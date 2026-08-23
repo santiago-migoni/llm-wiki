@@ -44,10 +44,10 @@
 
 ## Phase 5: Ask the Wiki (US3) (P1)
 
-- [ ] T027 [US3] Write `skills/wiki-query/SKILL.md`: index-first shortlisting, `grep -ril` fallback, citations to pages, surfacing disagreement, and offering to file the answer under `wiki/syntheses/`
-- [ ] T028 [US3] Add output forms and context budgeting to `skills/wiki-query/SKILL.md`: a filed answer may be a comparison table or a Marp deck; when a question spans more pages than fit in context, read the most relevant first and state which pages were not read
-- [ ] T029 [TEST][US3] Ask the scratch vault a covered question and verify the answer cites the pages it used
-- [ ] T030 [TEST][US3] Ask the scratch vault an uncovered question and verify Claude says the wiki does not cover it rather than answering from outside it
+- [x] T027 [US3] Write `skills/wiki-query/SKILL.md`: index-first shortlisting, `grep -ril` fallback, citations to pages, surfacing disagreement, and offering to file the answer under `wiki/syntheses/`
+- [x] T028 [US3] Add output forms and context budgeting to `skills/wiki-query/SKILL.md`: a filed answer may be a comparison table or a Marp deck; when a question spans more pages than fit in context, read the most relevant first and state which pages were not read
+- [x] T029 [TEST][US3] Ask the scratch vault a covered question and verify the answer cites the pages it used
+- [x] T030 [TEST][US3] Ask the scratch vault an uncovered question and verify Claude says the wiki does not cover it rather than answering from outside it
 
 ## Phase 6: Health-Check (US4) (P2)
 
