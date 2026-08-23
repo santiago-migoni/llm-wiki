@@ -2,7 +2,7 @@
 
 | Name            | Code     | Version | Date       | Status |
 | ---             | ---      | ---     | ---        | ---    |
-| llm-wiki-plugin | SPEC-001 | R01     | 2026-08-23 | Approved |
+| llm-wiki-plugin | SPEC-001 | R01     | 2026-08-23 | Converged |
 
 ## Summary
 
