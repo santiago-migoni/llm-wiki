@@ -22,7 +22,7 @@
 - [x] T011 [US5] Add the retrieval rule to `references/vault-protocol.md`: read `wiki/index.md` before opening any page, and read only the pages the task needs — the constitution's index-first Performance MUST
 - [x] T012 [US5] Add the write procedure to `references/vault-protocol.md`: update `wiki/index.md`, append one `## [YYYY-MM-DD] <op> | <subject>` entry to `wiki/log.md`, commit once at the end of the operation, then report what actually changed — pages created, pages updated, contradictions found — rather than announcing success generically
 - [x] T013 [TEST][US6] Verify `references/vault-protocol.md` contains no `cd` and no bare relative vault path, and that every documented command uses `-C <vault>` or an absolute path
-- [ ] T014 [TEST][US5] Run a skill against a scratch vault whose schema file specifies non-default directory names and a different log format, and verify the vault's conventions win over the plugin's defaults
+- [x] T014 [TEST][US5] Run a skill against a scratch vault whose schema file specifies non-default directory names and a different log format, and verify the vault's conventions win over the plugin's defaults
 
 ## Phase 3: Create a Vault (US1) (P1)
 
