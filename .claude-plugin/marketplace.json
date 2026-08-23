@@ -1,0 +1,24 @@
+{
+  "name": "llm-wiki",
+  "owner": {
+    "name": "Santiago Migoni",
+    "email": "santiagomigoni@gmail.com"
+  },
+  "metadata": {
+    "description": "Marketplace for the llm-wiki plugin: manage an LLM-maintained Obsidian wiki as a memory graph.",
+    "version": "1.0.1"
+  },
+  "plugins": [
+    {
+      "name": "llm-wiki",
+      "source": "./",
+      "description": "Manage an LLM-maintained Obsidian wiki as a memory graph: init vaults, ingest sources (docx/xlsx/pdf, batch, books by chapter), query with citations, budget-aware recall, conversation distillation, lint, stats, web research staging, and periodic digests.",
+      "version": "1.0.1",
+      "author": {
+        "name": "Santiago Migoni"
+      },
+      "keywords": ["obsidian", "wiki", "knowledge-base", "memory-graph", "markdown"],
+      "category": "productivity"
+    }
+  ]
+}

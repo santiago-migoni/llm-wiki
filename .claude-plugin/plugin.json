@@ -1,0 +1,9 @@
+{
+  "name": "llm-wiki",
+  "version": "1.0.1",
+  "description": "Manage an LLM-maintained Obsidian wiki as a memory graph: ingest sources (including docx, xlsx, pdf; single or batch), query with citations and rich outputs, lint with link suggestions and freshness checks, budget-aware recall, conversation distillation, web research staging, and periodic digests.",
+  "author": {
+    "name": "Santiago Migoni"
+  },
+  "keywords": ["obsidian", "wiki", "knowledge-base", "memory-graph", "markdown"]
+}
