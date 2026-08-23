@@ -1,6 +1,6 @@
 ---
 name: wiki-ingest
-description: File a source document into an LLM-maintained Obsidian wiki vault. Use when the user drops a file into raw/ and asks to process, ingest, or file it, or says "add this to the wiki". Handles markdown natively and converts .docx, .xlsx, .pdf, and other formats first (see references/converting-documents.md). Distinct from wiki-query: ingest files a new source into raw/; a question about what the wiki already knows is query's.
+description: File a source document into an LLM-maintained Obsidian wiki vault. Use when the user drops a file into raw/ and asks to process, ingest, or file it, or says "add this to the wiki". Handles markdown natively and converts .docx, .xlsx, .pdf, and other formats first (see references/converting-documents.md). Distinct from wiki-query. Ingest files a new source into raw/; a question about what the wiki already knows is query's.
 ---
 
 # Wiki ingest
