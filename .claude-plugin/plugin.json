@@ -1,9 +1,9 @@
 {
   "name": "llm-wiki",
-  "version": "2.0.0",
+  "version": "0.1.0",
   "description": "Turn a folder into an LLM-maintained Obsidian wiki: init a vault, ingest sources (with optional docx/xlsx/pdf conversion), query with citations, and lint for health. Markdown only, no dependencies.",
   "author": {
     "name": "Santiago Migoni"
   },
-  "keywords": ["obsidian", "wiki", "knowledge-base", "memory-graph", "markdown"]
+  "keywords": ["obsidian", "wiki", "knowledge-base", "notes", "markdown"]
 }

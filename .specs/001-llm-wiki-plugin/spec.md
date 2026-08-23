@@ -2,7 +2,7 @@
 
 | Name            | Code     | Version | Date       | Status |
 | ---             | ---      | ---     | ---        | ---    |
-| llm-wiki-plugin | SPEC-001 | R01     | 2026-08-23 | Converged |
+| llm-wiki-plugin | SPEC-001 | R02     | 2026-08-23 | Converged |
 
 ## Summary
 
@@ -112,7 +112,7 @@ The plugin runs on two hosts that differ in where the working directory points a
 - `git` is expected on both supported hosts but its presence is verified at use time, not assumed. Obsidian is assumed on the user's side but never invoked by the plugin.
 - Both supported hosts provide file tools and a shell. They differ in that Cowork's working directory is temporary scratch space and its shell is an isolated sandbox reaching user folders through mounts, so shell paths and file-tool paths may differ for the same file.
 - Converter tools (pandoc, poppler, Python libraries) may or may not be present; presence is detected at use time.
-- The existing `.claude-plugin/plugin.json` and `marketplace.json` are carried forward and updated, not recreated. This ships as version `2.0.0` under the existing `llm-wiki` name: a major bump, because five skills and the graph script are removed. Version 1 installations keep working until their owners choose to update.
+- The `.claude-plugin/plugin.json` and `marketplace.json` manifests are carried forward and updated, not recreated. This ships as version `0.1.0` from a new repository named `llm-wiki`, carrying only this feature's commits. The earlier nine-skill `llm-wiki` 1.x remains published from its own repository and is unaffected; it is superseded rather than continued, and its installations keep working until their owners choose to move. The version resets rather than bumping to `2.0.0` because nothing here has been used in sustained real work yet, and because `0.1.0` following `1.0.1` in one repository would run backwards through semver and risk the release never being offered.
 - `docs/llm-wiki.md` is the source pattern; it is committed and credited.
 
 ## Explicit Non-Goals
