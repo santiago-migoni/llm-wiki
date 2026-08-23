@@ -33,14 +33,14 @@
 
 ## Phase 4: File a Source (US2) (P1)
 
-- [ ] T019 [P][US2] Write `skills/wiki-ingest/references/converting-documents.md`: per-format conversion for pdf, docx, xlsx, pptx, html, and images, each probing for its converter and degrading with a stated alternative
-- [ ] T020 [US2] Write the core flow of `skills/wiki-ingest/SKILL.md`: read the source, discuss takeaways, write the source page with `source:`, update affected pages, index, log, and commit
-- [ ] T021 [US2] Add source triage to `skills/wiki-ingest/SKILL.md`: `git -C <vault> status --short raw/` with the `source:`-comparison fallback for non-git vaults; an already-cited source prompts before re-ingesting; a file outside `raw/` prompts to stage it there first
-- [ ] T022 [US2] Add the contradiction rule and batch mode to `skills/wiki-ingest/SKILL.md`; if the file exceeds 1,000 words, move batch mode to `skills/wiki-ingest/references/batch-ingest.md` per plan.md's stated fallback
-- [ ] T023 [TEST][US2] Ingest a markdown source into the scratch vault and verify the source page names the raw file, the index lists new pages, the log gains one entry, the commit contains only the touched paths plus the raw file, and the original under `raw/` is byte-identical afterwards
-- [ ] T024 [TEST][US2] Ingest a source whose body contains instructions addressed to the LLM and verify they are quoted to the user and not acted on
-- [ ] T025 [TEST][US2] Ingest a source contradicting an existing page and verify both claims survive and the log entry names the contradiction
-- [ ] T026 [TEST][US2] Attempt to ingest a PDF with no converter available and verify the skill reports what is missing, suggests how to convert, and leaves the other skills usable
+- [x] T019 [P][US2] Write `skills/wiki-ingest/references/converting-documents.md`: per-format conversion for pdf, docx, xlsx, pptx, html, and images, each probing for its converter and degrading with a stated alternative
+- [x] T020 [US2] Write the core flow of `skills/wiki-ingest/SKILL.md`: read the source, discuss takeaways, write the source page with `source:`, update affected pages, index, log, and commit
+- [x] T021 [US2] Add source triage to `skills/wiki-ingest/SKILL.md`: `git -C <vault> status --short raw/` with the `source:`-comparison fallback for non-git vaults; an already-cited source prompts before re-ingesting; a file outside `raw/` prompts to stage it there first
+- [x] T022 [US2] Add the contradiction rule and batch mode to `skills/wiki-ingest/SKILL.md`; if the file exceeds 1,000 words, move batch mode to `skills/wiki-ingest/references/batch-ingest.md` per plan.md's stated fallback
+- [x] T023 [TEST][US2] Ingest a markdown source into the scratch vault and verify the source page names the raw file, the index lists new pages, the log gains one entry, the commit contains only the touched paths plus the raw file, and the original under `raw/` is byte-identical afterwards
+- [x] T024 [TEST][US2] Ingest a source whose body contains instructions addressed to the LLM and verify they are quoted to the user and not acted on
+- [x] T025 [TEST][US2] Ingest a source contradicting an existing page and verify both claims survive and the log entry names the contradiction
+- [x] T026 [TEST][US2] Attempt to ingest a PDF with no converter available and verify the skill reports what is missing, suggests how to convert, and leaves the other skills usable
 
 ## Phase 5: Ask the Wiki (US3) (P1)
 
