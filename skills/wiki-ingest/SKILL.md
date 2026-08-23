@@ -29,4 +29,4 @@ When the user asks to process several — or all pending — sources in one pass
 
 ## Style
 
-Write for future retrieval: dense, factual, specific, no filler. Convert relative dates to absolute. One entity or concept per page; split a page when a section outgrows its host.
+Write for future retrieval: dense, factual, specific, no filler. Convert relative dates to absolute. Keep to one entity or concept per page. When a section outgrows its host page, say so and offer the split — do not split silently; restructuring an existing page is `wiki-lint`'s call, on the user's approval.

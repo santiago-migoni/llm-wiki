@@ -74,3 +74,9 @@
 - [x] VERIFY Round-trip integrity: `git log --oneline` on the scratch vault shows one labelled commit per operation, and every claim on a page traces to a source page naming a file in `raw/`
 - [x] VERIFY Every writing operation reported what actually changed — pages created, pages updated, contradictions found — not a generic success message
 - [x] VERIFY An operation interrupted before its commit leaves changes that `git status` and `git diff` fully describe
+
+## Phase 8: Convergence
+
+- [x] T037 Add a destructive-actions section to `references/vault-protocol.md` requiring explicit user confirmation before deleting a page, rewriting history, or force-pushing, and stating that files under `raw/` are never deleted, per constitution.md Security MUST #4 and #2 (missing)
+- [x] T038 Reword `skills/wiki-ingest/SKILL.md`'s Style line so an over-grown page is surfaced as a split candidate rather than split outright, per spec.md:107 Edge Cases (contradicts)
+- [x] T039 Add a conditional overview-update step to `references/vault-protocol.md`'s write procedure so `wiki/overview.md` is updated when the big picture shifts, matching plan.md:77's "evolving top-level synthesis" (partial)
