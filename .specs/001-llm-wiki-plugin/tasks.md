@@ -26,10 +26,10 @@
 
 ## Phase 3: Create a Vault (US1) (P1)
 
-- [ ] T015 [US1] Write `skills/wiki-init/assets/vault-template.md`: the schema file written into the user's vault, with placeholders for scope, categories, and user name, carrying conventions, workflows, log format, and commit labels
-- [ ] T016 [US1] Write `skills/wiki-init/SKILL.md`: refuse if already a vault, ask scope and git, scaffold directories tailored to scope, seed `index.md`/`log.md`/`overview.md`, initialize git
-- [ ] T017 [TEST][US1] Run `wiki-init` against a scratch folder and verify the schema file, `wiki/index.md`, `wiki/log.md`, `raw/`, scope-tailored categories, and one `schema:` commit all exist
-- [ ] T018 [TEST][US1] Run `wiki-init` against a folder that already contains a `wiki/` directory and verify it refuses, changes nothing, and offers a lint
+- [x] T015 [US1] Write `skills/wiki-init/assets/vault-template.md`: the schema file written into the user's vault, with placeholders for scope, categories, and user name, carrying conventions, workflows, log format, and commit labels
+- [x] T016 [US1] Write `skills/wiki-init/SKILL.md`: refuse if already a vault, ask scope and git, scaffold directories tailored to scope, seed `index.md`/`log.md`/`overview.md`, initialize git
+- [x] T017 [TEST][US1] Run `wiki-init` against a scratch folder and verify the schema file, `wiki/index.md`, `wiki/log.md`, `raw/`, scope-tailored categories, and one `schema:` commit all exist
+- [x] T018 [TEST][US1] Run `wiki-init` against a folder that already contains a `wiki/` directory and verify it refuses, changes nothing, and offers a lint
 
 ## Phase 4: File a Source (US2) (P1)
 
