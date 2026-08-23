@@ -15,13 +15,13 @@
 
 ## Phase 2: Shared Protocol (US5, US6) (P1)
 
-- [ ] T007 [US6] Write the vault-resolution section of `references/vault-protocol.md`: resolve an absolute vault root once, ask when more than one candidate exists, never treat the working directory as the vault
-- [ ] T008 [US5] Add the schema-authority section to `references/vault-protocol.md`: read the vault's schema file first, follow it wherever it conflicts with a skill, apply plugin defaults only where it is silent
-- [ ] T009 [US6] Add the path-lanes section to `references/vault-protocol.md`: file tools for pages, index, and log; shell for git and read-only queries; re-resolve shell-reported paths against the vault root before any file-tool call
-- [ ] T010 [US6] Add the git procedure to `references/vault-protocol.md`: probe with `git -C <vault> rev-parse --git-dir`, stage named paths only, commit labels, and the write-without-commit degradation when the probe fails
-- [ ] T011 [US5] Add the retrieval rule to `references/vault-protocol.md`: read `wiki/index.md` before opening any page, and read only the pages the task needs — the constitution's index-first Performance MUST
-- [ ] T012 [US5] Add the write procedure to `references/vault-protocol.md`: update `wiki/index.md`, append one `## [YYYY-MM-DD] <op> | <subject>` entry to `wiki/log.md`, commit once at the end of the operation, then report what actually changed — pages created, pages updated, contradictions found — rather than announcing success generically
-- [ ] T013 [TEST][US6] Verify `references/vault-protocol.md` contains no `cd` and no bare relative vault path, and that every documented command uses `-C <vault>` or an absolute path
+- [x] T007 [US6] Write the vault-resolution section of `references/vault-protocol.md`: resolve an absolute vault root once, ask when more than one candidate exists, never treat the working directory as the vault
+- [x] T008 [US5] Add the schema-authority section to `references/vault-protocol.md`: read the vault's schema file first, follow it wherever it conflicts with a skill, apply plugin defaults only where it is silent
+- [x] T009 [US6] Add the path-lanes section to `references/vault-protocol.md`: file tools for pages, index, and log; shell for git and read-only queries; re-resolve shell-reported paths against the vault root before any file-tool call
+- [x] T010 [US6] Add the git procedure to `references/vault-protocol.md`: probe with `git -C <vault> rev-parse --git-dir`, stage named paths only, commit labels, and the write-without-commit degradation when the probe fails
+- [x] T011 [US5] Add the retrieval rule to `references/vault-protocol.md`: read `wiki/index.md` before opening any page, and read only the pages the task needs — the constitution's index-first Performance MUST
+- [x] T012 [US5] Add the write procedure to `references/vault-protocol.md`: update `wiki/index.md`, append one `## [YYYY-MM-DD] <op> | <subject>` entry to `wiki/log.md`, commit once at the end of the operation, then report what actually changed — pages created, pages updated, contradictions found — rather than announcing success generically
+- [x] T013 [TEST][US6] Verify `references/vault-protocol.md` contains no `cd` and no bare relative vault path, and that every documented command uses `-C <vault>` or an absolute path
 - [ ] T014 [TEST][US5] Run a skill against a scratch vault whose schema file specifies non-default directory names and a different log format, and verify the vault's conventions win over the plugin's defaults
 
 ## Phase 3: Create a Vault (US1) (P1)
