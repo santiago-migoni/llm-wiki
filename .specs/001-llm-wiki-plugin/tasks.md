@@ -57,9 +57,9 @@
 
 ## Phase 7: Packaging
 
-- [ ] T034 [P] Write `README.md`: what the plugin is, the four skills, install, the documented scale ceiling, and credit to `docs/llm-wiki.md` as the source pattern
-- [ ] T035 [P] Write `CHANGELOG.md` with a `2.0.0` entry naming what was removed — five skills and the graph script — and why
-- [ ] T036 Verify trigger separation by reading the four skill descriptions together: no shared claim phrase, each naming its boundary against its nearest neighbour
+- [x] T034 [P] Write `README.md`: what the plugin is, the four skills, install, the documented scale ceiling, and credit to `docs/llm-wiki.md` as the source pattern
+- [x] T035 [P] Write `CHANGELOG.md` with a `2.0.0` entry naming what was removed — five skills and the graph script — and why
+- [x] T036 Verify trigger separation by reading the four skill descriptions together: no shared claim phrase, each naming its boundary against its nearest neighbour
 
 ## Verification
 
