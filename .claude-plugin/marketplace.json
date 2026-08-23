@@ -5,15 +5,15 @@
     "email": "santiagomigoni@gmail.com"
   },
   "metadata": {
-    "description": "Marketplace for the llm-wiki plugin: manage an LLM-maintained Obsidian wiki as a memory graph.",
-    "version": "1.0.1"
+    "description": "Marketplace for the llm-wiki plugin: turn a folder into an LLM-maintained Obsidian wiki.",
+    "version": "2.0.0"
   },
   "plugins": [
     {
       "name": "llm-wiki",
       "source": "./",
-      "description": "Manage an LLM-maintained Obsidian wiki as a memory graph: init vaults, ingest sources (docx/xlsx/pdf, batch, books by chapter), query with citations, budget-aware recall, conversation distillation, lint, stats, web research staging, and periodic digests.",
-      "version": "1.0.1",
+      "description": "Turn a folder into an LLM-maintained Obsidian wiki: init a vault, ingest sources (with optional docx/xlsx/pdf conversion), query with citations, and lint for health. Markdown only, no dependencies.",
+      "version": "2.0.0",
       "author": {
         "name": "Santiago Migoni"
       },

@@ -1,7 +1,7 @@
 {
   "name": "llm-wiki",
-  "version": "1.0.1",
-  "description": "Manage an LLM-maintained Obsidian wiki as a memory graph: ingest sources (including docx, xlsx, pdf; single or batch), query with citations and rich outputs, lint with link suggestions and freshness checks, budget-aware recall, conversation distillation, web research staging, and periodic digests.",
+  "version": "2.0.0",
+  "description": "Turn a folder into an LLM-maintained Obsidian wiki: init a vault, ingest sources (with optional docx/xlsx/pdf conversion), query with citations, and lint for health. Markdown only, no dependencies.",
   "author": {
     "name": "Santiago Migoni"
   },
