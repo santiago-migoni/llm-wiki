@@ -51,9 +51,9 @@
 
 ## Phase 6: Health-Check (US4) (P2)
 
-- [ ] T031 [US4] Write `skills/wiki-lint/SKILL.md`: broken links, index-versus-disk drift, contradictions, stale claims, pages that outgrew one topic, the scale-ceiling count, and findings grouped by severity with nothing applied before approval; orphan pages are referred to Obsidian's graph view rather than computed
-- [ ] T032 [US4] Add the schema-amendment path to `skills/wiki-lint/SKILL.md`: when a convention is not working, propose amending the vault's schema file and commit it with a `schema:` label
-- [ ] T033 [TEST][US4] Run `wiki-lint` on the scratch vault and verify it reports findings and changes nothing until the user approves a subset
+- [x] T031 [US4] Write `skills/wiki-lint/SKILL.md`: broken links, index-versus-disk drift, contradictions, stale claims, pages that outgrew one topic, the scale-ceiling count, and findings grouped by severity with nothing applied before approval; orphan pages are referred to Obsidian's graph view rather than computed
+- [x] T032 [US4] Add the schema-amendment path to `skills/wiki-lint/SKILL.md`: when a convention is not working, propose amending the vault's schema file and commit it with a `schema:` label
+- [x] T033 [TEST][US4] Run `wiki-lint` on the scratch vault and verify it reports findings and changes nothing until the user approves a subset
 
 ## Phase 7: Packaging
 
