@@ -63,14 +63,14 @@
 
 ## Verification
 
-- [ ] VERIFY All acceptance scenarios in spec.md pass
-- [ ] VERIFY All Non-Functional Requirements in spec.md are met
-- [ ] VERIFY No constitution MUST principle relevant to this feature is violated
-- [ ] VERIFY No files were created that are not listed in plan.md's file structure
-- [ ] VERIFY No new dependencies were added beyond those listed in plan.md
-- [ ] VERIFY `find . -name '*.py' -o -name '*.sh' -o -name '*.js'` returns nothing outside `.git/` — the spec's zero-executable-surface metric
-- [ ] VERIFY The four `SKILL.md` files total under 4,000 words by `wc -w`, each under 1,000
-- [ ] VERIFY An end-to-end scratch-vault run (init, ingest, query, lint) required no hand-editing of any file under `wiki/`
-- [ ] VERIFY Round-trip integrity: `git log --oneline` on the scratch vault shows one labelled commit per operation, and every claim on a page traces to a source page naming a file in `raw/`
-- [ ] VERIFY Every writing operation reported what actually changed — pages created, pages updated, contradictions found — not a generic success message
-- [ ] VERIFY An operation interrupted before its commit leaves changes that `git status` and `git diff` fully describe
+- [x] VERIFY All acceptance scenarios in spec.md pass
+- [x] VERIFY All Non-Functional Requirements in spec.md are met
+- [x] VERIFY No constitution MUST principle relevant to this feature is violated
+- [x] VERIFY No files were created that are not listed in plan.md's file structure
+- [x] VERIFY No new dependencies were added beyond those listed in plan.md
+- [x] VERIFY `find . -name '*.py' -o -name '*.sh' -o -name '*.js'` returns nothing outside `.git/` — the spec's zero-executable-surface metric
+- [x] VERIFY The four `SKILL.md` files total under 4,000 words by `wc -w`, each under 1,000
+- [x] VERIFY An end-to-end scratch-vault run (init, ingest, query, lint) required no hand-editing of any file under `wiki/`
+- [x] VERIFY Round-trip integrity: `git log --oneline` on the scratch vault shows one labelled commit per operation, and every claim on a page traces to a source page naming a file in `raw/`
+- [x] VERIFY Every writing operation reported what actually changed — pages created, pages updated, contradictions found — not a generic success message
+- [x] VERIFY An operation interrupted before its commit leaves changes that `git status` and `git diff` fully describe
