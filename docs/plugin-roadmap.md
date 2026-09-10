@@ -156,6 +156,8 @@ feat: initialize git-first wiki vault
 
 ## Fase 2 — Ingestión y actualización de fuentes
 
+**Estado: completada.**
+
 ### Objetivo
 
 Procesar documentos desde raw/inbox/ y convertirlos en fuentes actuales, extracciones y conocimiento canónico.
@@ -198,6 +200,16 @@ Procesar documentos desde raw/inbox/ y convertirlos en fuentes actuales, extracc
 - extracted.md es completo o declara sus limitaciones.
 - Las contradicciones quedan visibles.
 - El ingest informa los archivos creados, modificados y no procesados.
+
+### Implementación realizada
+
+- wiki-ingest ahora distingue fuente nueva, actualización, duplicado exacto y caso ambiguo.
+- Se documentó el contrato de source record en skills/wiki-ingest/references/source-record.md.
+- La detección de duplicados usa SHA-256 sin crear nuevas páginas ni commits.
+- Se protege el trabajo local no comiteado antes de reemplazar una fuente o una página.
+- La conversión se ejecuta sobre el source.<ext> actual y genera un extracted.md completo con estado y advertencias.
+- Los assets actuales se conservan y no se podan automáticamente.
+- El reporte de ingestión incluye slug, hash, paths, páginas, assets, contradicciones y estado de Git.
 
 ### Commit sugerido
 

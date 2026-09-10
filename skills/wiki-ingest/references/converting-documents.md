@@ -1,5 +1,7 @@
 # Converting non-markdown sources
 
+Read references/source-record.md for source identity, duplicate handling, metadata, and update rules. This reference covers only format-specific conversion.
+
 The source is staged in raw/inbox/. During ingestion, keep the current original under raw/sources/<slug>/source.<ext> and write the complete normalized extraction to raw/sources/<slug>/extracted.md.
 
 The extraction is derived and regenerable. It is never a replacement for the current original. Git preserves prior committed source and extraction states.

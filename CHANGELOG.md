@@ -12,6 +12,7 @@ Codex and ChatGPT Work migration with a Git-first document model.
 - Established one stable slug per logical document and Git history as the versioning mechanism.
 - Added SHA-256 duplicate detection, complete extraction requirements, historical Git queries, and exhaustive context coverage reporting.
 - Aligned the vault protocol, initialization template, ingestion, query, and lint skills with the simplified structure.
+- Added the source-record contract for classifying new documents, updates, exact duplicates, ambiguous identities, local-edit protection, extraction metadata, and ingest reports.
 
 ## 0.1.0
 
