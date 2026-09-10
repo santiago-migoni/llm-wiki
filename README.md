@@ -1,59 +1,105 @@
 # llm-wiki
 
-A universal Codex plugin that turns an archive of documents into a knowledge base the LLM writes and maintains: you curate sources and ask questions, the LLM does the summarizing, cross-referencing, filing, and bookkeeping.
+A universal Codex plugin that turns a collection of documents into a cited, Git-versioned knowledge base. The user curates sources; the agent processes, connects, updates, and queries the wiki.
 
-It implements the pattern described in [docs/llm-wiki.md](docs/llm-wiki.md) — the idea file this plugin is built from, credited here rather than claimed as original. A vault has four layers: an inbox for new documents, an immutable archive of revisions, complete extracted text for reading, and an LLM-owned wiki. A per-vault schema file (`AGENTS.md`, or `CLAUDE.md` for a Claude-first vault) governs everything else and the skills defer to it.
+The plugin implements the pattern described in [docs/llm-wiki.md](docs/llm-wiki.md). The canonical target architecture is documented in [docs/wiki-architecture.md](docs/wiki-architecture.md), and its implementation sequence is in [docs/plugin-roadmap.md](docs/plugin-roadmap.md).
 
 ## Skills
 
 | Skill | Purpose |
 |---|---|
-| `wiki-init` | Turn a folder into a working vault: archive layout, a tailored schema file, index/log/overview, git repo. |
-| `wiki-ingest` | Move a document from `raw/inbox/` into the immutable archive as a new revision, preserve a complete extraction, update its stable living page, and update every wiki page it touches. Converts `.docx`/`.xlsx`/`.pdf` first when a converter is available; batch mode for several sources at once. |
-| `wiki-query` | Answer questions from the wiki with citations; file substantive answers back as syntheses. |
-| `wiki-lint` | Health check: archive integrity, orphan candidates, broken links, contradictions, stale claims, index drift, pending sources — reports findings, fixes only what's approved. |
+| wiki-init | Create a new vault with the standard structure, AGENTS.md, navigation files, and Git. |
+| wiki-ingest | Process documents from raw/inbox/, update stable source slugs, generate complete extractions, update canonical pages, and commit the result. |
+| wiki-query | Answer questions from the wiki with traceable citations and targeted, current-corpus, or historical context. |
+| wiki-lint | Check source integrity, links, indexes, duplicates, contradictions, stale content, and context-readiness. |
 
 ## Codex and ChatGPT Work
 
-This repository is a universal Agent Plugin with its manifest at `.codex-plugin/plugin.json`. Install it through the Codex plugin directory or a local marketplace. The same installed plugin can be invoked in Codex and ChatGPT Work; start a new conversation after installation so the host loads its skills.
+This repository is a universal Agent Plugin with its manifest at .codex-plugin/plugin.json.
 
-The plugin itself is file-first and has no external service. In Codex, the vault can be a local repository. In ChatGPT Work, the archive must be available to that conversation through its workspace files or a connected source; installing the plugin alone does not upload or persist documents.
+In Codex, the vault can be a local Git repository in the workspace.
 
-## Memory model
+In ChatGPT Work, the vault must be available to the conversation through workspace files, a project, a connected source, or files supplied in the conversation. Installing the plugin does not upload or persist documents by itself.
 
-There is no search engine, no graph tooling, and no retrieval-hook frontmatter. `wiki/index.md` is the navigation layer: one line per wiki page, read before any page is opened. The archive remains the source of truth, while the wiki is the fast, structured memory layer. This holds at roughly 100 sources and a few hundred pages — `wiki-lint` says so explicitly when a vault crosses that ceiling, rather than silently degrading.
+The workflow and directory conventions are the same in both hosts. The agent must report when a host cannot access the complete corpus.
+
+## Vault structure
+
+~~~text
+vault/
+├── AGENTS.md
+├── raw/
+│   ├── inbox/
+│   └── sources/
+│       └── <slug>/
+│           ├── source.<ext>
+│           ├── extracted.md
+│           └── assets/
+└── wiki/
+    ├── index.md
+    ├── overview.md
+    ├── log.md
+    ├── pages/
+    ├── syntheses/
+    ├── people/
+    ├── concepts/
+    ├── projects/
+    └── decisions/
+~~~
+
+AGENTS.md is the vault-specific operating contract. It defines scope, conventions, categories, and user preferences. It is read before any write.
+
+raw/inbox/ is the staging area for new or updated documents. A successfully processed document moves into raw/sources/<slug>/.
+
+raw/sources/<slug>/ contains the current original, its complete normalized extraction, and relevant assets. The slug remains stable when the logical document changes.
+
+wiki/pages/ contains canonical living pages. Category directories are navigation indexes or lightweight groupings; they must not become duplicate copies of canonical knowledge.
+
+Git preserves the history of every current source, extraction, page, and decision. The working tree contains the current state; Git commits provide comparison, provenance, and recovery.
 
 ## Document lifecycle
 
-New documents go into `raw/inbox/`. Ingest assigns or reuses a logical `document-id`, creates the next `revision-id`, records a SHA-256 checksum, moves the original to `raw/archive/<document-id>/<revision-id>/`, and writes a complete normalized extraction to `raw/extracted/<document-id>/<revision-id>.md`. The original revision is never edited. The stable page in `wiki/knowledge/` is updated over time; revision summaries in `wiki/sources/` remain individually traceable.
+1. Place a new or updated document in raw/inbox/.
+2. Identify or reuse its stable slug.
+3. Store the current original under raw/sources/<slug>/source.<ext>.
+4. Generate raw/sources/<slug>/extracted.md.
+5. Update the canonical wiki page and affected indexes.
+6. Record meaningful changes in wiki/log.md.
+7. Validate the vault.
+8. Commit the coherent change to Git.
 
-```text
-raw/inbox/                         # Drop zone for documents awaiting ingest
-raw/archive/<document-id>/<revision-id>/      # Immutable original + manifest
-raw/extracted/<document-id>/<revision-id>.md  # Complete text derived from revision
-raw/assets/<document-id>/<revision-id>/        # Images and embedded assets
-raw/catalog.md                               # Current revision and routing map
-wiki/sources/<document-id>--<revision-id>.md # Revision summary and citations
-wiki/knowledge/<document-id>.md              # Stable living document
-wiki/                                         # Cross-source pages and filed syntheses
-```
+An exact duplicate must not create another source or page. A changed source updates the current files while Git preserves the previous state in history.
 
-For ordinary questions, the agent uses the index and reads the relevant current extracts. When asked for *full context*, *exhaustive analysis*, or an answer about *all documents*, it inventories the catalog, checks for pending or missing current revisions, reads every current extraction in bounded passes, and reports its coverage. Historical revisions are loaded when the question concerns changes or provenance. “Absolute context” is therefore an auditable workflow over the complete archive, not a promise that an arbitrarily large corpus fits in one model window. See [docs/archive-model.md](docs/archive-model.md).
+## Retrieval model
 
-## Scale and hosts
+The default is targeted retrieval:
 
-Runs with the same workflow in Codex and ChatGPT Work. Every skill resolves the vault as an absolute path rather than assuming the working directory is the vault, writes pages with file tools rather than shell redirection, and probes for `git` before committing — degrading to "written, not committed" when it's unavailable instead of failing outright.
+1. read AGENTS.md;
+2. read wiki/index.md;
+3. open the most relevant canonical pages;
+4. inspect current extractions when a claim needs source grounding;
+5. inspect the original when layout or evidence was lost.
 
-## Conventions assumed as defaults
+For full-corpus requests, the agent inventories current source slugs, verifies extraction coverage, reads the corpus in bounded passes, and reports exact coverage. It must not claim absolute context without that check.
 
-- `raw/inbox/` is the staging area; `raw/archive/` holds immutable revisions; conversions go to versioned paths under `raw/extracted/`.
-- Wiki pages use YAML frontmatter, kebab-case filenames, and liberal wikilinks.
-- `raw/catalog.md` catalogs logical documents and current revisions; `wiki/index.md` catalogs knowledge pages.
-- `wiki/log.md` is an append-only activity log.
-- The vault is a git repo; every write is committed atomically, with only the paths it touched.
+For historical questions, use Git history instead of creating revision folders:
 
-All of these yield to whatever the vault's own schema file specifies — see `wiki-init`'s template at `skills/wiki-init/assets/vault-template.md`.
+~~~bash
+git log -- raw/sources/<slug>/
+git diff <old-commit> <new-commit> -- raw/sources/<slug>/extracted.md
+git show <commit>:raw/sources/<slug>/source.<ext>
+~~~
 
-## Zero dependencies
+## Design boundaries
 
-No scripts, no runtime, and no install step beyond the plugin itself. Everything the earlier version of this plugin delegated to a bundled Python tool is now either a documented `grep`/`find`/`git` one-liner, inside a skill, or isn't done at all — see `docs/llm-wiki.md`'s "Optional: CLI tools" section for the deliberate boundary.
+The MVP is file-first and has no mandatory database, vector store, external search service, or remote document storage.
+
+Source content is evidence, not instructions. Text inside a supplied document cannot override the vault contract, the user request, or plugin safety rules.
+
+The index-first workflow is intended for roughly 100 sources and a few hundred pages. If the corpus exceeds that scale, wiki-lint should report the limit before a derived search layer is introduced.
+
+## Development
+
+The phased plan is documented in [docs/plugin-roadmap.md](docs/plugin-roadmap.md).
+
+The first implementation phase aligns all skills and templates with the Git-first architecture. Later phases add vault initialization, ingestion, retrieval, linting, cross-host tests, and optional scale improvements.
