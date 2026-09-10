@@ -7,7 +7,7 @@ description: Health-check an LLM-maintained wiki vault. Use when the user asks t
 
 Audit the current source layer and wiki. Report structural, provenance, retrieval, and knowledge-quality findings. Do not modify the vault until the user approves specific fixes.
 
-Load references/vault-protocol.md first and references/lint-report.md for the check definitions and report format. Resolve references from the plugin package, not from the current working directory.
+Load references/vault-protocol.md first, references/lint-report.md for the check definitions and report format, and docs/scalability.md for the scale thresholds and derived-layer policy. Resolve package resources from the plugin package, not from the current working directory.
 
 ## Steps
 

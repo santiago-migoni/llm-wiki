@@ -140,6 +140,19 @@ Report any occurrence of:
 
 Count current source records and canonical pages. Past roughly 100 sources or a few hundred pages, report that index-first retrieval may need a derived search layer.
 
+For consistent scale reporting, use the thresholds in docs/scalability.md:
+
+- GREEN: fewer than 80 source records, fewer than 200 canonical pages, and no source-layer file
+  at or above 5 MiB;
+- WATCH: 80–100 source records, 200–300 canonical pages, or a source-layer file at or above
+  5 MiB, unless the candidate threshold is reached;
+- DERIVED-SEARCH-CANDIDATE: more than 100 source records or more than 300 canonical pages.
+
+The numeric status is a decision signal, not a claim that the vault is context-ready. Report
+pending files, missing extractions, incomplete access, Git limitations, and observed retrieval
+degradation separately. A derived layer still requires evidence and must preserve the current
+Markdown/Git tree as its source of truth.
+
 ## Semantic checks
 
 Read relevant canonical pages, current extractions, and recent wiki/log.md entries. Check for:

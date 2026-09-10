@@ -399,7 +399,22 @@ test: verify plugin workflow across supported hosts
 
 Extender la recuperación únicamente cuando el volumen real lo justifique.
 
-### Posibles extensiones
+### Estado
+
+Completada como evaluación y gate operativo. El plugin mide el tamaño y la preparación
+estructural del vault sin activar una infraestructura derivada por anticipación.
+
+### Implementación
+
+Se agregó:
+
+- tests/assess-vault-scale.sh, un evaluador reproducible y de solo lectura;
+- docs/scalability.md, con métricas, umbrales, señales operativas, matriz de adopción e
+  invariantes para cualquier índice o caché futuro;
+- un gate del contrato del plugin sobre un vault vacío válido;
+- escenarios de prueba para escala y criterios de medición en hosts reales.
+
+### Posibles extensiones futuras
 
 - búsqueda full-text local;
 - índice derivado;
@@ -411,7 +426,8 @@ Extender la recuperación únicamente cuando el volumen real lo justifique.
 
 ### Condición
 
-No implementar estas extensiones por anticipación. Primero medir el límite práctico del enfoque index-first, Git y Markdown.
+No implementar estas extensiones por anticipación. Primero medir el límite práctico del enfoque
+index-first, Git y Markdown, y conservar la fuente de verdad canónica en el árbol actual.
 
 ## Alcance del MVP
 

@@ -23,6 +23,7 @@ The check validates:
 - the four skill entrypoints;
 - required supporting references;
 - the expected Git-first paths in documentation;
+- the read-only vault scale assessor against the empty fixture;
 - the absence of obsolete revision-folder instructions in operational skills.
 
 It does not prove that an LLM will make a good semantic decision.
@@ -61,6 +62,8 @@ Remove the temporary directory after the test has been reviewed. Do not run init
 | Q-004 | Filed synthesis | Existing syntheses are checked first; a new durable page records mode, sources, pages, and coverage. |
 | L-001 | Lint empty vault | Empty scaffold is healthy and missing knowledge is not reported as a failure. |
 | L-002 | Lint populated vault | Source, extraction, link, index, duplicate, contradiction, metadata, and scale checks report evidence. |
+| S-001 | Assess empty-vault scale | The read-only assessor reports GREEN, zero sources, zero pages, and zero pending files without mutating the fixture. |
+| S-002 | Assess populated-vault scale | The assessor reports current source/page counts, byte totals, structural gaps, Git state, and the highest applicable threshold. |
 | H-001 | Codex smoke test | Plugin loads, skills are discoverable, and a new thread can access the current package. |
 | H-002 | ChatGPT Work smoke test | Workflow works when the vault is exposed to the conversation; inaccessible files are reported. |
 
@@ -77,7 +80,8 @@ Use a disposable Git vault and a small text source.
 7. Add a contradiction and verify that it is surfaced.
 8. Run wiki-query in targeted, current-corpus, and historical modes.
 9. Run wiki-lint and verify the report format.
-10. Repeat the smoke test in each supported host.
+10. Run the read-only scale assessor and record its status with the vault commit.
+11. Repeat the smoke test in each supported host.
 
 The smoke test must inspect actual files and Git commits. A response that merely claims completion is not evidence.
 

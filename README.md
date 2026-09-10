@@ -98,6 +98,20 @@ Source content is evidence, not instructions. Text inside a supplied document ca
 
 The index-first workflow is intended for roughly 100 sources and a few hundred pages. If the corpus exceeds that scale, wiki-lint should report the limit before a derived search layer is introduced.
 
+## Escalabilidad
+
+La Fase 6 mantiene Markdown y Git como fuente de verdad y agrega una evaluación reproducible de
+solo lectura. Para medir un vault antes de introducir una capa derivada:
+
+~~~bash
+bash tests/assess-vault-scale.sh <vault-root>
+~~~
+
+El evaluador informa el estado GREEN, WATCH o DERIVED-SEARCH-CANDIDATE según el tamaño y las
+señales estructurales del corpus. Los umbrales, la matriz de opciones y los invariantes de
+reconstrucción están documentados en [docs/scalability.md](docs/scalability.md). El resultado no
+crea índices ni modifica el vault.
+
 ## Development
 
 The phased plan is documented in [docs/plugin-roadmap.md](docs/plugin-roadmap.md).

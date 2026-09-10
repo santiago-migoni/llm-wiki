@@ -38,6 +38,7 @@ required_paths=(
   "CHANGELOG.md"
   "docs/wiki-architecture.md"
   "docs/plugin-roadmap.md"
+  "docs/scalability.md"
   "docs/testing.md"
   "docs/host-compatibility.md"
   "references/vault-protocol.md"
@@ -50,6 +51,7 @@ required_paths=(
   "skills/wiki-query/references/context-modes.md"
   "skills/wiki-lint/SKILL.md"
   "skills/wiki-lint/references/lint-report.md"
+  "tests/assess-vault-scale.sh"
   "tests/fixtures/empty-vault/AGENTS.md"
   "tests/fixtures/empty-vault/wiki/index.md"
   "tests/fixtures/empty-vault/wiki/overview.md"
@@ -94,7 +96,16 @@ done
 rg -q "source-record\\.md" "$repo_root/skills/wiki-ingest/SKILL.md" || fail "ingest reference is not linked"
 rg -q "context-modes\\.md" "$repo_root/skills/wiki-query/SKILL.md" || fail "query reference is not linked"
 rg -q "lint-report\\.md" "$repo_root/skills/wiki-lint/SKILL.md" || fail "lint reference is not linked"
+rg -q "docs/scalability\\.md" "$repo_root/skills/wiki-lint/SKILL.md" || fail "scale policy is not linked from wiki-lint"
 rg -q "raw/sources/<slug>" "$repo_root/docs/wiki-architecture.md" || fail "architecture source path is missing"
 rg -q "wiki/pages/" "$repo_root/docs/wiki-architecture.md" || fail "architecture canonical page path is missing"
+rg -q "scalability\\.md" "$repo_root/README.md" || fail "scale policy is not linked"
+rg -q "assess-vault-scale\\.sh" "$repo_root/README.md" || fail "scale assessor is not documented"
+
+bash -n "$repo_root/tests/assess-vault-scale.sh" || fail "scale assessor has invalid Bash syntax"
+scale_output="$(bash "$repo_root/tests/assess-vault-scale.sh" "$repo_root/tests/fixtures/empty-vault")"
+if [[ "$scale_output" != *"Scale status: GREEN"* ]]; then
+  fail "empty-vault scale assessment is not GREEN"
+fi
 
 echo "plugin contract: ok"

@@ -15,6 +15,7 @@ Codex and ChatGPT Work migration with a Git-first document model.
 - Added the source-record contract for classifying new documents, updates, exact duplicates, ambiguous identities, local-edit protection, extraction metadata, and ingest reports.
 - Added auditable query modes for targeted, current-corpus, and historical context, with coverage ledgers, source citations, Git provenance, and durable synthesis filing.
 - Added report-first wiki linting for current source structure, extraction freshness, index drift, links, duplicates, contradictions, metadata, legacy layouts, and scale.
+- Added a read-only vault scale assessor with explicit GREEN, WATCH, and DERIVED-SEARCH-CANDIDATE thresholds before any derived search layer is considered.
 - Added a hybrid test strategy, an empty-vault fixture, a deterministic plugin contract check, and Codex/ChatGPT Work compatibility smoke-test guidance.
 
 ## 0.1.0

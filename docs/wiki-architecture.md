@@ -275,6 +275,16 @@ For a request that explicitly requires corpus-wide context, the agent should use
 
 For historical questions, use Git paths and commits as the primary retrieval mechanism. Do not load every historical revision when the question concerns only one document or period.
 
+## Scale gate
+
+The initial index-first model is intentionally bounded. Run the read-only
+tests/assess-vault-scale.sh evaluator before introducing a derived search layer. Its thresholds,
+operational signals, adoption order, and reconstruction invariants are documented in
+[docs/scalability.md](scalability.md).
+
+Any future index or cache must remain derived from the current source tree, preserve slug/path/hash
+or commit provenance, and leave Markdown plus Git as the source of truth.
+
 ## Answer traceability
 
 Answers should cite the knowledge path that supports them:
