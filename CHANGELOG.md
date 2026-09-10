@@ -7,6 +7,7 @@ Codex and ChatGPT Work migration with a Git-first document model.
 **What changed:**
 
 - Replaced the Claude-specific manifests with a universal .codex-plugin/plugin.json manifest.
+- Packaged the plugin in a repo-local Codex marketplace at .agents/plugins/marketplace.json.
 - Documented use in Codex and ChatGPT Work, including the boundary that the plugin does not provide external document storage.
 - Defined the current source lifecycle: raw/inbox/ → raw/sources/<slug>/source.<ext> + extracted.md → canonical wiki page.
 - Established one stable slug per logical document and Git history as the versioning mechanism.

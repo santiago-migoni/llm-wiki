@@ -2,7 +2,7 @@
 
 A universal Codex plugin that turns a collection of documents into a cited, Git-versioned knowledge base. The user curates sources; the agent processes, connects, updates, and queries the wiki.
 
-The plugin implements the pattern described in [docs/llm-wiki.md](docs/llm-wiki.md). The canonical target architecture is documented in [docs/wiki-architecture.md](docs/wiki-architecture.md), and its implementation sequence is in [docs/plugin-roadmap.md](docs/plugin-roadmap.md).
+The `llm-wiki` plugin implements the pattern described in [its design brief](plugins/llm-wiki/docs/llm-wiki.md). The canonical target architecture is documented in [wiki-architecture.md](plugins/llm-wiki/docs/wiki-architecture.md), and its implementation sequence is in [plugin-roadmap.md](plugins/llm-wiki/docs/plugin-roadmap.md).
 
 ## Skills
 
@@ -15,13 +15,43 @@ The plugin implements the pattern described in [docs/llm-wiki.md](docs/llm-wiki.
 
 ## Codex and ChatGPT Work
 
-This repository is a universal Agent Plugin with its manifest at .codex-plugin/plugin.json.
+This repository is a Codex marketplace containing the universal `llm-wiki` Agent Plugin. Its
+marketplace catalog is [.agents/plugins/marketplace.json](.agents/plugins/marketplace.json), and
+the plugin manifest is [plugins/llm-wiki/.codex-plugin/plugin.json](plugins/llm-wiki/.codex-plugin/plugin.json).
 
 In Codex, the vault can be a local Git repository in the workspace.
 
 In ChatGPT Work, the vault must be available to the conversation through workspace files, a project, a connected source, or files supplied in the conversation. Installing the plugin does not upload or persist documents by itself.
 
 The workflow and directory conventions are the same in both hosts. The agent must report when a host cannot access the complete corpus.
+
+## Install in Codex
+
+Register this repository as a marketplace and install the plugin:
+
+~~~bash
+codex plugin marketplace add santiago-migoni/llm-wiki --ref main
+codex plugin add llm-wiki@llm-wiki
+~~~
+
+For local development, replace the first command's source with the absolute path to this repository.
+After installing or updating the plugin, start a new Codex task so the current skills are loaded.
+
+The repository layout is:
+
+~~~text
+.
+├── .agents/plugins/marketplace.json
+├── plugins/llm-wiki/
+│   ├── .codex-plugin/plugin.json
+│   ├── docs/
+│   ├── references/
+│   ├── skills/
+│   └── tests/assess-vault-scale.sh
+└── tests/
+    ├── check-plugin-contract.sh
+    └── fixtures/
+~~~
 
 ## Vault structure
 
@@ -104,21 +134,21 @@ La Fase 6 mantiene Markdown y Git como fuente de verdad y agrega una evaluación
 solo lectura. Para medir un vault antes de introducir una capa derivada:
 
 ~~~bash
-bash tests/assess-vault-scale.sh <vault-root>
+bash plugins/llm-wiki/tests/assess-vault-scale.sh <vault-root>
 ~~~
 
 El evaluador informa el estado GREEN, WATCH o DERIVED-SEARCH-CANDIDATE según el tamaño y las
 señales estructurales del corpus. Los umbrales, la matriz de opciones y los invariantes de
-reconstrucción están documentados en [docs/scalability.md](docs/scalability.md). El resultado no
+reconstrucción están documentados en [docs/scalability.md](plugins/llm-wiki/docs/scalability.md). El resultado no
 crea índices ni modifica el vault.
 
 ## Development
 
-The phased plan is documented in [docs/plugin-roadmap.md](docs/plugin-roadmap.md).
+The phased plan is documented in [docs/plugin-roadmap.md](plugins/llm-wiki/docs/plugin-roadmap.md).
 
 The first implementation phase aligns all skills and templates with the Git-first architecture. Later phases add vault initialization, ingestion, retrieval, linting, cross-host tests, and optional scale improvements.
 
-Testing is documented in [docs/testing.md](docs/testing.md). Host-specific setup and smoke tests are documented in [docs/host-compatibility.md](docs/host-compatibility.md). Run the deterministic package check with:
+Testing is documented in [docs/testing.md](plugins/llm-wiki/docs/testing.md). Host-specific setup and smoke tests are documented in [docs/host-compatibility.md](plugins/llm-wiki/docs/host-compatibility.md). Run the deterministic package check with:
 
 ~~~bash
 bash tests/check-plugin-contract.sh

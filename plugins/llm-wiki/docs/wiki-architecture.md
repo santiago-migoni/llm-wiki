@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document defines the canonical architecture for the LLM Wiki plugin. The design is based on the principles in docs/llm-wiki.md and on the operating model agreed for this repository:
+This document defines the canonical architecture for the LLM Wiki plugin. The design is based on the principles in llm-wiki.md and on the operating model agreed for this repository:
 
 - the user supplies and curates documents;
 - the agent processes, connects, updates, and queries knowledge;
