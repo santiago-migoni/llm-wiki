@@ -32,7 +32,7 @@
     "defaultPrompt": [
       "Initialize a document wiki here",
       "Ingest the documents in raw/inbox",
-      "Answer with full context from the archive"
+      "Answer with full context from the Git-versioned vault"
     ],
     "brandColor": "#2563EB"
   }

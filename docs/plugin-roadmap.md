@@ -351,6 +351,8 @@ feat: validate vault integrity and knowledge quality
 
 ## Fase 5 — Pruebas y compatibilidad de hosts
 
+**Estado: completada a nivel de contrato y pruebas estáticas; las pruebas manuales de host quedan como gate de release.**
+
 ### Objetivo
 
 Comprobar que el plugin se puede instalar y utilizar de forma consistente en Codex y ChatGPT Work.
@@ -375,6 +377,15 @@ Comprobar que el plugin se puede instalar y utilizar de forma consistente en Cod
 - El plugin no afirma tener acceso a archivos que el host no expone.
 - El flujo funciona sin servicios externos.
 - La validación del plugin pasa en el entorno de desarrollo.
+
+### Implementación realizada
+
+- Se añadió una estrategia de pruebas híbrida para un plugin sin runtime propio.
+- Se documentó la matriz de escenarios C, I, G, Q, L y H.
+- Se añadió el fixture base tests/fixtures/empty-vault/.
+- Se añadió tests/check-plugin-contract.sh para verificar manifiesto, skills, referencias, rutas y ausencia de instrucciones operativas obsoletas.
+- Se documentaron las diferencias de acceso entre Codex y ChatGPT Work.
+- Se documentaron los smoke tests, las limitaciones de Git y el manejo de hosts con acceso de solo lectura.
 
 ### Commit sugerido
 

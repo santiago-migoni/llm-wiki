@@ -103,3 +103,9 @@ The index-first workflow is intended for roughly 100 sources and a few hundred p
 The phased plan is documented in [docs/plugin-roadmap.md](docs/plugin-roadmap.md).
 
 The first implementation phase aligns all skills and templates with the Git-first architecture. Later phases add vault initialization, ingestion, retrieval, linting, cross-host tests, and optional scale improvements.
+
+Testing is documented in [docs/testing.md](docs/testing.md). Host-specific setup and smoke tests are documented in [docs/host-compatibility.md](docs/host-compatibility.md). Run the deterministic package check with:
+
+~~~bash
+bash tests/check-plugin-contract.sh
+~~~
