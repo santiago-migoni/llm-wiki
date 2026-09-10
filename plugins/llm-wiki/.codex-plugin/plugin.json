@@ -1,6 +1,6 @@
 {
   "name": "llm-wiki",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "Turn a collection of documents into a cited, Git-versioned wiki maintained by Codex and ChatGPT Work.",
   "author": {
     "name": "Santiago Migoni",
@@ -34,6 +34,7 @@
       "Ingest the documents in raw/inbox",
       "Answer with full context from the Git-versioned vault"
     ],
-    "brandColor": "#2563EB"
+    "brandColor": "#2563EB",
+    "logo": "./assets/logo.png"
   }
 }

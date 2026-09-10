@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.0.0
+
+First official stable release of the LLM Wiki Codex marketplace plugin.
+
+**What changed:**
+
+- Added the plugin's minimal, transparent logo at `plugins/llm-wiki/assets/logo.png`.
+- Declared the logo in the plugin interface manifest and promoted the package version to `1.0.0`.
+- Stabilized the Git-first vault workflow for document ingestion, canonical wiki pages, citations, and historical context.
+- Published the repo-local marketplace package for installation in Codex and use with ChatGPT Work.
+
 ## 0.2.0
 
 Codex and ChatGPT Work migration with a Git-first document model.
