@@ -292,6 +292,8 @@ feat: add auditable wiki context modes
 
 ## Fase 4 — Lint y calidad de conocimiento
 
+**Estado: completada.**
+
 ### Objetivo
 
 Detectar problemas estructurales y semánticos antes de que degraden la recuperación.
@@ -331,6 +333,15 @@ Las correcciones aprobadas deben:
 - Los hallazgos se agrupan por severidad.
 - No elimina ni fusiona páginas automáticamente.
 - Identifica el modelo antiguo si aparece en un vault migrado.
+
+### Implementación realizada
+
+- wiki-lint ahora audita el estado actual de fuentes y páginas sin depender de catálogos ni revisiones.
+- Se documentaron comprobaciones deterministas para inbox, source records, hashes, extracciones, índices, enlaces y metadatos.
+- Se incorporó análisis semántico de contradicciones, claims stale, duplicados, huérfanos y gaps de conocimiento.
+- Se definieron severidades Blocker, High, Medium y Low con evidencia, impacto y corrección sugerida.
+- Se estableció un formato reproducible de informe y una política report-first.
+- Las correcciones aprobadas conservan fuentes, assets e historial Git y se registran en un commit lint:.
 
 ### Commit sugerido
 
