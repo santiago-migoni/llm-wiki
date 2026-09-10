@@ -71,6 +71,12 @@ The slug is:
 
 The source hash is metadata for duplicate detection. It is not an identity and it does not replace Git.
 
+Before creating or updating a source record, compare the input hash with every current source.*
+file under raw/sources/<slug>/. When Git history is available, compare it with historical source.*
+blobs under every slug as well. A match anywhere in the current tree or history is an exact duplicate,
+even when the input filename or proposed slug differs; report the existing path and commit and make
+no source, page, log, or commit changes.
+
 ## Raw layer
 
 - raw/inbox/ is the staging area for user-supplied documents.

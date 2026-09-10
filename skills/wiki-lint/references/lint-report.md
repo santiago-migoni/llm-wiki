@@ -142,11 +142,13 @@ Count current source records and canonical pages. Past roughly 100 sources or a 
 
 For consistent scale reporting, use the thresholds in docs/scalability.md:
 
-- GREEN: fewer than 80 source records, fewer than 200 canonical pages, and no source-layer file
-  at or above 5 MiB;
-- WATCH: 80–100 source records, 200–300 canonical pages, or a source-layer file at or above
-  5 MiB, unless the candidate threshold is reached;
-- DERIVED-SEARCH-CANDIDATE: more than 100 source records or more than 300 canonical pages.
+- GREEN: fewer than 80 source records, fewer than 200 canonical pages, no source-layer or wiki
+  Markdown file at or above 5 MiB, and less than 50 MiB of wiki Markdown in total;
+- WATCH: 80–100 source records, 200–300 canonical pages, a source-layer or wiki Markdown file at
+  or above 5 MiB, or 50–249 MiB of wiki Markdown in total, unless the candidate threshold is
+  reached;
+- DERIVED-SEARCH-CANDIDATE: more than 100 source records, more than 300 canonical pages, or at
+  least 250 MiB of wiki Markdown in total.
 
 The numeric status is a decision signal, not a claim that the vault is context-ready. Report
 pending files, missing extractions, incomplete access, Git limitations, and observed retrieval

@@ -51,8 +51,8 @@ Remove the temporary directory after the test has been reviewed. Do not run init
 | I-003 | Initialize inside existing Git repo | The parent repository is reused; no nested .git directory is created. |
 | G-001 | Ingest new Markdown source | Stable slug, source.<ext>, complete extracted.md, page, index, log, and ingest commit exist. |
 | G-002 | Update existing source | Same slug and current paths are updated; prior state is available through Git. |
-| G-003 | Exact duplicate | No new source, page, log entry, or commit is created. |
-| G-004 | Historical duplicate | A hash already present in the slug history is recognized without creating a new state. |
+| G-003 | Exact duplicate | Identical bytes are recognized across filenames and source slugs; no new source, page, log entry, or commit is created. |
+| G-004 | Historical duplicate | A hash already present in any source slug's history is recognized without creating a new state. |
 | G-005 | Ambiguous identity | Input remains pending and the agent asks before filing. |
 | G-006 | Contradictory source | The conflict is recorded and not silently overwritten. |
 | G-007 | Conversion | PDF, DOCX, spreadsheet, image, or other supported input has a complete or explicitly partial extraction. |
@@ -63,7 +63,7 @@ Remove the temporary directory after the test has been reviewed. Do not run init
 | L-001 | Lint empty vault | Empty scaffold is healthy and missing knowledge is not reported as a failure. |
 | L-002 | Lint populated vault | Source, extraction, link, index, duplicate, contradiction, metadata, and scale checks report evidence. |
 | S-001 | Assess empty-vault scale | The read-only assessor reports GREEN, zero sources, zero pages, and zero pending files without mutating the fixture. |
-| S-002 | Assess populated-vault scale | The assessor reports current source/page counts, byte totals, structural gaps, Git state, and the highest applicable threshold. |
+| S-002 | Assess populated-vault scale | The assessor reports current source/page counts, source and wiki Markdown byte totals, largest files, structural gaps, Git state, and the highest applicable threshold. |
 | H-001 | Codex smoke test | Plugin loads, skills are discoverable, and a new thread can access the current package. |
 | H-002 | ChatGPT Work smoke test | Workflow works when the vault is exposed to the conversation; inaccessible files are reported. |
 
@@ -76,7 +76,7 @@ Use a disposable Git vault and a small text source.
 3. Query a fact that requires the extracted text.
 4. Copy the source with one meaningful change into raw/inbox/ and ingest it using the same slug.
 5. Use Git history to compare the two states.
-6. Place the unchanged source in raw/inbox/ and verify the duplicate no-op.
+6. Place the unchanged source in raw/inbox/ under a different filename and verify the cross-slug duplicate no-op.
 7. Add a contradiction and verify that it is surfaced.
 8. Run wiki-query in targeted, current-corpus, and historical modes.
 9. Run wiki-lint and verify the report format.

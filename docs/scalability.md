@@ -21,6 +21,8 @@ vault y reporta:
 - archivos pendientes en raw/inbox/;
 - bytes de originales, extracciones y assets;
 - archivo más grande del layer de fuentes;
+- bytes totales de Markdown bajo wiki/ y archivo Markdown más grande;
+- bytes totales de síntesis y síntesis Markdown más grande;
 - source records sin source.<ext> o sin extracted.md;
 - disponibilidad, estado de cambios y profundidad básica de Git.
 
@@ -45,9 +47,9 @@ Los umbrales son un punto de partida revisable, no un límite técnico del model
 
 | Estado | Señal cuantitativa | Decisión |
 |---|---|---|
-| GREEN | Menos de 80 source records, menos de 200 páginas canónicas y ningún archivo del layer de fuentes de 5 MiB o más | Mantener recuperación targeted/index-first con Markdown y Git. |
-| WATCH | Entre 80 y 100 source records, entre 200 y 300 páginas, o un archivo del layer de fuentes de 5 MiB o más, sin alcanzar DERIVED-SEARCH-CANDIDATE | Medir consultas reales, revisar cobertura y volver a evaluar antes de agregar infraestructura. |
-| DERIVED-SEARCH-CANDIDATE | Más de 100 source records o más de 300 páginas canónicas | Evaluar un índice full-text local regenerable; no activarlo automáticamente. |
+| GREEN | Menos de 80 source records, menos de 200 páginas canónicas, ningún archivo de fuentes o Markdown de wiki de 5 MiB o más y menos de 50 MiB de Markdown de wiki total | Mantener recuperación targeted/index-first con Markdown y Git. |
+| WATCH | Entre 80 y 100 source records, entre 200 y 300 páginas, algún archivo de fuentes o Markdown de wiki de 5 MiB o más, o entre 50 y 249 MiB de Markdown de wiki total, sin alcanzar DERIVED-SEARCH-CANDIDATE | Medir consultas reales, revisar cobertura y volver a evaluar antes de agregar infraestructura. |
+| DERIVED-SEARCH-CANDIDATE | Más de 100 source records, más de 300 páginas canónicas o 250 MiB o más de Markdown de wiki total | Evaluar un índice full-text local regenerable; no activarlo automáticamente. |
 
 El estado numérico se determina por la señal más exigente. Un vault con archivos faltantes,
 extracciones incompletas o inbox pendiente no queda “listo” solo porque su tamaño sea GREEN;
@@ -113,4 +115,3 @@ La Fase 6 queda satisfecha cuando:
 4. no se agrega infraestructura derivada sin evidencia;
 5. una futura extensión tiene una fuente de verdad, una estrategia de reconstrucción y una
    política de trazabilidad definidas.
-

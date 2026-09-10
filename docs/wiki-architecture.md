@@ -175,7 +175,9 @@ These are discovery-oriented groupings:
 - projects/: initiatives, systems, products, and workstreams;
 - decisions/: decisions, rationale, alternatives, owners, and follow-up.
 
-They are not parallel copies of wiki/pages. The same knowledge should have one canonical home. A category file may be the canonical page itself, or it may be a short index that links to a page elsewhere. Choose one and make the link explicit.
+They are not parallel copies of wiki/pages. Every canonical knowledge page lives under wiki/pages/.
+Category files are short navigation indexes or lightweight groupings that link to canonical pages;
+they must not become alternative canonical pages or duplicate their bodies.
 
 As the vault grows, these directories can contain index files, but folders should not be created only to mirror a source document.
 
@@ -189,6 +191,11 @@ The stable identity of a logical document is its slug. The slug should be:
 - reused when the same logical document is updated.
 
 Use Git metadata to distinguish versions. Do not add revision identifiers to filenames, paths, frontmatter, or wiki page names unless there is a genuine need to distinguish two different logical documents.
+
+Before filing a source, compare its hash with every current source.* file and, when Git is available,
+with historical source.* blobs under all source slugs. Identical bytes are duplicates even when the
+filename or proposed slug differs. Report the existing source path and commit and leave the vault
+unchanged.
 
 Before creating a new page, the agent should search the index, filenames, frontmatter, and links for an existing canonical page. If one exists, update it. If the relationship between two documents is unclear, preserve both sources and ask for a decision rather than creating duplicate knowledge pages.
 

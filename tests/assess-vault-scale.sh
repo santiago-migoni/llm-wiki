@@ -22,8 +22,28 @@ from pathlib import Path
 
 root = Path(sys.argv[1]).expanduser().resolve()
 
+schema_candidates = (root / "AGENTS.md", root / "CLAUDE.md")
+existing_schema_paths = [path for path in schema_candidates if path.exists()]
+if len(existing_schema_paths) > 1:
+    print("Scale status: INVALID")
+    print(
+        "Multiple schema files: "
+        + ", ".join(path.name for path in existing_schema_paths)
+    )
+    raise SystemExit(1)
+if not existing_schema_paths:
+    print("Scale status: INVALID")
+    print("Missing required paths: AGENTS.md or CLAUDE.md")
+    raise SystemExit(1)
+
+schema_path = existing_schema_paths[0]
+if not schema_path.is_file():
+    print("Scale status: INVALID")
+    print("Schema path is not a file: " + schema_path.name)
+    raise SystemExit(1)
+
 required_paths = (
-    root / "AGENTS.md",
+    schema_path,
     root / "raw" / "inbox",
     root / "raw" / "sources",
     root / "wiki",
@@ -62,6 +82,7 @@ def format_bytes(value):
 
 source_root = root / "raw" / "sources"
 inbox_root = root / "raw" / "inbox"
+wiki_root = root / "wiki"
 pages_root = root / "wiki" / "pages"
 syntheses_root = root / "wiki" / "syntheses"
 source_records = sorted(item for item in source_root.iterdir() if item.is_dir())
@@ -73,6 +94,9 @@ canonical_pages = [
 ]
 syntheses = [
     path for path in files_under(syntheses_root) if path.suffix.lower() == ".md"
+]
+wiki_markdown_files = [
+    path for path in files_under(wiki_root) if path.suffix.lower() == ".md"
 ]
 
 source_files = []
@@ -100,18 +124,30 @@ source_layer_files = [
     path for path in files_under(source_root) if path.name != ".gitkeep"
 ]
 largest_source_file = max(source_layer_files, key=size_of, default=None)
+largest_wiki_file = max(wiki_markdown_files, key=size_of, default=None)
+largest_synthesis_file = max(syntheses, key=size_of, default=None)
 source_bytes = sum(size_of(path) for path in source_files)
 extraction_bytes = sum(size_of(path) for path in extraction_files)
 asset_bytes = sum(size_of(path) for path in asset_files)
+wiki_markdown_bytes = sum(size_of(path) for path in wiki_markdown_files)
+synthesis_bytes = sum(size_of(path) for path in syntheses)
 largest_source_bytes = size_of(largest_source_file) if largest_source_file else 0
+largest_wiki_bytes = size_of(largest_wiki_file) if largest_wiki_file else 0
+largest_synthesis_bytes = size_of(largest_synthesis_file) if largest_synthesis_file else 0
 
 # These thresholds mirror docs/scalability.md.
-if len(source_records) > 100 or len(canonical_pages) > 300:
+if (
+    len(source_records) > 100
+    or len(canonical_pages) > 300
+    or wiki_markdown_bytes >= 250 * 1024 * 1024
+):
     scale_status = "DERIVED-SEARCH-CANDIDATE"
 elif (
     len(source_records) >= 80
     or len(canonical_pages) >= 200
     or largest_source_bytes >= 5 * 1024 * 1024
+    or largest_wiki_bytes >= 5 * 1024 * 1024
+    or wiki_markdown_bytes >= 50 * 1024 * 1024
 ):
     scale_status = "WATCH"
 else:
@@ -147,6 +183,7 @@ git_state = (
 )
 
 print(f"Vault: {root}")
+print(f"Schema: {schema_path.name}")
 print(f"Scale status: {scale_status}")
 print(f"Current source records: {len(source_records)}")
 print(f"Canonical pages: {len(canonical_pages)}")
@@ -155,6 +192,8 @@ print(f"Pending inbox files: {len(pending_files)}")
 print(f"Current source bytes: {format_bytes(source_bytes)}")
 print(f"Extraction bytes: {format_bytes(extraction_bytes)}")
 print(f"Asset bytes: {format_bytes(asset_bytes)}")
+print(f"Wiki Markdown bytes: {format_bytes(wiki_markdown_bytes)}")
+print(f"Synthesis Markdown bytes: {format_bytes(synthesis_bytes)}")
 if largest_source_file:
     relative_largest = largest_source_file.relative_to(root)
     print(
@@ -163,6 +202,22 @@ if largest_source_file:
     )
 else:
     print("Largest source-layer file: 0 B")
+if largest_wiki_file:
+    relative_largest = largest_wiki_file.relative_to(root)
+    print(
+        "Largest wiki Markdown file: "
+        f"{format_bytes(largest_wiki_bytes)} ({relative_largest})"
+    )
+else:
+    print("Largest wiki Markdown file: 0 B")
+if largest_synthesis_file:
+    relative_largest = largest_synthesis_file.relative_to(root)
+    print(
+        "Largest synthesis Markdown file: "
+        f"{format_bytes(largest_synthesis_bytes)} ({relative_largest})"
+    )
+else:
+    print("Largest synthesis Markdown file: 0 B")
 print(f"Sources missing current original: {len(missing_current_source)}")
 print(f"Sources missing extracted.md: {len(missing_extraction)}")
 if missing_current_source:
@@ -192,4 +247,3 @@ else:
     )
 print(f"Recommendation: {recommendation}")
 PY
-

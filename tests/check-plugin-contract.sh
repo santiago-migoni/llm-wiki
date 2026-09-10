@@ -108,4 +108,29 @@ if [[ "$scale_output" != *"Scale status: GREEN"* ]]; then
   fail "empty-vault scale assessment is not GREEN"
 fi
 
+scale_test_root="$(mktemp -d)"
+trap 'rm -rf "$scale_test_root"' EXIT
+cp -R "$repo_root/tests/fixtures/empty-vault/." "$scale_test_root/"
+mv "$scale_test_root/AGENTS.md" "$scale_test_root/CLAUDE.md"
+
+claude_scale_output="$(bash "$repo_root/tests/assess-vault-scale.sh" "$scale_test_root")"
+if [[ "$claude_scale_output" != *"Schema: CLAUDE.md"* ]] || \
+   [[ "$claude_scale_output" != *"Scale status: GREEN"* ]]; then
+  fail "CLAUDE.md scale assessment is not supported"
+fi
+
+truncate -s 6M "$scale_test_root/wiki/syntheses/large.md"
+large_scale_output="$(bash "$repo_root/tests/assess-vault-scale.sh" "$scale_test_root")"
+if [[ "$large_scale_output" != *"Scale status: WATCH"* ]] || \
+   [[ "$large_scale_output" != *"Largest synthesis Markdown file: 6.0 MiB"* ]]; then
+  fail "large wiki Markdown is not included in scale assessment"
+fi
+
+cp "$scale_test_root/CLAUDE.md" "$scale_test_root/AGENTS.md"
+if bash "$repo_root/tests/assess-vault-scale.sh" "$scale_test_root" > "$scale_test_root/both-schema.out" 2>&1; then
+  fail "scale assessment accepts both schema files"
+fi
+rg -q "Multiple schema files: AGENTS.md, CLAUDE.md" "$scale_test_root/both-schema.out" || \
+  fail "scale assessment does not report both schema files"
+
 echo "plugin contract: ok"
