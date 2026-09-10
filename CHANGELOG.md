@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.0
+
+Codex and ChatGPT Work migration.
+
+**What changed:**
+
+- Replaced the Claude-specific manifests with a validated `.codex-plugin/plugin.json` universal plugin manifest.
+- Documented use in Codex and ChatGPT Work, including the boundary that the plugin does not provide external document storage.
+- Added an explicit document lifecycle: `raw/inbox/` → versioned `raw/archive/` → versioned `raw/extracted/` → `wiki/`.
+- Added stable logical document IDs, monotonic revision IDs, SHA-256 provenance, archive manifests, complete extraction requirements, stable living pages, and exhaustive context coverage reporting.
+- Strengthened lint expectations around archive integrity and pending sources.
+
 ## 0.1.0
 
 First release of this plugin in this repository.
