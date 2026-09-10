@@ -58,7 +58,7 @@ AGENTS.md             # This file: vault-specific rules and scope.
 
 ~~~yaml
 ---
-type: knowledge | synthesis | index | decision
+type: knowledge
 slug: <stable-slug>
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
@@ -66,9 +66,11 @@ source: raw/sources/<slug>/source.<ext>
 extracted: raw/sources/<slug>/extracted.md
 sha256: <hash of current source when available>
 tags: []
-status: current | provisional | superseded
+status: current
 ---
 ~~~
+
+Use type: synthesis for a cross-source analysis, type: decision for a decision record, and type: index for a navigation file. Use provisional or superseded as status values only when the page actually has that state.
 
 For a page that synthesizes several sources, list the relevant source paths in a Sources section instead of pretending that one source is authoritative.
 
