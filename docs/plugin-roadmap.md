@@ -219,6 +219,8 @@ feat: ingest documents into stable source slugs
 
 ## Fase 3 — Consulta y gestión de contexto
 
+**Estado: completada.**
+
 ### Objetivo
 
 Responder desde la wiki con el mínimo contexto necesario, pero permitir análisis exhaustivos cuando el usuario lo pida.
@@ -272,6 +274,15 @@ No se deben cargar todas las versiones históricas si la pregunta afecta a un ú
 - Las fuentes contradictorias se muestran como contradicción.
 - El modo de contexto utilizado queda explícito cuando es relevante.
 - Una síntesis guardada no duplica una página canónica.
+
+### Implementación realizada
+
+- wiki-query ahora selecciona el modo de contexto más estrecho que satisface la solicitud.
+- Se documentaron los procedimientos de contexto dirigido, corpus actual e histórico.
+- El modo corpus actual exige inventario, verificación de fuentes y extracciones, lectura por pasadas y cobertura por slug.
+- El modo histórico usa commits, paths, git log, git diff y git show sin introducir revision-id.
+- Se definió un contrato de citas para páginas, fuentes, marcadores y commits.
+- Se definió el frontmatter y el flujo para guardar síntesis durables sin duplicar páginas canónicas.
 
 ### Commit sugerido
 

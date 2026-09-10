@@ -13,6 +13,7 @@ Codex and ChatGPT Work migration with a Git-first document model.
 - Added SHA-256 duplicate detection, complete extraction requirements, historical Git queries, and exhaustive context coverage reporting.
 - Aligned the vault protocol, initialization template, ingestion, query, and lint skills with the simplified structure.
 - Added the source-record contract for classifying new documents, updates, exact duplicates, ambiguous identities, local-edit protection, extraction metadata, and ingest reports.
+- Added auditable query modes for targeted, current-corpus, and historical context, with coverage ledgers, source citations, Git provenance, and durable synthesis filing.
 
 ## 0.1.0
 
