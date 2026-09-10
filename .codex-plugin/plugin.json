@@ -1,0 +1,39 @@
+{
+  "name": "llm-wiki",
+  "version": "0.2.0",
+  "description": "Turn a collection of documents into a cited, Git-versioned wiki maintained by Codex and ChatGPT Work.",
+  "author": {
+    "name": "Santiago Migoni",
+    "email": "santiagomigoni@gmail.com"
+  },
+  "homepage": "https://github.com/santiago-migoni/llm-wiki",
+  "repository": "https://github.com/santiago-migoni/llm-wiki",
+  "keywords": [
+    "knowledge-base",
+    "document-archive",
+    "research",
+    "wiki",
+    "citations",
+    "markdown"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "LLM Wiki",
+    "shortDescription": "Build a cited wiki from an archive of documents.",
+    "longDescription": "Ingest documents into stable source slugs, preserve complete extracted text, and maintain a compact, cited wiki whose history is versioned by Git. Codex and ChatGPT Work can use targeted answers and auditable full-corpus context passes.",
+    "developerName": "Santiago Migoni",
+    "category": "Productivity",
+    "capabilities": [
+      "Document ingestion",
+      "Knowledge management",
+      "Citations",
+      "Writing"
+    ],
+    "defaultPrompt": [
+      "Initialize a document wiki here",
+      "Ingest the documents in raw/inbox",
+      "Answer with full context from the Git-versioned vault"
+    ],
+    "brandColor": "#2563EB"
+  }
+}

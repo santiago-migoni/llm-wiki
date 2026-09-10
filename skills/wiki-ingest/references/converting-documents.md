@@ -1,40 +1,72 @@
 # Converting non-markdown sources
 
-The original file in `raw/` is immutable — never edit or replace it. Write the converted markdown extraction to `raw/extracted/<original-stem>.md` (create the directory if needed). Extractions are derived artifacts: regenerable, and the source page's `source:` field still points at the **original** file.
+Read references/source-record.md for source identity, duplicate handling, metadata, and update rules. This reference covers only format-specific conversion.
 
-Begin every extraction with a short header noting the original filename, conversion method, and date, so staleness is detectable if the original changes.
+The source is staged in raw/inbox/. During ingestion, keep the current original under raw/sources/<slug>/source.<ext> and write the complete normalized extraction to raw/sources/<slug>/extracted.md.
 
-Every converter below is optional. Probe for it before use; if it is absent, say what is missing and how to convert manually, and leave the rest of `wiki-ingest` usable for other sources.
+The extraction is derived and regenerable. It is never a replacement for the current original. Git preserves prior committed source and extraction states.
 
-## .pdf
+Begin every extracted.md with a short header containing:
 
-- Try `pdftotext -layout file.pdf out.txt` (poppler) first; if unavailable, use whatever PDF-reading capability is already at hand to extract the text.
-- For scanned or image PDFs with no text layer, view the page images directly and transcribe what matters; note "OCR-by-LLM" in the extraction header.
-- Preserve heading structure where detectable; drop running headers and footers.
-- For a large work (a book, a long report), insert page markers as HTML comments (`<!-- p.87 -->`) at each page break instead of dropping page numbers — citations in wiki pages reference them (`ch. 3, p. 87`), keeping every claim traceable to the raw file.
+- stable slug;
+- current source path;
+- original filename;
+- SHA-256 when available;
+- conversion method;
+- extraction date;
+- warnings or omitted regions.
 
-## .docx
+All converters are optional. Probe before use. If a converter is unavailable, state the limitation and use the best available reading capability without blocking other source types.
 
-- Try `pandoc file.docx -t gfm -o out.md` first; if unavailable, use whatever document-reading capability is already at hand.
-- Keep tracked changes and comments only if the user says they matter.
-- Export embedded images to `raw/assets/` and reference them from the extraction if they carry meaning.
+## PDF
 
-## .xlsx / .csv
+- Try pdftotext -layout on raw/sources/<slug>/source.pdf, then normalize the result into raw/sources/<slug>/extracted.md.
+- For scanned or image-only PDFs, inspect page images and record OCR-by-LLM plus any omitted regions.
+- Preserve detectable headings, lists, and tables.
+- Drop repeated running headers and footers when they do not carry meaning.
+- For long documents, add page markers such as <!-- p.87 --> so claims can be traced to the original.
 
-- Inspect sheets directly, or with a spreadsheet-reading tool if one is at hand.
-- Do not dump a large sheet wholesale. For each sheet, record: purpose, column schema, row count, and a representative sample (roughly 10 rows) as a markdown table, plus any aggregate that matters (totals, ranges, distributions).
-- A workbook small enough (under roughly 50 rows total) can be dumped as a full markdown table instead.
+## DOCX
 
-## Images (.png, .jpg)
+- Try pandoc raw/sources/<slug>/source.docx -t gfm, then write the result to raw/sources/<slug>/extracted.md.
+- Preserve headings, lists, tables, footnotes, and links where possible.
+- Keep tracked changes and comments only when the user says they matter.
+- Export meaningful embedded images to raw/sources/<slug>/assets/ and reference them from extracted.md.
 
-- View directly; describe the content in the extraction. Store the image itself in `raw/assets/`.
+## XLSX and CSV
 
-## Other formats
+- Inspect sheets directly or use an available spreadsheet-reading capability.
+- For each sheet, record its purpose, column schema, row count, representative sample, and relevant aggregates.
+- Do not dump a large workbook wholesale.
+- A workbook with fewer than roughly 50 total rows may be represented as a complete Markdown table.
+- Preserve sheet names and cell or range markers for load-bearing values.
 
-- .pptx: extract per-slide text, one section per slide.
-- .html: convert to markdown, or extract the readable text directly.
-- Audio/video: no local transcription is assumed — ask the user for a transcript.
+## Images
+
+- Inspect the image directly.
+- Describe meaningful visual content in extracted.md.
+- Keep the current image under raw/sources/<slug>/source.<ext>; place additional meaningful assets in assets/.
+
+## PPTX
+
+- Extract text per slide, preserving slide numbers and meaningful speaker notes.
+- Record important diagrams or visual information in extracted.md and keep relevant images in assets/.
+
+## HTML
+
+- Extract readable content to Markdown.
+- Preserve title, headings, links, lists, tables, and meaningful metadata.
+- Exclude navigation and repeated boilerplate when it is not part of the source.
+
+## Audio and video
+
+No local transcription is assumed. Ask for a transcript or use an available transcription capability. If only a partial transcript is available, record the coverage and omissions.
 
 ## Sanity check
 
-After conversion, skim the extraction against the original for garbled text, missing sections, or mangled tables before filing. Note any known gap in the extraction header.
+After conversion:
+
+1. compare extracted.md with the original;
+2. check headings, lists, tables, images, signatures, page or slide markers, and footnotes;
+3. record garbled text or missing regions;
+4. never silently present an incomplete extraction as complete.
