@@ -146,6 +146,14 @@ def _text(command: str, payload: dict[str, Any]) -> str:
             f"{item['coverage'].get('unit', '?')}"
             for item in payload.get("extractions", [])
         )
+        contradiction_counts = payload.get("contradictions", {}).get("counts", {})
+        if contradiction_counts:
+            lines.append(
+                "CONTRADICTIONS "
+                f"page={contradiction_counts.get('page_entries', 0)} "
+                f"log={contradiction_counts.get('log_entries', 0)} "
+                f"unresolved={contradiction_counts.get('unresolved', 0)}"
+            )
         provenance = payload.get("provenance", {})
         if provenance.get("legacy_pages"):
             lines.append(

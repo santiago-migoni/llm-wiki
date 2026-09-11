@@ -39,7 +39,11 @@ For every source slug, verify:
 - exactly one current source.* file;
 - extracted.md exists;
 - source and extraction paths are readable;
-- extraction status is complete or has declared warnings.
+- extraction frontmatter is valid and declares format, status, unit, expected coverage,
+  processed coverage, and warnings;
+- extraction status and coverage determine whether the source is fully read, representative, or
+  partial. A non-complete status or a warning affecting the claim requires inspection of the
+  original, a retained structured derivative, or an explicit coverage exception.
 
 Files in raw/inbox/ are pending and are not part of the processed current corpus. If any exist, report that a complete corpus answer is not possible until they are ingested.
 
@@ -47,8 +51,11 @@ Files in raw/inbox/ are pending and are not part of the processed current corpus
 
 1. Read all canonical pages under wiki/pages/.
 2. Read current extracted.md files in bounded passes.
-3. Read original source files only when the extraction is incomplete or the question depends on source format.
-4. Track each source slug as read, partially read, skipped, unreadable, unsupported, or pending. For every page, preserve the complete `sources` entry set and flag missing, stale, or contradictory provenance.
+3. Read original source files when the extraction is not `complete` or the question depends on
+   source format, layout, visual evidence, or exact ranges.
+4. Track each source slug as fully read, representative, partial, skipped, unreadable, unsupported,
+   or pending, using the declared coverage counts. For every page, preserve the complete `sources`
+   entry set and flag missing, stale, or contradictory provenance.
 5. Do not silently truncate an extraction because of context limits. Continue in another bounded pass or report the omission.
 
 ### Report
@@ -128,8 +135,9 @@ per supporting record. The slugs must be declared in the page frontmatter's
 For any current-corpus or historical query, maintain a private or user-visible ledger:
 
 ~~~text
-- <slug or page> | status: fully read | evidence: <path and marker>
-- <slug or page> | status: partial | reason: <reason>
+- <slug or page> | status: fully read | extraction coverage: <processed>/<expected> <unit> | evidence: <path and marker>
+- <slug or page> | status: representative | extraction coverage: <processed>/<expected> <unit> | reason: <reason>
+- <slug or page> | status: partial | extraction coverage: <processed>/<expected> <unit> | reason: <reason>
 - <slug or page> | status: skipped | reason: <reason>
 ~~~
 

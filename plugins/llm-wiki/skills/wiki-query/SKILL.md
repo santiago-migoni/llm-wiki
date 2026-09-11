@@ -7,7 +7,7 @@ description: Answer questions from an LLM-maintained wiki vault with traceable c
 
 Answer from the current wiki and source layer. Use Git history for historical questions. Do not ingest, move, or rewrite sources during a query.
 
-Load references/vault-protocol.md first. Load references/context-modes.md when selecting an exhaustive or historical mode, filing a synthesis, or when a coverage report is required. Resolve references from the plugin package, not from the current working directory.
+Load references/vault-protocol.md first. Load references/context-modes.md when selecting an exhaustive or historical mode, filing a synthesis, or when a coverage report is required. Load [docs/contradictions.md](../../docs/contradictions.md) before answering a question that touches competing claims. Resolve references from the plugin package, not from the current working directory.
 
 ## Steps
 
@@ -27,10 +27,17 @@ Load references/vault-protocol.md first. Load references/context-modes.md when s
    - current source or extracted.md path;
    - page, section, slide, sheet, cell, timestamp, or other marker;
    - Git commit and path for historical claims.
-9. If sources disagree, preserve the competing citations and explain which evidence is direct, supporting, contextual, or countervailing. Never silently select one source.
-10. If the vault has no relevant information, say so and offer to ingest a source.
-11. State context limitations. Never claim complete or absolute context when a source is pending, skipped, unreadable, unsupported, or materially partial.
-12. If the answer is durable and substantive, offer to file it in wiki/syntheses/. If accepted, follow the synthesis procedure in references/context-modes.md and create a query: commit.
+9. Inspect `## Contradictions` on each relevant canonical page before answering. If a material
+   contradiction is `unresolved`, preserve both citations, describe the answer as contested, and do
+   not present either claim as certain. For `resolved` or `superseded`, preserve both evidences and
+   explain the recorded resolution criterion.
+10. If sources disagree without a structured contradiction entry, treat that as a missing update:
+    report the disagreement and do not silently select one source.
+11. If the vault has no relevant information, say so and offer to ingest a source.
+12. State context limitations and extraction coverage. Never claim complete or absolute context when
+    a source is pending, skipped, unreadable, unsupported, or materially partial, or when its
+    declared coverage is representative rather than complete.
+13. If the answer is durable and substantive, offer to file it in wiki/syntheses/. If accepted, follow the synthesis procedure in references/context-modes.md and create a query: commit.
 
 ## Context claims
 

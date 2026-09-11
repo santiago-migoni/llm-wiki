@@ -49,7 +49,8 @@ For every source record:
 - compute the current source hash when a hash utility is available;
 - compare it with sha256 in extracted.md and any canonical page metadata;
 - confirm extracted.md points to the current source path;
-- inspect status and warnings;
+- validate format, method, status, coverage unit, expected/processed counts, and warnings against
+  the [extraction coverage contract](../../../docs/extraction-coverage.md);
 - report missing, stale, partial, unreadable, or unsupported extractions.
 
 If the source changed after extraction, classify the extraction as stale even if the file exists.
@@ -173,6 +174,15 @@ Read relevant canonical pages, current extractions, and recent wiki/log.md entri
 - repeated concepts, people, projects, or decisions without a canonical page;
 - unresolved open questions;
 - extraction warnings that affect a load-bearing claim.
+
+### Contradictions
+
+For every structured entry under a canonical page's `## Contradictions` section, verify the two
+claims, both evidence locators, and one of `unresolved`, `resolved`, or `superseded`. A resolved or
+superseded entry must retain both evidences and state `Resolution` and `Criterion`. Cross-check
+`wiki/log.md` using the page wikilink and contradiction id. Report a canonical entry missing from
+the log, a contradiction mentioned only in the log, duplicate identifiers, or page/log status
+mismatches. Do not resolve authority conflicts automatically.
 
 For large vaults, prioritize recently changed and highly linked material, then state the sample and unexamined scope.
 

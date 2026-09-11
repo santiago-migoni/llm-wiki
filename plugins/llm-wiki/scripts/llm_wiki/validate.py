@@ -9,6 +9,7 @@ from .hashes import sha256_file
 from .inventory import build_inventory
 from .links import build_link_report
 from .models import Finding, relative
+from .contradictions import build_contradiction_report
 from .provenance import inspect_page_provenance
 from .vault import REQUIRED_DIRECTORIES, schema_paths
 
@@ -201,6 +202,17 @@ def validate(root: Path) -> dict:
             index=item["index"],
         )
 
+    contradictions = build_contradiction_report(root)
+    for issue in contradictions["issues"]:
+        findings.add(
+            issue["severity"],
+            issue["message"],
+            issue["path"],
+            code=issue["code"],
+            line=issue["line"],
+            **issue["details"],
+        )
+
     severity_order = {"blocker": 0, "high": 1, "medium": 2, "low": 3}
     ordered = sorted(findings.items, key=lambda item: (severity_order[item.severity], item.id))
     return {
@@ -214,6 +226,11 @@ def validate(root: Path) -> dict:
         "inventory": inventory["counts"],
         "inventory_warnings": inventory["warnings"],
         "extractions": extraction_reports,
+        "contradictions": {
+            key: value
+            for key, value in contradictions.items()
+            if key != "issues"
+        },
         "links": links["counts"],
         "provenance": {
             "status": "migrable" if legacy_pages else "current",

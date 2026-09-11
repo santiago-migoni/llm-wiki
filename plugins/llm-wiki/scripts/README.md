@@ -19,12 +19,16 @@ python3 <plugin-root>/scripts/llm-wiki validate <vault-root>
 python3 <plugin-root>/scripts/llm-wiki migrate-provenance <vault-root> --check
 ~~~
 
-The inventory, links, hashes, and validate commands are read-only. Provenance
+The inventory, links, hashes, and validate commands are read-only. `validate`
+also checks every extraction header and returns each source's format, status, and
+processed/expected coverage. Provenance
 migration is read-only by default; pass `--write` explicitly to apply the
 reviewed page-frontmatter changes. Migration never creates a Git commit and
 prints a unified diff. Add `--format json` for a versioned machine-readable
 result. Inventory JSON includes stable structural warning codes. Link reports
 also identify missing headings and canonical pages absent from `wiki/index.md`.
+Validation also checks query-visible contradiction records, including page/log
+cross-references and reviewed resolution criteria.
 
 `hashes --input` computes the pending file's SHA-256 and classifies it as a new
 file, current duplicate, historical duplicate, or a current-and-historical

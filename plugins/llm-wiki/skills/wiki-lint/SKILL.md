@@ -7,7 +7,7 @@ description: Health-check an LLM-maintained wiki vault. Use when the user asks t
 
 Audit the current source layer and wiki. Report structural, provenance, retrieval, and knowledge-quality findings. Do not modify the vault until the user approves specific fixes.
 
-Load references/vault-protocol.md first, references/lint-report.md for the check definitions and report format, and docs/scalability.md for the scale thresholds and derived-layer policy. Resolve package resources from the plugin package, not from the current working directory.
+Load references/vault-protocol.md first, references/lint-report.md for the check definitions and report format, docs/scalability.md for the scale thresholds and derived-layer policy, and docs/contradictions.md for the contradiction contract. Resolve package resources from the plugin package, not from the current working directory.
 
 ## Steps
 
@@ -29,8 +29,10 @@ Load references/vault-protocol.md first, references/lint-report.md for the check
    - frontmatter consistency;
    - Git working-tree and history state;
    - legacy layout and scale.
+   - contradiction page/log cross-references and resolution criteria.
 5. Run semantic checks over the relevant canonical pages, current extractions, and recent wiki/log.md entries:
    - contradictions;
+   - contradictions mentioned only in wiki/log.md;
    - stale or unsupported claims;
    - missing cross-references;
    - duplicated category content;
