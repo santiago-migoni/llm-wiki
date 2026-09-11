@@ -3,3 +3,7 @@
 
 # Ignore specs files
 .specs
+
+# Ignore Python runtime artifacts
+__pycache__/
+*.py[cod]

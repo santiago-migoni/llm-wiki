@@ -25,8 +25,16 @@ The check validates:
 - the expected Git-first paths in documentation;
 - the read-only vault scale assessor against the empty fixture;
 - the absence of obsolete revision-folder instructions in operational skills.
+- the dependency-free Python CLI and its strict frontmatter parser;
+- deterministic inventory warnings, hash classification, wikilink resolution, and structural validation behavior.
 
 It does not prove that an LLM will make a good semantic decision.
+
+Run the deterministic Python suite directly with:
+
+~~~bash
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s plugins/llm-wiki/scripts/tests -v
+~~~
 
 ## Fixture
 
@@ -69,6 +77,9 @@ Remove the temporary directory after the test has been reviewed. Do not run init
 | M-003 | Migration check | Default `migrate-provenance` mode makes no changes and prints exactly the affected pages plus a unified diff. |
 | M-004 | Migration write | Explicit `--write` converts only reviewed page frontmatter, preserves the body, and creates no commit. |
 | M-005 | Claim citations | Multi-source claims cite declared source slugs and locators; undeclared citation slugs are reported. |
+| D-001 | Inventory warnings | Missing or malformed structural entries produce stable warning codes in JSON and human output. |
+| D-002 | Hash classification | Current duplicates, historical duplicates, and explicit reversion targets are distinguished without writes. |
+| D-003 | Link resolution | Aliases resolve, headings are checked, and canonical pages missing from `wiki/index.md` are reported. |
 | H-001 | Codex smoke test | Plugin loads, skills are discoverable, and a new thread can access the current package. |
 | H-002 | ChatGPT Work smoke test | Workflow works when the vault is exposed to the conversation; inaccessible files are reported. |
 

@@ -13,7 +13,8 @@ Load references/vault-protocol.md first, references/lint-report.md for the check
 
 1. Resolve the vault and read AGENTS.md or the authoritative schema in full.
 2. Read wiki/index.md and determine the intended canonical and navigational structure.
-3. Run all deterministic checks from references/lint-report.md:
+3. When Python 3.10+ and the packaged deterministic CLI are available, run `python3 <plugin-root>/scripts/llm-wiki validate <vault-root> --format json`. Use its findings as the structural baseline. If it is unavailable, say so and perform the equivalent read-only checks manually.
+4. Run any remaining deterministic checks from references/lint-report.md that are not covered by the CLI:
    - pending files in raw/inbox/;
    - current source structure under raw/sources/<slug>/;
    - one current source.* and extracted.md per source;
@@ -28,7 +29,7 @@ Load references/vault-protocol.md first, references/lint-report.md for the check
    - frontmatter consistency;
    - Git working-tree and history state;
    - legacy layout and scale.
-4. Run semantic checks over the relevant canonical pages, current extractions, and recent wiki/log.md entries:
+5. Run semantic checks over the relevant canonical pages, current extractions, and recent wiki/log.md entries:
    - contradictions;
    - stale or unsupported claims;
    - missing cross-references;
@@ -37,15 +38,15 @@ Load references/vault-protocol.md first, references/lint-report.md for the check
    - repeated concepts, people, projects, or decisions without a canonical page;
    - unresolved questions;
    - extraction warnings affecting important claims.
-5. On a large vault, prioritize recently changed and highly linked paths. Report the sampled and unexamined scope.
-6. Group every finding by severity and use the report format in references/lint-report.md:
+6. On a large vault, prioritize recently changed and highly linked paths. Report the sampled and unexamined scope.
+7. Group every finding by severity and use the report format in references/lint-report.md:
    - Blocker;
    - High;
    - Medium;
    - Low.
-7. Report exact paths, evidence, impact, suggested correction, and whether approval is required.
-8. Change nothing until the user approves. Approval for selected findings authorizes only those corrections.
-9. After approved fixes:
+8. Report exact paths, evidence, impact, suggested correction, and whether approval is required.
+9. Change nothing until the user approves. Approval for selected findings authorizes only those corrections.
+10. After approved fixes:
    - edit only approved paths;
    - preserve sources, extractions, assets, and Git history;
    - update wiki/index.md when routes change;

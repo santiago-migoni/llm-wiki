@@ -137,6 +137,8 @@ evidence visible when sources disagree.
 - Do not use shell redirection to write vault documents.
 - Invoke shell commands with git -C <vault-root> or absolute paths.
 - Do not pass a shell-discovered path directly into a file-tool call without resolving it against the vault root.
+- When Python 3.10+ is available, prefer the packaged read-only CLI under `scripts/llm-wiki` for inventory, hashes, wikilinks, and structural validation. Its JSON output is evidence for deterministic checks, not a substitute for semantic review.
+- The packaged CLI uses only the Python standard library and accepts only the documented LLM Wiki YAML subset. Unsupported YAML must be reported rather than interpreted approximately.
 
 ## Git
 

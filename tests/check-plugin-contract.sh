@@ -211,10 +211,23 @@ rg -q "lint-report\\.md" "$plugin_root/skills/wiki-lint/SKILL.md" || fail "lint 
 rg -q "docs/scalability\\.md" "$plugin_root/skills/wiki-lint/SKILL.md" || fail "scale policy is not linked from wiki-lint"
 rg -q "docs/provenance\\.md" "$plugin_root/references/vault-protocol.md" || fail "provenance policy is not linked"
 rg -q "migrate-provenance" "$plugin_root/scripts/README.md" || fail "provenance migration is not documented"
+rg -q "INV-EXTRACTION-MISSING" "$plugin_root/scripts/llm_wiki/inventory.py" || fail "inventory warnings are not implemented"
+rg -q -- "--revert-to" "$plugin_root/scripts/llm_wiki/cli.py" || fail "hash reversion classification is not exposed"
+rg -q "missing_headings" "$plugin_root/scripts/llm_wiki/links.py" || fail "heading resolution is not implemented"
+rg -q "index_missing" "$plugin_root/scripts/llm_wiki/links.py" || fail "index route coverage is not implemented"
 rg -q "raw/sources/<slug>" "$plugin_root/docs/wiki-architecture.md" || fail "architecture source path is missing"
 rg -q "wiki/pages/" "$plugin_root/docs/wiki-architecture.md" || fail "architecture canonical page path is missing"
 rg -q "scalability\\.md" "$repo_root/README.md" || fail "scale policy is not linked"
 rg -q "assess-vault-scale\\.sh" "$repo_root/README.md" || fail "scale assessor is not documented"
+
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover \
+  -s "$plugin_root/scripts/tests" \
+  -p 'test_*.py' >/dev/null || fail "deterministic Python tool tests failed"
+
+validation_output="$(PYTHONDONTWRITEBYTECODE=1 python3 "$plugin_root/scripts/llm-wiki" validate "$repo_root/tests/fixtures/empty-vault")"
+if [[ "$validation_output" != *"Status: VALID"* ]]; then
+  fail "empty-vault deterministic validation failed"
+fi
 
 bash -n "$plugin_root/tests/assess-vault-scale.sh" || fail "scale assessor has invalid Bash syntax"
 scale_output="$(bash "$plugin_root/tests/assess-vault-scale.sh" "$repo_root/tests/fixtures/empty-vault")"

@@ -159,6 +159,23 @@ def validate(root: Path) -> dict:
             target=item["target"],
             candidates=item["candidates"],
         )
+    for item in links["missing_headings"]:
+        findings.add(
+            "medium",
+            "Missing wikilink heading",
+            item["path"],
+            line=item["line"],
+            target=item["target"],
+            heading=item["heading"],
+            available_headings=item["available_headings"],
+        )
+    for item in links["index_missing"]:
+        findings.add(
+            "medium",
+            "Canonical page is not linked from wiki/index.md",
+            item["path"],
+            index=item["index"],
+        )
 
     severity_order = {"blocker": 0, "high": 1, "medium": 2, "low": 3}
     ordered = sorted(findings.items, key=lambda item: (severity_order[item.severity], item.id))
@@ -171,6 +188,7 @@ def validate(root: Path) -> dict:
             for severity in severity_order
         },
         "inventory": inventory["counts"],
+        "inventory_warnings": inventory["warnings"],
         "links": links["counts"],
         "provenance": {
             "status": "migrable" if legacy_pages else "current",

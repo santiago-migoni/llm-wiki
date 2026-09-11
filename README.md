@@ -145,6 +145,25 @@ señales estructurales del corpus. Los umbrales, la matriz de opciones y los inv
 reconstrucción están documentados en [docs/scalability.md](plugins/llm-wiki/docs/scalability.md). El resultado no
 crea índices ni modifica el vault.
 
+## Deterministic vault checks
+
+The plugin includes a read-only Python 3.10+ CLI for inventory, source hashes, wikilinks, and
+structural validation. It uses only the Python standard library and accepts the documented strict
+subset of YAML frontmatter:
+
+~~~bash
+python3 plugins/llm-wiki/scripts/llm-wiki inventory <vault-root>
+python3 plugins/llm-wiki/scripts/llm-wiki hashes <vault-root> --input <pending-file> --include-history
+python3 plugins/llm-wiki/scripts/llm-wiki hashes <vault-root> --revert-to <sha256>
+python3 plugins/llm-wiki/scripts/llm-wiki links <vault-root>
+python3 plugins/llm-wiki/scripts/llm-wiki validate <vault-root>
+python3 plugins/llm-wiki/scripts/wiki-migrate-provenance <vault-root> --check
+~~~
+
+Add `--format json` for versioned machine-readable output. Unsupported YAML is reported instead of
+being interpreted approximately. Provenance migration is check-only by default; use `--write` only
+after reviewing its diff. See [scripts/README.md](plugins/llm-wiki/scripts/README.md).
+
 ## Development
 
 The phased plan is documented in [docs/plugin-roadmap.md](plugins/llm-wiki/docs/plugin-roadmap.md).

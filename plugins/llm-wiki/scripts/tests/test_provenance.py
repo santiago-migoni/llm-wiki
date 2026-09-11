@@ -30,7 +30,8 @@ def create_vault(root: Path) -> None:
         (root / directory).mkdir(parents=True, exist_ok=True)
     (root / "AGENTS.md").write_text("# Schema\n", encoding="utf-8")
     for name in ("index.md", "overview.md", "log.md"):
-        (root / "wiki" / name).write_text("# Empty\n", encoding="utf-8")
+        contents = "# Empty\n\n[[policy]]\n" if name == "index.md" else "# Empty\n"
+        (root / "wiki" / name).write_text(contents, encoding="utf-8")
 
 
 def add_source(root: Path, slug: str, content: bytes) -> str:

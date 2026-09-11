@@ -30,6 +30,11 @@ def _parser() -> argparse.ArgumentParser:
     hashes.add_argument("vault")
     hashes.add_argument("--include-history", action="store_true")
     hashes.add_argument("--input", help="Optional source file to compare with the vault")
+    hashes.add_argument(
+        "--revert-to",
+        metavar="SHA256",
+        help="Explicitly report a requested restoration target without changing files",
+    )
     hashes.add_argument("--format", choices=("json", "text"), default="text")
 
     migration = subparsers.add_parser(
@@ -62,17 +67,24 @@ def _envelope(command: str, data: dict[str, Any]) -> dict[str, Any]:
 def _text(command: str, payload: dict[str, Any]) -> str:
     if command == "inventory":
         counts = payload["counts"]
-        return "\n".join(
-            (
-                f"Vault: {payload['vault']}",
-                f"Schemas: {counts['schemas']}",
-                f"Source records: {counts['source_records']}",
-                f"Canonical pages: {counts['canonical_pages']}",
-                f"Syntheses: {counts['syntheses']}",
-                f"Pending inbox files: {counts['pending_inbox']}",
-                f"Git: {payload['git']['state']}",
-            )
-        )
+        lines = [
+            f"Vault: {payload['vault']}",
+            f"Schemas: {counts['schemas']}",
+            f"Source records: {counts['source_records']}",
+            f"Canonical pages: {counts['canonical_pages']}",
+            f"Syntheses: {counts['syntheses']}",
+            f"Pending inbox files: {counts['pending_inbox']}",
+            f"Git: {payload['git']['state']}",
+        ]
+        lines = [
+            *lines,
+            *(
+                f"WARNING {item['code']} {item.get('path', '-')}"
+                f": {item['message']}"
+                for item in payload["warnings"]
+            ),
+        ]
+        return "\n".join(lines)
     if command == "links":
         counts = payload["counts"]
         lines = [
@@ -80,6 +92,8 @@ def _text(command: str, payload: dict[str, Any]) -> str:
             f"Wikilinks: {counts['links']}",
             f"Missing: {counts['missing']}",
             f"Ambiguous: {counts['ambiguous']}",
+            f"Missing headings: {counts['missing_headings']}",
+            f"Unindexed canonical pages: {counts['index_missing']}",
         ]
         lines.extend(
             f"MISSING {item['path']}:{item['line']} -> {item['target']}"
@@ -88,6 +102,14 @@ def _text(command: str, payload: dict[str, Any]) -> str:
         lines.extend(
             f"AMBIGUOUS {item['path']}:{item['line']} -> {item['target']}"
             for item in payload["ambiguous"]
+        )
+        lines.extend(
+            f"MISSING HEADING {item['path']}:{item['line']} -> {item['target']}#{item['heading']}"
+            for item in payload["missing_headings"]
+        )
+        lines.extend(
+            f"INDEX MISSING {item['path']} (expected in {item['index']})"
+            for item in payload["index_missing"]
         )
         return "\n".join(lines)
     if command == "hashes":
@@ -99,7 +121,19 @@ def _text(command: str, payload: dict[str, Any]) -> str:
         ]
         if payload["input"]:
             lines.append(f"Input SHA-256: {payload['input']['sha256']}")
+            lines.append(f"Input classification: {payload['input']['match_type']}")
             lines.append(f"Input matches: {len(payload['matches'])}")
+        reversion = payload["reversion"]
+        if reversion["requested"]:
+            lines.append(
+                f"Reversion request: {reversion['status']}"
+                + (f" ({reversion['kind']})" if reversion["kind"] else "")
+            )
+            lines.append(f"Reversion matches: {len(reversion['matches'])}")
+        lines.extend(
+            f"DUPLICATE {item['kind']} {item['sha256']} ({len(item['locations'])} locations)"
+            for item in payload["duplicates"]
+        )
         lines.extend(f"WARNING {warning}" for warning in payload["warnings"])
         return "\n".join(lines)
     if command == "validate":
@@ -113,6 +147,11 @@ def _text(command: str, payload: dict[str, Any]) -> str:
         lines.extend(
             f"[{item['severity'].upper()}] {item['id']} {item['path'] or '-'}: {item['message']}"
             for item in payload["findings"]
+        )
+        lines.extend(
+            f"WARNING {item['code']} {item.get('path', '-')}"
+            f": {item['message']}"
+            for item in payload.get("inventory_warnings", [])
         )
         return "\n".join(lines)
     if command == "migrate-provenance":
@@ -149,8 +188,9 @@ def main(argv: list[str] | None = None) -> int:
 
             data = build_hash_report(
                 root,
-                include_history=args.include_history,
+                include_history=args.include_history or bool(args.revert_to),
                 input_path=Path(args.input) if args.input else None,
+                revert_to=args.revert_to,
             )
         elif args.command == "migrate-provenance":
             data = migrate_provenance(root, write=args.write)
@@ -164,6 +204,12 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == "validate" and data["findings"]:
             return 1
         if args.command == "migrate-provenance" and data["status"] == "blocked":
+            return 1
+        if (
+            args.command == "hashes"
+            and data["reversion"]["requested"]
+            and data["reversion"]["status"] == "not-found"
+        ):
             return 1
         return 0
     except (OSError, ValueError) as error:
