@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Added the portable Agent Plugins manifest at `plugins/llm-wiki/plugin.json`.
+- Kept `.codex-plugin/plugin.json` as a compatible Codex fallback and aligned shared metadata.
+- Added the repository MIT license and normalized the marketplace display name to `LLM Wiki`.
+
 ## 1.0.0
 
 First official stable release of the LLM Wiki Codex marketplace plugin.

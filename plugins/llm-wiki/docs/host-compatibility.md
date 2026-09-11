@@ -29,7 +29,9 @@ Never infer a capability from the product name. Verify the files and operations 
 
 ## Installation and refresh
 
-Install the plugin through the host's supported local plugin or marketplace flow. The plugin package manifest is .codex-plugin/plugin.json; the repository catalog is .agents/plugins/marketplace.json.
+Install the plugin through the host's supported local plugin or marketplace flow. The portable
+package manifest is `plugin.json`; `.codex-plugin/plugin.json` remains a Codex compatibility
+fallback. The repository catalog is `.agents/plugins/marketplace.json`.
 
 During local development:
 

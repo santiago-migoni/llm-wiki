@@ -24,7 +24,7 @@ El commit de base de esta etapa es:
 
 El repositorio ya contiene:
 
-- manifiesto universal en .codex-plugin/plugin.json;
+- manifiesto portable en `plugin.json` y fallback compatible en `.codex-plugin/plugin.json`;
 - skills para inicialización, ingestión, consulta y lint;
 - protocolo común de vault;
 - documentación de compatibilidad con Codex y ChatGPT Work;

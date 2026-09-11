@@ -4,10 +4,12 @@
   "description": "Turn a collection of documents into a cited, Git-versioned wiki maintained by Codex and ChatGPT Work.",
   "author": {
     "name": "Santiago Migoni",
-    "email": "santiagomigoni@gmail.com"
+    "email": "santiagomigoni@gmail.com",
+    "url": "https://github.com/santiago-migoni"
   },
   "homepage": "https://github.com/santiago-migoni/llm-wiki",
   "repository": "https://github.com/santiago-migoni/llm-wiki",
+  "license": "MIT",
   "keywords": [
     "knowledge-base",
     "document-archive",

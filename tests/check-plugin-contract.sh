@@ -14,32 +14,99 @@ command -v python3 >/dev/null 2>&1 || fail "python3 is required"
 
 plugin_root="$repo_root/plugins/llm-wiki"
 
-python3 - "$repo_root/.agents/plugins/marketplace.json" "$plugin_root/.codex-plugin/plugin.json" "$repo_root" <<'PY'
+python3 - "$repo_root/.agents/plugins/marketplace.json" "$plugin_root/plugin.json" "$plugin_root/.codex-plugin/plugin.json" "$repo_root" <<'PY'
 import json
 import sys
 from pathlib import Path
 
-marketplace_path, manifest_path, repo_root = sys.argv[1:]
-with open(manifest_path, encoding="utf-8") as handle:
-    manifest = json.load(handle)
+marketplace_path, portable_path, compatibility_path, repo_root = sys.argv[1:]
+with open(portable_path, encoding="utf-8") as handle:
+    portable = json.load(handle)
+with open(compatibility_path, encoding="utf-8") as handle:
+    compatibility = json.load(handle)
 with open(marketplace_path, encoding="utf-8") as handle:
     marketplace = json.load(handle)
 
-if manifest.get("name") != "llm-wiki":
-    raise SystemExit("manifest name must be llm-wiki")
-if not manifest.get("version"):
-    raise SystemExit("manifest version is missing")
-if manifest.get("skills") != "./skills/":
-    raise SystemExit("manifest skills path must be ./skills/")
-interface = manifest.get("interface", {})
+schema = "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json"
+if portable.get("$schema") != schema:
+    raise SystemExit("portable manifest has the wrong Agent Plugins schema")
+required_portable_fields = (
+    "$schema",
+    "name",
+    "version",
+    "description",
+    "author",
+    "homepage",
+    "repository",
+    "license",
+    "keywords",
+    "extensions",
+)
+for field in required_portable_fields:
+    if field not in portable:
+        raise SystemExit(f"portable manifest field is missing: {field}")
+if portable.get("name") != "llm-wiki":
+    raise SystemExit("portable manifest name must be llm-wiki")
+if not portable.get("version"):
+    raise SystemExit("portable manifest version is missing")
+if "skills" in portable:
+    raise SystemExit("portable manifest must rely on root skills/ discovery")
+if "interface" in portable:
+    raise SystemExit("portable interface metadata must be under extensions.com.openai")
+
+extensions = portable.get("extensions")
+if not isinstance(extensions, dict) or not isinstance(extensions.get("com.openai"), dict):
+    raise SystemExit("portable manifest extensions.com.openai is missing or invalid")
+openai_extension = extensions["com.openai"]
+portable_interface = openai_extension.get("interface", {})
+if not isinstance(portable_interface, dict):
+    raise SystemExit("portable manifest extensions.com.openai.interface is invalid")
 for field in ("displayName", "shortDescription", "longDescription"):
-    if not interface.get(field):
-        raise SystemExit(f"manifest interface.{field} is missing")
+    if not portable_interface.get(field):
+        raise SystemExit(f"portable manifest interface.{field} is missing")
+
+if compatibility.get("name") != portable.get("name"):
+    raise SystemExit("portable and compatibility manifest names diverge")
+if compatibility.get("version") != portable.get("version"):
+    raise SystemExit("portable and compatibility manifest versions diverge")
+for field in ("description", "author", "homepage", "repository", "license", "keywords"):
+    if compatibility.get(field) != portable.get(field):
+        raise SystemExit(f"portable and compatibility manifest {field} diverge")
+if compatibility.get("skills") != "./skills/":
+    raise SystemExit("compatibility manifest skills path must be ./skills/")
+if compatibility.get("interface") != portable_interface:
+    raise SystemExit("portable and compatibility interface metadata diverge")
+if portable_interface.get("displayName") != "LLM Wiki":
+    raise SystemExit("portable display name must be LLM Wiki")
+
+plugin_root = Path(portable_path).parent
+def check_asset(raw_path, label):
+    if not isinstance(raw_path, str) or not raw_path.startswith("./"):
+        raise SystemExit(f"{label} must be a plugin-relative ./ path")
+    candidate = (plugin_root / raw_path).resolve()
+    try:
+        candidate.relative_to(plugin_root.resolve())
+    except ValueError:
+        raise SystemExit(f"{label} escapes the plugin root")
+    if not candidate.is_file():
+        raise SystemExit(f"{label} does not point to a file: {raw_path}")
+
+check_asset(portable_interface.get("logo"), "portable interface.logo")
+check_asset(compatibility.get("interface", {}).get("logo"), "compatibility interface.logo")
+
+license_path = Path(repo_root) / "LICENSE"
+if not license_path.is_file():
+    raise SystemExit("root LICENSE is missing")
+license_text = license_path.read_text(encoding="utf-8")
+if "MIT License" not in license_text or "Santiago Migoni" not in license_text:
+    raise SystemExit("root LICENSE is not the declared MIT license")
 
 if marketplace.get("name") != "llm-wiki":
     raise SystemExit("marketplace name must be llm-wiki")
+if marketplace.get("interface", {}).get("displayName") != "LLM Wiki":
+    raise SystemExit("marketplace display name must be LLM Wiki")
 entries = [entry for entry in marketplace.get("plugins", []) if isinstance(entry, dict)]
-entry = next((entry for entry in entries if entry.get("name") == "llm-wiki"), None)
+entry = next((entry for entry in entries if entry.get("name") == portable.get("name")), None)
 if entry is None:
     raise SystemExit("marketplace entry for llm-wiki is missing")
 if entry.get("source", {}).get("path") != "./plugins/llm-wiki":
@@ -52,7 +119,9 @@ if entry.get("policy") != {
 if entry.get("category") != "Productivity":
     raise SystemExit("marketplace category is invalid")
 if not (Path(repo_root) / "plugins" / "llm-wiki" / ".codex-plugin" / "plugin.json").is_file():
-    raise SystemExit("plugin manifest path is missing")
+    raise SystemExit("compatibility manifest path is missing")
+if not (Path(repo_root) / "plugins" / "llm-wiki" / "plugin.json").is_file():
+    raise SystemExit("portable manifest path is missing")
 PY
 
 required_paths=(
@@ -61,6 +130,9 @@ required_paths=(
   "README.md"
   "CHANGELOG.md"
   "plugins/llm-wiki/.codex-plugin/plugin.json"
+  "plugins/llm-wiki/plugin.json"
+  "plugins/llm-wiki/assets/logo.png"
+  "LICENSE"
   "plugins/llm-wiki/docs/wiki-architecture.md"
   "plugins/llm-wiki/docs/plugin-roadmap.md"
   "plugins/llm-wiki/docs/scalability.md"

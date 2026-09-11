@@ -17,7 +17,9 @@ The `llm-wiki` plugin implements the pattern described in [its design brief](plu
 
 This repository is a Codex marketplace containing the universal `llm-wiki` Agent Plugin. Its
 marketplace catalog is [.agents/plugins/marketplace.json](.agents/plugins/marketplace.json), and
-the plugin manifest is [plugins/llm-wiki/.codex-plugin/plugin.json](plugins/llm-wiki/.codex-plugin/plugin.json).
+the portable plugin manifest is [plugins/llm-wiki/plugin.json](plugins/llm-wiki/plugin.json). The
+legacy [`.codex-plugin/plugin.json`](plugins/llm-wiki/.codex-plugin/plugin.json) remains as a
+Codex compatibility fallback.
 
 In Codex, the vault can be a local Git repository in the workspace.
 
@@ -43,6 +45,7 @@ The repository layout is:
 .
 ├── .agents/plugins/marketplace.json
 ├── plugins/llm-wiki/
+│   ├── plugin.json
 │   ├── .codex-plugin/plugin.json
 │   ├── docs/
 │   ├── references/

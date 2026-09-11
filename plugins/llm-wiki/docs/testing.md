@@ -19,7 +19,7 @@ bash tests/check-plugin-contract.sh
 
 The check validates:
 
-- the Codex plugin manifest;
+- the portable and Codex compatibility plugin manifests;
 - the four skill entrypoints;
 - required supporting references;
 - the expected Git-first paths in documentation;
