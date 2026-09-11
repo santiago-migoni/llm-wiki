@@ -8,10 +8,10 @@ inspectable artefacts; a manifest or deterministic test alone is not enough.
 
 | Host or layer | Version / commit | Evidence | Status | Limitation |
 |---|---|---|---|---|
-| Codex CLI local | Plugin `1.0.0`, commit `30189840c06fbfb2d951b34f242dbf2bd07172a1` | Local marketplace install, enabled package, and four discovered skills; see [Codex result](../../tests/results/codex/2026-09-11_codex_phase9.md) | `host-validated` for `C-001`/`C-002` | The semantic `H-001` cycle requires a new task and remains blocked. |
+| Codex CLI local | Release candidate `1.1.0`; implementation validated from the `1.0.0` installed package | Local marketplace install and four discovered skills; [installation result](../../tests/results/codex/2026-09-11_codex_phase9.md) plus [real-vault follow-up](../../tests/results/codex/2026-09-11_codex_real-vault_followup.md) | `host-validated` for installation, initialization, and ingestion | The referenced run did not produce a separate persisted transcript for every query mode; historical behavior is covered by the deterministic workflow. |
 | Codex deterministic tools | Python `3.9.6` working tree plus CI Python `3.11` | 34 unit tests, fixture lint, functional workflow, scale tests, and plugin contract | `automated` | The documented CLI baseline remains Python 3.10+; the scale assessor also works on the observed 3.9 host. |
-| ChatGPT Work | No host session exposed | [ChatGPT Work result](../../tests/results/chatgpt-work/2026-09-11_chatgpt-work_phase9.md) | `blocked` / experimental | A project or workspace must expose a disposable vault before read/write, partial-context, and Git behavior can be checked. |
-| Portable package | Manifest version `1.0.0` | `plugin.json`, `.codex-plugin/plugin.json`, marketplace catalog, and contract check | `automated` | Availability still depends on the host's plugin installation flow. |
+| ChatGPT Work | No host session exposed | [ChatGPT Work result](../../tests/results/chatgpt-work/2026-09-11_chatgpt-work_phase9.md) | `experimental` | A project or workspace must expose a disposable vault before read/write, partial-context, and Git behavior can be checked. |
+| Portable package | Manifest version `1.1.0` | `plugin.json`, `.codex-plugin/plugin.json`, marketplace catalog, and contract check | `automated` | Availability still depends on the host's plugin installation flow. |
 
 ## Capability interpretation
 
@@ -26,7 +26,6 @@ inspectable artefacts; a manifest or deterministic test alone is not enough.
 
 ## Release decision
 
-Documentation and manifests are prepared for v1.1, but v1.1 must not be described as released while
-`H-001` is blocked and `H-002` has no host evidence. The release gate can be reconsidered after a
-new Codex task runs the semantic cycle and ChatGPT Work either passes its smoke test or is clearly
-declared experimental in the release notes.
+Release `v1.1.0` is prepared with Codex host evidence and ChatGPT Work explicitly marked
+experimental. It must not be described as universally validated: ChatGPT Work still requires a
+workspace-backed smoke test before it can move from `experimental` to `host-validated`.

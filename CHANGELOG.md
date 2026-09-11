@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+No unreleased changes.
+
+## 1.1.0 — 2026-09-11
+
 - Clarified that originals are preserved byte-for-byte, updates replace only the current working
   tree through Git, and extraction quality is reported by format-specific coverage.
 - Added the v1.1 quickstart, populated-vault example, recovery and migration guides, and an
@@ -9,6 +13,9 @@
 - Added the portable Agent Plugins manifest at `plugins/llm-wiki/plugin.json`.
 - Kept `.codex-plugin/plugin.json` as a compatible Codex fallback and aligned shared metadata.
 - Added the repository MIT license and normalized the marketplace display name to `LLM Wiki`.
+- Validated the plugin in a real Codex vault with initialization and a supervised batch ingest of
+  Markdown and PDF sources, including format-specific coverage and Git commits.
+- ChatGPT Work remains explicitly experimental until a workspace-backed smoke test is available.
 
 ## 1.0.0
 

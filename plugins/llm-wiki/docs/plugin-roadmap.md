@@ -53,11 +53,11 @@ una capacidad está implementada, automatizada, validada en host o bloqueada.
 
 | Capacidad | Implementado | Probado automáticamente | Validado en host | Estado actual |
 |---|---|---|---|---|
-| Manifiesto y cuatro skills | Sí | Sí, contrato del plugin | Codex: sí; ChatGPT Work: pendiente | `host-validated` parcial |
-| Vault Git-first y procedencia | Sí | Sí, workflow funcional y tests | Smoke semántico pendiente | `automated` |
+| Manifiesto y cuatro skills | Sí | Sí, contrato del plugin | Codex: sí; ChatGPT Work: experimental | `host-validated` parcial |
+| Vault Git-first y procedencia | Sí | Sí, workflow funcional y tests | Codex: inicialización e ingestión reales | `host-validated` parcial |
 | Cobertura por formato | Sí | Sí, contrato de extracción | Pendiente | `automated` |
 | Contradicciones y actualización | Sí | Sí, tests y workflow funcional | Pendiente | `automated` |
-| Compatibilidad Codex/ChatGPT Work | Contrato documentado | Parcial | H-001/H-002 pendientes | `blocked` por entorno |
+| Compatibilidad Codex/ChatGPT Work | Contrato documentado | Parcial | Codex validado; ChatGPT Work experimental | `host-validated` parcial |
 
 Los estados de host y sus limitaciones están respaldados por la [matriz de compatibilidad](compatibility-matrix.md)
 y los [registros de resultados](../../tests/results/README.md). La documentación de v1.1 no convierte
@@ -490,7 +490,7 @@ Los smoke tests de host y sus registros bajo `tests/results/` siguen siendo el g
 
 ## Fase 9 — Validación en hosts reales
 
-**Estado: parcial; instalación y descubrimiento verificados en Codex, ejecución semántica y ChatGPT Work bloqueados por el entorno.**
+**Estado: Codex validado para inicialización e ingestión real; ChatGPT Work experimental por falta de workspace expuesto.**
 
 Se instaló el plugin desde un checkout limpio de la Fase 8 mediante el flujo de marketplace
 local de Codex. `codex plugin list` lo reportó como instalado y habilitado, y el paquete
@@ -502,22 +502,22 @@ Los registros reproducibles están en:
 - [`tests/results/codex/2026-09-11_codex_phase9.md`](../../tests/results/codex/2026-09-11_codex_phase9.md)
 - [`tests/results/chatgpt-work/2026-09-11_chatgpt-work_phase9.md`](../../tests/results/chatgpt-work/2026-09-11_chatgpt-work_phase9.md)
 
-El ciclo semántico completo de Codex (`init → ingest → query → update → historical query →
-lint`) requiere una tarea nueva para cargar las skills modificadas y queda pendiente. ChatGPT
-Work no estuvo expuesto en este entorno, por lo que no se afirma compatibilidad allí. La Fase 9
-no puede marcarse como completada hasta cerrar `H-001` y `H-002` con evidencia `host-validated`.
+La conversación de validación ejecutó `init` y una ingestión supervisada por lote en un vault real,
+con extracción Markdown/PDF, páginas canónicas, validación y tres commits `ingest:`. ChatGPT Work
+no estuvo expuesto; queda declarado experimental y no se afirma compatibilidad universal allí.
 
 ## Fase 10 — Documentación y release v1.1
 
-**Estado: documentación preparada; release bloqueado por el gate de hosts de la Fase 9.**
+**Estado: release v1.1.0 preparado; ChatGPT Work permanece experimental.**
 
 Se alinearon README, manifiestos, arquitectura y changelog con el modelo de originales preservados,
 actualizaciones versionadas por Git y extracción con cobertura declarada. Se añadieron el walkthrough,
 el ejemplo de vault poblado, la guía de recuperación, la migración desde v1.0, la licencia enlazada
 y la matriz de compatibilidad comprobada.
 
-La versión `1.1` todavía no se publica ni se declara liberada: el smoke test semántico de Codex y
-la evidencia de ChatGPT Work siguen siendo requisitos explícitos del gate.
+La versión `1.1.0` se publica con evidencia de Codex y la limitación de ChatGPT Work declarada de
+forma explícita. La validación de ChatGPT Work queda como trabajo posterior para elevar su estado
+de experimental a `host-validated`.
 
 ## Alcance del MVP
 
