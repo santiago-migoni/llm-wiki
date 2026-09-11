@@ -126,6 +126,7 @@ PY
 
 required_paths=(
   ".agents/plugins/marketplace.json"
+  ".github/workflows/ci.yml"
   "INSTALL.md"
   "README.md"
   "CHANGELOG.md"
@@ -135,6 +136,9 @@ required_paths=(
   "LICENSE"
   "plugins/llm-wiki/docs/wiki-architecture.md"
   "plugins/llm-wiki/docs/provenance.md"
+  "plugins/llm-wiki/docs/extraction-coverage.md"
+  "plugins/llm-wiki/docs/contradictions.md"
+  "plugins/llm-wiki/docs/supervised-ingestion.md"
   "plugins/llm-wiki/docs/synthesis-format.md"
   "plugins/llm-wiki/docs/plugin-roadmap.md"
   "plugins/llm-wiki/docs/scalability.md"
@@ -151,6 +155,7 @@ required_paths=(
   "plugins/llm-wiki/skills/wiki-lint/SKILL.md"
   "plugins/llm-wiki/skills/wiki-lint/references/lint-report.md"
   "plugins/llm-wiki/tests/assess-vault-scale.sh"
+  "plugins/llm-wiki/tests/test-assess-vault-scale.sh"
   "plugins/llm-wiki/scripts/llm-wiki"
   "plugins/llm-wiki/scripts/wiki-migrate-provenance"
   "plugins/llm-wiki/scripts/README.md"
@@ -160,19 +165,38 @@ required_paths=(
   "plugins/llm-wiki/scripts/llm_wiki/links.py"
   "plugins/llm-wiki/scripts/llm_wiki/validate.py"
   "plugins/llm-wiki/scripts/llm_wiki/provenance.py"
+  "plugins/llm-wiki/scripts/llm_wiki/extraction.py"
+  "plugins/llm-wiki/scripts/llm_wiki/contradictions.py"
   "plugins/llm-wiki/scripts/tests/test_cli.py"
+  "plugins/llm-wiki/scripts/tests/test_extraction.py"
+  "plugins/llm-wiki/scripts/tests/test_contradictions.py"
   "plugins/llm-wiki/scripts/tests/test_frontmatter.py"
   "plugins/llm-wiki/scripts/tests/test_provenance.py"
   "tests/fixtures/empty-vault/AGENTS.md"
   "tests/fixtures/empty-vault/wiki/index.md"
   "tests/fixtures/empty-vault/wiki/overview.md"
   "tests/fixtures/empty-vault/wiki/log.md"
+  "tests/fixtures/populated-vault/AGENTS.md"
+  "tests/fixtures/malformed-vault/AGENTS.md"
+  "tests/fixtures/duplicate-source-files/AGENTS.md"
+  "tests/fixtures/legacy-vault/AGENTS.md"
+  "tests/fixtures/watch-scale-vault/README.md"
+  "tests/fixtures/functional-vault/README.md"
+  "tests/fixtures/functional-vault/expected-tree.txt"
+  "tests/fixtures/functional-vault/expected-history.txt"
+  "tests/fixtures/functional-vault/source-v1.txt"
+  "tests/fixtures/functional-vault/source-v2.txt"
+  "tests/fixtures/functional-vault/source-support.txt"
+  "tests/test-fixture-lint.py"
+  "tests/test-functional-workflow.py"
 )
 
 for relative_path in "${required_paths[@]}"; do
   test -e "$repo_root/$relative_path" || fail "missing required path: $relative_path"
 done
 test -x "$plugin_root/scripts/wiki-migrate-provenance" || fail "provenance migration entrypoint is not executable"
+test -x "$plugin_root/tests/assess-vault-scale.sh" || fail "scale assessor is not executable"
+test -x "$plugin_root/tests/test-assess-vault-scale.sh" || fail "scale assessor test is not executable"
 
 required_dirs=(
   "tests/fixtures/empty-vault/raw/inbox"
@@ -211,6 +235,15 @@ rg -q "lint-report\\.md" "$plugin_root/skills/wiki-lint/SKILL.md" || fail "lint 
 rg -q "docs/scalability\\.md" "$plugin_root/skills/wiki-lint/SKILL.md" || fail "scale policy is not linked from wiki-lint"
 rg -q "docs/provenance\\.md" "$plugin_root/references/vault-protocol.md" || fail "provenance policy is not linked"
 rg -q "migrate-provenance" "$plugin_root/scripts/README.md" || fail "provenance migration is not documented"
+rg -q "extraction-coverage\\.md" "$plugin_root/skills/wiki-ingest/SKILL.md" || fail "extraction coverage contract is not linked from wiki-ingest"
+rg -q "coverage:" "$plugin_root/skills/wiki-ingest/references/source-record.md" || fail "extraction coverage metadata is not documented"
+rg -q "inspect_extraction" "$plugin_root/scripts/llm_wiki/validate.py" || fail "extraction coverage is not validated"
+rg -q "build_contradiction_report" "$plugin_root/scripts/llm_wiki/validate.py" || fail "contradictions are not validated"
+rg -q "CONTRA-LOG-ONLY" "$plugin_root/scripts/llm_wiki/contradictions.py" || fail "log-only contradictions are not reported"
+rg -q "CONTRA-RESOLUTION-MISSING" "$plugin_root/scripts/llm_wiki/contradictions.py" || fail "resolution criteria are not enforced"
+rg -q "supervised-ingestion\\.md" "$plugin_root/skills/wiki-ingest/SKILL.md" || fail "supervised ingestion contract is not linked"
+rg -q "wait for explicit approval" "$plugin_root/skills/wiki-ingest/SKILL.md" || fail "ingest does not require an approval checkpoint"
+rg -q "Planned commit" "$plugin_root/docs/supervised-ingestion.md" || fail "supervised proposal omits commit plan"
 rg -q "INV-EXTRACTION-MISSING" "$plugin_root/scripts/llm_wiki/inventory.py" || fail "inventory warnings are not implemented"
 rg -q -- "--revert-to" "$plugin_root/scripts/llm_wiki/cli.py" || fail "hash reversion classification is not exposed"
 rg -q "missing_headings" "$plugin_root/scripts/llm_wiki/links.py" || fail "heading resolution is not implemented"
@@ -219,6 +252,13 @@ rg -q "raw/sources/<slug>" "$plugin_root/docs/wiki-architecture.md" || fail "arc
 rg -q "wiki/pages/" "$plugin_root/docs/wiki-architecture.md" || fail "architecture canonical page path is missing"
 rg -q "scalability\\.md" "$repo_root/README.md" || fail "scale policy is not linked"
 rg -q "assess-vault-scale\\.sh" "$repo_root/README.md" || fail "scale assessor is not documented"
+rg -q "Invalid path type" "$plugin_root/tests/assess-vault-scale.sh" || fail "scale assessor does not validate path types"
+rg -q "multiple_current_source" "$plugin_root/tests/assess-vault-scale.sh" || fail "scale assessor does not detect duplicate current originals"
+rg -q "invalid_slugs" "$plugin_root/tests/assess-vault-scale.sh" || fail "scale assessor does not validate source slugs"
+rg -q "test-functional-workflow\.py" "$plugin_root/docs/testing.md" || fail "functional workflow is not documented"
+rg -q "expected-tree\.txt" "$plugin_root/docs/testing.md" || fail "functional tree snapshot is not documented"
+rg -q "test-functional-workflow\.py" "$repo_root/.github/workflows/ci.yml" || fail "functional workflow is not wired into CI"
+rg -q "test-fixture-lint\.py" "$repo_root/.github/workflows/ci.yml" || fail "fixture lint is not wired into CI"
 
 PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover \
   -s "$plugin_root/scripts/tests" \
@@ -230,6 +270,7 @@ if [[ "$validation_output" != *"Status: VALID"* ]]; then
 fi
 
 bash -n "$plugin_root/tests/assess-vault-scale.sh" || fail "scale assessor has invalid Bash syntax"
+bash -n "$plugin_root/tests/test-assess-vault-scale.sh" || fail "scale assessor test has invalid Bash syntax"
 scale_output="$(bash "$plugin_root/tests/assess-vault-scale.sh" "$repo_root/tests/fixtures/empty-vault")"
 if [[ "$scale_output" != *"Scale status: GREEN"* ]]; then
   fail "empty-vault scale assessment is not GREEN"
@@ -259,5 +300,9 @@ if bash "$plugin_root/tests/assess-vault-scale.sh" "$scale_test_root" > "$scale_
 fi
 rg -q "Multiple schema files: AGENTS.md, CLAUDE.md" "$scale_test_root/both-schema.out" || \
   fail "scale assessment does not report both schema files"
+
+"$plugin_root/tests/test-assess-vault-scale.sh" || fail "scale assessor boundary and fixture tests failed"
+PYTHONDONTWRITEBYTECODE=1 python3 "$repo_root/tests/test-fixture-lint.py" || fail "fixture lint tests failed"
+PYTHONDONTWRITEBYTECODE=1 python3 "$repo_root/tests/test-functional-workflow.py" || fail "functional workflow tests failed"
 
 echo "plugin contract: ok"

@@ -1,0 +1,71 @@
+name: LLM Wiki checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install ShellCheck
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y shellcheck
+
+      - name: JSON and manifest schema validation
+        run: |
+          python3 -m json.tool .agents/plugins/marketplace.json >/dev/null
+          python3 -m json.tool plugins/llm-wiki/plugin.json >/dev/null
+          python3 -m json.tool plugins/llm-wiki/.codex-plugin/plugin.json >/dev/null
+
+      - name: Bash syntax
+        run: |
+          bash -n tests/check-plugin-contract.sh
+          bash -n plugins/llm-wiki/tests/assess-vault-scale.sh
+          bash -n plugins/llm-wiki/tests/test-assess-vault-scale.sh
+
+      - name: ShellCheck
+        run: |
+          shellcheck tests/check-plugin-contract.sh
+          shellcheck plugins/llm-wiki/tests/assess-vault-scale.sh
+          shellcheck plugins/llm-wiki/tests/test-assess-vault-scale.sh
+
+      - name: Python deterministic tests
+        run: |
+          PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover \
+            -s plugins/llm-wiki/scripts/tests \
+            -p 'test_*.py' -v
+
+      - name: Markdown-link validation
+        run: |
+          PYTHONDONTWRITEBYTECODE=1 python3 plugins/llm-wiki/scripts/llm-wiki \
+            links tests/fixtures/empty-vault --format json
+
+      - name: Scale boundary tests
+        run: bash plugins/llm-wiki/tests/test-assess-vault-scale.sh
+
+      - name: Fixture lint tests
+        run: PYTHONDONTWRITEBYTECODE=1 python3 tests/test-fixture-lint.py
+
+      - name: Functional workflow
+        run: PYTHONDONTWRITEBYTECODE=1 python3 tests/test-functional-workflow.py
+
+      - name: Plugin contract
+        run: bash tests/check-plugin-contract.sh
+
+      - name: Check diff whitespace
+        run: git diff --check
