@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Clarified that originals are preserved byte-for-byte, updates replace only the current working
+  tree through Git, and extraction quality is reported by format-specific coverage.
+- Added the v1.1 quickstart, populated-vault example, recovery and migration guides, and an
+  evidence-based host compatibility matrix.
 - Added the portable Agent Plugins manifest at `plugins/llm-wiki/plugin.json`.
 - Kept `.codex-plugin/plugin.json` as a compatible Codex fallback and aligned shared metadata.
 - Added the repository MIT license and normalized the marketplace display name to `LLM Wiki`.
@@ -28,7 +32,8 @@ Codex and ChatGPT Work migration with a Git-first document model.
 - Documented use in Codex and ChatGPT Work, including the boundary that the plugin does not provide external document storage.
 - Defined the current source lifecycle: raw/inbox/ → raw/sources/<slug>/source.<ext> + extracted.md → canonical wiki page.
 - Established one stable slug per logical document and Git history as the versioning mechanism.
-- Added SHA-256 duplicate detection, complete extraction requirements, historical Git queries, and exhaustive context coverage reporting.
+- Added SHA-256 duplicate detection, format-specific extraction coverage requirements, historical
+  Git queries, and auditable context coverage reporting.
 - Aligned the vault protocol, initialization template, ingestion, query, and lint skills with the simplified structure.
 - Added the source-record contract for classifying new documents, updates, exact duplicates, ambiguous identities, local-edit protection, extraction metadata, and ingest reports.
 - Added auditable query modes for targeted, current-corpus, and historical context, with coverage ledgers, source citations, Git provenance, and durable synthesis filing.

@@ -23,3 +23,7 @@ codex plugin add llm-wiki@llm-wiki
 After installing or updating the plugin, start a new Codex task so it loads the current skills.
 The plugin does not upload or persist vault documents. In ChatGPT Work, expose the vault through
 the workspace, a project, a connected source, or files supplied in the conversation.
+
+See the [five-minute walkthrough](plugins/llm-wiki/docs/quickstart.md), [host compatibility
+matrix](plugins/llm-wiki/docs/compatibility-matrix.md), and [MIT license](LICENSE) before using a
+vault in a release workflow.

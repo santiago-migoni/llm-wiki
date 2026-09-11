@@ -70,7 +70,10 @@ AGENTS.md contains policy and workflow. It is not a knowledge page and should no
 
 ## Raw layer
 
-The raw layer is the evidence boundary. It preserves what the user supplied and the complete text derived from it.
+The raw layer is the evidence boundary. It preserves what the user supplied and a derived reading
+artifact whose format-specific coverage is declared. The original is not edited to repair an
+extraction, and a derived artifact must not be presented as complete when meaningful content was
+omitted.
 
 ### raw/inbox/
 
@@ -92,7 +95,7 @@ This directory is the source of truth for the current original and its current e
 
 This is the current original file supplied by the user, in its original format whenever practical: PDF, DOCX, XLSX, image, audio, or another supported extension.
 
-Keep the original because extraction can lose layout, tables, signatures, images, footnotes, metadata, or other evidence. Do not edit it to repair an extraction. If the source changes, replace the current source through a normal Git commit so the previous version remains recoverable in history.
+Keep the original because extraction can lose layout, tables, signatures, images, footnotes, metadata, or other evidence. The agent never edits the original bytes to repair an extraction. If the source changes, replace the current source record through a normal Git commit so the previous version remains recoverable in history.
 
 ### extracted.md
 

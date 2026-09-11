@@ -93,3 +93,12 @@ A host is considered compatible only when:
 - historical behavior is honest about Git availability;
 - no write is claimed when the host is read-only;
 - lint produces the common report structure.
+
+## Evidence status
+
+The intended capability matrix above is not itself host evidence. The current checked results are
+summarized in [compatibility-matrix.md](compatibility-matrix.md) and retain the distinction between
+implemented, automatically tested, host-validated, and blocked. In particular, Codex installation
+and skill discovery are recorded, while the semantic smoke test still requires a new task. No
+ChatGPT Work capability is claimed until a workspace exposes a disposable vault and the smoke test
+is run there.

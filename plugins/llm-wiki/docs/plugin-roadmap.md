@@ -5,7 +5,7 @@
 Convertir LLM Wiki en un plugin portable para Codex y ChatGPT Work que permita:
 
 - recibir documentos crudos;
-- procesarlos y extraer su contenido completo;
+- procesarlos y extraer su contenido con cobertura declarada por formato;
 - mantener una wiki de conocimiento durable;
 - conservar el historial mediante Git;
 - encontrar contexto relevante de forma eficiente;
@@ -48,6 +48,20 @@ La línea base de la remediación se documenta en
 
 La matriz de promesas públicas y escenarios es la fuente para decidir cuándo
 una capacidad está implementada, automatizada, validada en host o bloqueada.
+
+## Matriz de estado de evidencia
+
+| Capacidad | Implementado | Probado automáticamente | Validado en host | Estado actual |
+|---|---|---|---|---|
+| Manifiesto y cuatro skills | Sí | Sí, contrato del plugin | Codex: sí; ChatGPT Work: pendiente | `host-validated` parcial |
+| Vault Git-first y procedencia | Sí | Sí, workflow funcional y tests | Smoke semántico pendiente | `automated` |
+| Cobertura por formato | Sí | Sí, contrato de extracción | Pendiente | `automated` |
+| Contradicciones y actualización | Sí | Sí, tests y workflow funcional | Pendiente | `automated` |
+| Compatibilidad Codex/ChatGPT Work | Contrato documentado | Parcial | H-001/H-002 pendientes | `blocked` por entorno |
+
+Los estados de host y sus limitaciones están respaldados por la [matriz de compatibilidad](compatibility-matrix.md)
+y los [registros de resultados](../../tests/results/README.md). La documentación de v1.1 no convierte
+una capacidad automatizada en una promesa de acceso universal.
 
 ## Decisiones congeladas
 
@@ -493,6 +507,18 @@ lint`) requiere una tarea nueva para cargar las skills modificadas y queda pendi
 Work no estuvo expuesto en este entorno, por lo que no se afirma compatibilidad allí. La Fase 9
 no puede marcarse como completada hasta cerrar `H-001` y `H-002` con evidencia `host-validated`.
 
+## Fase 10 — Documentación y release v1.1
+
+**Estado: documentación preparada; release bloqueado por el gate de hosts de la Fase 9.**
+
+Se alinearon README, manifiestos, arquitectura y changelog con el modelo de originales preservados,
+actualizaciones versionadas por Git y extracción con cobertura declarada. Se añadieron el walkthrough,
+el ejemplo de vault poblado, la guía de recuperación, la migración desde v1.0, la licencia enlazada
+y la matriz de compatibilidad comprobada.
+
+La versión `1.1` todavía no se publica ni se declara liberada: el smoke test semántico de Codex y
+la evidencia de ChatGPT Work siguen siendo requisitos explícitos del gate.
+
 ## Alcance del MVP
 
 El MVP está completo cuando las fases 0 a 4 cumplen sus criterios de salida:
@@ -527,15 +553,23 @@ Fase 0: alinear contrato
         ↓
 Fase 1: inicializar vault
         ↓
-Fase 2: ingerir y actualizar
+Fase 2: diseñar procedencia multifuente
         ↓
-Fase 3: consultar y gestionar contexto
+Fase 3: completar herramientas deterministas
         ↓
-Fase 4: validar calidad
+Fase 4: corregir el evaluador de escala
         ↓
-Fase 5: probar hosts y preparar release
+Fase 5: definir extracción por formato
         ↓
-Fase 6: escalar solo si hace falta
+Fase 6: fortalecer contradicciones y actualización semántica
+        ↓
+Fase 7: mejorar ingestión supervisada
+        ↓
+Fase 8: automatizar pruebas funcionales
+        ↓
+Fase 9: validar hosts reales
+        ↓
+Fase 10: documentar y preparar release v1.1
 ~~~
 
 Cada fase debe terminar con una revisión de criterios de salida y un commit independiente.

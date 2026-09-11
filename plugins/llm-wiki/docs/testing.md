@@ -129,7 +129,7 @@ invariants that do not require an LLM host:
 - new source classification and current duplicate no-op;
 - update under the same slug with Git history preserved;
 - historical duplicate and explicit reversion reporting;
-- complete extraction metadata and multifuente provenance;
+- declared format-specific extraction coverage and multifuente provenance;
 - indexed canonical page and query-visible contradiction with a matching log event;
 - read-only inventory, links, hashes, validation, and scale checks;
 - exact paths in each ingest commit;

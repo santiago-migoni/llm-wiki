@@ -24,7 +24,7 @@
       "interface": {
         "displayName": "LLM Wiki",
         "shortDescription": "Build a cited wiki from an archive of documents.",
-        "longDescription": "Ingest documents into stable source slugs, preserve complete extracted text, and maintain a compact, cited wiki whose history is versioned by Git. Codex and ChatGPT Work can use targeted answers and auditable full-corpus context passes.",
+        "longDescription": "Ingest documents into stable source slugs, preserve the original plus a format-specific extraction with declared coverage, and maintain a compact, cited wiki whose history is versioned by Git. Codex and ChatGPT Work can use targeted answers and auditable full-corpus context passes when the vault is exposed.",
         "developerName": "Santiago Migoni",
         "category": "Productivity",
         "capabilities": [

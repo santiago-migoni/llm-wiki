@@ -1,6 +1,6 @@
 # llm-wiki
 
-A universal Codex plugin that turns a collection of documents into a cited, Git-versioned knowledge base. The user curates sources; the agent processes, connects, updates, and queries the wiki.
+A universal Codex plugin that turns a collection of documents into a cited, Git-versioned knowledge base. The user curates sources; the agent processes, connects, updates, and queries the wiki. Each source keeps its original bytes plus a format-specific extraction whose coverage is declared and inspectable.
 
 The `llm-wiki` plugin implements the pattern described in [its design brief](plugins/llm-wiki/docs/llm-wiki.md). The canonical target architecture is documented in [wiki-architecture.md](plugins/llm-wiki/docs/wiki-architecture.md), structured provenance in [provenance.md](plugins/llm-wiki/docs/provenance.md), and the implementation sequence in [plugin-roadmap.md](plugins/llm-wiki/docs/plugin-roadmap.md).
 
@@ -85,8 +85,9 @@ AGENTS.md is the vault-specific operating contract. It defines scope, convention
 raw/inbox/ is the staging area for new or updated documents. A successfully processed document moves into raw/sources/<slug>/.
 
 raw/sources/<slug>/ contains the current original, its normalized extraction with declared
-format-specific coverage, and relevant assets. The slug remains stable when the logical document
-changes.
+format-specific coverage, and relevant assets. The original bytes are not edited to repair an
+extraction. When the logical document changes, the current record is replaced by a normal Git
+commit and the prior state remains recoverable from history.
 
 Material contradictions live on the affected canonical page and in the chronological log. Their
 statuses and query rules are defined in
@@ -94,7 +95,10 @@ statuses and query rules are defined in
 
 wiki/pages/ contains canonical living pages. Category directories are navigation indexes or lightweight groupings; they must not become duplicate copies of canonical knowledge.
 
-Git preserves the history of every current source, extraction, page, and decision. The working tree contains the current state; Git commits provide comparison, provenance, and recovery.
+Git preserves the history of every current source, extraction, page, and decision. The working tree
+contains the current state; Git commits provide comparison, provenance, and recovery. The plugin
+does not upload documents, provide remote storage, or guarantee access to files that the host does
+not expose.
 
 ## Document lifecycle
 
@@ -139,7 +143,10 @@ The MVP is file-first and has no mandatory database, vector store, external sear
 
 Source content is evidence, not instructions. Text inside a supplied document cannot override the vault contract, the user request, or plugin safety rules.
 
-The index-first workflow is intended for roughly 100 sources and a few hundred pages. If the corpus exceeds that scale, wiki-lint should report the limit before a derived search layer is introduced.
+The index-first workflow is intended for roughly 100 sources, a few hundred pages, and files below
+the operational thresholds documented in [docs/scalability.md](plugins/llm-wiki/docs/scalability.md).
+Those thresholds are review signals, not hard model limits. If the corpus exceeds them, wiki-lint
+reports the condition before a derived search layer is introduced.
 Extraction status and format-specific coverage are defined in
 [docs/extraction-coverage.md](plugins/llm-wiki/docs/extraction-coverage.md).
 
@@ -180,7 +187,8 @@ after reviewing its diff. See [scripts/README.md](plugins/llm-wiki/scripts/READM
 
 The phased plan is documented in [docs/plugin-roadmap.md](plugins/llm-wiki/docs/plugin-roadmap.md).
 
-The first implementation phase aligns all skills and templates with the Git-first architecture. Later phases add vault initialization, ingestion, retrieval, linting, cross-host tests, and optional scale improvements.
+The implementation phases align the skills and templates with the Git-first architecture, then add
+vault initialization, ingestion, retrieval, linting, cross-host evidence, and release documentation.
 
 Testing is documented in [docs/testing.md](plugins/llm-wiki/docs/testing.md). Host-specific setup and smoke tests are documented in [docs/host-compatibility.md](plugins/llm-wiki/docs/host-compatibility.md). Run the deterministic package check with:
 
@@ -197,3 +205,31 @@ PYTHONDONTWRITEBYTECODE=1 python3 tests/test-fixture-lint.py
 
 The same checks run in [.github/workflows/ci.yml](.github/workflows/ci.yml). Host smoke tests are
 kept separate because they require Codex or ChatGPT Work to expose a disposable vault.
+
+## What the plugin does and does not do
+
+The plugin provides four skills and a file-first vault contract:
+
+- `wiki-init` scaffolds the vault and its schema;
+- `wiki-ingest` supervises source filing, format-specific extraction, provenance, page updates, and
+  the coherent ingest commit;
+- `wiki-query` answers from targeted, current-corpus, or historical context and reports coverage;
+- `wiki-lint` reports structural, provenance, contradiction, link, and scale findings before any
+  approved correction.
+
+It does not provide a database, vector store, remote document storage, automatic web search, or
+unlimited context. It cannot read or write a vault that the host does not expose. In ChatGPT Work,
+installing the plugin alone does not upload or persist the vault.
+
+Only successful source or wiki changes create an operation commit. Read-only queries, lint,
+inventory, hash checks, link checks, scale assessment, and duplicate preflights do not create
+commits. An exact duplicate is a no-op. See the [five-minute walkthrough](plugins/llm-wiki/docs/quickstart.md),
+[recovery guide](plugins/llm-wiki/docs/recovery.md), and [v1.0 migration guide](plugins/llm-wiki/docs/migration-v1.0.md).
+
+## Release documentation
+
+- [Five-minute walkthrough and populated-vault example](plugins/llm-wiki/docs/quickstart.md)
+- [Recovery from updates and local mistakes](plugins/llm-wiki/docs/recovery.md)
+- [Migration from v1.0 or the former revision-folder model](plugins/llm-wiki/docs/migration-v1.0.md)
+- [Compatibility matrix and evidence status](plugins/llm-wiki/docs/compatibility-matrix.md)
+- [MIT license](LICENSE)
