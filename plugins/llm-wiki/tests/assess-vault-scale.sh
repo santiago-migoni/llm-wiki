@@ -16,6 +16,8 @@ test -d "$vault_root" || fail "vault root does not exist: $vault_root"
 command -v python3 >/dev/null 2>&1 || fail "python3 is required"
 
 python3 - "$vault_root" <<'PY'
+from __future__ import annotations
+
 import os
 import re
 import stat

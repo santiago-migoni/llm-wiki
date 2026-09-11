@@ -474,6 +474,25 @@ commit y snapshots del árbol e historial.
 Las pruebas no presentan la simulación determinista como una ejecución de Codex o ChatGPT Work.
 Los smoke tests de host y sus registros bajo `tests/results/` siguen siendo el gate de la Fase 9.
 
+## Fase 9 — Validación en hosts reales
+
+**Estado: parcial; instalación y descubrimiento verificados en Codex, ejecución semántica y ChatGPT Work bloqueados por el entorno.**
+
+Se instaló el plugin desde un checkout limpio de la Fase 8 mediante el flujo de marketplace
+local de Codex. `codex plugin list` lo reportó como instalado y habilitado, y el paquete
+expuso las cuatro skills esperadas. El workflow determinista también pasó en el host local
+después de corregir la evaluación de anotaciones del evaluador de escala para Python 3.9.
+
+Los registros reproducibles están en:
+
+- [`tests/results/codex/2026-09-11_codex_phase9.md`](../../tests/results/codex/2026-09-11_codex_phase9.md)
+- [`tests/results/chatgpt-work/2026-09-11_chatgpt-work_phase9.md`](../../tests/results/chatgpt-work/2026-09-11_chatgpt-work_phase9.md)
+
+El ciclo semántico completo de Codex (`init → ingest → query → update → historical query →
+lint`) requiere una tarea nueva para cargar las skills modificadas y queda pendiente. ChatGPT
+Work no estuvo expuesto en este entorno, por lo que no se afirma compatibilidad allí. La Fase 9
+no puede marcarse como completada hasta cerrar `H-001` y `H-002` con evidencia `host-validated`.
+
 ## Alcance del MVP
 
 El MVP está completo cuando las fases 0 a 4 cumplen sus criterios de salida:
