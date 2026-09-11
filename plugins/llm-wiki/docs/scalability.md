@@ -24,12 +24,20 @@ vault y reporta:
 - bytes totales de Markdown bajo wiki/ y archivo Markdown más grande;
 - bytes totales de síntesis y síntesis Markdown más grande;
 - source records sin source.<ext> o sin extracted.md;
+- source records con más de un source.<ext>, slugs inválidos o entradas inesperadas;
+- rutas obligatorias ausentes, con tipo incorrecto o inaccesibles;
 - disponibilidad, estado de cambios y profundidad básica de Git.
 
-El reporte mide tamaño y señales estructurales. No inventa una latencia de consulta ni considera
-que un corpus grande sea un problema por sí mismo. La experiencia observada —tiempo de respuesta,
-cantidad de lecturas necesarias, cobertura y errores de recuperación— puede elevar la prioridad
-aunque el contador de archivos todavía esté por debajo de los umbrales.
+El reporte mide tamaño y señales estructurales. Una anomalía estructural produce `Scale status:
+INVALID` y un diagnóstico estable; por ejemplo, `Invalid path type: raw/sources must be a
+directory` o `Inaccessible directory: wiki/pages`. El evaluador no continúa contando el corpus
+como si fuera válido cuando falta una ruta obligatoria, hay un tipo incorrecto o una estructura de
+source record contradictoria.
+
+No inventa una latencia de consulta ni considera que un corpus grande sea un problema por sí
+mismo. La experiencia observada —tiempo de respuesta, cantidad de lecturas necesarias, cobertura
+y errores de recuperación— puede elevar la prioridad aunque el contador de archivos todavía esté
+por debajo de los umbrales.
 
 Ejecutar:
 

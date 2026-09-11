@@ -16,60 +16,76 @@ test -d "$vault_root" || fail "vault root does not exist: $vault_root"
 command -v python3 >/dev/null 2>&1 || fail "python3 is required"
 
 python3 - "$vault_root" <<'PY'
+import os
+import re
+import stat
 import subprocess
 import sys
 from pathlib import Path
 
+
 root = Path(sys.argv[1]).expanduser().resolve()
-
-schema_candidates = (root / "AGENTS.md", root / "CLAUDE.md")
-existing_schema_paths = [path for path in schema_candidates if path.exists()]
-if len(existing_schema_paths) > 1:
-    print("Scale status: INVALID")
-    print(
-        "Multiple schema files: "
-        + ", ".join(path.name for path in existing_schema_paths)
-    )
-    raise SystemExit(1)
-if not existing_schema_paths:
-    print("Scale status: INVALID")
-    print("Missing required paths: AGENTS.md or CLAUDE.md")
-    raise SystemExit(1)
-
-schema_path = existing_schema_paths[0]
-if not schema_path.is_file():
-    print("Scale status: INVALID")
-    print("Schema path is not a file: " + schema_path.name)
-    raise SystemExit(1)
-
-required_paths = (
-    schema_path,
-    root / "raw" / "inbox",
-    root / "raw" / "sources",
-    root / "wiki",
-    root / "wiki" / "pages",
-)
-missing_paths = [str(path.relative_to(root)) for path in required_paths if not path.exists()]
-if missing_paths:
-    print("Scale status: INVALID")
-    print("Missing required paths: " + ", ".join(missing_paths))
-    raise SystemExit(1)
+SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+inaccessible_paths: set[Path] = set()
 
 
-def files_under(path):
-    if not path.is_dir():
+def relative(path: Path) -> str:
+    return path.relative_to(root).as_posix()
+
+
+def path_state(path: Path) -> str:
+    try:
+        info = path.stat()
+    except FileNotFoundError:
+        return "missing"
+    except OSError:
+        inaccessible_paths.add(path)
+        return "inaccessible"
+    if stat.S_ISDIR(info.st_mode):
+        return "directory"
+    if stat.S_ISREG(info.st_mode):
+        return "file"
+    return "other"
+
+
+def safe_entries(path: Path) -> list[Path]:
+    try:
+        return sorted(path.iterdir(), key=lambda item: item.name)
+    except OSError:
+        inaccessible_paths.add(path)
         return []
-    return [item for item in path.rglob("*") if item.is_file()]
 
 
-def size_of(path):
+def files_under(path: Path) -> list[Path]:
+    if path_state(path) != "directory":
+        return []
+
+    found: list[Path] = []
+
+    def onerror(error: OSError) -> None:
+        inaccessible_paths.add(Path(error.filename) if error.filename else path)
+
+    for current, directories, files in os.walk(path, onerror=onerror, followlinks=False):
+        directories.sort()
+        files.sort()
+        for name in files:
+            candidate = Path(current) / name
+            if path_state(candidate) == "file":
+                found.append(candidate)
+    return sorted(found)
+
+
+def size_of(path: Path | None) -> int:
+    if path is None:
+        return 0
     try:
         return path.stat().st_size
     except OSError:
+        inaccessible_paths.add(path)
         return 0
 
 
-def format_bytes(value):
+def format_bytes(value: int) -> str:
     units = ("B", "KiB", "MiB", "GiB")
     number = float(value)
     for unit in units:
@@ -78,14 +94,84 @@ def format_bytes(value):
                 return f"{int(number)} {unit}"
             return f"{number:.1f} {unit}"
         number /= 1024
+    raise AssertionError("unreachable")
 
+
+def git_value(*args: str):
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(root), *args],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+    except OSError:
+        return None
+    if result.returncode != 0:
+        return None
+    return result.stdout.strip()
+
+
+def invalid(message: str) -> None:
+    print("Scale status: INVALID")
+    print(message)
+    raise SystemExit(1)
+
+
+schema_candidates = (root / "AGENTS.md", root / "CLAUDE.md")
+existing_schema_paths = [
+    path for path in schema_candidates if path_state(path) != "missing"
+]
+if len(existing_schema_paths) > 1:
+    invalid(
+        "Multiple schema files: "
+        + ", ".join(path.name for path in existing_schema_paths)
+    )
+if not existing_schema_paths:
+    invalid("Missing required paths: AGENTS.md or CLAUDE.md")
+
+schema_path = existing_schema_paths[0]
+if path_state(schema_path) != "file":
+    invalid(f"Invalid path type: {schema_path.name} must be a regular file")
+
+required_directories = (
+    root / "raw" / "inbox",
+    root / "raw" / "sources",
+    root / "wiki",
+    root / "wiki" / "pages",
+)
+missing_paths = [
+    relative(path) for path in required_directories if path_state(path) == "missing"
+]
+if missing_paths:
+    invalid("Missing required paths: " + ", ".join(missing_paths))
+
+invalid_types = [
+    relative(path)
+    for path in required_directories
+    if path_state(path) not in {"directory", "inaccessible"}
+]
+if invalid_types:
+    print("Scale status: INVALID")
+    for path in invalid_types:
+        print(f"Invalid path type: {path} must be a directory")
+    raise SystemExit(1)
 
 source_root = root / "raw" / "sources"
 inbox_root = root / "raw" / "inbox"
 wiki_root = root / "wiki"
 pages_root = root / "wiki" / "pages"
 syntheses_root = root / "wiki" / "syntheses"
-source_records = sorted(item for item in source_root.iterdir() if item.is_dir())
+
+source_records = [
+    item for item in safe_entries(source_root) if path_state(item) == "directory"
+]
+unexpected_root_entries = [
+    relative(item)
+    for item in safe_entries(source_root)
+    if item.name != ".gitkeep" and path_state(item) != "directory"
+]
+
 pending_files = [
     path for path in files_under(inbox_root) if path.name != ".gitkeep"
 ]
@@ -103,22 +189,49 @@ source_files = []
 extraction_files = []
 asset_files = []
 missing_current_source = []
+multiple_current_source = []
 missing_extraction = []
+invalid_slugs = []
+unexpected_source_entries = []
+
 for record in source_records:
+    if not SLUG_RE.fullmatch(record.name):
+        invalid_slugs.append(record.name)
+
+    entries = safe_entries(record)
     current_files = sorted(
-        path for path in record.iterdir()
-        if path.is_file() and path.name.startswith("source.")
+        item
+        for item in entries
+        if item.name.startswith("source.") and path_state(item) == "file"
     )
     source_files.extend(current_files)
-    extraction = record / "extracted.md"
     if not current_files:
         missing_current_source.append(record.name)
-    if not extraction.is_file():
+    elif len(current_files) > 1:
+        multiple_current_source.append(
+            (record.name, [item.name for item in current_files])
+        )
+
+    extraction = record / "extracted.md"
+    if path_state(extraction) != "file":
         missing_extraction.append(record.name)
     else:
         extraction_files.append(extraction)
+
     assets_root = record / "assets"
-    asset_files.extend(files_under(assets_root))
+    if path_state(assets_root) == "directory":
+        asset_files.extend(files_under(assets_root))
+
+    for entry in entries:
+        entry_state = path_state(entry)
+        if entry.name.startswith("source.") and entry_state == "file":
+            continue
+        if entry.name == "extracted.md" and entry_state == "file":
+            continue
+        if entry.name == "assets" and entry_state == "directory":
+            continue
+        if entry_state != "inaccessible":
+            unexpected_source_entries.append(relative(entry))
 
 source_layer_files = [
     path for path in files_under(source_root) if path.name != ".gitkeep"
@@ -131,12 +244,24 @@ extraction_bytes = sum(size_of(path) for path in extraction_files)
 asset_bytes = sum(size_of(path) for path in asset_files)
 wiki_markdown_bytes = sum(size_of(path) for path in wiki_markdown_files)
 synthesis_bytes = sum(size_of(path) for path in syntheses)
-largest_source_bytes = size_of(largest_source_file) if largest_source_file else 0
-largest_wiki_bytes = size_of(largest_wiki_file) if largest_wiki_file else 0
-largest_synthesis_bytes = size_of(largest_synthesis_file) if largest_synthesis_file else 0
+largest_source_bytes = size_of(largest_source_file)
+largest_wiki_bytes = size_of(largest_wiki_file)
+largest_synthesis_bytes = size_of(largest_synthesis_file)
+
+structural_issues = bool(
+    missing_current_source
+    or multiple_current_source
+    or invalid_slugs
+    or unexpected_root_entries
+    or unexpected_source_entries
+    or missing_extraction
+    or inaccessible_paths
+)
 
 # These thresholds mirror docs/scalability.md.
-if (
+if structural_issues:
+    scale_status = "INVALID"
+elif (
     len(source_records) > 100
     or len(canonical_pages) > 300
     or wiki_markdown_bytes >= 250 * 1024 * 1024
@@ -153,27 +278,13 @@ elif (
 else:
     scale_status = "GREEN"
 
-
-def git_value(*args):
-    try:
-        result = subprocess.run(
-            ["git", "-C", str(root), *args],
-            check=False,
-            capture_output=True,
-            text=True,
-        )
-    except OSError:
-        return None
-    if result.returncode != 0:
-        return None
-    return result.stdout.strip()
-
-
 git_available = git_value("rev-parse", "--is-inside-work-tree") == "true"
 git_shallow = git_value("rev-parse", "--is-shallow-repository")
 git_changes = None
 if git_available:
-    git_changes = git_value("status", "--short", "--untracked-files=all", "--", "raw/sources", "wiki")
+    git_changes = git_value(
+        "status", "--short", "--untracked-files=all", "--", "raw/sources", "wiki"
+    )
 git_state = (
     "unavailable"
     if not git_available
@@ -195,35 +306,44 @@ print(f"Asset bytes: {format_bytes(asset_bytes)}")
 print(f"Wiki Markdown bytes: {format_bytes(wiki_markdown_bytes)}")
 print(f"Synthesis Markdown bytes: {format_bytes(synthesis_bytes)}")
 if largest_source_file:
-    relative_largest = largest_source_file.relative_to(root)
     print(
         "Largest source-layer file: "
-        f"{format_bytes(largest_source_bytes)} ({relative_largest})"
+        f"{format_bytes(largest_source_bytes)} ({relative(largest_source_file)})"
     )
 else:
     print("Largest source-layer file: 0 B")
 if largest_wiki_file:
-    relative_largest = largest_wiki_file.relative_to(root)
     print(
         "Largest wiki Markdown file: "
-        f"{format_bytes(largest_wiki_bytes)} ({relative_largest})"
+        f"{format_bytes(largest_wiki_bytes)} ({relative(largest_wiki_file)})"
     )
 else:
     print("Largest wiki Markdown file: 0 B")
 if largest_synthesis_file:
-    relative_largest = largest_synthesis_file.relative_to(root)
     print(
         "Largest synthesis Markdown file: "
-        f"{format_bytes(largest_synthesis_bytes)} ({relative_largest})"
+        f"{format_bytes(largest_synthesis_bytes)} ({relative(largest_synthesis_file)})"
     )
 else:
     print("Largest synthesis Markdown file: 0 B")
 print(f"Sources missing current original: {len(missing_current_source)}")
+print(f"Sources with multiple current originals: {len(multiple_current_source)}")
 print(f"Sources missing extracted.md: {len(missing_extraction)}")
 if missing_current_source:
-    print("Missing current originals: " + ", ".join(missing_current_source))
+    print("Missing current originals: " + ", ".join(sorted(missing_current_source)))
+if multiple_current_source:
+    for slug, names in multiple_current_source:
+        print(f"Multiple current originals: {slug} ({', '.join(names)})")
 if missing_extraction:
-    print("Missing extractions: " + ", ".join(missing_extraction))
+    print("Missing extractions: " + ", ".join(sorted(missing_extraction)))
+if invalid_slugs:
+    print("Invalid source slugs: " + ", ".join(sorted(invalid_slugs)))
+if unexpected_root_entries:
+    print("Unexpected source-root entries: " + ", ".join(sorted(unexpected_root_entries)))
+if unexpected_source_entries:
+    print("Unexpected source entries: " + ", ".join(sorted(unexpected_source_entries)))
+for path in sorted(inaccessible_paths, key=relative):
+    print("Inaccessible directory: " + relative(path))
 if git_available:
     history = "shallow" if git_shallow == "true" else "full-or-unknown"
     print(f"Git: {git_state} ({history})")
@@ -240,10 +360,14 @@ elif scale_status == "WATCH":
         "Measure retrieval latency and coverage on real workloads; "
         "review a derived full-text layer only if the experience degrades."
     )
-else:
+elif scale_status == "DERIVED-SEARCH-CANDIDATE":
     recommendation = (
         "Evaluate a local rebuildable full-text index; "
         "do not change the canonical Markdown/Git source of truth."
     )
+else:
+    recommendation = "Repair structural issues before using the scale recommendation."
 print(f"Recommendation: {recommendation}")
+if scale_status == "INVALID":
+    raise SystemExit(1)
 PY
