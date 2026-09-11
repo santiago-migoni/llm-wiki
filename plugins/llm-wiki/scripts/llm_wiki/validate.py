@@ -4,6 +4,7 @@ import re
 from pathlib import Path
 
 from .frontmatter import FrontmatterError, parse_file
+from .extraction import inspect_extraction
 from .hashes import sha256_file
 from .inventory import build_inventory
 from .links import build_link_report
@@ -43,6 +44,7 @@ def _validate_document(root: Path, path: Path, findings: _Findings):
 
 def validate(root: Path) -> dict:
     findings = _Findings()
+    extraction_reports: list[dict] = []
     schemas = schema_paths(root)
     if not schemas:
         findings.add("blocker", "Missing AGENTS.md or CLAUDE.md")
@@ -83,6 +85,28 @@ def validate(root: Path) -> dict:
                 continue
             document = _validate_document(root, extraction, findings)
             if document and len(sources) == 1:
+                extraction_report = inspect_extraction(
+                    root,
+                    extraction,
+                    sources[0],
+                    record.name,
+                    document.metadata,
+                )
+                extraction_reports.append(
+                    {
+                        key: value
+                        for key, value in extraction_report.items()
+                        if key != "issues"
+                    }
+                )
+                for issue in extraction_report["issues"]:
+                    findings.add(
+                        issue["severity"],
+                        issue["message"],
+                        relative(extraction, root),
+                        code=issue["code"],
+                        **issue["details"],
+                    )
                 metadata = document.metadata
                 expected_path = relative(sources[0], root)
                 if metadata.get("source") != expected_path:
@@ -189,6 +213,7 @@ def validate(root: Path) -> dict:
         },
         "inventory": inventory["counts"],
         "inventory_warnings": inventory["warnings"],
+        "extractions": extraction_reports,
         "links": links["counts"],
         "provenance": {
             "status": "migrable" if legacy_pages else "current",

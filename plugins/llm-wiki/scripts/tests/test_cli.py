@@ -36,6 +36,46 @@ class CliTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertEqual(json.loads(result.stdout)["status"], "valid")
 
+    def test_validate_exposes_extraction_coverage(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "raw/inbox").mkdir(parents=True)
+            record = root / "raw/sources/report"
+            record.mkdir(parents=True)
+            (root / "wiki/pages").mkdir(parents=True)
+            (root / "wiki/index.md").write_text("# Index\n", encoding="utf-8")
+            (root / "AGENTS.md").write_text("# Schema\n", encoding="utf-8")
+            source = record / "source.csv"
+            source.write_bytes(b"name,value\na,1\n")
+            digest = hashlib.sha256(source.read_bytes()).hexdigest()
+            (record / "extracted.md").write_text(
+                "---\n"
+                "type: extraction\n"
+                "slug: report\n"
+                "source: raw/sources/report/source.csv\n"
+                "original-filename: report.csv\n"
+                f"sha256: {digest}\n"
+                "extracted: 2026-09-11\n"
+                "format: csv\n"
+                "method: csv reader\n"
+                "status: representative\n"
+                "coverage:\n"
+                "  unit: rows\n"
+                "  expected: 2\n"
+                "  processed: 1\n"
+                "warnings: [sample only]\n"
+                "---\n"
+                "# Sample\n",
+                encoding="utf-8",
+            )
+
+            result = run_cli("validate", str(root), "--format", "json")
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            payload = json.loads(result.stdout)
+            self.assertEqual(payload["extractions"][0]["status"], "representative")
+            self.assertEqual(payload["extractions"][0]["coverage"]["processed"], 1)
+            self.assertEqual(payload["extractions"][0]["coverage"]["expected"], 2)
+
     def test_multiple_source_files_are_invalid(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -48,7 +88,11 @@ class CliTests(unittest.TestCase):
             (record / "source.docx").write_bytes(b"two")
             (record / "extracted.md").write_text(
                 "---\ntype: extraction\nslug: policy\nsource: raw/sources/policy/source.pdf\n"
-                "sha256: value\nstatus: complete\n---\ntext\n",
+                "original-filename: policy.pdf\nsha256: "
+                + "0" * 64
+                + "\nextracted: 2026-09-11\nformat: pdf\nmethod: test fixture\n"
+                "status: complete\ncoverage:\n  unit: pages\n  expected: 1\n"
+                "  processed: 1\nwarnings: []\n---\ntext\n",
                 encoding="utf-8",
             )
             result = run_cli("validate", str(root), "--format", "json")

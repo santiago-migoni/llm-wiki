@@ -138,6 +138,14 @@ def _text(command: str, payload: dict[str, Any]) -> str:
         return "\n".join(lines)
     if command == "validate":
         lines = [f"Vault: {payload['vault']}", f"Status: {payload['status'].upper()}"]
+        lines.extend(
+            "EXTRACTION "
+            f"{item['slug']} status={item['status']} "
+            f"coverage={item['coverage'].get('processed', '?')}/"
+            f"{item['coverage'].get('expected', '?')} "
+            f"{item['coverage'].get('unit', '?')}"
+            for item in payload.get("extractions", [])
+        )
         provenance = payload.get("provenance", {})
         if provenance.get("legacy_pages"):
             lines.append(

@@ -62,7 +62,8 @@ If there are uncommitted changes that were not created by the current ingest, st
 
 ## Current source metadata
 
-When possible, include this header at the beginning of extracted.md:
+Include this header at the beginning of every extracted.md. The complete field and format-specific
+coverage contract is defined in [docs/extraction-coverage.md](../../../docs/extraction-coverage.md).
 
 ~~~yaml
 ---
@@ -72,13 +73,22 @@ source: raw/sources/<slug>/source.<ext>
 original-filename: <filename supplied by the user>
 sha256: <hash of current source>
 extracted: YYYY-MM-DD
+format: markdown | txt | html | pdf | docx | xlsx | csv | pptx | image | audio | video | other
 method: <converter or reading method>
-status: complete | partial
+status: complete | representative | partial | unsupported
+coverage:
+  unit: pages | slides | sheets | rows | seconds | regions
+  expected: <non-negative integer>
+  processed: <non-negative integer not greater than expected>
 warnings: []
 ---
 ~~~
 
-Use a concise warning when status is partial. Do not claim complete extraction when meaningful sections, tables, pages, slides, cells, images, or audio were not represented.
+Use a concise warning for every non-complete status. `complete` requires
+`coverage.processed == coverage.expected`; `representative` identifies a deliberate sample;
+`partial` identifies omitted or unreadable material; and `unsupported` means that no trustworthy
+unit was processed. Do not claim complete extraction when meaningful sections, tables, pages,
+slides, cells, images, or audio were not represented.
 
 The hash is for duplicate detection and freshness checks. It is not an identifier and must not be used to create a new path.
 
@@ -189,6 +199,6 @@ Report at least:
 - canonical pages created or updated;
 - assets added or retained;
 - source hash;
-- extraction status and warnings;
+- extraction format, status, processed/expected coverage, and warnings;
 - contradictions or open questions;
 - Git commit, or why no commit was created.

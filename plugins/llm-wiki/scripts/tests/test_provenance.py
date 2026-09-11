@@ -45,8 +45,17 @@ def add_source(root: Path, slug: str, content: bytes) -> str:
         "type: extraction\n"
         f"slug: {slug}\n"
         f"source: raw/sources/{slug}/source.txt\n"
+        "original-filename: source.txt\n"
         f"sha256: {digest}\n"
+        "extracted: 2026-09-11\n"
+        "format: txt\n"
+        "method: test fixture\n"
         "status: complete\n"
+        "coverage:\n"
+        "  unit: pages\n"
+        "  expected: 1\n"
+        "  processed: 1\n"
+        "warnings: []\n"
         "---\n"
         "Extracted text.\n",
         encoding="utf-8",
