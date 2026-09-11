@@ -32,6 +32,21 @@ El repositorio ya contiene:
 
 La inconsistencia inicial entre la arquitectura Git-first y las instrucciones operativas fue resuelta en la Fase 0. El contrato activo del plugin ahora usa un slug estable, fuentes actuales bajo raw/sources/<slug>/ y Git como historial.
 
+## Línea base de la remediación de auditoría
+
+La línea base de la remediación se documenta en
+[`audit-remediation-plan.md`](audit-remediation-plan.md) y en la evidencia bajo
+[`tests/results/`](../../tests/results/). A partir de esta línea base:
+
+- el empaquetado estático queda validado por contrato;
+- la ejecución en Codex queda pendiente de registros de host;
+- la ejecución en ChatGPT Work queda pendiente de registros de host;
+- la estabilidad semántica queda pendiente de evidencia funcional y de sus
+  artefactos inspeccionables.
+
+La matriz de promesas públicas y escenarios es la fuente para decidir cuándo
+una capacidad está implementada, automatizada, validada en host o bloqueada.
+
 ## Decisiones congeladas
 
 Estas decisiones rigen todas las fases:

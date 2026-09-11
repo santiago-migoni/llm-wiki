@@ -67,6 +67,29 @@ Remove the temporary directory after the test has been reviewed. Do not run init
 | H-001 | Codex smoke test | Plugin loads, skills are discoverable, and a new thread can access the current package. |
 | H-002 | ChatGPT Work smoke test | Workflow works when the vault is exposed to the conversation; inaccessible files are reported. |
 
+## Matriz de promesas públicas y evidencia
+
+Esta matriz conecta las promesas visibles del plugin con escenarios y artefactos
+que pueden verificarlas. El estado es el de la línea base de la remediación;
+`pending` no significa que la promesa haya sido validada.
+
+| ID | Promesa pública | Evidencia verificable | Estado de línea base |
+| --- | --- | --- | --- |
+| P-001 | El paquete y sus skills son descubribles por el host | `C-001`, `C-002`, `H-001`, `H-002` | `static-validated`; host pendiente |
+| P-002 | La operación es Git-first y conserva fuente, extracción e historial | `I-001`–`I-003`, `G-001`, `G-002`, `Q-003` | `pending-semantic` |
+| P-003 | Duplicados exactos e históricos no generan registros actuales falsos | `G-003`, `G-004` y commits inspeccionados | `pending-semantic` |
+| P-004 | Las consultas de corpus completo informan su cobertura real y sus límites | `Q-002`, `H-001`, `H-002` y artefactos de consulta | `pending-host` |
+| P-005 | Las respuestas conservan citas trazables a fuentes verificables | `Q-001`, `Q-003`, `Q-004` y páginas generadas | `pending-semantic` |
+| P-006 | Las contradicciones materiales permanecen visibles y no se sobrescriben silenciosamente | `G-006`, `L-002`, registro de auditoría y página afectada | `pending-semantic` |
+| P-007 | La extracción es completa o declara explícitamente sus limitaciones | `G-007`, artefactos de extracción y reporte | `pending-semantic` |
+| P-008 | Lint y pruebas de escala son de solo lectura y reportan evidencia | `L-001`, `L-002`, `S-001`, `S-002` | `pending-semantic` |
+| P-009 | Cada host comunica honestamente sus capacidades de lectura y escritura | `H-001`, `H-002`, registros por host | `pending-host` |
+
+Los registros de ejecución se almacenan en
+[`tests/results/`](../../tests/results/). Cada fila debe enlazar, en el
+registro correspondiente, el commit del plugin, el host, los escenarios y los
+artefactos que sustentan el estado declarado.
+
 ## Behavioral smoke test
 
 Use a disposable Git vault and a small text source.
