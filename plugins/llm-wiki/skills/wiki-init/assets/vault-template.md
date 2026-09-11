@@ -62,9 +62,12 @@ type: knowledge
 slug: <stable-slug>
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
-source: raw/sources/<slug>/source.<ext>
-extracted: raw/sources/<slug>/extracted.md
-sha256: <hash of current source when available>
+sources:
+  - slug: <source-slug>
+    source: raw/sources/<source-slug>/source.<ext>
+    extracted: raw/sources/<source-slug>/extracted.md
+    sha256: <64 lowercase hexadecimal characters>
+    role: primary
 tags: []
 status: current
 ---
@@ -72,7 +75,17 @@ status: current
 
 Use type: synthesis for a cross-source analysis, type: decision for a decision record, and type: index for a navigation file. Use provisional or superseded as status values only when the page actually has that state.
 
-For a page that synthesizes several sources, list the relevant source paths in a Sources section instead of pretending that one source is authoritative.
+New pages use `sources` for one or more complete provenance entries. Each
+entry contains the source slug, current source path, current extraction path,
+SHA-256, and one role: `primary`, `supporting`, `context`, or `counterpoint`.
+Keep entries in role/slug order and cite the relevant source slug and locator
+under each load-bearing claim. Existing singular `source`, `extracted`, and
+`sha256` metadata remains readable and is migrable with
+`wiki-migrate-provenance`.
+
+For a page that synthesizes several sources, keep every relevant source in
+`sources`; do not pretend that one source is authoritative. See the packaged
+provenance contract for the behavior when a source changes or disappears.
 
 wiki/index.md must contain a short route for every canonical page: its title, purpose, and the topic or question it helps answer.
 

@@ -25,17 +25,19 @@ Load references/vault-protocol.md first and load references/source-record.md whe
 12. Write raw/sources/<slug>/extracted.md as complete normalized text. Include the source-record header, preserve meaningful sections, and record extraction warnings.
 13. Store relevant current assets in raw/sources/<slug>/assets/. Do not prune possibly useful existing assets automatically.
 14. Before filing, briefly report key takeaways for a supervised single-source ingest. Skip this discussion only for an explicitly requested batch or unsupervised run.
-15. Create or update the canonical page in wiki/pages/ when the source represents durable knowledge. Search before creating it. Do not create a second page in a category directory.
-16. Update relevant navigation indexes. Category directories may contain short indexes that link to wiki/pages/; they must not copy canonical content.
-17. Update wiki/overview.md only if the global orientation materially changed.
-18. Append one concise semantic entry to wiki/log.md. Include the slug, whether it was new or updated, and any contradiction or extraction limitation.
-19. Validate links, source/extraction metadata, pending inbox state, and the paths touched.
-20. If Git is available, stage only the exact paths touched and create one commit with an ingest: label. Never use git add -A or git add .
-21. Report:
+15. Identify every canonical page and durable synthesis whose claims or provenance are affected by the source. Report this list before writing; do not assume the source slug identifies the only affected page.
+16. Create or update the canonical page in wiki/pages/ when the source represents durable knowledge. Search before creating it. New or updated pages use a `sources` list, even when it contains one entry, and preserve the complete entry for every source already supporting the page.
+17. For every load-bearing claim, add `Evidence` and, when applicable, `Support` citation lines with the declared source slug and a section, page, slide, sheet, cell, timestamp, or other locator. Keep contradictions and competing citations visible.
+18. Update relevant navigation indexes. Category directories may contain short indexes that link to wiki/pages/; they must not copy canonical content.
+19. Update wiki/overview.md only if the global orientation materially changed.
+20. Append one concise semantic entry to wiki/log.md. Include the slug, every affected page, whether it was new or updated, and any contradiction or extraction limitation.
+21. Validate links, every provenance entry and hash, source/extraction metadata, pending inbox state, and the exact paths touched.
+22. If Git is available, stage only the exact paths touched and create one commit with an ingest: label. Never use git add -A or git add .
+23. Report:
    - operation: new, update, duplicate, ambiguous, or blocked;
    - stable slug;
    - current source and extraction paths;
-   - canonical pages created or updated;
+   - every affected canonical page or synthesis, including pages inspected and left unchanged;
    - assets added or retained;
    - source hash;
    - extraction status and warnings;

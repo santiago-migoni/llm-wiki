@@ -20,7 +20,9 @@ Do not infer current-corpus mode merely because several pages are relevant. Use 
 4. Follow links to relevant syntheses, category indexes, and source slugs.
 5. Read raw/sources/<slug>/extracted.md when a claim is load-bearing or the canonical page is only a summary.
 6. Inspect raw/sources/<slug>/source.<ext> when the question depends on layout, images, signatures, tables, footnotes, or content not faithfully represented in Markdown.
-7. Record the pages and source slugs actually used.
+7. Record the pages and every source slug actually used. When a page has a
+   `sources` list, inspect the relevant entry's current extraction and hash
+   before relying on its claim.
 
 If the index misses the topic, search wiki/ and raw/sources/ read-only. State when the answer required fallback search.
 
@@ -46,7 +48,7 @@ Files in raw/inbox/ are pending and are not part of the processed current corpus
 1. Read all canonical pages under wiki/pages/.
 2. Read current extracted.md files in bounded passes.
 3. Read original source files only when the extraction is incomplete or the question depends on source format.
-4. Track each slug as read, partially read, skipped, unreadable, unsupported, or pending.
+4. Track each source slug as read, partially read, skipped, unreadable, unsupported, or pending. For every page, preserve the complete `sources` entry set and flag missing, stale, or contradictory provenance.
 5. Do not silently truncate an extraction because of context limits. Continue in another bounded pass or report the omission.
 
 ### Report
@@ -95,10 +97,11 @@ If a source changed extension, inspect the directory history and cite the exact 
 
 Citations should let a future agent locate the evidence quickly.
 
-For canonical knowledge:
+For canonical knowledge, cite each load-bearing claim:
 
 ~~~text
 [[page-slug]], section: Current understanding
+source slug: <source-slug>
 source: raw/sources/<source-slug>/extracted.md, section or marker
 ~~~
 
@@ -111,7 +114,9 @@ commit: <short-hash>
 path: raw/sources/<slug>/extracted.md
 ~~~
 
-Distinguish:
+For a claim combining multiple sources, include one source slug and locator
+per supporting record. The slugs must be declared in the page frontmatter's
+`sources` list. Distinguish:
 
 - direct source evidence;
 - a current canonical interpretation;
@@ -136,7 +141,7 @@ Only file an answer when it is durable and substantive, and only after offering 
 
 Before creating a new file, search wiki/syntheses/ and wiki/index.md for an existing synthesis on the same question. Update an existing synthesis when appropriate.
 
-A new synthesis should use:
+A new synthesis should use the format in [docs/synthesis-format.md](../../../docs/synthesis-format.md):
 
 ~~~yaml
 ---
@@ -146,7 +151,12 @@ created: YYYY-MM-DD
 updated: YYYY-MM-DD
 status: current
 context-mode: targeted | current-corpus | historical
-sources: []
+sources:
+  - slug: <source-slug>
+    source: raw/sources/<source-slug>/source.<ext>
+    extracted: raw/sources/<source-slug>/extracted.md
+    sha256: <64 lowercase hexadecimal characters>
+    role: primary | supporting | context | counterpoint
 pages: []
 commits: []
 ---

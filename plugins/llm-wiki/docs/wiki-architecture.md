@@ -158,9 +158,23 @@ A page may represent a policy, process, reference, topic, system, recurring meet
 
 A canonical page should state its status, current claims, sources, open questions, and related pages. It should not reproduce the entire source document.
 
+### Structured page provenance
+
+When a page depends on more than one source, its frontmatter contains one
+ordered provenance entry per source. Every entry keeps the current source path,
+extraction path, current-source hash, and semantic role together. The complete
+field, role, order, migration, and citation contract is in
+[provenance.md](provenance.md).
+
+The legacy singular `source`, `extracted`, and `sha256` fields remain readable
+for existing vaults and are reported as migrable. New pages and updates use
+`sources`; a source update retains its slug and updates all affected page
+entries in the same coherent Git change.
+
 ### wiki/syntheses/
 
-This directory contains durable analyses that combine multiple sources or canonical pages.
+This directory contains durable analyses that combine multiple sources or canonical pages. Their
+frontmatter and claim-level citation format is defined in [synthesis-format.md](synthesis-format.md).
 
 Use it for comparative analysis, research notes, timelines, topic briefs, decision support, and answers that are valuable beyond the current conversation. A synthesis must link to the pages and sources it uses and should make clear which statements are direct evidence, interpretation, or recommendation.
 
@@ -208,16 +222,27 @@ Canonical pages may use lightweight frontmatter. It should identify the current 
 type: knowledge
 slug: security-policy
 updated: 2026-09-10
-source: raw/sources/security-policy/source.pdf
-extracted: raw/sources/security-policy/extracted.md
-sha256: <hash of current source>
+sources:
+  - slug: corporate-policy
+    source: raw/sources/corporate-policy/source.pdf
+    extracted: raw/sources/corporate-policy/extracted.md
+    sha256: <64 lowercase hexadecimal characters>
+    role: primary
+  - slug: audit-report
+    source: raw/sources/audit-report/source.docx
+    extracted: raw/sources/audit-report/extracted.md
+    sha256: <64 lowercase hexadecimal characters>
+    role: supporting
 tags:
   - security
   - governance
 ---
 ~~~
 
-The hash helps detect whether a supplied file is byte-for-byte identical to the current source. It is not a document identifier and does not replace Git history.
+The hash on each entry helps detect whether a supplied file is byte-for-byte
+identical to the current source. It is not a document identifier and does not
+replace Git history. A multi-source claim cites its source slugs and locators
+in the page body; disagreements remain explicit.
 
 ## Ingestion and update workflow
 

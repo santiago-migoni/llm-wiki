@@ -1,0 +1,10 @@
+#!/usr/bin/env python3
+"""Convenience entry point for the provenance migration command."""
+
+import sys
+
+from llm_wiki.cli import main
+
+
+if __name__ == "__main__":
+    raise SystemExit(main(["migrate-provenance", *sys.argv[1:]]))

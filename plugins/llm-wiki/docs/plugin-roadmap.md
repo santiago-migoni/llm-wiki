@@ -27,6 +27,7 @@ El repositorio ya contiene:
 - manifiesto portable en `plugin.json` y fallback compatible en `.codex-plugin/plugin.json`;
 - skills para inicialización, ingestión, consulta y lint;
 - protocolo común de vault;
+- contrato de procedencia estructurada y migración segura desde el formato singular;
 - documentación de compatibilidad con Codex y ChatGPT Work;
 - arquitectura Git-first documentada.
 
@@ -39,6 +40,7 @@ La línea base de la remediación se documenta en
 [`tests/results/`](../../tests/results/). A partir de esta línea base:
 
 - el empaquetado estático queda validado por contrato;
+- la procedencia estructurada y la migración segura quedan respaldadas por el contrato y las pruebas deterministas;
 - la ejecución en Codex queda pendiente de registros de host;
 - la ejecución en ChatGPT Work queda pendiente de registros de host;
 - la estabilidad semántica queda pendiente de evidencia funcional y de sus

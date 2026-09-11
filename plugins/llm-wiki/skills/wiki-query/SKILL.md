@@ -21,13 +21,13 @@ Load references/vault-protocol.md first. Load references/context-modes.md when s
 5. In current-corpus mode, inventory raw/sources/, inspect raw/inbox/, verify source/extraction coverage, read all wiki/pages/ pages and current extractions in bounded passes, and track coverage by slug.
 6. In historical mode, use Git log, diff, and show for the relevant stable slug or page. Cite the commit and exact path for historical claims.
 7. Answer only from material actually read. If outside knowledge is useful, label it explicitly as outside the vault.
-8. Cite the evidence path:
+8. Cite each load-bearing claim, not only the page as a whole:
    - canonical page and section;
-   - stable source slug;
+   - declared source slug from the page's `sources` list;
    - current source or extracted.md path;
    - page, section, slide, sheet, cell, timestamp, or other marker;
    - Git commit and path for historical claims.
-9. If sources disagree, surface the disagreement and identify the competing evidence. Do not silently select one source.
+9. If sources disagree, preserve the competing citations and explain which evidence is direct, supporting, contextual, or countervailing. Never silently select one source.
 10. If the vault has no relevant information, say so and offer to ingest a source.
 11. State context limitations. Never claim complete or absolute context when a source is pending, skipped, unreadable, unsupported, or materially partial.
 12. If the answer is durable and substantive, offer to file it in wiki/syntheses/. If accepted, follow the synthesis procedure in references/context-modes.md and create a query: commit.

@@ -64,6 +64,11 @@ Remove the temporary directory after the test has been reviewed. Do not run init
 | L-002 | Lint populated vault | Source, extraction, link, index, duplicate, contradiction, metadata, and scale checks report evidence. |
 | S-001 | Assess empty-vault scale | The read-only assessor reports GREEN, zero sources, zero pages, and zero pending files without mutating the fixture. |
 | S-002 | Assess populated-vault scale | The assessor reports current source/page counts, source and wiki Markdown byte totals, largest files, structural gaps, Git state, and the highest applicable threshold. |
+| M-001 | Multi-source provenance | A page stores every source slug, current source/extraction path, role, and matching SHA-256; the validator checks all entries. |
+| M-002 | Legacy provenance compatibility | A page using singular source/extracted/sha256 remains readable and is reported as migrable rather than invalid solely for its shape. |
+| M-003 | Migration check | Default `migrate-provenance` mode makes no changes and prints exactly the affected pages plus a unified diff. |
+| M-004 | Migration write | Explicit `--write` converts only reviewed page frontmatter, preserves the body, and creates no commit. |
+| M-005 | Claim citations | Multi-source claims cite declared source slugs and locators; undeclared citation slugs are reported. |
 | H-001 | Codex smoke test | Plugin loads, skills are discoverable, and a new thread can access the current package. |
 | H-002 | ChatGPT Work smoke test | Workflow works when the vault is exposed to the conversation; inaccessible files are reported. |
 

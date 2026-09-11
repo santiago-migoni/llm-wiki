@@ -100,6 +100,36 @@ Do not edit the original to repair an extraction. Preserve its bytes for the cur
 
 The same knowledge must not be copied into a canonical page and a category page. A category entry should link to the canonical page. If a category needs an index, keep it short and navigational.
 
+## Structured provenance
+
+Canonical pages and durable syntheses use an ordered `sources` list when they
+depend on source records. Each entry must contain `slug`, `source`,
+`extracted`, `sha256`, and `role`. The paths must be vault-relative and point
+to the same `raw/sources/<slug>/` record; the hash must match the current
+original bytes. Allowed roles are `primary`, `supporting`, `context`, and
+`counterpoint`. New entries use role order and then slug order for a stable
+diff. See [docs/provenance.md](../docs/provenance.md) for the complete
+contract.
+
+The reader remains compatible with legacy page metadata using singular
+`source`, `extracted`, and `sha256`. Lint reports that shape as migrable rather
+than invalid solely because it is old. New writes must use `sources`. A source
+change keeps its slug, updates the matching entry and every affected page, and
+lets Git preserve the previous state. A missing source is visible as a
+provenance finding; it is never pruned silently.
+
+Every load-bearing multi-source claim must cite the source slug and a locator
+in the body, for example:
+
+~~~markdown
+- The policy requires annual review.
+  - Evidence: `corporate-policy`, section “Review cycle”.
+  - Support: `audit-report`, page 14.
+~~~
+
+Citation slugs must be declared in the page's `sources` list. Keep competing
+evidence visible when sources disagree.
+
 ## File tools and shell
 
 - Use file tools to read and write vault documents.
@@ -162,7 +192,7 @@ Use by default:
 2. read wiki/index.md;
 3. shortlist relevant canonical pages;
 4. read linked syntheses and category indexes as needed;
-5. read current extracted.md when a claim needs source grounding;
+5. read the declared provenance entry and current extracted.md when a claim needs source grounding;
 6. inspect the original when extraction lost layout, signatures, images, tables, or other evidence.
 
 If the index does not surface the topic, search wiki/ and raw/sources/ with a read-only text search.
@@ -174,7 +204,7 @@ Use when the user asks for full context, all documents, or an exhaustive current
 1. inventory current source slugs under raw/sources/;
 2. check raw/inbox/ for pending files;
 3. verify each source has exactly one current source file and extracted.md;
-4. read all canonical pages;
+4. read all canonical pages, including every structured provenance entry and its current hash;
 5. read current extractions in bounded passes;
 6. track coverage by slug;
 7. report inaccessible, unsupported, oversized, or conflicting content.
@@ -197,12 +227,13 @@ Use Git paths, commits, and diffs when the question concerns change over time, p
 
 For any operation that changes the vault:
 
-1. update the affected canonical pages;
-2. update wiki/index.md for created or materially changed pages;
-3. update wiki/overview.md only when the global picture changes;
-4. append one semantic entry to wiki/log.md;
-5. validate the touched paths and relevant links;
-6. commit once if Git is available;
-7. report what changed, what was not changed, contradictions, and missing context.
+1. identify and report every affected canonical page or synthesis before writing;
+2. update the affected pages, preserving complete structured provenance and claim citations;
+3. update wiki/index.md for created or materially changed pages;
+4. update wiki/overview.md only when the global picture changes;
+5. append one semantic entry to wiki/log.md;
+6. validate the touched paths, every provenance entry and hash, and relevant links;
+7. commit once if Git is available;
+8. report exactly what changed, what was inspected and left unchanged, contradictions, and missing context.
 
 Do not commit halfway through a write. If interrupted, leave the complete uncommitted state visible through Git status and diff.

@@ -89,12 +89,18 @@ Look for:
 
 Do not merge or delete pages automatically.
 
-### Source/page coverage
+### Source/page provenance coverage
 
 Check that:
 
-- canonical pages' source and extracted paths exist;
-- source slugs referenced by pages exist;
+- canonical pages' structured `sources` entries contain `slug`, `source`, `extracted`, `sha256`, and `role`;
+- every source and extracted path exists and belongs to the declared source slug;
+- every declared hash matches the current original, including the second and later entries;
+- source roles are allowed and entries have stable role/slug order;
+- source slugs and paths are unique within a page;
+- explicit `Evidence` and `Support` citation slugs are declared by the page;
+- legacy singular `source`, `extracted`, and `sha256` pages are reported as migrable, not invalid solely because of their format;
+- suggest `wiki-migrate-provenance <vault> --check`; never run its `--write` mode as part of lint without explicit approval;
 - source records expected to become durable knowledge are discoverable from wiki/index.md;
 - a page does not silently cite a superseded or missing path;
 - synthesis pages list the source slugs or canonical pages they use.
@@ -107,9 +113,8 @@ Check fields relevant to each page type:
 - slug;
 - created;
 - updated;
-- source;
-- extracted;
-- sha256;
+- sources and each entry's slug, source, extracted, sha256, and role;
+- legacy source, extracted, and sha256 only for compatibility pages;
 - tags;
 - status;
 - context-mode, sources, pages, and commits for syntheses when applicable.

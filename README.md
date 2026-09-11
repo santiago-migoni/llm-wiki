@@ -2,7 +2,7 @@
 
 A universal Codex plugin that turns a collection of documents into a cited, Git-versioned knowledge base. The user curates sources; the agent processes, connects, updates, and queries the wiki.
 
-The `llm-wiki` plugin implements the pattern described in [its design brief](plugins/llm-wiki/docs/llm-wiki.md). The canonical target architecture is documented in [wiki-architecture.md](plugins/llm-wiki/docs/wiki-architecture.md), and its implementation sequence is in [plugin-roadmap.md](plugins/llm-wiki/docs/plugin-roadmap.md).
+The `llm-wiki` plugin implements the pattern described in [its design brief](plugins/llm-wiki/docs/llm-wiki.md). The canonical target architecture is documented in [wiki-architecture.md](plugins/llm-wiki/docs/wiki-architecture.md), structured provenance in [provenance.md](plugins/llm-wiki/docs/provenance.md), and the implementation sequence in [plugin-roadmap.md](plugins/llm-wiki/docs/plugin-roadmap.md).
 
 ## Skills
 
@@ -96,7 +96,7 @@ Git preserves the history of every current source, extraction, page, and decisio
 2. Identify or reuse its stable slug.
 3. Store the current original under raw/sources/<slug>/source.<ext>.
 4. Generate raw/sources/<slug>/extracted.md.
-5. Update the canonical wiki page and affected indexes.
+5. Update every affected canonical page or synthesis and its indexes, preserving structured source provenance and claim citations.
 6. Record meaningful changes in wiki/log.md.
 7. Validate the vault.
 8. Commit the coherent change to Git.

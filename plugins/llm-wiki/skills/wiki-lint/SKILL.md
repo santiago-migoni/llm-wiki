@@ -19,6 +19,9 @@ Load references/vault-protocol.md first, references/lint-report.md for the check
    - one current source.* and extracted.md per source;
    - extraction hash and path freshness;
    - canonical page and index coverage;
+   - every structured `sources` entry, including its slug, role, paths, order, and hash;
+   - claim citations that refer to undeclared source slugs;
+   - legacy singular provenance reported as migrable rather than invalid solely for its shape;
    - broken and ambiguous wikilinks;
    - duplicate page and source candidates;
    - source/page/synthesis path coverage;

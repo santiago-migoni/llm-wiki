@@ -92,9 +92,12 @@ type: knowledge
 slug: <stable-page-slug>
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
-source: raw/sources/<source-slug>/source.<ext>
-extracted: raw/sources/<source-slug>/extracted.md
-sha256: <hash of current source>
+sources:
+  - slug: <source-slug>
+    source: raw/sources/<source-slug>/source.<ext>
+    extracted: raw/sources/<source-slug>/extracted.md
+    sha256: <64 lowercase hexadecimal characters>
+    role: primary
 tags: []
 status: current
 ---
@@ -111,7 +114,8 @@ The page body should be selective and retrieval-oriented:
 
 ## Evidence
 
-- <Claim> — source: raw/sources/<source-slug>/extracted.md, <section or marker>.
+- <Claim>.
+  - Evidence: `<source-slug>`, <section or marker>.
 
 ## Open questions
 
@@ -122,7 +126,32 @@ The page body should be selective and retrieval-oriented:
 - [[related-page]]
 ~~~
 
-A page can cite several sources. List them in the body when one source is not authoritative. Do not copy the full extraction into the page.
+A page can cite several sources. Add one complete entry to `sources` for each
+source and keep the entries in stable role/slug order. For a claim that combines
+sources, use one `Evidence` or `Support` line per source:
+
+~~~markdown
+- <Claim supported by two records>.
+  - Evidence: `<primary-slug>`, <section or marker>.
+  - Support: `<supporting-slug>`, <section or marker>.
+~~~
+
+Citation slugs must already be declared in frontmatter. Do not copy the full
+extraction into the page.
+
+## Provenance updates
+
+When a new source supports an existing page, append its structured entry in the
+stable order, add citations to the affected claims, and list every affected
+page before writing. When a source changes, keep its slug, update its source,
+extraction, hash, and every affected page entry in one coherent operation. When
+a source disappears or no longer supports a claim, preserve the old entry until
+an explicit reviewed change removes it and updates the claims. Never drop a
+source from a page merely because a lookup failed.
+
+Existing pages with singular `source`, `extracted`, and `sha256` fields remain
+readable. Treat them as migrable and use `wiki-migrate-provenance --check`
+before an explicit `--write`; do not mix the singular and structured formats.
 
 ## Update rules
 
