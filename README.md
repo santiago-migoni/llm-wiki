@@ -82,7 +82,7 @@ vault/
 
 AGENTS.md is the vault-specific operating contract. It defines scope, conventions, categories, and user preferences. It is read before any write.
 
-raw/inbox/ is the staging area for new or updated documents. A successfully processed document moves into raw/sources/<slug>/.
+raw/inbox/ is the staging area for new or updated documents. A successfully processed document moves into raw/sources/<slug>/, where `<slug>` may be flat or a slash-separated lowercase kebab-case path such as `fundamentos/actividades`.
 
 raw/sources/<slug>/ contains the current original, its normalized extraction with declared
 format-specific coverage, and relevant assets. The original bytes are not edited to repair an

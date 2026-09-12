@@ -159,6 +159,104 @@ class ProvenanceTests(unittest.TestCase):
                 )
             )
 
+    def test_nested_provenance_and_canonical_page_are_valid(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            create_vault(root)
+            digest = add_source(root, "fundamentos/actividades", b"activities")
+            page = root / "wiki/pages/fundamentos/actividades.md"
+            page.parent.mkdir(parents=True)
+            page.write_text(
+                page_frontmatter(
+                    "fundamentos/actividades",
+                    "sources:\n"
+                    "  - slug: fundamentos/actividades\n"
+                    "    source: raw/sources/fundamentos/actividades/source.txt\n"
+                    "    extracted: raw/sources/fundamentos/actividades/extracted.md\n"
+                    f"    sha256: {digest}\n"
+                    "    role: primary\n",
+                )
+                + "# Activities\n",
+                encoding="utf-8",
+            )
+            (root / "wiki/index.md").write_text(
+                "# Index\n\n[[fundamentos/actividades]]\n", encoding="utf-8"
+            )
+
+            result = run_cli("validate", str(root), "--format", "json")
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            payload = json.loads(result.stdout)
+            self.assertEqual(payload["status"], "valid")
+            self.assertEqual(payload["provenance"]["status"], "current")
+
+    def test_provenance_rejects_unsafe_hierarchical_slug(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            create_vault(root)
+            digest = add_source(root, "fundamentos/actividades", b"activities")
+            for slug in (
+                "/absolute",
+                "fundamentos//actividades",
+                "fundamentos/../actividades",
+                "fundamentos/./actividades",
+                "Fundamentos/actividades",
+                "fundamentos/actividades_",
+            ):
+                (root / "wiki/pages/policy.md").write_text(
+                    page_frontmatter(
+                        "policy",
+                        "sources:\n"
+                        f"  - slug: {slug}\n"
+                        "    source: raw/sources/fundamentos/actividades/source.txt\n"
+                        "    extracted: raw/sources/fundamentos/actividades/extracted.md\n"
+                        f"    sha256: {digest}\n"
+                        "    role: primary\n",
+                    )
+                    + "# Policy\n",
+                    encoding="utf-8",
+                )
+
+                result = run_cli("validate", str(root), "--format", "json")
+                self.assertEqual(result.returncode, 1, slug)
+                codes = {
+                    item["details"].get("code")
+                    for item in json.loads(result.stdout)["findings"]
+                }
+                self.assertIn("PROV-SLUG", codes, slug)
+
+    def test_provenance_rejects_unsafe_paths(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            create_vault(root)
+            digest = add_source(root, "fundamentos/actividades", b"activities")
+            unsafe_paths = (
+                "/absolute/source.txt",
+                "raw/sources/fundamentos/../actividades/source.txt",
+                "raw/sources/fundamentos//actividades/source.txt",
+                r"raw\sources\fundamentos\actividades\source.txt",
+            )
+            for source_path in unsafe_paths:
+                (root / "wiki/pages/policy.md").write_text(
+                    page_frontmatter(
+                        "policy",
+                        "sources:\n"
+                        "  - slug: fundamentos/actividades\n"
+                        f"    source: {source_path}\n"
+                        "    extracted: raw/sources/fundamentos/actividades/extracted.md\n"
+                        f"    sha256: {digest}\n"
+                        "    role: primary\n",
+                    )
+                    + "# Policy\n",
+                    encoding="utf-8",
+                )
+                result = run_cli("validate", str(root), "--format", "json")
+                self.assertEqual(result.returncode, 1, source_path)
+                codes = {
+                    item["details"].get("code")
+                    for item in json.loads(result.stdout)["findings"]
+                }
+                self.assertIn("PROV-SOURCE-PATH", codes, source_path)
+
     def test_legacy_page_is_valid_but_reported_as_migrable(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

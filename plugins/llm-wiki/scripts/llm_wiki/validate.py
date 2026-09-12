@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import re
 from pathlib import Path
 
 from .frontmatter import FrontmatterError, parse_file
@@ -10,11 +9,15 @@ from .inventory import build_inventory
 from .links import build_link_report
 from .models import Finding, relative
 from .contradictions import build_contradiction_report
+from .paths import (
+    canonical_page_slug,
+    is_valid_slug,
+    source_namespace_files,
+    source_record_dirs,
+    source_slug,
+)
 from .provenance import inspect_page_provenance
 from .vault import REQUIRED_DIRECTORIES, schema_paths
-
-
-SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 
 
 class _Findings:
@@ -64,10 +67,18 @@ def validate(root: Path) -> dict:
     inventory = build_inventory(root)
     source_root = root / "raw/sources"
     if source_root.is_dir():
-        for record in sorted(item for item in source_root.iterdir() if item.is_dir()):
+        for namespace, files in source_namespace_files(root):
+            findings.add(
+                "high",
+                "Source namespace contains unexpected files",
+                relative(namespace, root),
+                entries=[item.name for item in files],
+            )
+        for record in source_record_dirs(root):
             path = relative(record, root)
-            if not SLUG_RE.fullmatch(record.name):
-                findings.add("medium", "Source slug is not lowercase kebab-case", path)
+            slug = source_slug(root, record)
+            if not is_valid_slug(slug):
+                findings.add("medium", "Source slug is not a safe lowercase kebab-case path", path)
             sources = sorted(
                 item for item in record.iterdir() if item.is_file() and item.name.startswith("source.")
             )
@@ -90,7 +101,7 @@ def validate(root: Path) -> dict:
                     root,
                     extraction,
                     sources[0],
-                    record.name,
+                    slug,
                     document.metadata,
                 )
                 extraction_reports.append(
@@ -134,8 +145,9 @@ def validate(root: Path) -> dict:
         if not pages_root.is_dir():
             continue
         for page in sorted(path for path in pages_root.rglob("*.md") if path.is_file()):
-            if not SLUG_RE.fullmatch(page.stem):
-                findings.add("medium", "Page filename is not lowercase kebab-case", relative(page, root))
+            page_slug = canonical_page_slug(root, page)
+            if not is_valid_slug(page_slug):
+                findings.add("medium", "Page filename is not a safe lowercase kebab-case path", relative(page, root))
             document = _validate_document(root, page, findings)
             if document is None:
                 continue
@@ -146,12 +158,12 @@ def validate(root: Path) -> dict:
                     f"Page type must be {expected_type}",
                     relative(page, root),
                 )
-            if metadata.get("slug") != page.stem:
+            if metadata.get("slug") != page_slug:
                 findings.add(
                     "medium",
                     "Canonical page slug does not match filename",
                     relative(page, root),
-                    expected=page.stem,
+                    expected=page_slug,
                     actual=metadata.get("slug"),
                 )
             provenance = inspect_page_provenance(root, metadata, document.body)

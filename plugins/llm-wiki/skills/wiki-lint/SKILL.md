@@ -16,7 +16,7 @@ Load references/vault-protocol.md first, references/lint-report.md for the check
 3. When Python 3.10+ and the packaged deterministic CLI are available, run `python3 <plugin-root>/scripts/llm-wiki validate <vault-root> --format json`. Use its findings as the structural baseline. If it is unavailable, say so and perform the equivalent read-only checks manually.
 4. Run any remaining deterministic checks from references/lint-report.md that are not covered by the CLI:
    - pending files in raw/inbox/;
-   - current source structure under raw/sources/<slug>/;
+   - current source structure under leaf raw/sources/<slug>/ records, including nested namespaces;
    - one current source.* and extracted.md per source;
    - extraction hash and path freshness;
    - canonical page and index coverage;

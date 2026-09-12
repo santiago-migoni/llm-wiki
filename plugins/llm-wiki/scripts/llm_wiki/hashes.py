@@ -5,10 +5,10 @@ import re
 from pathlib import Path
 
 from .models import relative
+from .paths import source_record_dirs, source_slug, source_slug_from_vault_path
 from .vault import git_available, run_git
 
 
-SOURCE_PATH_RE = re.compile(r"^raw/sources/([^/]+)/source\.[^/]+$")
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 
 
@@ -25,11 +25,14 @@ def current_hashes(root: Path) -> list[dict]:
     source_root = root / "raw/sources"
     if not source_root.is_dir():
         return result
-    for path in sorted(source_root.glob("*/source.*")):
-        if path.is_file():
+    for record in source_record_dirs(root):
+        slug = source_slug(root, record)
+        for path in sorted(record.glob("source.*")):
+            if not path.is_file():
+                continue
             result.append(
                 {
-                    "slug": path.parent.name,
+                    "slug": slug,
                     "path": relative(path, root),
                     "sha256": sha256_file(path),
                 }
@@ -63,7 +66,7 @@ def historical_hashes(root: Path) -> tuple[list[dict], list[str]]:
             commit = raw.removeprefix("commit:")
         elif commit:
             vault_path = raw.removeprefix(prefix) if not prefix or raw.startswith(prefix) else ""
-            if SOURCE_PATH_RE.fullmatch(vault_path):
+            if source_slug_from_vault_path(vault_path) is not None:
                 candidates.add((commit, raw, vault_path))
 
     results = []
@@ -72,10 +75,10 @@ def historical_hashes(root: Path) -> tuple[list[dict], list[str]]:
         if not blob or blob.returncode != 0:
             warnings.append(f"Unable to read {commit[:12]}:{vault_path}")
             continue
-        match = SOURCE_PATH_RE.fullmatch(vault_path)
+        slug = source_slug_from_vault_path(vault_path)
         results.append(
             {
-                "slug": match.group(1) if match else None,
+                "slug": slug,
                 "path": vault_path,
                 "commit": commit,
                 "sha256": hashlib.sha256(blob.stdout).hexdigest(),

@@ -221,6 +221,33 @@ class CliTests(unittest.TestCase):
             self.assertIn("INV-EXTRACTION-MISSING", codes)
             self.assertIn("INV-SOURCE-UNEXPECTED", codes)
 
+    def test_namespace_files_are_not_silently_treated_as_source_records(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "raw/inbox").mkdir(parents=True)
+            namespace = root / "raw/sources/fundamentos"
+            (namespace / "actividades").mkdir(parents=True)
+            (root / "wiki/pages").mkdir(parents=True)
+            (root / "wiki/index.md").write_text("# Index\n", encoding="utf-8")
+            (root / "AGENTS.md").write_text("# Schema\n", encoding="utf-8")
+            (namespace / "source.txt").write_bytes(b"misplaced")
+
+            inventory = run_cli("inventory", str(root), "--format", "json")
+            self.assertEqual(inventory.returncode, 0, inventory.stderr)
+            warning = next(
+                item
+                for item in json.loads(inventory.stdout)["warnings"]
+                if item["code"] == "INV-SOURCE-UNEXPECTED"
+            )
+            self.assertEqual(warning["path"], "raw/sources/fundamentos")
+
+            validation = run_cli("validate", str(root), "--format", "json")
+            self.assertEqual(validation.returncode, 1)
+            self.assertIn(
+                "Source namespace contains unexpected files",
+                [item["message"] for item in json.loads(validation.stdout)["findings"]],
+            )
+
     def test_hashes_classify_current_duplicates(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -239,6 +266,104 @@ class CliTests(unittest.TestCase):
             self.assertEqual(len(duplicates), 1)
             self.assertEqual(duplicates[0]["kind"], "current")
             self.assertEqual(len(duplicates[0]["current_locations"]), 2)
+
+    def test_inventory_discovers_nested_and_flat_source_records(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "raw/inbox").mkdir(parents=True)
+            (root / "raw/sources/fundamentos/actividades/assets").mkdir(parents=True)
+            (root / "raw/sources/fundamentos/contactos").mkdir(parents=True)
+            (root / "raw/sources/assets/foo").mkdir(parents=True)
+            (root / "raw/sources/security-policy").mkdir(parents=True)
+            (root / "wiki/pages").mkdir(parents=True)
+            (root / "wiki/index.md").write_text("# Index\n", encoding="utf-8")
+            (root / "AGENTS.md").write_text("# Schema\n", encoding="utf-8")
+            for slug in (
+                "assets/foo",
+                "fundamentos/actividades",
+                "fundamentos/contactos",
+                "security-policy",
+            ):
+                record = root / "raw/sources" / slug
+                (record / "source.md").write_text(slug, encoding="utf-8")
+                (record / "extracted.md").write_text("# Extracted\n", encoding="utf-8")
+
+            result = run_cli("inventory", str(root), "--format", "json")
+            self.assertEqual(result.returncode, 0, result.stderr)
+            payload = json.loads(result.stdout)
+            records = payload["source_records"]
+            self.assertEqual(
+                [record["slug"] for record in records],
+                ["assets/foo", "fundamentos/actividades", "fundamentos/contactos", "security-policy"],
+            )
+            self.assertNotIn("fundamentos", [record["slug"] for record in records])
+            self.assertFalse(payload["warnings"])
+
+    def test_nested_hashes_include_full_slug_and_cross_namespace_duplicates(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "raw/inbox").mkdir(parents=True)
+            (root / "raw/sources/one/shared").mkdir(parents=True)
+            (root / "raw/sources/two/shared").mkdir(parents=True)
+            (root / "wiki/pages").mkdir(parents=True)
+            (root / "AGENTS.md").write_text("# Schema\n", encoding="utf-8")
+            for slug in ("one/shared", "two/shared"):
+                (root / "raw/sources" / slug / "source.txt").write_bytes(b"same")
+
+            result = run_cli("hashes", str(root), "--format", "json")
+            self.assertEqual(result.returncode, 0, result.stderr)
+            payload = json.loads(result.stdout)
+            self.assertEqual(
+                {item["slug"] for item in payload["current"]},
+                {"one/shared", "two/shared"},
+            )
+            self.assertEqual(len(payload["duplicates"]), 1)
+            self.assertEqual(
+                {item["slug"] for item in payload["duplicates"][0]["current_locations"]},
+                {"one/shared", "two/shared"},
+            )
+
+    def test_nested_historical_hashes_preserve_full_slug(self):
+        with tempfile.TemporaryDirectory() as directory:
+            repository = Path(directory)
+            vault = repository / "vault"
+            (vault / "raw/inbox").mkdir(parents=True)
+            record = vault / "raw/sources/fundamentos/actividades"
+            record.mkdir(parents=True)
+            (vault / "wiki/pages").mkdir(parents=True)
+            (vault / "AGENTS.md").write_text("# Schema\n", encoding="utf-8")
+            source = record / "source.txt"
+            source.write_bytes(b"version one")
+            subprocess.run(["git", "init", "-q", str(repository)], check=True)
+            subprocess.run(
+                ["git", "-C", str(repository), "config", "user.name", "LLM Wiki Test"],
+                check=True,
+            )
+            subprocess.run(
+                ["git", "-C", str(repository), "config", "user.email", "test@example.invalid"],
+                check=True,
+            )
+            subprocess.run(["git", "-C", str(repository), "add", "vault"], check=True)
+            subprocess.run(
+                ["git", "-C", str(repository), "commit", "-qm", "first"], check=True
+            )
+            source.write_bytes(b"version two")
+            subprocess.run(["git", "-C", str(repository), "add", "vault"], check=True)
+            subprocess.run(
+                ["git", "-C", str(repository), "commit", "-qm", "second"], check=True
+            )
+
+            result = run_cli("hashes", str(vault), "--include-history", "--format", "json")
+            self.assertEqual(result.returncode, 0, result.stderr)
+            historical = json.loads(result.stdout)["historical"]
+            self.assertEqual(len(historical), 2)
+            self.assertTrue(all(item["slug"] == "fundamentos/actividades" for item in historical))
+            self.assertTrue(
+                all(
+                    item["path"] == "raw/sources/fundamentos/actividades/source.txt"
+                    for item in historical
+                )
+            )
 
     def test_links_resolve_aliases_headings_and_index_routes(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -263,6 +388,30 @@ class CliTests(unittest.TestCase):
             resolved = next(item for item in payload["links"] if item["alias"] == "Known page")
             self.assertEqual(resolved["candidates"], ["wiki/pages/known.md"])
             self.assertEqual(resolved["heading"], None)
+
+    def test_links_prioritize_exact_nested_page_before_basename_fallback(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            pages = root / "wiki/pages"
+            (pages / "fundamentos").mkdir(parents=True)
+            (pages / "otro").mkdir(parents=True)
+            (root / "wiki/index.md").write_text(
+                "# Index\n\n[[fundamentos/actividades]]\n[[actividades]]\n",
+                encoding="utf-8",
+            )
+            (pages / "fundamentos/actividades.md").write_text("# Nested\n", encoding="utf-8")
+            (pages / "otro/actividades.md").write_text("# Other\n", encoding="utf-8")
+
+            result = run_cli("links", str(root), "--format", "json")
+            self.assertEqual(result.returncode, 0, result.stderr)
+            links = json.loads(result.stdout)["links"]
+            exact = next(item for item in links if item["target"] == "fundamentos/actividades")
+            basename = next(item for item in links if item["target"] == "actividades")
+            self.assertEqual(exact["candidates"], ["wiki/pages/fundamentos/actividades.md"])
+            self.assertEqual(
+                basename["candidates"],
+                ["wiki/pages/fundamentos/actividades.md", "wiki/pages/otro/actividades.md"],
+            )
 
     def test_required_path_wrong_type_is_reported_without_traceback(self):
         with tempfile.TemporaryDirectory() as directory:

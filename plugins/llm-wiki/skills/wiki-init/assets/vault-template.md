@@ -12,7 +12,7 @@ This vault is an LLM-maintained knowledge base. The human ({{user name}}) curate
 raw/
   inbox/              # User drop zone for new or updated documents.
   sources/            # Current source records, one stable slug per logical document.
-    <slug>/
+    <slug>/                 # flat or namespace/sub-slug
       source.<ext>    # Current original.
       extracted.md    # Normalized extraction with declared coverage.
       assets/         # Relevant supporting assets.
@@ -41,10 +41,11 @@ AGENTS.md             # This file: vault-specific rules and scope.
 
 ## Source identity and storage
 
-- Each logical document has one stable lowercase kebab-case slug.
+- Each logical document has one stable slug: lowercase kebab-case, optionally
+  composed of slash-separated namespace segments.
 - Reuse the slug when that document is updated.
 - Do not add upload dates, hashes, or revision numbers to source paths or page names.
-- raw/sources/<slug>/ contains only the current original, its current extraction, and current supporting assets.
+- raw/sources/<slug>/ contains only the current original, its current extraction, and current supporting assets. Intermediate namespace directories are not records.
 - The current original is source.<ext>; do not modify it to repair an extraction.
 - extracted.md is a normalized extraction, not a summary. Its frontmatter must declare format,
   method, status, measurable coverage, and warnings. Use `complete` only when every expected unit
@@ -55,7 +56,7 @@ AGENTS.md             # This file: vault-specific rules and scope.
 
 - Canonical knowledge pages live in wiki/pages/.
 - Category directories contain indexes or navigation aids. They must not duplicate canonical page bodies.
-- Use lowercase kebab-case filenames.
+- Use lowercase kebab-case filenames; nested canonical pages use the complete relative slug, for example `wiki/pages/fundamentos/actividades.md` with `slug: fundamentos/actividades`.
 - Use wikilinks for internal navigation: [[page-slug]].
 - Every canonical page starts with frontmatter:
 

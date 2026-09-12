@@ -15,6 +15,12 @@ raw/sources/<slug>/
 
 There is exactly one current original matching source.*. The extension may change when the source format changes, but the directory keeps the same slug.
 
+The slug may be flat (`policy`) or hierarchical (`fundamentos/actividades`).
+Each segment must be lowercase kebab-case. Namespace directories such as
+`raw/sources/fundamentos/` are organizational only; the leaf directory is the
+record. The same sub-slug may appear under different namespaces because the
+complete slash-separated slug is the identity.
+
 Do not add revision numbers, upload dates, hashes, manifests, catalogs, or duplicate source pages to this record. Git commits provide the historical record.
 
 ## Classify the input
@@ -31,7 +37,7 @@ Reuse the existing slug when the source is a newer or corrected version of the s
 
 ### Exact duplicate
 
-Compute the hash of the input and compare it with every current source.* file under raw/sources/<slug>/, not only the likely matching slug. If no current source matches and the repository has history, inspect historical source.* blobs under every source slug and compare their bytes as well. If the hash already exists in the current state or in any slug's history, classify the input as a duplicate of an existing state. A filename or proposed slug change does not make identical bytes a new source. In either case:
+Compute the hash of the input and compare it with every current source.* file under raw/sources/**/, not only the likely matching slug. If no current source matches and the repository has history, inspect historical source.* blobs under every source slug and compare their bytes as well. If the hash already exists in the current state or in any slug's history, classify the input as a duplicate of an existing state. A filename or proposed slug change does not make identical bytes a new source. In either case:
 
 - do not create a new source directory;
 - do not regenerate pages or assets;

@@ -29,7 +29,8 @@ need to be copied merely because the plugin version changed.
 
 For layouts using `raw/archive/`, per-revision source pages, or revision IDs:
 
-1. Map every logical document to one stable lowercase kebab-case slug.
+1. Map every logical document to one stable lowercase kebab-case slug, optionally composed of
+   slash-separated namespace segments.
 2. Select the current original and place it at `raw/sources/<slug>/source.<ext>`.
 3. Generate `raw/sources/<slug>/extracted.md` with the format, method, status, coverage, and
    warnings required by [extraction coverage](extraction-coverage.md).

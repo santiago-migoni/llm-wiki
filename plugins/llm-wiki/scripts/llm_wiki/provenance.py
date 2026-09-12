@@ -17,9 +17,9 @@ from typing import Any
 
 from .frontmatter import FrontmatterError, parse_file
 from .hashes import sha256_file
+from .paths import is_valid_slug, source_slug_from_vault_path
 
 
-SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 SOURCE_FIELDS = ("slug", "source", "extracted", "sha256", "role")
 LEGACY_FIELDS = ("source", "extracted", "sha256")
@@ -93,12 +93,12 @@ def _entry_issues(
         )
 
     slug = entry.get("slug")
-    if not isinstance(slug, str) or not SLUG_RE.fullmatch(slug):
+    if not is_valid_slug(slug):
         issues.append(
             _issue(
                 "PROV-SLUG",
                 "high",
-                "Provenance source slug is not lowercase kebab-case",
+                "Provenance source slug is not a safe lowercase kebab-case path",
                 index=index,
                 slug=slug,
             )
@@ -116,7 +116,7 @@ def _entry_issues(
                 source=source,
             )
         )
-    elif isinstance(slug, str) and SLUG_RE.fullmatch(slug):
+    elif is_valid_slug(slug):
         prefix = _source_record_prefix(slug)
         if not source.startswith(prefix) or not SOURCE_NAME_RE.fullmatch(source_path.name):
             issues.append(
@@ -142,7 +142,7 @@ def _entry_issues(
                 extracted=extracted,
             )
         )
-    elif isinstance(slug, str) and SLUG_RE.fullmatch(slug):
+    elif is_valid_slug(slug):
         expected = f"{_source_record_prefix(slug)}extracted.md"
         if extracted != expected:
             issues.append(
@@ -194,7 +194,7 @@ def _entry_issues(
             )
         )
 
-    if not isinstance(slug, str) or not SLUG_RE.fullmatch(slug):
+    if not is_valid_slug(slug):
         return issues, None
 
     normalized = {
@@ -330,10 +330,9 @@ def _legacy_slug(source: Any) -> str | None:
     if not isinstance(source, str):
         return None
     path = _path_value(source)
-    if path is None or len(path.parts) < 4:
+    if path is None:
         return None
-    slug = path.parts[2]
-    return slug if SLUG_RE.fullmatch(slug) else None
+    return source_slug_from_vault_path(path.as_posix())
 
 
 def legacy_entry(metadata: dict[str, Any]) -> dict[str, Any] | None:
@@ -360,7 +359,7 @@ def extract_citations(body: str) -> list[dict[str, Any]]:
         match = CITATION_LINE_RE.match(line)
         if not match:
             continue
-        slugs = [value for value in CODE_SPAN_RE.findall(match.group(2)) if SLUG_RE.fullmatch(value)]
+        slugs = [value for value in CODE_SPAN_RE.findall(match.group(2)) if is_valid_slug(value)]
         citations.append(
             {
                 "line": line_number,

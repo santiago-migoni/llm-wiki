@@ -5,6 +5,10 @@ format was represented perfectly. Every new extraction declares its format, proc
 status, measurable coverage, and warnings so a query can distinguish complete, representative,
 partial, and unsupported material.
 
+`<slug>` may be a flat lowercase kebab-case slug or a slash-separated
+hierarchical slug such as `fundamentos/actividades`; the source and extraction
+paths must use that complete slug.
+
 ## Required frontmatter
 
 Use this header before the normalized extraction body:

@@ -66,6 +66,16 @@ assert_status "$empty_fixture" "GREEN"
 assert_status "$repo_root/tests/fixtures/populated-vault" "GREEN"
 assert_status "$repo_root/tests/fixtures/legacy-vault" "GREEN"
 
+case_root="$(new_case)"
+for slug in one/shared two/shared; do
+  record="$case_root/raw/sources/$slug"
+  mkdir -p "$record/assets"
+  touch "$record/source.txt" "$record/extracted.md"
+done
+assert_status "$case_root" "GREEN"
+[[ "$last_output" == *"Current source records: 2"* ]] || \
+  fail "nested source records were not counted as leaves"
+
 run_assessor "$repo_root/tests/fixtures/malformed-vault"
 [[ "$last_status" -eq 1 ]] || fail "malformed fixture was accepted: $last_output"
 [[ "$last_output" == *"Scale status: INVALID"* ]] || fail "malformed fixture has no INVALID status"

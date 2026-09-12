@@ -2,6 +2,8 @@
 
 Git is the archive for current source records, extractions, pages, and decisions. The working tree
 holds only the current state. Recovery should preserve history and make the correction explicit.
+The `<slug>` path in the commands below may be flat or hierarchical; use the complete
+slash-separated slug for nested records and pages.
 
 ## Inspect before changing anything
 

@@ -51,7 +51,7 @@ def main() -> int:
     code, payload = run("malformed-vault")
     messages = {item["message"] for item in payload["findings"]}
     assert code == 1 and payload["status"] == "invalid", "malformed fixture must fail validation"
-    assert "Source slug is not lowercase kebab-case" in messages
+    assert "Source slug is not a safe lowercase kebab-case path" in messages
     assert "Source record is missing extracted.md" in messages
     return_codes["malformed-vault"] = code
 

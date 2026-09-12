@@ -15,7 +15,7 @@ el estado actual del vault y no debe convertirse en una segunda fuente de verdad
 El evaluador de escala (tests/assess-vault-scale.sh) es de solo lectura. Recibe la raíz de un
 vault y reporta:
 
-- cantidad de source records actuales bajo raw/sources/;
+- cantidad de source records actuales bajo raw/sources/ (recorriendo namespaces y contando solo carpetas hoja);
 - cantidad de páginas canónicas bajo wiki/pages/;
 - cantidad de síntesis;
 - archivos pendientes en raw/inbox/;
@@ -81,7 +81,8 @@ Cuando exista evidencia suficiente, adoptar una sola extensión por vez y volver
 la evaluación de escala.
 
 1. **Búsqueda full-text local derivada.** Primera opción para acelerar descubrimiento lexical.
-   Debe reconstruirse desde raw/sources/<slug>/extracted.md, páginas y metadatos actuales.
+   Debe reconstruirse desde raw/sources/<slug>/extracted.md, páginas y metadatos actuales;
+   `<slug>` puede ser plano o jerárquico.
    Debe conservar path, slug, hash y commit de origen. No reemplaza las citas al vault.
 2. **Caché de metadatos.** Útil si el costo dominante es recorrer el árbol, contar archivos o
    leer frontmatter. Su clave de invalidación debe incluir como mínimo el slug y los hashes de

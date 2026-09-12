@@ -79,13 +79,17 @@ omitted.
 
 This is the staging area for newly supplied or updated files.
 
-A document may arrive here with an arbitrary filename and extension. The agent should inspect it, identify whether it is new or an update, and then place the current canonical copy under raw/sources/<slug>/.
+A document may arrive here with an arbitrary filename and extension. The agent should inspect it, identify whether it is new or an update, and then place the current canonical copy under raw/sources/<slug>/, where `<slug>` may be flat or hierarchical.
 
 An empty inbox means there are no pending documents waiting to be processed. Files must not remain in the inbox after a successful ingest unless the workflow explicitly uses the inbox as a handoff queue.
 
 ### raw/sources/<slug>/
 
 This is the stable home for the current version of one logical source document.
+`<slug>` is either a lowercase kebab-case name or slash-separated lowercase
+kebab-case segments, such as `fundamentos/actividades`. Intermediate namespace
+directories are not source records; the leaf directory contains exactly one
+`source.*`, one `extracted.md`, and optional `assets/`.
 
 The slug is semantic and stable. It should identify the document’s role or subject, not its upload time, hash, or revision number. If the same policy, contract, meeting series, or reference is updated, its slug normally remains unchanged.
 

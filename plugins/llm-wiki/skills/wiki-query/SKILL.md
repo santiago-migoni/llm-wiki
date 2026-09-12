@@ -24,7 +24,7 @@ Load references/vault-protocol.md first. Load references/context-modes.md when s
 8. Cite each load-bearing claim, not only the page as a whole:
    - canonical page and section;
    - declared source slug from the page's `sources` list;
-   - current source or extracted.md path;
+   - current source or extracted.md path (the complete flat or hierarchical slug);
    - page, section, slide, sheet, cell, timestamp, or other marker;
    - Git commit and path for historical claims.
 9. Inspect `## Contradictions` on each relevant canonical page before answering. If a material

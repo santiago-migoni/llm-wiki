@@ -18,7 +18,7 @@ Do not infer current-corpus mode merely because several pages are relevant. Use 
 2. Read wiki/index.md.
 3. Select the smallest relevant set of canonical pages.
 4. Follow links to relevant syntheses, category indexes, and source slugs.
-5. Read raw/sources/<slug>/extracted.md when a claim is load-bearing or the canonical page is only a summary.
+5. Read raw/sources/<slug>/extracted.md when a claim is load-bearing or the canonical page is only a summary. `<slug>` may be a flat slug or a complete namespace/sub-slug path.
 6. Inspect raw/sources/<slug>/source.<ext> when the question depends on layout, images, signatures, tables, footnotes, or content not faithfully represented in Markdown.
 7. Record the pages and every source slug actually used. When a page has a
    `sources` list, inspect the relevant entry's current extraction and hash
@@ -32,7 +32,7 @@ Use the current source layer, not Git history.
 
 ### Inventory
 
-Build a coverage list containing every current source slug under raw/sources/ and every canonical page under wiki/pages/. Also inspect raw/inbox/.
+Build a coverage list containing every current source slug under raw/sources/ (recursing through namespaces and counting only leaf records) and every canonical page under wiki/pages/. Also inspect raw/inbox/.
 
 For every source slug, verify:
 

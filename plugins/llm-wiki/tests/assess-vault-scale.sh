@@ -27,7 +27,9 @@ from pathlib import Path
 
 
 root = Path(sys.argv[1]).expanduser().resolve()
-SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+SLUG_RE = re.compile(
+    r"^[a-z0-9]+(?:-[a-z0-9]+)*(?:/[a-z0-9]+(?:-[a-z0-9]+)*)*$"
+)
 inaccessible_paths: set[Path] = set()
 
 
@@ -165,9 +167,43 @@ wiki_root = root / "wiki"
 pages_root = root / "wiki" / "pages"
 syntheses_root = root / "wiki" / "syntheses"
 
-source_records = [
-    item for item in safe_entries(source_root) if path_state(item) == "directory"
-]
+source_directories = sorted(
+    (path for path in source_root.rglob("*") if path_state(path) == "directory"),
+    key=lambda path: path.as_posix(),
+)
+support_asset_dirs = set()
+for item in source_directories:
+    if item.name != "assets" or item.parent == source_root:
+        continue
+    entries = safe_entries(item.parent)
+    namespace_children = [
+        entry
+        for entry in entries
+        if entry.name != "assets" and path_state(entry) == "directory"
+    ]
+    if not namespace_children:
+        support_asset_dirs.add(item)
+
+source_records = []
+namespace_files = []
+for item in source_directories:
+    if any(asset == item or asset in item.parents for asset in support_asset_dirs):
+        continue
+    entries = safe_entries(item)
+    namespace_children = [
+        entry
+        for entry in entries
+        if entry.name != "assets" and path_state(entry) == "directory"
+    ]
+    direct_files = [
+        entry
+        for entry in entries
+        if entry.name != ".gitkeep" and path_state(entry) == "file"
+    ]
+    if namespace_children and direct_files:
+        namespace_files.extend(direct_files)
+    if not namespace_children:
+        source_records.append(item)
 unexpected_root_entries = [
     relative(item)
     for item in safe_entries(source_root)
@@ -197,8 +233,9 @@ invalid_slugs = []
 unexpected_source_entries = []
 
 for record in source_records:
-    if not SLUG_RE.fullmatch(record.name):
-        invalid_slugs.append(record.name)
+    slug = record.relative_to(source_root).as_posix()
+    if not SLUG_RE.fullmatch(slug):
+        invalid_slugs.append(slug)
 
     entries = safe_entries(record)
     current_files = sorted(
@@ -208,15 +245,15 @@ for record in source_records:
     )
     source_files.extend(current_files)
     if not current_files:
-        missing_current_source.append(record.name)
+        missing_current_source.append(slug)
     elif len(current_files) > 1:
         multiple_current_source.append(
-            (record.name, [item.name for item in current_files])
+            (slug, [item.name for item in current_files])
         )
 
     extraction = record / "extracted.md"
     if path_state(extraction) != "file":
-        missing_extraction.append(record.name)
+        missing_extraction.append(slug)
     else:
         extraction_files.append(extraction)
 
@@ -255,6 +292,7 @@ structural_issues = bool(
     or multiple_current_source
     or invalid_slugs
     or unexpected_root_entries
+    or namespace_files
     or unexpected_source_entries
     or missing_extraction
     or inaccessible_paths
@@ -342,6 +380,11 @@ if invalid_slugs:
     print("Invalid source slugs: " + ", ".join(sorted(invalid_slugs)))
 if unexpected_root_entries:
     print("Unexpected source-root entries: " + ", ".join(sorted(unexpected_root_entries)))
+if namespace_files:
+    print(
+        "Unexpected namespace source entries: "
+        + ", ".join(sorted(relative(path) for path in namespace_files))
+    )
 if unexpected_source_entries:
     print("Unexpected source entries: " + ", ".join(sorted(unexpected_source_entries)))
 for path in sorted(inaccessible_paths, key=relative):

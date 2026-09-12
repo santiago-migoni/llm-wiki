@@ -33,13 +33,14 @@ status: current
 
 Each entry requires:
 
-- `slug`: the existing lowercase kebab-case source-record slug;
+- `slug`: the existing lowercase kebab-case source-record slug, optionally
+  composed of namespace segments such as `fundamentos/actividades`;
 - `source`: the current `raw/sources/<slug>/source.<ext>` path;
 - `extracted`: the current `raw/sources/<slug>/extracted.md` path;
 - `sha256`: the hash of the current original bytes;
 - `role`: one of `primary`, `supporting`, `context`, or `counterpoint`.
 
-The source and extraction paths must belong to the same slug, exist in the
+The source and extraction paths must belong to the same complete slug, exist in the
 vault, and remain vault-relative. A page cannot repeat a slug or source path.
 The hash is checked against every entry, not only the first one.
 
@@ -79,6 +80,10 @@ contradiction instead of choosing silently.
 The deterministic validator checks the metadata, hashes, paths, roles, order,
 duplicate entries, and explicit citation slugs. Whether a citation actually
 supports the prose remains a semantic review responsibility.
+
+Unsafe slugs are rejected: empty segments, duplicate separators, `.`, `..`,
+absolute paths, backslashes, and segments outside lowercase kebab-case are not
+valid. Flat slugs remain valid for compatibility.
 
 ## Compatibility and migration
 

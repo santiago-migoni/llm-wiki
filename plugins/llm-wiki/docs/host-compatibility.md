@@ -8,7 +8,8 @@ The same vault contract applies in Codex and ChatGPT Work:
 
 - AGENTS.md defines the vault-specific rules;
 - raw/inbox/ receives pending documents;
-- raw/sources/<slug>/ stores the current source record;
+- raw/sources/<slug>/ stores the current source record; `<slug>` may be flat or hierarchical,
+  with namespaces represented by intermediate directories;
 - wiki/ contains canonical knowledge and navigation;
 - Git preserves prior states when the repository is available;
 - the agent reports the context it actually accessed.

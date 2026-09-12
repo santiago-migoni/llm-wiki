@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from .models import SourceRecord, relative
+from .paths import source_namespace_files, source_record_dirs, source_slug
 from .vault import REQUIRED_DIRECTORIES, git_available, run_git, schema_paths
 
 
@@ -52,8 +53,19 @@ def build_inventory(root: Path) -> dict:
                 warnings.append(
                     _warning(root, "INV-SOURCE-ENTRY-TYPE", "Source root entry is not a directory", item)
                 )
+        for namespace, files in source_namespace_files(root):
+            warnings.append(
+                _warning(
+                    root,
+                    "INV-SOURCE-UNEXPECTED",
+                    "Source namespace contains unexpected files",
+                    namespace,
+                    entries=[item.name for item in files],
+                )
+            )
 
-        for record in sorted(item for item in source_root.iterdir() if item.is_dir()):
+        for record in source_record_dirs(root):
+            slug = source_slug(root, record)
             sources = sorted(
                 item for item in record.iterdir() if item.is_file() and item.name.startswith("source.")
             )
@@ -95,7 +107,7 @@ def build_inventory(root: Path) -> dict:
                 )
             records.append(
                 SourceRecord(
-                    slug=record.name,
+                    slug=slug,
                     path=relative(record, root),
                     sources=[relative(item, root) for item in sources],
                     extraction=relative(extraction, root) if extraction.is_file() else None,

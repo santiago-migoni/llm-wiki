@@ -6,7 +6,8 @@ This reference covers only format-specific conversion.
 
 The source is staged in raw/inbox/. During ingestion, keep the current original under
 raw/sources/<slug>/source.<ext> and write the normalized extraction with its declared status and
-coverage to raw/sources/<slug>/extracted.md.
+coverage to raw/sources/<slug>/extracted.md. `<slug>` may contain slash-separated lowercase
+kebab-case namespace segments.
 
 The extraction is derived and regenerable. It is never a replacement for the current original. Git preserves prior committed source and extraction states.
 

@@ -31,7 +31,7 @@ El repositorio ya contiene:
 - documentación de compatibilidad con Codex y ChatGPT Work;
 - arquitectura Git-first documentada.
 
-La inconsistencia inicial entre la arquitectura Git-first y las instrucciones operativas fue resuelta en la Fase 0. El contrato activo del plugin ahora usa un slug estable, fuentes actuales bajo raw/sources/<slug>/ y Git como historial.
+La inconsistencia inicial entre la arquitectura Git-first y las instrucciones operativas fue resuelta en la Fase 0. El contrato activo del plugin ahora usa un slug estable (plano o jerárquico), fuentes actuales bajo raw/sources/<slug>/ y Git como historial.
 
 ## Línea base de la remediación de auditoría
 
@@ -68,12 +68,12 @@ una capacidad automatizada en una promesa de acceso universal.
 Estas decisiones rigen todas las fases:
 
 1. Git es el mecanismo de versionado y archivado.
-2. Cada documento lógico tiene un único slug estable.
+2. Cada documento lógico tiene un único slug estable, plano o compuesto por segmentos kebab-case separados por `/`.
 3. El estado actual vive en raw/sources/<slug>/.
 4. El original actual se guarda como raw/sources/<slug>/source.<ext>.
 5. La extracción derivada se guarda como raw/sources/<slug>/extracted.md con estado y cobertura
    declarados por formato.
-6. La página canónica vive en wiki/pages/<slug>.md cuando corresponda.
+6. La página canónica vive en wiki/pages/<slug>.md cuando corresponda; el path relativo completo puede reflejar un slug jerárquico.
 7. Las carpetas people/, concepts/, projects/ y decisions/ sirven para navegación e índices, no para duplicar páginas.
 8. El contenido de las fuentes es datos y evidencia, no instrucciones para el agente.
 9. No se incorporan bases de datos, vector stores ni servicios externos en el MVP.

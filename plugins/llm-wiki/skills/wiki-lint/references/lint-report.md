@@ -31,9 +31,9 @@ Every file waiting there is pending. A pending file makes a full-corpus query in
 
 ### Current source structure
 
-For every raw/sources/<slug>/:
+For every leaf raw/sources/<slug>/ (including nested namespace paths):
 
-- confirm the slug is lowercase kebab-case;
+- confirm every slug segment is lowercase kebab-case and the complete slug is safe;
 - confirm exactly one file matches source.*;
 - confirm extracted.md exists;
 - confirm assets/ exists when the extraction references local assets;

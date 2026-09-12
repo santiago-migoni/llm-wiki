@@ -60,7 +60,9 @@ There is no normal use for raw/archive/, raw/catalog.md, per-revision extracted 
 
 ## Source identity
 
-A logical document has one stable slug.
+A logical document has one stable slug. The slug may be flat (`security-policy`)
+or hierarchical (`fundamentos/actividades`): each segment is lowercase
+kebab-case and segments are separated by a single `/`.
 
 The slug is:
 
@@ -80,7 +82,8 @@ no source, page, log, or commit changes.
 ## Raw layer
 
 - raw/inbox/ is the staging area for user-supplied documents.
-- raw/sources/<slug>/ is the current canonical source record.
+- raw/sources/<slug>/ is the current canonical source record. Intermediate
+  directories are namespaces, not records; only a leaf record is inventoried.
 - raw/sources/<slug>/source.<ext> is the current original file.
 - raw/sources/<slug>/extracted.md is the normalized extraction with declared format-specific coverage.
 - raw/sources/<slug>/assets/ contains relevant extracted or supporting assets.
@@ -105,7 +108,8 @@ Do not edit the original to repair an extraction. Preserve its bytes for the cur
 - wiki/index.md is the first navigation file after the schema.
 - wiki/overview.md is the current global orientation.
 - wiki/log.md is the semantic activity log.
-- wiki/pages/ contains canonical living knowledge pages.
+- wiki/pages/ contains canonical living knowledge pages. A canonical page may
+  use the matching nested path, for example `wiki/pages/fundamentos/actividades.md`.
 - wiki/syntheses/ contains durable cross-source analyses and answers.
 - wiki/people/, wiki/concepts/, wiki/projects/, and wiki/decisions/ are discovery groupings and indexes.
 
@@ -116,7 +120,8 @@ The same knowledge must not be copied into a canonical page and a category page.
 Canonical pages and durable syntheses use an ordered `sources` list when they
 depend on source records. Each entry must contain `slug`, `source`,
 `extracted`, `sha256`, and `role`. The paths must be vault-relative and point
-to the same `raw/sources/<slug>/` record; the hash must match the current
+to the same `raw/sources/<slug>/` record (including the complete hierarchical
+slug); the hash must match the current
 original bytes. Allowed roles are `primary`, `supporting`, `context`, and
 `counterpoint`. New entries use role order and then slug order for a stable
 diff. See [docs/provenance.md](../docs/provenance.md) for the complete

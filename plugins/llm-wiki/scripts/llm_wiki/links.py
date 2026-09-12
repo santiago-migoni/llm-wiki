@@ -4,6 +4,7 @@ import re
 from pathlib import Path
 
 from .models import relative
+from .paths import canonical_page_slug
 
 
 WIKILINK_RE = re.compile(r"\[\[([^\]]+)\]\]")
@@ -63,9 +64,20 @@ def _stem_target(target: str) -> str:
     return name[:-3] if name.casefold().endswith(".md") else name
 
 
+def _exact_target(target: str, pages: dict[str, list[str]]) -> list[str] | None:
+    """Resolve a target as a full canonical page slug before basename fallback."""
+
+    normalized = target.strip()
+    if normalized.casefold().endswith(".md"):
+        normalized = normalized[:-3]
+    candidate = pages.get(normalized.casefold())
+    return candidate
+
+
 def build_link_report(root: Path) -> dict:
     files = wiki_markdown(root)
     stems: dict[str, list[str]] = {}
+    exact_pages: dict[str, list[str]] = {}
     documents: dict[Path, str] = {}
     headings: dict[Path, list[dict]] = {}
     for path in files:
@@ -76,6 +88,9 @@ def build_link_report(root: Path) -> dict:
         documents[path] = text
         headings[path] = markdown_headings(text)
         stems.setdefault(path.stem.casefold(), []).append(relative(path, root))
+        if path.is_relative_to(root / "wiki/pages"):
+            slug = canonical_page_slug(root, path)
+            exact_pages.setdefault(slug.casefold(), []).append(relative(path, root))
 
     links = []
     missing = []
@@ -93,7 +108,9 @@ def build_link_report(root: Path) -> dict:
                 if not target and not heading:
                     continue
                 if target:
-                    candidates = stems.get(_stem_target(target).casefold(), [])
+                    candidates = _exact_target(target, exact_pages)
+                    if candidates is None:
+                        candidates = stems.get(_stem_target(target).casefold(), [])
                 else:
                     candidates = [relative(path, root)]
                 item = {
