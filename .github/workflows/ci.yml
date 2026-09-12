@@ -24,7 +24,7 @@ jobs:
       - name: Install ShellCheck
         run: |
           sudo apt-get update
-          sudo apt-get install --no-install-recommends -y shellcheck
+          sudo apt-get install --no-install-recommends -y ripgrep shellcheck
 
       - name: JSON and manifest schema validation
         run: |
