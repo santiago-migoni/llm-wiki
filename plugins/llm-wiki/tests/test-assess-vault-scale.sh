@@ -7,7 +7,6 @@ fail() {
 }
 
 plugin_root="$(cd "$(dirname "$0")/.." && pwd)"
-repo_root="$(cd "$plugin_root/../.." && pwd)"
 assessor="$plugin_root/tests/assess-vault-scale.sh"
 empty_fixture="$plugin_root/tests/fixtures/empty-vault"
 test_root="$(mktemp -d)"
