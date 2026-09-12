@@ -1,7 +1,7 @@
 # Functional workflow fixture
 
 This fixture contains inputs and expected snapshots for the deterministic
-functional workflow. The runner copies `tests/fixtures/empty-vault/` into a
+functional workflow. The runner copies `plugins/llm-wiki/tests/fixtures/empty-vault/` into a
 temporary Git vault, materializes approved ingest artifacts, and verifies the
 current tree, source hashes, provenance, links, contradictions, validation,
 scale report, duplicate no-op, and Git history.

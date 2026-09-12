@@ -13,12 +13,12 @@ import tempfile
 from pathlib import Path
 
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-PLUGIN_SCRIPTS = REPO_ROOT / "plugins/llm-wiki/scripts"
+PLUGIN_ROOT = Path(__file__).resolve().parents[1]
+PLUGIN_SCRIPTS = PLUGIN_ROOT / "scripts"
 CLI = PLUGIN_SCRIPTS / "llm-wiki"
-ASSESSOR = REPO_ROOT / "plugins/llm-wiki/tests/assess-vault-scale.sh"
-EMPTY_FIXTURE = REPO_ROOT / "tests/fixtures/empty-vault"
-FUNCTIONAL_FIXTURE = REPO_ROOT / "tests/fixtures/functional-vault"
+ASSESSOR = PLUGIN_ROOT / "tests/assess-vault-scale.sh"
+EMPTY_FIXTURE = PLUGIN_ROOT / "tests/fixtures/empty-vault"
+FUNCTIONAL_FIXTURE = PLUGIN_ROOT / "tests/fixtures/functional-vault"
 
 
 class FunctionalTestError(AssertionError):

@@ -38,12 +38,12 @@ It does not prove that an LLM will make a good semantic decision.
 Run the deterministic Python suite directly with:
 
 ~~~bash
-PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s plugins/llm-wiki/scripts/tests -v
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s plugins/llm-wiki/tests/unit -v
 ~~~
 
 ## Fixture
 
-tests/fixtures/empty-vault/ is a small valid vault used as a baseline for lint and query smoke tests. It has no sources and no canonical pages.
+plugins/llm-wiki/tests/fixtures/empty-vault/ is a small valid vault used as a baseline for lint and query smoke tests. It has no sources and no canonical pages.
 
 For initialization tests, use a fresh temporary directory rather than mutating the repository or the fixture:
 
@@ -134,14 +134,14 @@ invariants that do not require an LLM host:
 - read-only inventory, links, hashes, validation, and scale checks;
 - exact paths in each ingest commit;
 - final tree and Git history against
-  [`expected-tree.txt`](../../tests/fixtures/functional-vault/expected-tree.txt) and
-  [`expected-history.txt`](../../tests/fixtures/functional-vault/expected-history.txt).
+  [`expected-tree.txt`](../tests/fixtures/functional-vault/expected-tree.txt) and
+  [`expected-history.txt`](../tests/fixtures/functional-vault/expected-history.txt).
 
 Run it from the repository root:
 
 ~~~bash
-PYTHONDONTWRITEBYTECODE=1 python3 tests/test-functional-workflow.py
-PYTHONDONTWRITEBYTECODE=1 python3 tests/test-fixture-lint.py
+PYTHONDONTWRITEBYTECODE=1 python3 plugins/llm-wiki/tests/test-functional-workflow.py
+PYTHONDONTWRITEBYTECODE=1 python3 plugins/llm-wiki/tests/test-fixture-lint.py
 ~~~
 
 The runner does not claim that a Codex or ChatGPT Work agent selected the slug, interpreted the

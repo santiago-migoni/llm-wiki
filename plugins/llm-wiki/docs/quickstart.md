@@ -133,8 +133,8 @@ status: current
   - Evidence: `security-policy`, section “Review cycle”.
 ~~~
 
-For a larger executable example, see the deterministic [functional fixture](../../tests/fixtures/functional-vault/README.md)
-and its [workflow runner](../../tests/test-functional-workflow.py). Those tests prove file and Git
+For a larger executable example, see the deterministic [functional fixture](../tests/fixtures/functional-vault/README.md)
+and its [workflow runner](../tests/test-functional-workflow.py). Those tests prove file and Git
 invariants; they do not pretend to be an LLM host interaction.
 
 ## Next references

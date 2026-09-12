@@ -416,7 +416,7 @@ Comprobar que el plugin se puede instalar y utilizar de forma consistente en Cod
 
 - Se añadió una estrategia de pruebas híbrida para un plugin sin runtime propio.
 - Se documentó la matriz de escenarios C, I, G, Q, L y H.
-- Se añadió el fixture base tests/fixtures/empty-vault/.
+- Se añadió el fixture base plugins/llm-wiki/tests/fixtures/empty-vault/.
 - Se añadió tests/check-plugin-contract.sh para verificar manifiesto, skills, referencias, rutas y ausencia de instrucciones operativas obsoletas.
 - Se documentaron las diferencias de acceso entre Codex y ChatGPT Work.
 - Se documentaron los smoke tests, las limitaciones de Git y el manejo de hosts con acceso de solo lectura.

@@ -10,9 +10,9 @@ import sys
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[1]
-CLI = ROOT / "plugins/llm-wiki/scripts/llm-wiki"
-FIXTURES = ROOT / "tests/fixtures"
+PLUGIN_ROOT = Path(__file__).resolve().parents[1]
+CLI = PLUGIN_ROOT / "scripts/llm-wiki"
+FIXTURES = PLUGIN_ROOT / "tests/fixtures"
 
 
 def run(fixture: str) -> tuple[int, dict]:

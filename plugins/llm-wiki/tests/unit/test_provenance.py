@@ -7,7 +7,7 @@ import unittest
 from pathlib import Path
 
 
-SCRIPTS = Path(__file__).resolve().parents[1]
+SCRIPTS = Path(__file__).resolve().parents[2] / "scripts"
 CLI = SCRIPTS / "llm-wiki"
 
 

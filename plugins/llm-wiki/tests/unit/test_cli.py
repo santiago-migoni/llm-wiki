@@ -7,9 +7,10 @@ import unittest
 from pathlib import Path
 
 
-SCRIPTS = Path(__file__).resolve().parents[1]
+PLUGIN_ROOT = Path(__file__).resolve().parents[2]
+SCRIPTS = PLUGIN_ROOT / "scripts"
 CLI = SCRIPTS / "llm-wiki"
-FIXTURE = Path(__file__).resolve().parents[4] / "tests/fixtures/empty-vault"
+FIXTURE = PLUGIN_ROOT / "tests/fixtures/empty-vault"
 
 
 def run_cli(*args):

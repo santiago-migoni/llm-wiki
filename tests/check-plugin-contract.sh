@@ -165,30 +165,31 @@ required_paths=(
   "plugins/llm-wiki/scripts/llm_wiki/links.py"
   "plugins/llm-wiki/scripts/llm_wiki/validate.py"
   "plugins/llm-wiki/scripts/llm_wiki/provenance.py"
+  "plugins/llm-wiki/scripts/llm_wiki/paths.py"
   "plugins/llm-wiki/scripts/llm_wiki/extraction.py"
   "plugins/llm-wiki/scripts/llm_wiki/contradictions.py"
-  "plugins/llm-wiki/scripts/tests/test_cli.py"
-  "plugins/llm-wiki/scripts/tests/test_extraction.py"
-  "plugins/llm-wiki/scripts/tests/test_contradictions.py"
-  "plugins/llm-wiki/scripts/tests/test_frontmatter.py"
-  "plugins/llm-wiki/scripts/tests/test_provenance.py"
-  "tests/fixtures/empty-vault/AGENTS.md"
-  "tests/fixtures/empty-vault/wiki/index.md"
-  "tests/fixtures/empty-vault/wiki/overview.md"
-  "tests/fixtures/empty-vault/wiki/log.md"
-  "tests/fixtures/populated-vault/AGENTS.md"
-  "tests/fixtures/malformed-vault/AGENTS.md"
-  "tests/fixtures/duplicate-source-files/AGENTS.md"
-  "tests/fixtures/legacy-vault/AGENTS.md"
-  "tests/fixtures/watch-scale-vault/README.md"
-  "tests/fixtures/functional-vault/README.md"
-  "tests/fixtures/functional-vault/expected-tree.txt"
-  "tests/fixtures/functional-vault/expected-history.txt"
-  "tests/fixtures/functional-vault/source-v1.txt"
-  "tests/fixtures/functional-vault/source-v2.txt"
-  "tests/fixtures/functional-vault/source-support.txt"
-  "tests/test-fixture-lint.py"
-  "tests/test-functional-workflow.py"
+  "plugins/llm-wiki/tests/unit/test_cli.py"
+  "plugins/llm-wiki/tests/unit/test_extraction.py"
+  "plugins/llm-wiki/tests/unit/test_contradictions.py"
+  "plugins/llm-wiki/tests/unit/test_frontmatter.py"
+  "plugins/llm-wiki/tests/unit/test_provenance.py"
+  "plugins/llm-wiki/tests/test-fixture-lint.py"
+  "plugins/llm-wiki/tests/test-functional-workflow.py"
+  "plugins/llm-wiki/tests/fixtures/empty-vault/AGENTS.md"
+  "plugins/llm-wiki/tests/fixtures/empty-vault/wiki/index.md"
+  "plugins/llm-wiki/tests/fixtures/empty-vault/wiki/overview.md"
+  "plugins/llm-wiki/tests/fixtures/empty-vault/wiki/log.md"
+  "plugins/llm-wiki/tests/fixtures/populated-vault/AGENTS.md"
+  "plugins/llm-wiki/tests/fixtures/malformed-vault/AGENTS.md"
+  "plugins/llm-wiki/tests/fixtures/duplicate-source-files/AGENTS.md"
+  "plugins/llm-wiki/tests/fixtures/legacy-vault/AGENTS.md"
+  "plugins/llm-wiki/tests/fixtures/watch-scale-vault/README.md"
+  "plugins/llm-wiki/tests/fixtures/functional-vault/README.md"
+  "plugins/llm-wiki/tests/fixtures/functional-vault/expected-tree.txt"
+  "plugins/llm-wiki/tests/fixtures/functional-vault/expected-history.txt"
+  "plugins/llm-wiki/tests/fixtures/functional-vault/source-v1.txt"
+  "plugins/llm-wiki/tests/fixtures/functional-vault/source-v2.txt"
+  "plugins/llm-wiki/tests/fixtures/functional-vault/source-support.txt"
 )
 
 for relative_path in "${required_paths[@]}"; do
@@ -199,14 +200,14 @@ test -x "$plugin_root/tests/assess-vault-scale.sh" || fail "scale assessor is no
 test -x "$plugin_root/tests/test-assess-vault-scale.sh" || fail "scale assessor test is not executable"
 
 required_dirs=(
-  "tests/fixtures/empty-vault/raw/inbox"
-  "tests/fixtures/empty-vault/raw/sources"
-  "tests/fixtures/empty-vault/wiki/pages"
-  "tests/fixtures/empty-vault/wiki/syntheses"
-  "tests/fixtures/empty-vault/wiki/people"
-  "tests/fixtures/empty-vault/wiki/concepts"
-  "tests/fixtures/empty-vault/wiki/projects"
-  "tests/fixtures/empty-vault/wiki/decisions"
+  "plugins/llm-wiki/tests/fixtures/empty-vault/raw/inbox"
+  "plugins/llm-wiki/tests/fixtures/empty-vault/raw/sources"
+  "plugins/llm-wiki/tests/fixtures/empty-vault/wiki/pages"
+  "plugins/llm-wiki/tests/fixtures/empty-vault/wiki/syntheses"
+  "plugins/llm-wiki/tests/fixtures/empty-vault/wiki/people"
+  "plugins/llm-wiki/tests/fixtures/empty-vault/wiki/concepts"
+  "plugins/llm-wiki/tests/fixtures/empty-vault/wiki/projects"
+  "plugins/llm-wiki/tests/fixtures/empty-vault/wiki/decisions"
 )
 
 for relative_dir in "${required_dirs[@]}"; do
@@ -261,24 +262,24 @@ rg -q "test-functional-workflow\.py" "$repo_root/.github/workflows/ci.yml" || fa
 rg -q "test-fixture-lint\.py" "$repo_root/.github/workflows/ci.yml" || fail "fixture lint is not wired into CI"
 
 PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover \
-  -s "$plugin_root/scripts/tests" \
+  -s "$plugin_root/tests/unit" \
   -p 'test_*.py' >/dev/null || fail "deterministic Python tool tests failed"
 
-validation_output="$(PYTHONDONTWRITEBYTECODE=1 python3 "$plugin_root/scripts/llm-wiki" validate "$repo_root/tests/fixtures/empty-vault")"
+validation_output="$(PYTHONDONTWRITEBYTECODE=1 python3 "$plugin_root/scripts/llm-wiki" validate "$plugin_root/tests/fixtures/empty-vault")"
 if [[ "$validation_output" != *"Status: VALID"* ]]; then
   fail "empty-vault deterministic validation failed"
 fi
 
 bash -n "$plugin_root/tests/assess-vault-scale.sh" || fail "scale assessor has invalid Bash syntax"
 bash -n "$plugin_root/tests/test-assess-vault-scale.sh" || fail "scale assessor test has invalid Bash syntax"
-scale_output="$(bash "$plugin_root/tests/assess-vault-scale.sh" "$repo_root/tests/fixtures/empty-vault")"
+scale_output="$(bash "$plugin_root/tests/assess-vault-scale.sh" "$plugin_root/tests/fixtures/empty-vault")"
 if [[ "$scale_output" != *"Scale status: GREEN"* ]]; then
   fail "empty-vault scale assessment is not GREEN"
 fi
 
 scale_test_root="$(mktemp -d)"
 trap 'rm -rf "$scale_test_root"' EXIT
-cp -R "$repo_root/tests/fixtures/empty-vault/." "$scale_test_root/"
+cp -R "$plugin_root/tests/fixtures/empty-vault/." "$scale_test_root/"
 mv "$scale_test_root/AGENTS.md" "$scale_test_root/CLAUDE.md"
 
 claude_scale_output="$(bash "$plugin_root/tests/assess-vault-scale.sh" "$scale_test_root")"
@@ -302,7 +303,7 @@ rg -q "Multiple schema files: AGENTS.md, CLAUDE.md" "$scale_test_root/both-schem
   fail "scale assessment does not report both schema files"
 
 "$plugin_root/tests/test-assess-vault-scale.sh" || fail "scale assessor boundary and fixture tests failed"
-PYTHONDONTWRITEBYTECODE=1 python3 "$repo_root/tests/test-fixture-lint.py" || fail "fixture lint tests failed"
-PYTHONDONTWRITEBYTECODE=1 python3 "$repo_root/tests/test-functional-workflow.py" || fail "functional workflow tests failed"
+PYTHONDONTWRITEBYTECODE=1 python3 "$plugin_root/tests/test-fixture-lint.py" || fail "fixture lint tests failed"
+PYTHONDONTWRITEBYTECODE=1 python3 "$plugin_root/tests/test-functional-workflow.py" || fail "functional workflow tests failed"
 
 echo "plugin contract: ok"

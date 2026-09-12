@@ -199,8 +199,8 @@ bash tests/check-plugin-contract.sh
 The functional workflow and fixture checks can also be run directly:
 
 ~~~bash
-PYTHONDONTWRITEBYTECODE=1 python3 tests/test-functional-workflow.py
-PYTHONDONTWRITEBYTECODE=1 python3 tests/test-fixture-lint.py
+PYTHONDONTWRITEBYTECODE=1 python3 plugins/llm-wiki/tests/test-functional-workflow.py
+PYTHONDONTWRITEBYTECODE=1 python3 plugins/llm-wiki/tests/test-fixture-lint.py
 ~~~
 
 The same checks run in [.github/workflows/ci.yml](.github/workflows/ci.yml). Host smoke tests are

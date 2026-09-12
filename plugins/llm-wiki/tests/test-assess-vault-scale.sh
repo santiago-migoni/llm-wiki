@@ -9,7 +9,7 @@ fail() {
 plugin_root="$(cd "$(dirname "$0")/.." && pwd)"
 repo_root="$(cd "$plugin_root/../.." && pwd)"
 assessor="$plugin_root/tests/assess-vault-scale.sh"
-empty_fixture="$repo_root/tests/fixtures/empty-vault"
+empty_fixture="$plugin_root/tests/fixtures/empty-vault"
 test_root="$(mktemp -d)"
 last_status=0
 last_output=""
@@ -63,8 +63,8 @@ assert_invalid_schema_type() {
 }
 
 assert_status "$empty_fixture" "GREEN"
-assert_status "$repo_root/tests/fixtures/populated-vault" "GREEN"
-assert_status "$repo_root/tests/fixtures/legacy-vault" "GREEN"
+assert_status "$plugin_root/tests/fixtures/populated-vault" "GREEN"
+assert_status "$plugin_root/tests/fixtures/legacy-vault" "GREEN"
 
 case_root="$(new_case)"
 for slug in one/shared two/shared; do
@@ -76,14 +76,14 @@ assert_status "$case_root" "GREEN"
 [[ "$last_output" == *"Current source records: 2"* ]] || \
   fail "nested source records were not counted as leaves"
 
-run_assessor "$repo_root/tests/fixtures/malformed-vault"
+run_assessor "$plugin_root/tests/fixtures/malformed-vault"
 [[ "$last_status" -eq 1 ]] || fail "malformed fixture was accepted: $last_output"
 [[ "$last_output" == *"Scale status: INVALID"* ]] || fail "malformed fixture has no INVALID status"
 [[ "$last_output" == *"Invalid source slugs: Bad_Slug"* ]] || fail "invalid slug was not reported"
 [[ "$last_output" == *"Sources missing extracted.md: 1"* ]] || fail "missing extraction was not reported"
 [[ "$last_output" == *"Unexpected source entries:"* ]] || fail "unexpected source entry was not reported"
 
-run_assessor "$repo_root/tests/fixtures/duplicate-source-files"
+run_assessor "$plugin_root/tests/fixtures/duplicate-source-files"
 [[ "$last_status" -eq 1 ]] || fail "duplicate-source fixture was accepted: $last_output"
 [[ "$last_output" == *"Sources with multiple current originals: 1"* ]] || \
   fail "multiple current originals were not reported"

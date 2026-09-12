@@ -47,22 +47,22 @@ jobs:
       - name: Python deterministic tests
         run: |
           PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover \
-            -s plugins/llm-wiki/scripts/tests \
+            -s plugins/llm-wiki/tests/unit \
             -p 'test_*.py' -v
 
       - name: Markdown-link validation
         run: |
           PYTHONDONTWRITEBYTECODE=1 python3 plugins/llm-wiki/scripts/llm-wiki \
-            links tests/fixtures/empty-vault --format json
+            links plugins/llm-wiki/tests/fixtures/empty-vault --format json
 
       - name: Scale boundary tests
         run: bash plugins/llm-wiki/tests/test-assess-vault-scale.sh
 
       - name: Fixture lint tests
-        run: PYTHONDONTWRITEBYTECODE=1 python3 tests/test-fixture-lint.py
+        run: PYTHONDONTWRITEBYTECODE=1 python3 plugins/llm-wiki/tests/test-fixture-lint.py
 
       - name: Functional workflow
-        run: PYTHONDONTWRITEBYTECODE=1 python3 tests/test-functional-workflow.py
+        run: PYTHONDONTWRITEBYTECODE=1 python3 plugins/llm-wiki/tests/test-functional-workflow.py
 
       - name: Plugin contract
         run: bash tests/check-plugin-contract.sh
