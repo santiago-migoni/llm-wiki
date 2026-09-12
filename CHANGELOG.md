@@ -4,6 +4,14 @@
 
 No unreleased changes.
 
+## 1.2.0 — 2026-09-12
+
+- Added hierarchical source slugs and nested canonical pages while preserving existing flat slugs.
+- Made source inventory, provenance, current and historical hashes, duplicate detection, validation,
+  and exact wikilink resolution work with complete hierarchical paths.
+- Preserved namespace segments named `assets` instead of confusing them with record attachments.
+- Moved the plugin's unit, fixture, scale, and functional tests into `plugins/llm-wiki/tests/`.
+
 ## 1.1.0 — 2026-09-11
 
 - Clarified that originals are preserved byte-for-byte, updates replace only the current working

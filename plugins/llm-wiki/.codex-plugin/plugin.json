@@ -1,6 +1,6 @@
 {
   "name": "llm-wiki",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Turn a collection of documents into a cited, Git-versioned wiki maintained by Codex and ChatGPT Work.",
   "author": {
     "name": "Santiago Migoni",

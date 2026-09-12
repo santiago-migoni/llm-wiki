@@ -274,6 +274,7 @@ class CliTests(unittest.TestCase):
             (root / "raw/inbox").mkdir(parents=True)
             (root / "raw/sources/fundamentos/actividades/assets").mkdir(parents=True)
             (root / "raw/sources/fundamentos/contactos").mkdir(parents=True)
+            (root / "raw/sources/fundamentos/assets/actividades").mkdir(parents=True)
             (root / "raw/sources/assets/foo").mkdir(parents=True)
             (root / "raw/sources/security-policy").mkdir(parents=True)
             (root / "wiki/pages").mkdir(parents=True)
@@ -282,6 +283,7 @@ class CliTests(unittest.TestCase):
             for slug in (
                 "assets/foo",
                 "fundamentos/actividades",
+                "fundamentos/assets/actividades",
                 "fundamentos/contactos",
                 "security-policy",
             ):
@@ -295,7 +297,13 @@ class CliTests(unittest.TestCase):
             records = payload["source_records"]
             self.assertEqual(
                 [record["slug"] for record in records],
-                ["assets/foo", "fundamentos/actividades", "fundamentos/contactos", "security-policy"],
+                [
+                    "assets/foo",
+                    "fundamentos/actividades",
+                    "fundamentos/assets/actividades",
+                    "fundamentos/contactos",
+                    "security-policy",
+                ],
             )
             self.assertNotIn("fundamentos", [record["slug"] for record in records])
             self.assertFalse(payload["warnings"])

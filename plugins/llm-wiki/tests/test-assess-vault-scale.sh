@@ -76,6 +76,14 @@ assert_status "$case_root" "GREEN"
 [[ "$last_output" == *"Current source records: 2"* ]] || \
   fail "nested source records were not counted as leaves"
 
+case_root="$(new_case)"
+record="$case_root/raw/sources/fundamentos/assets/actividades"
+mkdir -p "$record"
+touch "$record/source.txt" "$record/extracted.md"
+assert_status "$case_root" "GREEN"
+[[ "$last_output" == *"Current source records: 1"* ]] || \
+  fail "a namespace segment named assets was treated as a supporting-asset directory"
+
 run_assessor "$plugin_root/tests/fixtures/malformed-vault"
 [[ "$last_status" -eq 1 ]] || fail "malformed fixture was accepted: $last_output"
 [[ "$last_output" == *"Scale status: INVALID"* ]] || fail "malformed fixture has no INVALID status"

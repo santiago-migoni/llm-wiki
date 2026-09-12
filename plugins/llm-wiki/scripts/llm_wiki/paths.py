@@ -45,7 +45,12 @@ def _support_asset_dirs(source_root: Path, directories: list[Path]) -> set[Path]
             for item in siblings
             if item.is_dir() and item.name != "assets"
         ]
-        if not namespace_children:
+        has_record_marker = any(
+            item.is_file()
+            and (SOURCE_NAME_RE.fullmatch(item.name) or item.name == "extracted.md")
+            for item in siblings
+        )
+        if not namespace_children and has_record_marker:
             support_assets.add(path)
     return support_assets
 
@@ -80,7 +85,7 @@ def source_record_dirs(root: Path) -> list[Path]:
             records.append(path)
             continue
         namespace_children = [
-            item for item in children if item.is_dir() and item.name != "assets"
+            item for item in children if item.is_dir() and item not in support_assets
         ]
         if not namespace_children:
             records.append(path)
@@ -112,7 +117,7 @@ def source_namespace_files(root: Path) -> list[tuple[Path, list[Path]]]:
         except OSError:
             continue
         has_namespace_child = any(
-            item.is_dir() and item.name != "assets" for item in children
+            item.is_dir() and item not in support_assets for item in children
         )
         if not has_namespace_child:
             continue

@@ -1,6 +1,6 @@
 # Informe: soporte para slugs jerárquicos en fuentes
 
-**Estado:** implementada en el árbol de trabajo; pendiente de revisión y commit.
+**Estado:** implementada y validada para la release `v1.2.0`.
 
 ## Problema
 
@@ -30,7 +30,7 @@ La implementación agrega una enumeración común de carpetas hoja, slugs seguro
 hashes actuales e históricos recursivos, provenance jerárquica, páginas canónicas anidadas y
 resolución exacta antes del fallback por basename. Las fuentes planas no se migran.
 
-## Solución propuesta
+## Solución implementada
 
 Añadir soporte para slugs jerárquicos conservando compatibilidad con los slugs planos actuales.
 
@@ -88,21 +88,19 @@ fundamentos/contactos
 
 ## Páginas canónicas anidadas
 
-Si también se desea organizar las páginas canónicas físicamente, debería admitirse:
+Las páginas canónicas también admiten organización física por namespaces:
 
 ~~~text
 wiki/pages/fundamentos/actividades.md
 ~~~
 
-En ese caso, el validador debe comparar el slug con la ruta relativa completa, y el resolvedor de
-wikilinks debe priorizar coincidencias exactas como `[[fundamentos/actividades]]` antes de buscar
-por nombre base.
+El validador compara el slug con la ruta relativa completa, y el resolvedor de wikilinks prioriza
+coincidencias exactas como `[[fundamentos/actividades]]` antes de buscar por nombre base.
 
 ## Compatibilidad y migración
 
 El cambio no debe considerarse una migración automática: las fuentes planas existentes deben
 seguir funcionando, y los registros jerárquicos nuevos deben validarse como `namespace/sub-slug`.
 
-La implementación futura debe preservar los paths actuales, los hashes, la procedencia y el
-historial Git. Antes de modificar fuentes existentes deberá presentar un plan explícito y una
-validación de compatibilidad.
+La implementación preserva los paths actuales, los hashes, la procedencia y el historial Git.
+No migra fuentes existentes automáticamente.

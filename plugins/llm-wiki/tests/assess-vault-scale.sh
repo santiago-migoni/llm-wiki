@@ -181,7 +181,12 @@ for item in source_directories:
         for entry in entries
         if entry.name != "assets" and path_state(entry) == "directory"
     ]
-    if not namespace_children:
+    has_record_marker = any(
+        path_state(entry) == "file"
+        and (re.fullmatch(r"source\.[^/]+", entry.name) or entry.name == "extracted.md")
+        for entry in entries
+    )
+    if not namespace_children and has_record_marker:
         support_asset_dirs.add(item)
 
 source_records = []
@@ -193,7 +198,7 @@ for item in source_directories:
     namespace_children = [
         entry
         for entry in entries
-        if entry.name != "assets" and path_state(entry) == "directory"
+        if path_state(entry) == "directory" and entry not in support_asset_dirs
     ]
     direct_files = [
         entry

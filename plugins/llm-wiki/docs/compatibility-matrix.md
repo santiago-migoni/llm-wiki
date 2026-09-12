@@ -8,10 +8,10 @@ inspectable artefacts; a manifest or deterministic test alone is not enough.
 
 | Host or layer | Version / commit | Evidence | Status | Limitation |
 |---|---|---|---|---|
-| Codex CLI local | Release candidate `1.1.0`; implementation validated from the `1.0.0` installed package | Local marketplace install and four discovered skills; [installation result](../../tests/results/codex/2026-09-11_codex_phase9.md) plus [real-vault follow-up](../../tests/results/codex/2026-09-11_codex_real-vault_followup.md) | `host-validated` for installation, initialization, and ingestion | The referenced run did not produce a separate persisted transcript for every query mode; historical behavior is covered by the deterministic workflow. |
-| Codex deterministic tools | Python `3.9.6` working tree plus CI Python `3.11` | 34 unit tests, fixture lint, functional workflow, scale tests, and plugin contract | `automated` | The documented CLI baseline remains Python 3.10+; the scale assessor also works on the observed 3.9 host. |
+| Codex CLI local | Release `1.2.0`; host evidence from the `1.1.0` installed package | Local marketplace install and four discovered skills; [installation result](../../tests/results/codex/2026-09-11_codex_phase9.md) plus [real-vault follow-up](../../tests/results/codex/2026-09-11_codex_real-vault_followup.md) | `host-validated` for installation, initialization, and ingestion in `1.1.0`; hierarchical paths covered by automated tests | The referenced run did not produce a separate persisted transcript for every query mode; historical behavior is covered by the deterministic workflow. |
+| Codex deterministic tools | Python `3.9.6` working tree plus CI Python `3.11` | 42 unit tests, fixture lint, functional workflow, scale tests, and plugin contract | `automated` | The documented CLI baseline remains Python 3.10+; the scale assessor also works on the observed 3.9 host. |
 | ChatGPT Work | No host session exposed | [ChatGPT Work result](../../tests/results/chatgpt-work/2026-09-11_chatgpt-work_phase9.md) | `experimental` | A project or workspace must expose a disposable vault before read/write, partial-context, and Git behavior can be checked. |
-| Portable package | Manifest version `1.1.0` | `plugin.json`, `.codex-plugin/plugin.json`, marketplace catalog, and contract check | `automated` | Availability still depends on the host's plugin installation flow. |
+| Portable package | Manifest version `1.2.0` | `plugin.json`, `.codex-plugin/plugin.json`, marketplace catalog, and contract check | `automated` | Availability still depends on the host's plugin installation flow. |
 
 ## Capability interpretation
 
