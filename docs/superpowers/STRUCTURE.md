@@ -1,7 +1,7 @@
 ---
 title: Estructura de llm-wiki
 status: draft
-version: v003
+version: v004
 responsible: Usuario promotor del proyecto
 created_at: "2026-10-08"
 updated_at: "2026-10-09"
@@ -83,7 +83,7 @@ Evidencia de pruebas y límites: [registro de implementación](evidence/2026-10-
 
 ## Cambios propuestos para áreas definidas por el usuario
 
-La decisión canónica es [ARCHITECTURE.md](ARCHITECTURE.md), v007, ADR-009
+La decisión canónica es [ARCHITECTURE.md](ARCHITECTURE.md), v008, ADR-009
 (proposed). Esta sección localiza los cambios futuros; no los describe como
 implementados ni autoriza ejecutarlos. La dirección aplicable permanece en
 [CONSTITUTION.md](CONSTITUTION.md), v003, PRI-003–005 y OBJ-002–003.
@@ -132,3 +132,33 @@ histórico; esta inspección acotada no actualiza toda la evidencia de distribuc
 de evidencia. Base anterior preservada:
 `e703e1f9d898ccc797cb2d7eeed1ee4e68a3ee04:docs/superpowers/STRUCTURE.md`.
 Estado draft, aprobación pendiente; no se altera el mapa de módulos implementados.
+
+## Localización de la propuesta transversal
+
+Extiende el mapa anterior con la integración de ADR-009 y la resolución de tipos
+de ADR-010, ambos propuestos en [ARCHITECTURE.md](ARCHITECTURE.md), v008.
+Fuente de esta revisión: selección del usuario de los cuatro puntos de la
+verificación de carpetas. Base exacta:
+`16da4583ab65a124d461cfdd41470020cb8a8073:docs/superpowers/STRUCTURE.md`.
+
+| Ruta afectada en una futura implementación | Cambio localizado y límite |
+| --- | --- |
+| `internal/vault/layout.go`, `bootstrap.go` y tests | Resolución de OKR y entidades; filas canónicas/alias y precedencia de mapas de ADR-010. Preservar presets, notas existentes y carpeta wiki compartida |
+| `plugins/llm-wiki/references/folder-map.md`, `write-rules.md`, `ai-first-rules.md` | Reglas transversales opcionales, rutas y enlaces según arquitectura; sin autoridad nueva sobre el vault |
+| `plugins/llm-wiki/skills/wiki-obsidian-project/`, `wiki-obsidian-projects/`, `wiki-obsidian-person/`, `wiki-obsidian-capture/`, `wiki-obsidian-task/`, `wiki-obsidian-save/` | Consulta/reutilización de áreas durante las acciones autorizadas; conservar deduplicación y políticas actuales |
+| `plugins/llm-wiki/skills/wiki-obsidian-calendar/` | Relación opcional de notas en modo meeting; no ampliar integración externa ni permisos de schedule |
+| `plugins/llm-wiki/skills/wiki-obsidian-daily/`, `wiki-obsidian-log/`, `wiki-obsidian-review/`, `wiki-obsidian-synthesize/`, `wiki-obsidian-distill/` | Relaciones sustentadas en entradas y notas derivadas, sin diarios por área ni modificación de raw |
+| `plugins/llm-wiki/skills/wiki-obsidian-okr/SKILL.md` (nuevo, propuesto) y referencias de plantilla | Workflow de objetivos/resultados explícitos; valores desconocidos pendientes, sin métricas o fechas inventadas |
+| `internal/graph/` y pruebas cercanas | Verificar enlaces múltiples en el cuerpo y backlinks; no se propone ampliar el parser a frontmatter |
+| `internal/catalog/`, metadatos de capacidades y referencias derivados | Descubrimiento y trazabilidad de extensiones; conservar F/I/T originales y separar entrega de validación por modalidad |
+| `tests/fixtures/`, `tests/acceptance/` y tests de paquetes afectados | Casos wiki/Obsidian, precedencia, tarjetas, raw, múltiples áreas, repetición, conflictos y continuidad de arquitectura v008 |
+
+La matriz de arquitectura fija comportamiento y decisiones; esta tabla solo
+indica ubicación. Los directorios listados existen salvo las skills declaradas
+nuevas. No se generaron skills, plantillas, fixtures ni código del producto en
+esta tarea. Un área no crea subcarpetas en los destinos anteriores.
+
+Constitución v003 e infraestructura v002 conservan sus bases. Spec/plan y
+evidencias previas no se repuntan a este borrador ni se amplía AP-001.
+2026-10-09, v004: añade localización del alcance transversal y referencias a
+ADR-010, con estado draft y aprobación pendiente.

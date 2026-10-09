@@ -1,7 +1,7 @@
 ---
 title: Arquitectura de llm-wiki
 status: draft
-version: v007
+version: v008
 responsible: Usuario promotor del proyecto
 created_at: "2026-10-08"
 updated_at: "2026-10-09"
@@ -579,7 +579,7 @@ necesitará además paquete reconstruido y evidencia de distribución correspond
   segura de nombres; no ejecutar una conversión masiva como parte de la creación.
 - Renombrado, archivo, fusión y eliminación de áreas no se definen en este
   incremento; no hay permiso implícito para realizarlos ni migraciones automáticas.
-- [STRUCTURE.md](STRUCTURE.md), v003, localiza cambios futuros sin duplicar esta
+- [STRUCTURE.md](STRUCTURE.md), v004, localiza cambios futuros sin duplicar esta
   decisión. [INFRASTRUCTURE.md](INFRASTRUCTURE.md), v002, sigue describiendo la
   persistencia y recuperación existentes: no se requieren servicios, estado nuevo,
   schedulers ni conectores por esta propuesta.
@@ -594,3 +594,150 @@ estado referenciado de spec/plan previo según sus metadatos. Base anterior exac
 `e703e1f9d898ccc797cb2d7eeed1ee4e68a3ee04:docs/superpowers/ARCHITECTURE.md`.
 Conserva aprobaciones parciales y registros históricos; no registra aprobación,
 implementación, instalación ni validación de la gestión de áreas.
+
+## Propuesta ampliada: aplicación transversal en las carpetas wiki
+
+### Alcance y fuente de v008
+
+Esta revisión desarrolla los cuatro puntos seleccionados por el usuario en la
+anotación sobre `msg_0eb917ea2afbbbf3016ac943036a8881918b5dc5f5da1c23b9`:
+consulta/vinculación de áreas en workflows; tratamiento de OKRs y entidades;
+enlaces en el cuerpo; validación de pertenencia múltiple sin duplicación ni
+reorganización. «Entendido. Elabora una propuesta nueva basada en estos items»
+autoriza esta propuesta documental, no su implementación. «Perfecto» precedió
+una petición de verificación: no se registra como aprobación de contratos nuevos.
+
+Base exacta: `16da4583ab65a124d461cfdd41470020cb8a8073`, arquitectura v007 y
+estructura v003, con árbol limpio antes de editar. La inspección estática de
+`internal/vault/layout.go`, `bootstrap.go`, `internal/graph/links.go`,
+`internal/service/service.go` y las skills de proyecto, persona, captura, tarea,
+save, daily, log, review y calendar confirma los límites descritos abajo.
+No hay nueva evidencia de ejecución, instalación ni continuidad real.
+
+La constitución v003 de esa base permanece approved y sin cambios: aplican
+PRI-003–005, OBJ-002–003 y EXI-002–003. Esta ampliación concreta esos resultados,
+sin crear otra misión, objetivo o principio. ADR-009 sigue proposed y conserva
+su registro canónico; los apartados siguientes amplían su integración. ADR-010
+registra exclusivamente la decisión de resolución de tipos y destinos.
+
+### Integración transversal propuesta de ADR-009
+
+La relación con áreas es opcional y se activa por petición del usuario o una
+convención previamente adoptada dentro del alcance de la escritura solicitada.
+La ausencia de esa convención mantiene el comportamiento previo. Leer un manual
+no habilita por sí solo clasificación, propagación ni automatizaciones nuevas.
+
+Antes de vincular, usar el lector de áreas propuesto, leer propósito/candidatos y
+resolver coincidencias. Reutilizar relaciones existentes; una ambigüedad queda
+pendiente. La clasificación semántica corresponde al agente; el runtime no
+deduce un área por carpeta, tag, nombre o parentesco con un proyecto. Si sugiere
+heredar las áreas de un proyecto, debe comprobar pertinencia y autorización.
+No crear un área ausente por inferencia ni trasladar notas para clasificarlas.
+
+| Tipo y carpeta predeterminada wiki | Workflow afectado | Integración propuesta |
+| --- | --- | --- |
+| Proyecto, `wiki/projects/` | project, projects y save | Enlazar áreas pertinentes en el proyecto único; su overview puede recuperar esas relaciones sin reclasificar ni mover |
+| Idea/concepto, `wiki/concepts/` | capture, synthesize, distill y save | Reutilizar nota existente y enlazar áreas sustentadas; mantener procedencia y umbrales propios de cada workflow |
+| Entidad, `wiki/entities/` | person y save | Mantener una ficha por entidad; admitir áreas múltiples sin convertir cada vínculo en una ficha nueva |
+| Tarea, `wiki/tasks/` o tarjeta | task y save | Nota sustancial con enlaces en su cuerpo; tarea breve con enlaces dentro de su tarjeta, sin crear nota solo para añadir área |
+| Reunión, `wiki/meetings/` | calendar, modo meeting | Enlazar desde la nota con datos aportados o comprobados; no requiere acceso externo para el caso local |
+| Decisión, `wiki/decisions/` | save y workflows que registren decisiones | Preservar nota o sección existente, motivos y procedencia; relacionar esa unidad sin duplicarla ni forzar una nueva nota |
+| OKR, `wiki/okrs/` | Workflow de OKR propuesto y save | Objetivo/resultados vinculados con áreas; no inventar métricas, línea base, metas, responsables ni fechas |
+| Diaria, `wiki/daily/` | daily y propagaciones prescritas | Mantener diario común por fecha; enlazar áreas en entradas pertinentes sin generar un diario por área |
+| Log, `wiki/logs/` | log y save | Conservar log de proyecto/fecha e historial; enlazar áreas pertinentes sin nuevos registros paralelos |
+| Revisión, `wiki/reviews/` | review | Recuperar relaciones dentro del periodo y cobertura existentes; la revisión por área solo se ejecuta si se pide, sin cambiar el periodo ni inventar actividad |
+
+El nuevo workflow de OKR es una extensión propuesta, no una skill ya disponible
+ni un reemplazo del tablero del preset executive. Debe permitir registrar o
+consultar objetivos con información pendiente explícita. Solo actualiza un
+tablero o índice cuando esa propagación forme parte del workflow adoptado.
+El flujo person conserva su finalidad; save puede registrar organizaciones y
+herramientas con los tipos y destinos de ADR-010, sin prometer un workflow
+específico de organizaciones o herramientas que aún no existe.
+
+### Relaciones, formatos y compatibilidad
+
+- Mantener la decisión de ADR-009: enlaces canónicos en el cuerpo de la unidad
+  registrada; cero o varias áreas, sin área principal obligatoria. Una sección
+  existente apropiada prevalece sobre generar encabezados redundantes.
+- En tableros Kanban, insertar enlaces en la tarjeta o en la nota relacionada;
+  nunca añadir un encabezado que el plugin interprete como columna nueva.
+- No modificar fuentes `raw/` para añadir backlinks o áreas. La nota derivada
+  puede enlazar la fuente y las áreas; el original permanece intacto.
+- No usar un campo YAML `areas` como sustituto de los enlaces del cuerpo: el
+  grafo actual descarta frontmatter. Conservar campos humanos heredados e informar
+  su limitación; convertirlos exige una petición aparte. Esta propuesta no amplía
+  el parser de grafo para interpretar metadata ni redefine `relations:`.
+- Consultar backlinks para navegación desde un área. Un índice explícito de área
+  es opcional y derivado; actualizarlo únicamente dentro de la escritura autorizada,
+  sin reconstruir toda la bóveda cada vez. Resultados parciales conservan cobertura.
+- Mantener hashes, controles de rutas y recuperación de ADR-009. Las convenciones
+  no crean una autorización general para tocar otras notas, tableros o el manual.
+
+### ADR-010 — Tipos explícitos para OKRs y entidades, con rutas configurables (proposed)
+
+- **Elección propuesta:** añadir claves de resolución `okr`, `entity`,
+  `organization` y `tool`, conservando `person`. Reconocer `company`/`companies`
+  como alias de resolución de `organization`, sin convertir automáticamente el
+  frontmatter humano existente. Los tipos técnicos distinguen contenido; no
+  son una lista fija de áreas ni categorías de vida.
+- **Estado actual:** `normalizeKind` y los defaults no incluyen esas claves.
+  Bootstrap crea OKRs y agrupa People/Companies/Tools en `wiki/entities/`, pero
+  sus filas de mapa no equivalen a resolución independiente de todos esos tipos.
+- **Rutas propuestas:** en wiki, `okr` usa `wiki/okrs/` y los cuatro tipos de
+  entidad comparten `wiki/entities/`. En Obsidian, `okr` usa `OKRs/`, `person`
+  conserva su resolución actual de People/people, `organization` usa `Companies/`,
+  `tool` usa `Tools/` y la entidad genérica usa `Entities/`.
+- **Precedencia propuesta:** mapa válido explícito del subtipo, después mapa
+  válido explícito de `entity` para los subtipos sin destino propio, finalmente
+  default del subtipo. Para OKR se aplica su mapa explícito o su default. Las
+  entradas explícitas inválidas se diagnostican y no habilitan una escritura
+  mediante fallback silencioso. Precisar estos diagnósticos en el contrato futuro.
+- **Límites:** resolver un destino no crea la carpeta. Crear contenido solo crea
+  sus padres necesarios; no subdivide entities por área, no mueve notas existentes
+  y no interpreta nombres visibles como paths. Conflictos de layout o registros
+  de destino requieren resolución antes de escribir.
+- **Alternativas:** conservar rutas decididas solo por el agente evita ampliar el
+  mapa, pero mantiene el desacople observado; dividir físicamente las entidades
+  por defecto cambia la organización del estilo wiki y puede duplicar fichas.
+  Se recomienda extender la resolución conservando su carpeta wiki compartida.
+- **Consecuencias:** agregar tipos y alias a código, reglas y plantillas requiere
+  regresiones de precedencia y consumidores. No implica clasificación semántica
+  en Go ni agregar nuevas herramientas de escritura.
+- **Autoridad y evidencia:** propuesta del asistente por el encargo actual;
+  aprobación pendiente. Implementación not_implemented, validación pendiente.
+  Los esquemas finales deben especificarse antes de adoptar el incremento.
+
+### Verificación requerida para el alcance ampliado
+
+| Grupo | Caso de regresión y caso legítimo que debe conservar |
+| --- | --- |
+| Workflows | Activación de clasificación autorizada y flujo previo sin áreas; duplicado/ambiguo no genera otra nota ni un área nueva |
+| Tipos y mapas | OKR y cada tipo de entidad en ambos layouts; mapa de subtipo y mapa genérico con precedencia; destino inválido, alias y rutas protegidas |
+| Relaciones múltiples | Una nota con dos áreas, backlinks desde ambas y hash del contenido persistido; repetir vinculación no duplica enlaces ni altera su ubicación |
+| Formatos | Tarea breve permanece tarjeta; Kanban conserva columnas; raw conserva bytes; metadata heredada no se convierte |
+| Continuidad | Segundo proceso recupera relaciones; segunda sesión Codex utiliza fuentes suficientes; distinguir evidencia del componente de aceptación del workflow |
+| Fallos | Inventario parcial, cancelación, hash obsoleto y lote interrumpido conservan diagnósticos, contenido humano y recuperación sin éxito ficticio |
+
+La suite futura debe observar conteo de notas canónicas, rutas y enlaces, no solo
+presencia de texto en skills. Para runtime: pruebas enfocadas, race y vet; para
+producción: paquete nuevo y evidencia de correspondencia con fuentes, contratos
+CLI/MCP y ejecución de host según el alcance anunciado. Nada de ello se ejecutó
+como parte de esta revisión documental.
+
+### Referencias y decisiones pendientes de la revisión ampliada
+
+[STRUCTURE.md](STRUCTURE.md), v004, contiene la localización adicional. La
+constitución e infraestructura permanecen sin cambios. Spec/plan previos conservan
+AP-001 y sus bases exactas; ADR-010 y este alcance no se incorporan a su aprobación.
+No se crean tareas de implementación, una release o un nuevo estado técnico.
+
+Pendiente: adoptar o corregir la integración transversal y ADR-010; precisar
+contrato del lector, esquema/alias de tipos y diagnósticos de mapas; acordar la
+política de clasificación en el manual de cada vault al utilizarla. No se requiere
+que todos los usuarios activen áreas ni que modifiquen su estructura para hacerlo.
+
+2026-10-09, v008: amplía la propuesta por los cuatro puntos seleccionados y añade
+ADR-010. Base presentada anterior:
+`16da4583ab65a124d461cfdd41470020cb8a8073:docs/superpowers/ARCHITECTURE.md`.
+Estado draft; no registra aprobación ni implementación nuevas.
