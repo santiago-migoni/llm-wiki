@@ -1,0 +1,951 @@
+[
+  {
+    "criterion_id": "US-001.AC-01",
+    "requirement": "La instalación desde catálogo local/Git descubre las skills y herramientas del paquete y permite una lectura real; arrancar no descarga dependencias ni requiere Go/Python/Node instalados.",
+    "input": {
+      "package_versions": [
+        "0.1.0-dev.1",
+        "0.1.0-dev.2"
+      ],
+      "test": "TestPackagedBinaryWithoutDevelopmentToolchain",
+      "host": "Codex CLI 0.135.0 on macOS 27.0.1 arm64"
+    },
+    "output_observed": "Paquete universal, MCP aislado, instalación CLI y 48 skills verificados; actualización/downgrade de procesos conserva todos los hashes de vault/estado. Desktop y downgrade por marketplace pendientes.",
+    "result": "pending",
+    "version": "0.1.0-dev.2",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md",
+    "evidence_status": "partial; no Desktop acceptance"
+  },
+  {
+    "criterion_id": "US-001.AC-02",
+    "input": {
+      "process": "llm-wiki vault select --state-dir <state> --project <existing-project> --path <existing-vault>; restart process; run vault show; separately run show with a new state root; run serve with only PATH in environment; initialize MCP 2025-06-18; call tools/list and wiki_get_vault with returned vault_id; timezone selected explicitly as America/Argentina/Mendoza through CLI and MCP",
+      "environment": "macOS darwin/arm64; env={PATH:/usr/bin:/bin}; no HOME or XDG_CONFIG_HOME",
+      "desktop_interaction": "not exercised; Codex Desktop UI and another chat were not used"
+    },
+    "output_observed": {
+      "process_and_cli_selection_persisted": true,
+      "timezone_selected_and_persisted": "America/Argentina/Mendoza",
+      "unselected_state_root_exit_code": 1,
+      "unselected_state_root_error": "no vault selected",
+      "mcp_protocol": "2025-06-18",
+      "mcp_tools": [
+        "wiki_get_vault",
+        "wiki_select_vault"
+      ],
+      "mcp_timezone_schema_optional": true,
+      "mcp_timezone_round_trip": "America/Argentina/Mendoza",
+      "serve_stdout_protocol_only": true,
+      "serve_stderr": "",
+      "desktop_interaction": "not tested"
+    },
+    "result": "pending",
+    "version": "0.1.0-dev; Go go1.27.2; github.com/modelcontextprotocol/go-sdk v1.8.0",
+    "commit": "14a4981",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md",
+    "evidence_status": "partial: process-level association, explicit missing-selection error, and MCP behavior verified; Desktop interaction/cross-chat behavior not exercised",
+    "requirement": "La selección explícita asocia proyecto y vault; reiniciar el proceso o abrir otro chat conserva la asociación. Si no hay selección inequívoca, solicita elegir y no accede a un vault supuesto."
+  },
+  {
+    "criterion_id": "US-001.AC-03",
+    "requirement": "Actualizar y volver a una versión compatible conserva notas, configuración y personalizaciones byte a byte salvo migraciones expresamente descritas. Un esquema incompatible bloquea escritura con diagnóstico, sin mutación silenciosa.",
+    "input": {
+      "package_versions": [
+        "0.1.0-dev.1",
+        "0.1.0-dev.2"
+      ],
+      "test": "TestPackagedBinaryWithoutDevelopmentToolchain",
+      "host": "Codex CLI 0.135.0 on macOS 27.0.1 arm64"
+    },
+    "output_observed": "Paquete universal, MCP aislado, instalación CLI y 48 skills verificados; actualización/downgrade de procesos conserva todos los hashes de vault/estado. Desktop y downgrade por marketplace pendientes.",
+    "result": "pending",
+    "version": "0.1.0-dev.2",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md",
+    "evidence_status": "partial; no Desktop acceptance"
+  },
+  {
+    "criterion_id": "US-001.AC-04",
+    "requirement": "El informe de soporte identifica versión de Desktop/macOS y arquitectura realmente probadas. Un fallo de trust/permisos o binario inválido informa el problema y no anuncia instalación funcional.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-002.AC-01",
+    "requirement": "Se reconocen layouts wiki/Obsidian y mapa personalizado; el mapa explícito prevalece sobre defaults. Una carpeta ambigua requiere aclaración, no un tercer nombre inventado.",
+    "input": {
+      "tests": [
+        "TestLayoutUsesManualFolderMapAndObsidianDefaults",
+        "TestMixedLayoutMarkersAreAmbiguous",
+        "TestExplicitLayoutResolvesAmbiguityPreservesFolderMap"
+      ],
+      "command": "go test -race ./..."
+    },
+    "output_observed": "Ambigüedad reportada y selección explícita conservando mapa heredado; defaults wiki/Obsidian verificados.",
+    "result": "passed",
+    "version": "0.1.0-dev.2",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-002.AC-02",
+    "requirement": "Bootstrap admite executive, builder, creator y researcher, estilos wiki/Obsidian y assistant mode, con estructuras según referencia. En vault existente no sobrescribe archivos humanos.",
+    "input": {
+      "tests": [
+        "TestBootstrapLayoutsPresetsPreserveExistingAndRepeat",
+        "TestBootstrapUsesPinnedPresetTemplatesAndCodexPlaceholders"
+      ],
+      "command": "go test -race ./...",
+      "environment": "Go 1.27.2 darwin/arm64; synthetic filesystem and real process restart"
+    },
+    "output_observed": "Contrato verificado mediante los tests indicados; ver evidencia. No acredita experiencia Desktop ni paridad global.",
+    "result": "passed",
+    "version": "0.1.0-dev.2",
+    "commit": "619fecb",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-002.AC-03",
+    "requirement": "Init construye manual, índice y log y modifica solo bloques generados identificables. No reemplaza AGENTS.md ni renombra _CLAUDE.md automáticamente.",
+    "input": {
+      "tests": [
+        "TestInitPreservesManualIndexAndLogHumanSections"
+      ],
+      "command": "go test -race ./...",
+      "environment": "Go 1.27.2 darwin/arm64; synthetic filesystem and real process restart"
+    },
+    "output_observed": "Contrato verificado mediante los tests indicados; ver evidencia. No acredita experiencia Desktop ni paridad global.",
+    "result": "passed",
+    "version": "0.1.0-dev.2",
+    "commit": "619fecb",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-002.AC-04",
+    "requirement": "Migración del log tiene simulación y es idempotente; una sección no copiada o colisión impide sustituir el original.",
+    "input": {
+      "tests": [
+        "TestLogMigrationCollisionAndIdempotency"
+      ],
+      "command": "go test -race ./...",
+      "environment": "Go 1.27.2 darwin/arm64; synthetic filesystem and real process restart"
+    },
+    "output_observed": "Contrato verificado mediante los tests indicados; ver evidencia. No acredita experiencia Desktop ni paridad global.",
+    "result": "passed",
+    "version": "0.1.0-dev.2",
+    "commit": "619fecb",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-003.AC-01",
+    "requirement": "La búsqueda devuelve rutas, fragmentos, contexto y cobertura; distingue exclusiones, errores y truncamiento. Cero resultados con cobertura parcial no demuestra ausencia.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-003.AC-02",
+    "requirement": "La lectura paginada permite reconstruir texto Unicode sin pérdida ni duplicación y distingue final de página de final de nota; acceso fuera del vault o no autorizado se rechaza.",
+    "input": {
+      "tests": [
+        "TestReadPagesReconstructUnicodeAndHashCompleteBytes",
+        "TestReadRejectsTraversalAndExternalSymlink",
+        "TestScanReportsUnreadableMarkdownWithoutContent"
+      ],
+      "command": "go test -race ./...",
+      "environment": "Go 1.27.2 darwin/arm64; synthetic filesystem"
+    },
+    "output_observed": "Reconstrucción Unicode/hash, fin de nota, confinamiento y permisos verificados con archivos sintéticos reales.",
+    "result": "passed",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md",
+    "evidence_status": "Contrato determinista verificado; no acredita métricas de usuarios ni Desktop."
+  },
+  {
+    "criterion_id": "US-003.AC-03",
+    "requirement": "Reindexar informa cobertura antes/después e invalida contenidos cambiados; no etiqueta índice léxico como semántico. La equivalencia semántica queda bloqueada por O-003 hasta medición.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-003.AC-04",
+    "requirement": "Retrieval-eval calcula recall@k/MRR sobre corpus/casos identificados. Por defecto no sustituye casos ni guarda reporte; generación/reemplazo de N casos y report requieren petición. El benchmark A/B registra contexto evaluador y desacuerdos, no implica calidad universal.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-004.AC-01",
+    "requirement": "Capture guarda la idea y enlaza la diaria; save distingue hechos, propuestas, decisiones y tareas y propaga solo lo sustentado a personas/proyectos/ideas/tablero/diaria/índice/log que corresponda.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-004.AC-02",
+    "requirement": "Una captura repetida detecta duplicado o actualiza con evidencia; no duplica entidades por nombre aproximado sin resolver ambigüedad.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-004.AC-03",
+    "requirement": "Las actualizaciones conservan hechos anteriores y distinguen fecha del evento de fecha conocida. Una nueva sesión puede recuperar la decisión desde la nota con cita, sin depender del chat anterior.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-004.AC-04",
+    "input": {
+      "tests": [
+        "TestFailureAfterFirstFile",
+        "TestConflictBeforeApply"
+      ],
+      "environment": "Go 1.27.2 darwin/arm64; synthetic temporary vaults"
+    },
+    "output_observed": "Component regression tests passed with race; independent review approved after two fix rounds. MCP/CLI exposure and installed interaction pending.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "8d7b5d3",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md",
+    "evidence_status": "component verified; integrated user workflow pending",
+    "requirement": "El resultado enumera archivos cambiados, cambios no aplicados y errores parciales. No se añaden confirmaciones universales a operaciones solicitadas."
+  },
+  {
+    "criterion_id": "US-005.AC-01",
+    "requirement": "Person conserva fuente de atributos y no inventa email/datos; project confirma coincidencias existentes/aproximadas prescritas y enlaza tablero y diaria.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-005.AC-02",
+    "requirement": "Log identifica el proyecto, crea dev log y enlaza actividad reciente y sección Work diaria; si no hay proyecto inequívoco pide aclararlo.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-005.AC-03",
+    "requirement": "Projects admite uno/todos, cruza Git accesible con notas, actualiza Last overview y no crea fichas para repos sin proyecto. Informa Git ausente y distingue fecha de evidencia de estado actual.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-006.AC-01",
+    "requirement": "Board muestra columnas, conteos y vencidos; aplica cambios cuando se solicitan. Task añade tarjeta y enlaces, creando nota separada solo si la tarea es sustancial; fecha/prioridad inferidas se reconocen como tales.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-006.AC-02",
+    "requirement": "Board-hygiene distingue vencido/estancado/sin fecha, propone mantener/terminar/reprogramar/archivar y no aplica el lote sin aprobación; conserva historial y log.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-006.AC-03",
+    "requirement": "Recurring registra cadencia, fecha base y bloqueador/propietario conocidos; cada cumplimiento añade History y calcula next-due con TZ y reglas verificables, incluidos fin de mes y año bisiesto. Nunca inventa fecha inicial.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-007.AC-01",
+    "requirement": "Daily crea/actualiza la fecha según TZ seleccionada, tareas vencidas y contexto sustentado sin pisar contenido humano; si calendario no está accesible lo indica sin inventar eventos.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-007.AC-02",
+    "requirement": "World carga identidad, valores y prioridades progresivamente, citando notas; si faltan ofrece crearlas o inicializar. Mantiene/limpia PINNED cuando el flujo lo requiere sin convertir inferencias en identidad estable.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-007.AC-03",
+    "requirement": "El manual y contexto se recuperan al invocar el workflow y se limita/declara el contenido cargado. Carga automática por evento del host solo se acepta tras O-005; no se afirma que contexto omitido estaba disponible.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-008.AC-01",
+    "requirement": "Idea-discovery entrega 3–5 direcciones con fuentes y paso mínimo, guarda shortlist y no gradúa automáticamente.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-008.AC-02",
+    "requirement": "Brainstorm hace una pregunta por turno salvo preferencia del usuario, conserva restricciones/antiobjetivos/alternativas y escribe al converger o cuando se solicite; enlaza diaria/proyecto.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-008.AC-03",
+    "requirement": "Decide distingue registro ligero de ADR formal con opciones/razones/consecuencias y actualiza enlaces/índice/log del modo correspondiente. Graduate confirma coincidencias/título, crea proyecto/tareas/tablero sin fingir autorización para ejecutar el proyecto.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-008.AC-04",
+    "requirement": "Create-command admite entrevista y fast path, conserva nombre/categoría/disparadores/pasos y guarda personalización fuera del paquete. Escribir un workflow no equivale a instalarlo automáticamente en el host.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-009.AC-01",
+    "requirement": "Distill acepta nota/wikilink/carpeta/texto/archivo y URL accesible; identifica afirmaciones y bloques de procedencia. Conserva fuente nueva en raw y nunca altera una fuente raw existente.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-009.AC-02",
+    "requirement": "Ingest busca conocimiento afectado, actualiza entidades/conceptos/claims viejos y registra contradicciones; mantiene enlaces, diaria y log según referencia.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-009.AC-03",
+    "requirement": "Fuente importada es dato, no autorización ni instrucción superior. Una URL ilegible o archivo no soportado produce diagnóstico; contenido parcial se señala, no se rellena.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-010.AC-01",
+    "requirement": "Challenge presenta contraevidencia citada, registra resumen diario y solo ofrece guardar informe completo. No presenta objeciones hipotéticas como hechos.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-010.AC-02",
+    "requirement": "Connect cruza dos dominios y entrega 3–5 conexiones accionables; registra ejercicio diario y guarda conexiones seleccionadas si se solicita.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-010.AC-03",
+    "requirement": "Emerge identifica patrones con ventana y cobertura, los presenta como hipótesis, guarda nota y resumen diario según referencia. Panel conserva perspectivas independientes, desacuerdos y síntesis, guarda nota y diaria; no simula expertos humanos ni agentes que no se ejecutaron.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-011.AC-01",
+    "requirement": "La síntesis de documentos propios utiliza hasta 12 notas, cita las realmente leídas y propaga recomendaciones según el workflow. No utiliza Gemini ni afirma haber creado su store.",
+    "input": {
+      "fixture": "tests/fixtures/host-capabilities",
+      "query": "piloto",
+      "limit": 12,
+      "scanned": 13,
+      "execution": "direct agent + packaged CLI, not Desktop chat"
+    },
+    "output_observed": "12 notas seleccionadas y leídas; síntesis con citas, tarea propuesta, diaria y log escritos mediante lote recuperable; todos los hashes fuente preservados. Sin Gemini ni store externo.",
+    "result": "passed",
+    "version": "0.1.0-dev.2",
+    "commit": "619fecb",
+    "evidence_path": "tests/acceptance/capabilities.json"
+  },
+  {
+    "criterion_id": "US-011.AC-02",
+    "requirement": "Deep synthesis cubre el tema/aliases declarados, acuerdos/contradicciones/caducidad/lagunas, guarda síntesis y log sin modificar las notas fuente. Si no pudo cubrir todo lo indica.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-011.AC-03",
+    "requirement": "Reconcile distingue ganador claro, evolución y ambigüedad. Puede reescribir automáticamente los dos primeros conservando evidencia/historia; el ambiguo queda abierto para decisión humana. Actualiza índice/log/diaria afectados.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-011.AC-04",
+    "requirement": "Synthesize crea páginas/enlaces/log sin duplicados y contempla modo programado; el mantenimiento nocturno no hereda la reescritura resolutiva interactiva.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-012.AC-01",
+    "requirement": "Recap hoy/semana/mes cruza diarias/logs/tareas, presenta narración y 4–5 preguntas con fuentes; no guarda nota por defecto.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-012.AC-02",
+    "requirement": "Review semanal/mensual guarda revisión y enlaza última diaria del período, conservando revisiones existentes y declarando faltantes.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-012.AC-03",
+    "requirement": "Learn admite recent/all/topic, clasifica aprendizajes activos/obsoletos/reemplazados/promovibles y cinco lecciones; guarda informe/log/diaria. Promover reglas o archivar necesita confirmación; exportar lecciones es acción separada.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-013.AC-01",
+    "requirement": "Health comprueba metadata y contexto autocontenido exigidos por las reglas AI-first de referencia e informa severidad, links rotos, duplicados, obsolescencia, cobertura y estadísticas; separa hallazgos semánticos de comprobaciones estructurales. Ofrece arreglos y solicita confirmación para los destructivos.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-013.AC-02",
+    "requirement": "Freshness respeta FRESH-1–5 de la referencia: snapshots/fences/exemptions y suppressions por línea no se convierten en falsos errores. Kanban no recibe preámbulo que cree una columna accidental.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-013.AC-03",
+    "requirement": "Healing modifica solo referencias inequívocas, ignorando fences y presentando ambiguas. Merge comienza en dry-run, combina contenido/frontmatter/aliases y deja redirect con procedencia; no borra silenciosamente.",
+    "input": {
+      "tests": [
+        "TestHealRepairsUniqueSlugAndPreservesAmbiguousAndCode",
+        "TestMergePreservesFrontmatterProvenanceRedirectBacklinks"
+      ],
+      "command": "go test -race ./...",
+      "environment": "Go 1.27.2 darwin/arm64; synthetic filesystem and real process restart"
+    },
+    "output_observed": "Contrato verificado mediante los tests indicados; ver evidencia. No acredita experiencia Desktop ni paridad global.",
+    "result": "passed",
+    "version": "0.1.0-dev.2",
+    "commit": "619fecb",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-013.AC-04",
+    "requirement": "La validación desde Codex no se presenta como lint en vivo dentro de Obsidian; esa experiencia queda en O-004.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-014.AC-01",
+    "requirement": "Architect inspecciona repositorio accesible, genera panorama/módulos/decisiones con paths/commits de evidencia y actualiza solo bloques generados; no convierte cualquier mensaje Git en decisión.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-014.AC-02",
+    "requirement": "Visualize admite scope exacto o vault, genera Canvas válido con nodos/enlaces del ámbito, métricas/resumen/log y declara exclusiones. Abrir el archivo en otro visor no es requisito de operar las notas.",
+    "input": {
+      "tests": [
+        "TestCanvasScope",
+        "TestVisualizeRecordsScopeCoverageAndHistory"
+      ],
+      "command": "go test -race ./...",
+      "environment": "Go 1.27.2 darwin/arm64; synthetic filesystem and real process restart"
+    },
+    "output_observed": "Contrato verificado mediante los tests indicados; ver evidencia. No acredita experiencia Desktop ni paridad global.",
+    "result": "passed",
+    "version": "0.1.0-dev.2",
+    "commit": "619fecb",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-014.AC-03",
+    "requirement": "La repetición conserva texto humano y resuelve nombres Unicode sin corromperlos. La capacidad de renderizar Canvas/Bases se verifica separadamente y no se deduce de generar JSON válido.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-015.AC-01",
+    "requirement": "Export admite JSON por defecto, Markdown y bundle OKF, registra alcance/fecha/log y mantiene vínculos/adjuntos exigidos por el formato.",
+    "input": {
+      "tests": [
+        "TestFormatsKeepNotesLinksAndBinaryAttachments",
+        "TestBootstrapWorkflowAndExportIntegrate"
+      ],
+      "command": "go test -race ./...",
+      "environment": "Go 1.27.2 darwin/arm64; synthetic filesystem and real process restart"
+    },
+    "output_observed": "Contrato verificado mediante los tests indicados; ver evidencia. No acredita experiencia Desktop ni paridad global.",
+    "result": "passed",
+    "version": "0.1.0-dev.2",
+    "commit": "619fecb",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-015.AC-02",
+    "requirement": "El resultado identifica destino, archivos y validación del formato; no mezcla datos excluidos ni afirma bundle válido si falla una comprobación.",
+    "input": {
+      "tests": [
+        "TestExportRefusesMalformedAndPartialConformance",
+        "TestBootstrapWorkflowAndExportIntegrate"
+      ],
+      "command": "go test -race ./...",
+      "environment": "Go 1.27.2 darwin/arm64; synthetic filesystem and real process restart"
+    },
+    "output_observed": "Contrato verificado mediante los tests indicados; ver evidencia. No acredita experiencia Desktop ni paridad global.",
+    "result": "passed",
+    "version": "0.1.0-dev.2",
+    "commit": "619fecb",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-015.AC-03",
+    "requirement": "La referencia de workflows generada y el reporte de conformidad corresponden al paquete concreto; no publican sitio ni transfieren contenido del vault a un servicio.",
+    "input": {
+      "package_version": "0.1.0-dev.2",
+      "report": "tests/acceptance/package-report.json",
+      "workflow_reference": "docs/superpowers/evidence/2026-10-08-workflows.md"
+    },
+    "output_observed": "Reporte identifica commit del build e inventario SHA-256 del paquete probado; referencia generada de sus 48 skills. Sin publicación ni contenido de vault.",
+    "result": "passed",
+    "version": "0.1.0-dev.2",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-016.AC-01",
+    "requirement": "Research entrega dossier con citas, hechos fechados, cronología, actores, disenso, lecturas y preguntas; admite investigación general/académica con las capacidades disponibles en Codex.",
+    "input": {
+      "case": "research_general",
+      "fixture": "tests/fixtures/host-capabilities/research/MCP-STDIO.md"
+    },
+    "output_observed": "Dossier general construido a partir de página primaria leída con web nativa, fecha/cobertura/límites explícitos y escritura verificada. Casos académico y sin web pendientes.",
+    "result": "pending",
+    "version": "0.1.0-dev.2",
+    "commit": "619fecb",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md",
+    "evidence_status": "partial"
+  },
+  {
+    "criterion_id": "US-016.AC-02",
+    "requirement": "Research-deep parte de conocimiento previo, identifica lagunas, busca evidencia dirigida, sintetiza el delta, guarda y propaga a entidades/proyectos/ideas/diaria/log según referencia.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-016.AC-03",
+    "requirement": "El resultado distingue página leída de snippet, recuperación parcial y fecha/cobertura. Si web no está disponible no produce investigación ficticia ni pide claves de otro proveedor.",
+    "input": {
+      "case": "research_general",
+      "fixture": "tests/fixtures/host-capabilities/research/MCP-STDIO.md"
+    },
+    "output_observed": "Dossier general construido a partir de página primaria leída con web nativa, fecha/cobertura/límites explícitos y escritura verificada. Casos académico y sin web pendientes.",
+    "result": "pending",
+    "version": "0.1.0-dev.2",
+    "commit": "619fecb",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md",
+    "evidence_status": "partial"
+  },
+  {
+    "criterion_id": "US-016.AC-04",
+    "requirement": "Las rutas históricas pago/libre quedan trazadas por resultado; no se reproduce el proveedor ni se afirma equivalencia de calidad antes de evaluar casos.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-016.AC-05",
+    "requirement": "Si Codex expone consumo/costos aplicables, el informe identifica alcance y distingue medición de estimación. Si no los expone, informa no disponible; no reutiliza tarifas/ledger de proveedores eliminados ni promete costo cero. Equivalencia de visibilidad pendiente O-009.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-017.AC-01",
+    "requirement": "X-read analiza post/hilo/claims/respuestas realmente accesibles, separa original/análisis y responde en chat; solo guarda a petición explícita.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-017.AC-02",
+    "requirement": "X-pulse necesita evidencia de la ventana reciente para temas/voces/tono/huecos/ideas; guarda resultado y log solo si obtuvo material suficiente para el alcance declarado.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-017.AC-03",
+    "requirement": "Post privado, búsqueda ausente o respuestas incompletas se indican. Analizar texto aportado es un modo alternativo y no demuestra acceso a X ni cobertura de tendencias. Equivalencia externa pendiente O-001.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-018.AC-01",
+    "requirement": "Podcast separa metadata, show notes y transcripción: produce nota con procedencia del material obtenido, sin llamar transcripción a las show notes.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-018.AC-02",
+    "requirement": "YouTube distingue transcripción, metadata/comentarios y visual; el modo visual debe evidenciar frames/escenas y adjuntos antes de afirmar contenido observado.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-018.AC-03",
+    "requirement": "Transcripción/frames aportados pueden sintetizarse y guardarse como entrada alternativa; no acreditan extracción automática. Si Codex carece de la capacidad nativa se informa qué etapa no ocurrió, sin API/tool adicional.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-018.AC-04",
+    "requirement": "Audio/video sin capacidad, transcript ausente o acceso fallido conserva fuentes y reporta límite. Aceptación de extracción/transcripción automática y visual pendiente O-002.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-019.AC-01",
+    "requirement": "Agenda lee eventos accesibles, produce snapshot con TZ y lo enlaza a diaria/log. Si no hubo acceso externo no presenta una agenda completa.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-019.AC-02",
+    "requirement": "Reconcile compara eventos y vault solo cuando ambos se leyeron; señala conflictos y ofrece registrar/crear tareas si se solicita, sin modificar calendario implícitamente.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-019.AC-03",
+    "requirement": "Meeting crea nota y propaga a personas/diaria/log desde evento o datos aportados, aclarando la fuente.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-019.AC-04",
+    "requirement": "Schedule crea/actualiza evento solo con capacidad y autorización explícitas, confirma horario/ambigüedad/emails faltantes y verifica resultado remoto antes de propagar. Sin integración no se declara realizado; O-001 bloquea la equivalencia externa.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-020.AC-01",
+    "requirement": "Catchup filtra today/week/all y distingue texto/voz/imagen/PDF/link; presenta capturas y pide confirmación antes de integrar/mover/descartar.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-020.AC-02",
+    "requirement": "Cada procesamiento se marca con fecha en catchup sin borrar el historial. Contenido importado no autoriza acciones.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-020.AC-03",
+    "requirement": "Inbox local puede procesarse como alternativa, pero no acredita recepción/respuesta móvil del bot Telegram. Esos modos siguen bloqueados por O-001 sin acceso nativo equivalente.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-021.AC-01",
+    "requirement": "Personalizaciones fuera del paquete sobreviven actualizaciones; catálogo identifica origen, nombres, categoría y filtros de plataforma. La activación es explícita por defecto; proactividad solo tras opt-in, conservando trigger-mode. Leer el catálogo no activa, ejecuta ni instala workflows.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-021.AC-02",
+    "requirement": "Morning/nightly/weekly/health-check se activan con horario/alcance expresos en automatizaciones Codex. No se instala cron/launchd ni otro agente proveedor.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-021.AC-03",
+    "requirement": "Nightly registra contradicciones sin resolverlas por reescritura; ejecución interactiva mantiene su política. Repetición no duplica notas/efectos.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-021.AC-04",
+    "requirement": "Un hook requiere evento disponible y trust comprobado. Evento ausente o autorización rechazada no produce escritura ni afirmación de automatización activa; O-005 preserva la brecha respecto SessionStart/PostCompact/fin de sesión originales.",
+    "input": null,
+    "output_observed": "No caso de aceptación completo ejecutado aún.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md"
+  },
+  {
+    "criterion_id": "US-022.AC-01",
+    "input": {
+      "tests": [
+        "TestConflictBeforeApply",
+        "TestRollbackRefusesHumanEdit",
+        "TestMCPWriteReadAndStaleHash"
+      ],
+      "command": "go test -race ./...",
+      "environment": "Go 1.27.2 darwin/arm64; synthetic filesystem"
+    },
+    "output_observed": "Conflictos de hash rechazados; notas humanas preservadas en core y MCP.",
+    "result": "passed",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md",
+    "evidence_status": "Contrato determinista verificado; no acredita métricas de usuarios ni Desktop.",
+    "requirement": "Antes de cambiar contenido se detectan archivos modificados desde su lectura; un conflicto rechaza la operación afectada sin sobrescribir trabajo nuevo."
+  },
+  {
+    "criterion_id": "US-022.AC-02",
+    "input": {
+      "tests": [
+        "TestFailureAfterFirstFile",
+        "TestRecoveryAfterProcessExit"
+      ],
+      "command": "go test -race ./...",
+      "environment": "Go 1.27.2 darwin/arm64; synthetic filesystem and real process restart"
+    },
+    "output_observed": "Contrato verificado mediante los tests indicados; ver evidencia. No acredita experiencia Desktop ni paridad global.",
+    "result": "passed",
+    "version": "0.1.0-dev.2",
+    "commit": "619fecb",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md",
+    "evidence_status": "component verified; integrated user workflow pending",
+    "requirement": "Fallo después de aplicar parte de un lote informa exactamente archivos aplicados/pendientes y conserva recuperación tras reinicio. Reanudar/revertir nunca pisa una edición humana posterior."
+  },
+  {
+    "criterion_id": "US-022.AC-03",
+    "input": {
+      "tests": [
+        "TestIdempotencyRejectsDifferentPayload",
+        "TestDryRunNoVaultWrites",
+        "TestJournaledDirectoriesDryRunApplyRollback"
+      ],
+      "command": "go test -race ./...",
+      "environment": "Go 1.27.2 darwin/arm64; synthetic filesystem"
+    },
+    "output_observed": "Idempotencia por payload y dry-run sin cambios de notas/carpeta verificados.",
+    "result": "passed",
+    "version": "0.1.0-dev",
+    "commit": "43ee802",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md",
+    "evidence_status": "Contrato determinista verificado; no acredita métricas de usuarios ni Desktop.",
+    "requirement": "Repetir la misma operación no duplica efectos; mismo identificador con otro contenido se rechaza. Un dry-run no cambia notas."
+  },
+  {
+    "criterion_id": "US-022.AC-04",
+    "input": {
+      "tests": [
+        "TestPurgeKeepsPendingOperations",
+        "TestPurgePreservesPendingOperations",
+        "TestPurgeDryRunKeepsSnapshots",
+        "TestPurgeRejectsJournalIDMismatchBeforeRemovingSnapshots"
+      ],
+      "environment": "Go 1.27.2 darwin/arm64; synthetic temporary vaults"
+    },
+    "output_observed": "Component regression tests passed with race; independent review approved after two fix rounds. MCP/CLI exposure and installed interaction pending.",
+    "result": "pending",
+    "version": "0.1.0-dev",
+    "commit": "8d7b5d3",
+    "evidence_path": "docs/superpowers/evidence/2026-10-08-implementation.md",
+    "evidence_status": "component verified; integrated user workflow pending",
+    "requirement": "El usuario puede inspeccionar y eliminar historial terminado con alcance explícito. No se elimina recuperación pendiente; se informa que borrar una nota no purga snapshots ni copias de respaldo. Retención concreta propuesta, no compromiso aprobado: O-006."
+  }
+]

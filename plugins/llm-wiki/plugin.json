@@ -1,0 +1,29 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "llm-wiki",
+  "version": "0.1.0-dev.2",
+  "description": "Knowledge workflows in Codex with local Markdown, recoverable writes and explicit capability gaps.",
+  "author": {
+    "name": "llm-wiki contributors"
+  },
+  "license": "MIT",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "llm-wiki",
+        "shortDescription": "Conocimiento desde Codex",
+        "longDescription": "Gestiona notas Markdown desde Codex: búsqueda local, contexto, workflows, operaciones recuperables, bootstrap y exportación. Versión de desarrollo; consulta capabilities.json para pruebas pendientes y funciones dependientes del host.",
+        "developerName": "llm-wiki contributors",
+        "category": "Productivity",
+        "capabilities": [
+          "Interactive",
+          "Read",
+          "Write"
+        ],
+        "defaultPrompt": "Selecciona mi vault y carga su contexto operativo.",
+        "logo": "./assets/icon.svg",
+        "composerIcon": "./assets/icon.svg"
+      }
+    }
+  }
+}

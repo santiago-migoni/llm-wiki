@@ -1,0 +1,70 @@
+{
+  "coverage": {
+    "scanned": 13,
+    "excluded": null,
+    "errors": null,
+    "truncated": false
+  },
+  "notes": [
+    {
+      "path": "Source01.md",
+      "text": "---\ndate: 2026-10-08\ntype: concept\nai-first: true\ntags: [piloto]\n---\n\n# Piloto 01\n\n## For future agent\nDato de ensayo sintético, sin usuarios reales.\n\nEl piloto trabaja con notas Markdown.\n",
+      "hash": "c9d409dee6b3eee05bf3ba98c8c4cb7241de0d45fdd5b805cf71b120950661ef"
+    },
+    {
+      "path": "Source02.md",
+      "text": "---\ndate: 2026-10-08\ntype: concept\nai-first: true\ntags: [piloto]\n---\n\n# Piloto 02\n\n## For future agent\nDato de ensayo sintético, sin usuarios reales.\n\nLa búsqueda local del piloto es léxica.\n",
+      "hash": "674edbe7077b28cd938f6fac3551e63bb1925926812b803c39a5fecfa65e4620"
+    },
+    {
+      "path": "Source03.md",
+      "text": "---\ndate: 2026-10-08\ntype: concept\nai-first: true\ntags: [piloto]\n---\n\n# Piloto 03\n\n## For future agent\nDato de ensayo sintético, sin usuarios reales.\n\nEl piloto no midió equivalencia semántica.\n",
+      "hash": "1e9caf111e166fee3333498f9869d0f2d8b9c3386b28457907bd34062478d981"
+    },
+    {
+      "path": "Source04.md",
+      "text": "---\ndate: 2026-10-08\ntype: concept\nai-first: true\ntags: [piloto]\n---\n\n# Piloto 04\n\n## For future agent\nDato de ensayo sintético, sin usuarios reales.\n\nLa configuración del piloto vive fuera del paquete.\n",
+      "hash": "b160df4042ebdd89bc165252832e1c266808f37bd46da5fbb5f6fa2d2b588022"
+    },
+    {
+      "path": "Source05.md",
+      "text": "---\ndate: 2026-10-08\ntype: concept\nai-first: true\ntags: [piloto]\n---\n\n# Piloto 05\n\n## For future agent\nDato de ensayo sintético, sin usuarios reales.\n\nEl piloto conserva fuentes raw.\n",
+      "hash": "394ff9466ea994fe4c3fa888eaca1c8e463162f7200b60ea7a19fd35ac4ab65b"
+    },
+    {
+      "path": "Source06.md",
+      "text": "---\ndate: 2026-10-08\ntype: concept\nai-first: true\ntags: [piloto]\n---\n\n# Piloto 06\n\n## For future agent\nDato de ensayo sintético, sin usuarios reales.\n\nEl piloto exige hashes para actualizar notas.\n",
+      "hash": "655f4e70a1ce23cf7d831f39780f52180f76175a1c44835631b45f22a5961103"
+    },
+    {
+      "path": "Source07.md",
+      "text": "---\ndate: 2026-10-08\ntype: concept\nai-first: true\ntags: [piloto]\n---\n\n# Piloto 07\n\n## For future agent\nDato de ensayo sintético, sin usuarios reales.\n\nEl piloto necesita registrar exclusiones al buscar.\n",
+      "hash": "de56d7fa7283ac6cfdbb63702a7a58047d6e275ac38eae3b8113637e09787546"
+    },
+    {
+      "path": "Source08.md",
+      "text": "---\ndate: 2026-10-08\ntype: concept\nai-first: true\ntags: [piloto]\n---\n\n# Piloto 08\n\n## For future agent\nDato de ensayo sintético, sin usuarios reales.\n\nEl piloto no verificó ejecución Intel.\n",
+      "hash": "12c00f6c210d6dbfc6b758de5e2e0a49762cc7bab891adb5c1832619a13fee73"
+    },
+    {
+      "path": "Source09.md",
+      "text": "---\ndate: 2026-10-08\ntype: concept\nai-first: true\ntags: [piloto]\n---\n\n# Piloto 09\n\n## For future agent\nDato de ensayo sintético, sin usuarios reales.\n\nEl piloto genera Canvas como datos.\n",
+      "hash": "9e8bf74ecf2d8ee5d7d42b417264e4d579d2c041bcae3f7797c8401dfdc1834a"
+    },
+    {
+      "path": "Source10.md",
+      "text": "---\ndate: 2026-10-08\ntype: concept\nai-first: true\ntags: [piloto]\n---\n\n# Piloto 10\n\n## For future agent\nDato de ensayo sintético, sin usuarios reales.\n\nEl piloto no probó render de Canvas.\n",
+      "hash": "ccb2980a0eff5ef23175320af3fad7842dc33d0beba609e04637454b8e893387"
+    },
+    {
+      "path": "Source11.md",
+      "text": "---\ndate: 2026-10-08\ntype: concept\nai-first: true\ntags: [piloto]\n---\n\n# Piloto 11\n\n## For future agent\nDato de ensayo sintético, sin usuarios reales.\n\nEl piloto guarda workflows personales en el vault.\n",
+      "hash": "b718c10db1268216a41c939dc975ee7d78488b657a924bfbbd08a767cdfdbb8f"
+    },
+    {
+      "path": "Source12.md",
+      "text": "---\ndate: 2026-10-08\ntype: concept\nai-first: true\ntags: [piloto]\n---\n\n# Piloto 12\n\n## For future agent\nDato de ensayo sintético, sin usuarios reales.\n\nEl piloto necesita probar continuidad entre chats.\n",
+      "hash": "1fa4254f723a04677a931b94c8701144785f8a7c21508d04b990e267c781300a"
+    }
+  ]
+}

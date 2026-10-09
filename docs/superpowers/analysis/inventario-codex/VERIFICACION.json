@@ -1,0 +1,113 @@
+{
+  "source_commit": "b0089f7666d0c1e3db41c9d587b6f3c997665235",
+  "temporary_checkout": "/private/tmp/llm-wiki-inventory-5d440c6f",
+  "command": "/bin/bash scripts/build.sh --platform agent-skills",
+  "exit_code": 0,
+  "stdout": "[info] Building platform: agent-skills\n[ok] agent-skills → dist/agent-skills/\n",
+  "stderr": "",
+  "generated_skills": [
+    "create-command",
+    "idea-discovery",
+    "notebooklm",
+    "obsidian-architect",
+    "obsidian-board",
+    "obsidian-board-hygiene",
+    "obsidian-brainstorm",
+    "obsidian-capture",
+    "obsidian-catchup",
+    "obsidian-challenge",
+    "obsidian-connect",
+    "obsidian-core",
+    "obsidian-daily",
+    "obsidian-decide",
+    "obsidian-distill",
+    "obsidian-emerge",
+    "obsidian-export",
+    "obsidian-find",
+    "obsidian-graduate",
+    "obsidian-health",
+    "obsidian-ingest",
+    "obsidian-init",
+    "obsidian-learn",
+    "obsidian-log",
+    "obsidian-merge",
+    "obsidian-panel",
+    "obsidian-person",
+    "obsidian-project",
+    "obsidian-projects",
+    "obsidian-recap",
+    "obsidian-reconcile",
+    "obsidian-recurring",
+    "obsidian-reindex",
+    "obsidian-retrieval-eval",
+    "obsidian-review",
+    "obsidian-save",
+    "obsidian-synthesize",
+    "obsidian-task",
+    "obsidian-visualize",
+    "obsidian-world",
+    "podcast",
+    "research",
+    "research-deep",
+    "vault-deep-synthesis",
+    "x-pulse",
+    "x-read",
+    "youtube"
+  ],
+  "missing_commands": [
+    "obsidian-calendar"
+  ],
+  "source_commands": 47,
+  "probe_semantic_help": {
+    "command": "python3 -B dist/agent-skills/skills/obsidian-core/scripts/eval/semantic_search.py --help",
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/private/tmp/llm-wiki-inventory-5d440c6f/dist/agent-skills/skills/obsidian-core/scripts/eval/semantic_search.py\", line 64, in <module>\n    from vault_ops import _SKIP_DIRS as SKIP_DIRS  # noqa: E402\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nModuleNotFoundError: No module named 'vault_ops'\n"
+  },
+  "bundled_components": {
+    "scripts": true,
+    "references": true,
+    "pyproject.toml": true,
+    "integrations": false,
+    "hooks": false,
+    "commands": false,
+    "uv.lock": false
+  },
+  "control_source_semantic_help": {
+    "command": "python3 -B scripts/eval/semantic_search.py --help",
+    "exit_code": 0,
+    "stdout": "usage: semantic_search.py [-h] --path PATH [--build] [--query QUERY]\n                          [--limit LIMIT]\n\nLocal semantic search over the vault (via Ollama)\n\noptions:\n  -h, --help     show this help message and exit\n  --path PATH    Vault root\n  --build        Build/refresh the embedding index\n  --query QUERY  Run a semantic search and print the top matches\n  --limit LIMIT\n",
+    "stderr": ""
+  },
+  "environment": {
+    "python": "3.14.4",
+    "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+    "shell": "/bin/bash"
+  },
+  "limits": "Solo build y ayuda CLI en copia temporal. No instalación en Codex, no vault real, no llamadas API ni evaluación de resultados.",
+  "inventory_checks": {
+    "command_inventory_exact_coverage": 47,
+    "unique_sequential_ids": {
+      "F": 47,
+      "I": 12,
+      "T": 44
+    },
+    "mcp_tools": [
+      "obsidian_search",
+      "obsidian_read_note",
+      "obsidian_save_note",
+      "obsidian_capture",
+      "obsidian_update_note",
+      "obsidian_replace_text",
+      "obsidian_move_note",
+      "obsidian_validate_note",
+      "obsidian_backlinks",
+      "obsidian_vault_health",
+      "obsidian_list_skills",
+      "obsidian_get_skill"
+    ],
+    "source_hashes_verified": 366,
+    "local_links_verified": 53,
+    "constitution_and_reference_unchanged": true
+  }
+}

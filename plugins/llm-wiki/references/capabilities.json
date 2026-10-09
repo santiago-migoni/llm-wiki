@@ -1,0 +1,1629 @@
+{
+  "schema_version": 1,
+  "status_legend": {
+    "planned": "design or inventory only; not implemented or verified",
+    "blocked": "requires host/backend evidence or explicit scope decision",
+    "component_verified": "implemented backend contract verified on synthetic filesystem/STDIO; does not imply workflow or Desktop acceptance"
+  },
+  "tool_contracts": [
+    "wiki_select_vault",
+    "wiki_get_vault",
+    "wiki_reindex",
+    "wiki_retrieval_eval",
+    "wiki_init",
+    "wiki_bootstrap",
+    "wiki_migrate_log",
+    "wiki_merge",
+    "wiki_export",
+    "wiki_save_workflow",
+    "wiki_get_context",
+    "wiki_read_metadata",
+    "wiki_read_note",
+    "wiki_search",
+    "wiki_save_note",
+    "wiki_update_note",
+    "wiki_replace_text",
+    "wiki_move_note",
+    "wiki_capture",
+    "wiki_backlinks",
+    "wiki_validate_note",
+    "wiki_vault_health",
+    "wiki_list_skills",
+    "wiki_get_skill",
+    "wiki_apply_changes",
+    "wiki_recover",
+    "wiki_purge_history",
+    "wiki_visualize",
+    "wiki_heal_links"
+  ],
+  "tool_contract_source": "internal/service and internal/mcp; core tests and MCP STDIO integration verified, Desktop install pending",
+  "F": [
+    {
+      "id": "F-001",
+      "name": "create-command",
+      "modes": [
+        {
+          "name": "interview",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "fast-path",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "discovery-after-authoring",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-create-command/SKILL.md",
+      "write_policy": "Escribe un nuevo `commands/<name>.md`; recomienda compilar/instalar y eventualmente commit."
+    },
+    {
+      "id": "F-002",
+      "name": "idea-discovery",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-idea-discovery/SKILL.md",
+      "write_policy": "Guarda shortlist en carpeta de ideas con enlaces fuente; no gradúa ideas automáticamente."
+    },
+    {
+      "id": "F-003",
+      "name": "notebooklm",
+      "modes": [
+        {
+          "name": "vault-synthesis-up-to-12",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "limit-enforced",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "propagation",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "host-search-absent",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-notebooklm/SKILL.md",
+      "write_policy": "Sube notas a store temporal, escribe síntesis, elimina store; después modifica notas de entidades/proyectos y diaria."
+    },
+    {
+      "id": "F-004",
+      "name": "obsidian-architect",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-architect/SKILL.md",
+      "write_policy": "Crea/actualiza notas de arquitectura con bloques marcados; enlaza proyecto y nota diaria; log."
+    },
+    {
+      "id": "F-005",
+      "name": "obsidian-board-hygiene",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-board-hygiene/SKILL.md",
+      "write_policy": "Modifica tablero solo después de aprobación; movimientos aditivos/estrikethrough; log."
+    },
+    {
+      "id": "F-006",
+      "name": "obsidian-board",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-board/SKILL.md",
+      "write_policy": "Cambia tablero: marca/mueve completados y añade tareas; el texto no menciona log."
+    },
+    {
+      "id": "F-007",
+      "name": "obsidian-brainstorm",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-brainstorm/SKILL.md",
+      "write_policy": "Guarda nota en ideas/conceptos; la enlaza desde la diaria y proyecto relacionado si existe; ofrece `obsidian-graduate` o `obsidian-decide`."
+    },
+    {
+      "id": "F-008",
+      "name": "obsidian-calendar",
+      "modes": [
+        {
+          "name": "agenda",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "reconcile",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "meeting",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "schedule",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-calendar/SKILL.md",
+      "write_policy": "Agenda guarda snapshot, log y diaria; meeting crea nota y propaga a personas/diaria/log; schedule es el único modo que crea/actualiza eventos externos y propaga a tarea/personas/diaria/log. Reconcile solo ofrece registrar resultado y crear tareas si el usuario lo solicita."
+    },
+    {
+      "id": "F-009",
+      "name": "obsidian-capture",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-capture/SKILL.md",
+      "write_policy": "Guarda la idea en carpeta de ideas y la menciona en la nota diaria."
+    },
+    {
+      "id": "F-010",
+      "name": "obsidian-catchup",
+      "modes": [
+        {
+          "name": "today",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "week",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "all",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "text",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "voice",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "image",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "pdf",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "link",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "remote-queue-absent",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-catchup/SKILL.md",
+      "write_policy": "Revisa capturas con el usuario y pide confirmación antes de escribir: integra, mueve o descarta entradas sueltas, y marca con fecha su procesamiento en catchup.md sin borrar el historial de la cola."
+    },
+    {
+      "id": "F-011",
+      "name": "obsidian-challenge",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-challenge/SKILL.md",
+      "write_policy": "Siempre registra resumen en la diaria; ofrece guardar el informe completo como nota independiente (no lo guarda automáticamente)."
+    },
+    {
+      "id": "F-012",
+      "name": "obsidian-connect",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-connect/SKILL.md",
+      "write_policy": "Ofrece guardar conexiones elegidas en ideas; siempre registra el ejercicio en la diaria."
+    },
+    {
+      "id": "F-013",
+      "name": "obsidian-daily",
+      "modes": [
+        {
+          "name": "create",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "update",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "calendar-absent",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-daily/SKILL.md",
+      "write_policy": "Crea o actualiza la nota diaria con eventos de calendario, tareas vencidas y contexto de conversación."
+    },
+    {
+      "id": "F-014",
+      "name": "obsidian-decide",
+      "modes": [
+        {
+          "name": "lightweight",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "formal-adr",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-decide/SKILL.md",
+      "write_policy": "Modo ligero añade decisiones fechadas a proyectos y diaria; modo formal crea ADR, actualiza proyecto e índice y añade log/enlace diario."
+    },
+    {
+      "id": "F-015",
+      "name": "obsidian-distill",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-distill/SKILL.md",
+      "write_policy": "Guarda la fuente intacta en `raw/` si es local/URL y aún no está allí; escribe distilación, enlaza desde fuente y diaria y añade log."
+    },
+    {
+      "id": "F-016",
+      "name": "obsidian-emerge",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-emerge/SKILL.md",
+      "write_policy": "Presenta patrones y evidencia, ofrece guardar informe independiente o dentro de proyecto, y añade resumen breve a la diaria."
+    },
+    {
+      "id": "F-017",
+      "name": "obsidian-export",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-export/SKILL.md",
+      "write_policy": "Escribe snapshot a `_export/vault-snapshot.json`, `.md` o `_export/okf/`; añade log."
+    },
+    {
+      "id": "F-018",
+      "name": "obsidian-find",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-find/SKILL.md",
+      "write_policy": "Solo lectura/respuesta."
+    },
+    {
+      "id": "F-019",
+      "name": "obsidian-graduate",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-graduate/SKILL.md",
+      "write_policy": "Crea proyecto, notas/tareas y entradas de tablero; enlaces desde diaria/log."
+    },
+    {
+      "id": "F-020",
+      "name": "obsidian-health",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-health/SKILL.md",
+      "write_policy": "Genera diagnóstico y ofrece fixes seguros; los destructivos requieren confirmación explícita. Ofrece .vault-config.json si miles de hallazgos provienen de carpetas que el usuario no mantiene."
+    },
+    {
+      "id": "F-021",
+      "name": "obsidian-ingest",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-ingest/SKILL.md",
+      "write_policy": "Amplias escrituras/reescrituras en varias notas, log y enlaces; puede requerir fuentes externas."
+    },
+    {
+      "id": "F-022",
+      "name": "obsidian-init",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-init/SKILL.md",
+      "write_policy": "Crea/actualiza artefactos estructurales y migra log si corresponde."
+    },
+    {
+      "id": "F-023",
+      "name": "obsidian-learn",
+      "modes": [
+        {
+          "name": "recent",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "all",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "topic",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "promote-confirmed",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "archive-confirmed",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-learn/SKILL.md",
+      "write_policy": "Guarda el informe en conceptos, añade log y resumen a la diaria; luego ofrece promover reglas o archivar aprendizajes, ambos con confirmación, o exportar las cinco lecciones."
+    },
+    {
+      "id": "F-024",
+      "name": "obsidian-log",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-log/SKILL.md",
+      "write_policy": "Crea dev log e inyecta enlace en actividad reciente del proyecto y sección Work de la diaria."
+    },
+    {
+      "id": "F-025",
+      "name": "obsidian-merge",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-merge/SKILL.md",
+      "write_policy": "Dry-run no escribe; aplicación fusiona y deja redirect, sin borrar silenciosamente."
+    },
+    {
+      "id": "F-026",
+      "name": "obsidian-panel",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-panel/SKILL.md",
+      "write_policy": "Guarda siempre nota `type: synthesis` en conceptos/Ideas y la enlaza desde la diaria; conserva las perspectivas y la síntesis."
+    },
+    {
+      "id": "F-027",
+      "name": "obsidian-person",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-person/SKILL.md",
+      "write_policy": "Crea/actualiza nota de persona y enlaces de interacciones."
+    },
+    {
+      "id": "F-028",
+      "name": "obsidian-project",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-project/SKILL.md",
+      "write_policy": "Crea/actualiza ficha, añade tarjeta kanban y enlaza desde la diaria; una coincidencia existente o nombre aproximado se confirma según el comando."
+    },
+    {
+      "id": "F-029",
+      "name": "obsidian-projects",
+      "modes": [
+        {
+          "name": "one-project",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "all-projects",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "git-present",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "git-absent",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-projects/SKILL.md",
+      "write_policy": "Imprime estado en conversación y actualiza `## Last overview` en cada nota de proyecto; no crea automáticamente notas para repos sin proyecto."
+    },
+    {
+      "id": "F-030",
+      "name": "obsidian-recap",
+      "modes": [
+        {
+          "name": "today",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "week",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "month",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "chat-only",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-recap/SKILL.md",
+      "write_policy": "Presenta el recap en la conversación; el cuerpo no prescribe guardar una nota."
+    },
+    {
+      "id": "F-031",
+      "name": "obsidian-reconcile",
+      "modes": [
+        {
+          "name": "clear-winner",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "evolution",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "ambiguous-conflict",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-reconcile/SKILL.md",
+      "write_policy": "Reescribe automáticamente páginas cuando hay ganador claro o evolución, documentando historial; solo casos genuinamente ambiguos se guardan como conflicto abierto para decisión humana. Después reconstruye secciones afectadas de `index.md`, escribe log y resumen diario."
+    },
+    {
+      "id": "F-032",
+      "name": "obsidian-recurring",
+      "modes": [
+        {
+          "name": "create",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "complete-and-advance",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "month-end",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "timezone",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-recurring/SKILL.md",
+      "write_policy": "Crea/actualiza el registro recurrente, propaga a proyecto/finanzas y diaria/log; cada cumplimiento añade History y avanza `next-due`."
+    },
+    {
+      "id": "F-033",
+      "name": "obsidian-reindex",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-reindex/SKILL.md",
+      "write_policy": "Actualiza índice local (posible llamada de embeddings/modelo según implementación)."
+    },
+    {
+      "id": "F-034",
+      "name": "obsidian-retrieval-eval",
+      "modes": [
+        {
+          "name": "evaluate",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "report-requested",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "generate-or-replace-explicit",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-retrieval-eval/SKILL.md",
+      "write_policy": "Solo evalúa por defecto; `report` o petición de guardar produce nota baseline. Casos viven en ruta gitignored con paths privados."
+    },
+    {
+      "id": "F-035",
+      "name": "obsidian-review",
+      "modes": [
+        {
+          "name": "week",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "month",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-review/SKILL.md",
+      "write_policy": "Guarda revisión en reviews y la enlaza desde la última diaria del período."
+    },
+    {
+      "id": "F-036",
+      "name": "obsidian-save",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-save/SKILL.md",
+      "write_policy": "Muchas actualizaciones/creaciones de entidades, tareas, decisiones, ideas, nota diaria y log."
+    },
+    {
+      "id": "F-037",
+      "name": "obsidian-synthesize",
+      "modes": [
+        {
+          "name": "interactive",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "scheduled-opt-in",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "coverage-and-duplicates",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-synthesize/SKILL.md",
+      "write_policy": "Crea notas de síntesis y enlaces/log; potencialmente automatizable como tarea periódica."
+    },
+    {
+      "id": "F-038",
+      "name": "obsidian-task",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-task/SKILL.md",
+      "write_policy": "Añade tarjeta al tablero y enlaces a proyecto/diaria; crea nota de tarea separada solo cuando la tarea es sustancial (más de una línea)."
+    },
+    {
+      "id": "F-039",
+      "name": "obsidian-visualize",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-visualize/SKILL.md",
+      "write_policy": "Escribe `atlas.canvas` (o canvas de scope), genera un resumen textual de métricas y hallazgos, y añade log."
+    },
+    {
+      "id": "F-040",
+      "name": "obsidian-world",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-obsidian-world/SKILL.md",
+      "write_policy": "Lee contexto progresivamente y presenta estado; durante una tarea compleja puede escribir/limpiar `PINNED.md`; ofrece crear archivos de identidad faltantes o correr `obsidian-init`."
+    },
+    {
+      "id": "F-041",
+      "name": "podcast",
+      "modes": [
+        {
+          "name": "transcript-present",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "transcript-absent",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "audio-capability-absent",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-podcast/SKILL.md",
+      "write_policy": "Descarga/procesa audio cuando se requiere transcribir y guarda nota AI-first automáticamente."
+    },
+    {
+      "id": "F-042",
+      "name": "research-deep",
+      "modes": [
+        {
+          "name": "vault-baseline",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "web-delta",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "propagation",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "no-provider-route",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-research-deep/SKILL.md",
+      "write_policy": "Guarda investigación, actualiza múltiples notas, enlaza diaria y logs; gasto API en modo pago."
+    },
+    {
+      "id": "F-043",
+      "name": "research",
+      "modes": [
+        {
+          "name": "dossier",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "citations-and-dates",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "dissent",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "no-web",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-research/SKILL.md",
+      "write_policy": "Modo pago guarda nota; modo libre requiere síntesis y guardado por agente; log."
+    },
+    {
+      "id": "F-044",
+      "name": "vault-deep-synthesis",
+      "modes": [
+        {
+          "name": "workflow-as-inventoried",
+          "status": "planned",
+          "evidence": "static-design-only"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-vault-deep-synthesis/SKILL.md",
+      "write_policy": "Escribe síntesis en conceptos y log; no altera notas fuente."
+    },
+    {
+      "id": "F-045",
+      "name": "x-pulse",
+      "modes": [
+        {
+          "name": "recent-window",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "x-search-unavailable",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-x-pulse/SKILL.md",
+      "write_policy": "Guarda nota AI-first y añade log automáticamente."
+    },
+    {
+      "id": "F-046",
+      "name": "x-read",
+      "modes": [
+        {
+          "name": "public",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "private",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "inaccessible",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "chat-only",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "save-explicit",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-x-read/SKILL.md",
+      "write_policy": "Por defecto solo chat; guarda nota únicamente a petición explícita."
+    },
+    {
+      "id": "F-047",
+      "name": "youtube",
+      "modes": [
+        {
+          "name": "transcript",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "metadata-and-comments",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "visual-scenes",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        },
+        {
+          "name": "capability-absent",
+          "status": "planned",
+          "evidence": "acceptance-case-required"
+        }
+      ],
+      "status": "planned",
+      "evidence": "static-design-only",
+      "host_capability": "unknown",
+      "skill": "skills/wiki-youtube/SKILL.md",
+      "write_policy": "Guarda nota automáticamente; modo visual descarga temporalmente video, procesa frames y copia destacados al vault."
+    }
+  ],
+  "I": [
+    {
+      "id": "I-001",
+      "capability": "Conectar un cliente MCP a un vault: buscar, leer notas con paginación, crear/capturar notas, actualizar o mover notas, validar, consultar backlinks/salud, descubrir instrucciones",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "I-002",
+      "capability": "Revisar cumplimiento AI-first desde Obsidian",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "I-003",
+      "capability": "Capturar desde Telegram texto, voz, fotos, documentos/PDF y enlaces",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "I-004",
+      "capability": "Investigación web general y académica",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "I-005",
+      "capability": "Investigación profunda comparada con conocimiento previo del vault",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "I-006",
+      "capability": "Investigación de actividad y análisis de publicaciones en X",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "I-007",
+      "capability": "Extraer YouTube a nota: transcripción, metadatos/comentarios y capa visual opcional",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "I-008",
+      "capability": "Extraer podcast de Apple Podcasts, Spotify o RSS",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "I-009",
+      "capability": "Síntesis basada solo en documentos propios con Gemini File Search (`/notebooklm`)",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "I-010",
+      "capability": "Extraer texto de páginas citadas para complementar la investigación profunda",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "I-011",
+      "capability": "Proveedores y modelos compartidos, costes y fallback",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "I-012",
+      "capability": "Pipeline de fuentes de audio, feed y video",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    }
+  ],
+  "T": [
+    {
+      "id": "T-001",
+      "capability": "Manual central del vault: reglas de operación, descubrimiento, lectura de `_CLAUDE.md`, comportamiento por defecto y rutas a comandos",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-002",
+      "capability": "Reglas AI-first para notas: contexto autocontenido, preámbulo “For future agent”, frontmatter, frescura por claim, URL, wikilinks y confianza",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-003",
+      "capability": "Búsqueda completa, antifabricación, tratar fuentes como datos no instrucciones, citas y búsqueda previa contra duplicados",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-004",
+      "capability": "Propagación transversal de cada hecho a proyecto/persona/board/daily/index/log",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-005",
+      "capability": "Historia bi-temporal y preservación de hechos anteriores",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-006",
+      "capability": "Contexto siempre disponible (`SOUL.md` y `CRITICAL_FACTS.md`, límite aprox. 150 tokens)",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-007",
+      "capability": "Inmutabilidad de `raw/`, mantenimiento de `index.md` y `log.md` o logs diarios",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-008",
+      "capability": "Vault vivo: reescritura informada, contradicciones, síntesis y dos salidas (respuesta + actualización)",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-009",
+      "capability": "Esquemas y layouts wiki/Obsidian; tipos, folders, nombres, taxonomía y bases",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-010",
+      "capability": "Política de frescura y lint de afirmaciones volátiles",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-011",
+      "capability": "Plantillas para modo asistente y manual de vault, sección inyectable y regeneración segura",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-012",
+      "capability": "Bootstrap completo con presets executive/builder/creator/researcher, estilos wiki/Obsidian y assistant mode",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-013",
+      "capability": "Instalación/actualización Claude: comandos symlink/copias, skill link, registro SessionStart, config de research opcional",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-014",
+      "capability": "Setup de vault existente, `OBSIDIAN_VAULT_PATH`, hooks PostCompact/SessionStart y MCP opcional",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-015",
+      "capability": "Contexto SessionStart: publica skill root, inyecta manual solo dentro del vault, límite 10k y fallback a lectura; detecta plugin competidor",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-016",
+      "capability": "Validación de notas escritas: comprobaciones AI-first tras herramientas de escritura",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-017",
+      "capability": "Propagación automática PostCompact con resumen de sesión, gate doble opt-in, lock corto, JSONL de ejecución y salida headless",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-018",
+      "capability": "Hook Hermes al final de sesión para recall/propagación y configuración de ejemplo opt-in",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-019",
+      "capability": "Cuatro agentes programados: morning, nightly, weekly, health-check; prompts, pasos y horarios",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-020",
+      "capability": "Diferencia entre ejecución interactiva y headless; slash commands no expanden con `claude -p`",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-021",
+      "capability": "Construcción multiplataforma desde `commands/` con filtros, descripción/triggers/categorías y reescritura de paths",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-022",
+      "capability": "Agent Skills unificado: un skill por comando más `obsidian-core`, AI rules embebidas, preámbulo root y regla global opcional",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-023",
+      "capability": "Build Codex legacy por skills y manual `AGENTS.md`; instala scripts/references en `.codex/`",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-024",
+      "capability": "Adapters por harness (Claude, Gemini, Grok, Hermes, OpenCode, Pi) y ownership metadata",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-025",
+      "capability": "Wrapper antiguo que expone comandos como ejecutables llamando `codex exec`",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-026",
+      "capability": "Actualizador con fast-forward, comprobación de repo/vault, rebuild, gate, backup y rollback al copiar dist",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-027",
+      "capability": "Escaneo de salud: estructura, links rotos, duplicados, cobertura y JSON para agente",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-028",
+      "capability": "Reparación mecánica de wikilinks con matching exacto/slug; triage AI de ambiguos",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-029",
+      "capability": "Merge de notas con unión frontmatter, aliases/merged_from y nota redirect preservada",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-030",
+      "capability": "Migración de `log.md` monolítico a `Logs/fecha.md` con salvaguarda de pérdida",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-031",
+      "capability": "Índice estadístico del vault y bloque generado; omite templates/raw/references/export",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-032",
+      "capability": "Análisis de arquitectura de repositorio, extracción de grafo, minería de commits ADR, export OKF y utilidades de encoding",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-033",
+      "capability": "Análisis de frescura y formato interoperable OKF",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-034",
+      "capability": "Evaluación de recuperación: casos por vault, recall@k/MRR, baseline y diagnóstico coverage/pool/order",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-035",
+      "capability": "Benchmark sintético reproducible de retrieval y evaluación de calidad de respuesta A/B con juez distinto",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-036",
+      "capability": "Inventario/conformance report para verificar builds, además de generación de sitio desde commands",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-037",
+      "capability": "Actualización de facts, summaries y maintenance sobre notas mediante comandos y reglas",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-038",
+      "capability": "Captura y organización de información de conversación, daily, decisión, task, persona, proyecto, devlog",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-039",
+      "capability": "Comandos de pensamiento/síntesis, crítica, emergencia de conexiones, visualización, arquitectura y pizarra",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-040",
+      "capability": "Reglas de escritura por modo de lote, sección sentinel-safe, estilos, status, fechas, archiving y stub notes",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-041",
+      "capability": "Disparadores proactivos y trigger-mode por comando, filtros por plataforma y categorías",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-042",
+      "capability": "Persistencia/integración con Obsidian mediante MCP server/plugin y captura Telegram",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-043",
+      "capability": "Consistencia de referencias/versiones y personalización de fork",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    },
+    {
+      "id": "T-044",
+      "capability": "Límites y privacidad de ejecución: setup opcional de research, API keys, telemetry/cost log",
+      "modes": null,
+      "status": "planned",
+      "evidence": "static-inventory-only",
+      "host_capability": "unknown",
+      "mode_status": "not-separated-by-id-in-source-matrix"
+    }
+  ],
+  "known_gaps": [
+    {
+      "id": "O-001",
+      "modes": [
+        "calendar.agenda",
+        "calendar.reconcile",
+        "calendar.meeting",
+        "calendar.schedule",
+        "catchup.telegram",
+        "x.search"
+      ],
+      "status": "blocked",
+      "reason": "No native route is confirmed in this package; do not simulate external access."
+    },
+    {
+      "id": "O-002",
+      "modes": [
+        "podcast.transcription",
+        "youtube.transcription",
+        "youtube.comments",
+        "youtube.visual-scenes"
+      ],
+      "status": "blocked",
+      "reason": "Audio/video extraction, transcript, comments and scene inspection are not confirmed."
+    },
+    {
+      "id": "O-003",
+      "modes": [
+        "vault.semantic-retrieval"
+      ],
+      "status": "blocked",
+      "reason": "Lexical lookup does not establish semantic-retrieval equivalence."
+    },
+    {
+      "id": "O-005",
+      "modes": [
+        "context.auto-load",
+        "workflow.scheduled"
+      ],
+      "status": "blocked",
+      "reason": "Explicit invocation is default; no hooks/events/schedules are configured or verified."
+    },
+    {
+      "id": "O-009",
+      "modes": [
+        "research.cost-visibility"
+      ],
+      "status": "blocked",
+      "reason": "Host consumption/cost visibility has not been verified."
+    }
+  ],
+  "tool_contract_status": "component_verified"
+}

@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "llm-wiki": {
+      "command": "${PLUGIN_ROOT}/bin/llm-wiki",
+      "args": [
+        "serve"
+      ]
+    }
+  }
+}

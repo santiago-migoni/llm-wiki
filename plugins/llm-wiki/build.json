@@ -1,0 +1,12 @@
+{
+  "architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "go": "go1.27.2",
+  "intel_runtime_tested": false,
+  "runtime_dependencies": [],
+  "sdk": "github.com/modelcontextprotocol/go-sdk@v1.8.0",
+  "source_commit": null,
+  "source_tree_sha256": "a9aeac28e2760fd8653b8304869d511d31736bd1096c1327dc5460cbbe516511"
+}

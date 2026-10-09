@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-08",
+  "kind": "documentary_coverage_only",
+  "checks": [
+    {
+      "file": "COMANDOS.md",
+      "prefix": "F",
+      "expected": 47,
+      "found": 47,
+      "missing": [],
+      "unexpected": []
+    },
+    {
+      "file": "INTEGRACIONES-Y-CICLO.md",
+      "prefix": "I",
+      "expected": 12,
+      "found": 12,
+      "missing": [],
+      "unexpected": []
+    },
+    {
+      "file": "INTEGRACIONES-Y-CICLO.md",
+      "prefix": "T",
+      "expected": 44,
+      "found": 44,
+      "missing": [],
+      "unexpected": []
+    }
+  ],
+  "functional_tests_run": false,
+  "plugin_installed": false
+}

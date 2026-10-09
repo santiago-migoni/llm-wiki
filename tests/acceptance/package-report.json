@@ -1,0 +1,289 @@
+{
+  "scope": "package conformance only; not workflow/Desktop acceptance",
+  "version": "0.1.0-dev.2",
+  "source_commit": "43ee802c91ab08e9899a443e37d128838edbc9d5",
+  "checksum_inventory_sha256": "986abb5f38fe857f5bddf5af7e13c96cb4248f1198cf205a370ceb029e5e6644",
+  "skills": [
+    {
+      "name": "llm-wiki",
+      "description": "Use when the user explicitly invokes llm-wiki or names one of its vault workflows.",
+      "path": "skills/llm-wiki/SKILL.md"
+    },
+    {
+      "name": "wiki-create-command",
+      "description": "Use when the user explicitly invokes wiki-create-command or directly requests the create-command workflow in llm-wiki.",
+      "path": "skills/wiki-create-command/SKILL.md"
+    },
+    {
+      "name": "wiki-idea-discovery",
+      "description": "Use when the user explicitly invokes wiki-idea-discovery or directly requests the idea-discovery workflow in llm-wiki.",
+      "path": "skills/wiki-idea-discovery/SKILL.md"
+    },
+    {
+      "name": "wiki-notebooklm",
+      "description": "Use when the user explicitly invokes wiki-notebooklm or directly requests the notebooklm workflow in llm-wiki.",
+      "path": "skills/wiki-notebooklm/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-architect",
+      "description": "Use when the user explicitly invokes wiki-obsidian-architect or directly requests the obsidian-architect workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-architect/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-board",
+      "description": "Use when the user explicitly invokes wiki-obsidian-board or directly requests the obsidian-board workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-board/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-board-hygiene",
+      "description": "Use when the user explicitly invokes wiki-obsidian-board-hygiene or directly requests the obsidian-board-hygiene workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-board-hygiene/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-brainstorm",
+      "description": "Use when the user explicitly invokes wiki-obsidian-brainstorm or directly requests the obsidian-brainstorm workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-brainstorm/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-calendar",
+      "description": "Use when the user explicitly invokes wiki-obsidian-calendar or directly requests the obsidian-calendar workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-calendar/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-capture",
+      "description": "Use when the user explicitly invokes wiki-obsidian-capture or directly requests the obsidian-capture workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-capture/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-catchup",
+      "description": "Use when the user explicitly invokes wiki-obsidian-catchup or directly requests the obsidian-catchup workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-catchup/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-challenge",
+      "description": "Use when the user explicitly invokes wiki-obsidian-challenge or directly requests the obsidian-challenge workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-challenge/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-connect",
+      "description": "Use when the user explicitly invokes wiki-obsidian-connect or directly requests the obsidian-connect workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-connect/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-daily",
+      "description": "Use when the user explicitly invokes wiki-obsidian-daily or directly requests the obsidian-daily workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-daily/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-decide",
+      "description": "Use when the user explicitly invokes wiki-obsidian-decide or directly requests the obsidian-decide workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-decide/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-distill",
+      "description": "Use when the user explicitly invokes wiki-obsidian-distill or directly requests the obsidian-distill workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-distill/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-emerge",
+      "description": "Use when the user explicitly invokes wiki-obsidian-emerge or directly requests the obsidian-emerge workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-emerge/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-export",
+      "description": "Use when the user explicitly invokes wiki-obsidian-export or directly requests the obsidian-export workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-export/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-find",
+      "description": "Use when the user explicitly invokes wiki-obsidian-find or directly requests the obsidian-find workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-find/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-graduate",
+      "description": "Use when the user explicitly invokes wiki-obsidian-graduate or directly requests the obsidian-graduate workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-graduate/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-health",
+      "description": "Use when the user explicitly invokes wiki-obsidian-health or directly requests the obsidian-health workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-health/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-ingest",
+      "description": "Use when the user explicitly invokes wiki-obsidian-ingest or directly requests the obsidian-ingest workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-ingest/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-init",
+      "description": "Use when the user explicitly invokes wiki-obsidian-init or directly requests the obsidian-init workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-init/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-learn",
+      "description": "Use when the user explicitly invokes wiki-obsidian-learn or directly requests the obsidian-learn workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-learn/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-log",
+      "description": "Use when the user explicitly invokes wiki-obsidian-log or directly requests the obsidian-log workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-log/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-merge",
+      "description": "Use when the user explicitly invokes wiki-obsidian-merge or directly requests the obsidian-merge workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-merge/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-panel",
+      "description": "Use when the user explicitly invokes wiki-obsidian-panel or directly requests the obsidian-panel workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-panel/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-person",
+      "description": "Use when the user explicitly invokes wiki-obsidian-person or directly requests the obsidian-person workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-person/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-project",
+      "description": "Use when the user explicitly invokes wiki-obsidian-project or directly requests the obsidian-project workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-project/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-projects",
+      "description": "Use when the user explicitly invokes wiki-obsidian-projects or directly requests the obsidian-projects workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-projects/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-recap",
+      "description": "Use when the user explicitly invokes wiki-obsidian-recap or directly requests the obsidian-recap workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-recap/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-reconcile",
+      "description": "Use when the user explicitly invokes wiki-obsidian-reconcile or directly requests the obsidian-reconcile workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-reconcile/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-recurring",
+      "description": "Use when the user explicitly invokes wiki-obsidian-recurring or directly requests the obsidian-recurring workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-recurring/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-reindex",
+      "description": "Use when the user explicitly invokes wiki-obsidian-reindex or directly requests the obsidian-reindex workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-reindex/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-retrieval-eval",
+      "description": "Use when the user explicitly invokes wiki-obsidian-retrieval-eval or directly requests the obsidian-retrieval-eval workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-retrieval-eval/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-review",
+      "description": "Use when the user explicitly invokes wiki-obsidian-review or directly requests the obsidian-review workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-review/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-save",
+      "description": "Use when the user explicitly invokes wiki-obsidian-save or directly requests the obsidian-save workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-save/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-synthesize",
+      "description": "Use when the user explicitly invokes wiki-obsidian-synthesize or directly requests the obsidian-synthesize workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-synthesize/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-task",
+      "description": "Use when the user explicitly invokes wiki-obsidian-task or directly requests the obsidian-task workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-task/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-visualize",
+      "description": "Use when the user explicitly invokes wiki-obsidian-visualize or directly requests the obsidian-visualize workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-visualize/SKILL.md"
+    },
+    {
+      "name": "wiki-obsidian-world",
+      "description": "Use when the user explicitly invokes wiki-obsidian-world or directly requests the obsidian-world workflow in llm-wiki.",
+      "path": "skills/wiki-obsidian-world/SKILL.md"
+    },
+    {
+      "name": "wiki-podcast",
+      "description": "Use when the user explicitly invokes wiki-podcast or directly requests the podcast workflow in llm-wiki.",
+      "path": "skills/wiki-podcast/SKILL.md"
+    },
+    {
+      "name": "wiki-research",
+      "description": "Use when the user explicitly invokes wiki-research or directly requests the research workflow in llm-wiki.",
+      "path": "skills/wiki-research/SKILL.md"
+    },
+    {
+      "name": "wiki-research-deep",
+      "description": "Use when the user explicitly invokes wiki-research-deep or directly requests the research-deep workflow in llm-wiki.",
+      "path": "skills/wiki-research-deep/SKILL.md"
+    },
+    {
+      "name": "wiki-vault-deep-synthesis",
+      "description": "Use when the user explicitly invokes wiki-vault-deep-synthesis or directly requests the vault-deep-synthesis workflow in llm-wiki.",
+      "path": "skills/wiki-vault-deep-synthesis/SKILL.md"
+    },
+    {
+      "name": "wiki-x-pulse",
+      "description": "Use when the user explicitly invokes wiki-x-pulse or directly requests the x-pulse workflow in llm-wiki.",
+      "path": "skills/wiki-x-pulse/SKILL.md"
+    },
+    {
+      "name": "wiki-x-read",
+      "description": "Use when the user explicitly invokes wiki-x-read or directly requests the x-read workflow in llm-wiki.",
+      "path": "skills/wiki-x-read/SKILL.md"
+    },
+    {
+      "name": "wiki-youtube",
+      "description": "Use when the user explicitly invokes wiki-youtube or directly requests the youtube workflow in llm-wiki.",
+      "path": "skills/wiki-youtube/SKILL.md"
+    }
+  ],
+  "tools": [
+    "wiki_select_vault",
+    "wiki_get_vault",
+    "wiki_reindex",
+    "wiki_retrieval_eval",
+    "wiki_init",
+    "wiki_bootstrap",
+    "wiki_migrate_log",
+    "wiki_merge",
+    "wiki_export",
+    "wiki_save_workflow",
+    "wiki_get_context",
+    "wiki_read_metadata",
+    "wiki_read_note",
+    "wiki_search",
+    "wiki_save_note",
+    "wiki_update_note",
+    "wiki_replace_text",
+    "wiki_move_note",
+    "wiki_capture",
+    "wiki_backlinks",
+    "wiki_validate_note",
+    "wiki_vault_health",
+    "wiki_list_skills",
+    "wiki_get_skill",
+    "wiki_apply_changes",
+    "wiki_recover",
+    "wiki_purge_history",
+    "wiki_visualize",
+    "wiki_heal_links"
+  ],
+  "checks": {
+    "portable_plugin_schema": "passed",
+    "portable_mcp_schema": "passed",
+    "checksum_verification": "passed",
+    "isolated_mcp_process": "passed",
+    "cli_plugin_discovery": "passed",
+    "desktop_mcp_call": "pending",
+    "intel_execution": "pending",
+    "workflow_behavior": "pending"
+  }
+}

@@ -1,0 +1,52 @@
+# Workflows del paquete 0.1.0-dev.2
+
+Fuente del build: `43ee802c91ab08e9899a443e37d128838edbc9d5`. Lista generada del árbol de skills incluido en el inventario de checksums. Existencia no acredita aceptación funcional.
+
+- [llm-wiki](../../../plugins/llm-wiki/skills/llm-wiki/SKILL.md): Use when the user explicitly invokes llm-wiki or names one of its vault workflows.
+- [wiki-create-command](../../../plugins/llm-wiki/skills/wiki-create-command/SKILL.md): Use when the user explicitly invokes wiki-create-command or directly requests the create-command workflow in llm-wiki.
+- [wiki-idea-discovery](../../../plugins/llm-wiki/skills/wiki-idea-discovery/SKILL.md): Use when the user explicitly invokes wiki-idea-discovery or directly requests the idea-discovery workflow in llm-wiki.
+- [wiki-notebooklm](../../../plugins/llm-wiki/skills/wiki-notebooklm/SKILL.md): Use when the user explicitly invokes wiki-notebooklm or directly requests the notebooklm workflow in llm-wiki.
+- [wiki-obsidian-architect](../../../plugins/llm-wiki/skills/wiki-obsidian-architect/SKILL.md): Use when the user explicitly invokes wiki-obsidian-architect or directly requests the obsidian-architect workflow in llm-wiki.
+- [wiki-obsidian-board](../../../plugins/llm-wiki/skills/wiki-obsidian-board/SKILL.md): Use when the user explicitly invokes wiki-obsidian-board or directly requests the obsidian-board workflow in llm-wiki.
+- [wiki-obsidian-board-hygiene](../../../plugins/llm-wiki/skills/wiki-obsidian-board-hygiene/SKILL.md): Use when the user explicitly invokes wiki-obsidian-board-hygiene or directly requests the obsidian-board-hygiene workflow in llm-wiki.
+- [wiki-obsidian-brainstorm](../../../plugins/llm-wiki/skills/wiki-obsidian-brainstorm/SKILL.md): Use when the user explicitly invokes wiki-obsidian-brainstorm or directly requests the obsidian-brainstorm workflow in llm-wiki.
+- [wiki-obsidian-calendar](../../../plugins/llm-wiki/skills/wiki-obsidian-calendar/SKILL.md): Use when the user explicitly invokes wiki-obsidian-calendar or directly requests the obsidian-calendar workflow in llm-wiki.
+- [wiki-obsidian-capture](../../../plugins/llm-wiki/skills/wiki-obsidian-capture/SKILL.md): Use when the user explicitly invokes wiki-obsidian-capture or directly requests the obsidian-capture workflow in llm-wiki.
+- [wiki-obsidian-catchup](../../../plugins/llm-wiki/skills/wiki-obsidian-catchup/SKILL.md): Use when the user explicitly invokes wiki-obsidian-catchup or directly requests the obsidian-catchup workflow in llm-wiki.
+- [wiki-obsidian-challenge](../../../plugins/llm-wiki/skills/wiki-obsidian-challenge/SKILL.md): Use when the user explicitly invokes wiki-obsidian-challenge or directly requests the obsidian-challenge workflow in llm-wiki.
+- [wiki-obsidian-connect](../../../plugins/llm-wiki/skills/wiki-obsidian-connect/SKILL.md): Use when the user explicitly invokes wiki-obsidian-connect or directly requests the obsidian-connect workflow in llm-wiki.
+- [wiki-obsidian-daily](../../../plugins/llm-wiki/skills/wiki-obsidian-daily/SKILL.md): Use when the user explicitly invokes wiki-obsidian-daily or directly requests the obsidian-daily workflow in llm-wiki.
+- [wiki-obsidian-decide](../../../plugins/llm-wiki/skills/wiki-obsidian-decide/SKILL.md): Use when the user explicitly invokes wiki-obsidian-decide or directly requests the obsidian-decide workflow in llm-wiki.
+- [wiki-obsidian-distill](../../../plugins/llm-wiki/skills/wiki-obsidian-distill/SKILL.md): Use when the user explicitly invokes wiki-obsidian-distill or directly requests the obsidian-distill workflow in llm-wiki.
+- [wiki-obsidian-emerge](../../../plugins/llm-wiki/skills/wiki-obsidian-emerge/SKILL.md): Use when the user explicitly invokes wiki-obsidian-emerge or directly requests the obsidian-emerge workflow in llm-wiki.
+- [wiki-obsidian-export](../../../plugins/llm-wiki/skills/wiki-obsidian-export/SKILL.md): Use when the user explicitly invokes wiki-obsidian-export or directly requests the obsidian-export workflow in llm-wiki.
+- [wiki-obsidian-find](../../../plugins/llm-wiki/skills/wiki-obsidian-find/SKILL.md): Use when the user explicitly invokes wiki-obsidian-find or directly requests the obsidian-find workflow in llm-wiki.
+- [wiki-obsidian-graduate](../../../plugins/llm-wiki/skills/wiki-obsidian-graduate/SKILL.md): Use when the user explicitly invokes wiki-obsidian-graduate or directly requests the obsidian-graduate workflow in llm-wiki.
+- [wiki-obsidian-health](../../../plugins/llm-wiki/skills/wiki-obsidian-health/SKILL.md): Use when the user explicitly invokes wiki-obsidian-health or directly requests the obsidian-health workflow in llm-wiki.
+- [wiki-obsidian-ingest](../../../plugins/llm-wiki/skills/wiki-obsidian-ingest/SKILL.md): Use when the user explicitly invokes wiki-obsidian-ingest or directly requests the obsidian-ingest workflow in llm-wiki.
+- [wiki-obsidian-init](../../../plugins/llm-wiki/skills/wiki-obsidian-init/SKILL.md): Use when the user explicitly invokes wiki-obsidian-init or directly requests the obsidian-init workflow in llm-wiki.
+- [wiki-obsidian-learn](../../../plugins/llm-wiki/skills/wiki-obsidian-learn/SKILL.md): Use when the user explicitly invokes wiki-obsidian-learn or directly requests the obsidian-learn workflow in llm-wiki.
+- [wiki-obsidian-log](../../../plugins/llm-wiki/skills/wiki-obsidian-log/SKILL.md): Use when the user explicitly invokes wiki-obsidian-log or directly requests the obsidian-log workflow in llm-wiki.
+- [wiki-obsidian-merge](../../../plugins/llm-wiki/skills/wiki-obsidian-merge/SKILL.md): Use when the user explicitly invokes wiki-obsidian-merge or directly requests the obsidian-merge workflow in llm-wiki.
+- [wiki-obsidian-panel](../../../plugins/llm-wiki/skills/wiki-obsidian-panel/SKILL.md): Use when the user explicitly invokes wiki-obsidian-panel or directly requests the obsidian-panel workflow in llm-wiki.
+- [wiki-obsidian-person](../../../plugins/llm-wiki/skills/wiki-obsidian-person/SKILL.md): Use when the user explicitly invokes wiki-obsidian-person or directly requests the obsidian-person workflow in llm-wiki.
+- [wiki-obsidian-project](../../../plugins/llm-wiki/skills/wiki-obsidian-project/SKILL.md): Use when the user explicitly invokes wiki-obsidian-project or directly requests the obsidian-project workflow in llm-wiki.
+- [wiki-obsidian-projects](../../../plugins/llm-wiki/skills/wiki-obsidian-projects/SKILL.md): Use when the user explicitly invokes wiki-obsidian-projects or directly requests the obsidian-projects workflow in llm-wiki.
+- [wiki-obsidian-recap](../../../plugins/llm-wiki/skills/wiki-obsidian-recap/SKILL.md): Use when the user explicitly invokes wiki-obsidian-recap or directly requests the obsidian-recap workflow in llm-wiki.
+- [wiki-obsidian-reconcile](../../../plugins/llm-wiki/skills/wiki-obsidian-reconcile/SKILL.md): Use when the user explicitly invokes wiki-obsidian-reconcile or directly requests the obsidian-reconcile workflow in llm-wiki.
+- [wiki-obsidian-recurring](../../../plugins/llm-wiki/skills/wiki-obsidian-recurring/SKILL.md): Use when the user explicitly invokes wiki-obsidian-recurring or directly requests the obsidian-recurring workflow in llm-wiki.
+- [wiki-obsidian-reindex](../../../plugins/llm-wiki/skills/wiki-obsidian-reindex/SKILL.md): Use when the user explicitly invokes wiki-obsidian-reindex or directly requests the obsidian-reindex workflow in llm-wiki.
+- [wiki-obsidian-retrieval-eval](../../../plugins/llm-wiki/skills/wiki-obsidian-retrieval-eval/SKILL.md): Use when the user explicitly invokes wiki-obsidian-retrieval-eval or directly requests the obsidian-retrieval-eval workflow in llm-wiki.
+- [wiki-obsidian-review](../../../plugins/llm-wiki/skills/wiki-obsidian-review/SKILL.md): Use when the user explicitly invokes wiki-obsidian-review or directly requests the obsidian-review workflow in llm-wiki.
+- [wiki-obsidian-save](../../../plugins/llm-wiki/skills/wiki-obsidian-save/SKILL.md): Use when the user explicitly invokes wiki-obsidian-save or directly requests the obsidian-save workflow in llm-wiki.
+- [wiki-obsidian-synthesize](../../../plugins/llm-wiki/skills/wiki-obsidian-synthesize/SKILL.md): Use when the user explicitly invokes wiki-obsidian-synthesize or directly requests the obsidian-synthesize workflow in llm-wiki.
+- [wiki-obsidian-task](../../../plugins/llm-wiki/skills/wiki-obsidian-task/SKILL.md): Use when the user explicitly invokes wiki-obsidian-task or directly requests the obsidian-task workflow in llm-wiki.
+- [wiki-obsidian-visualize](../../../plugins/llm-wiki/skills/wiki-obsidian-visualize/SKILL.md): Use when the user explicitly invokes wiki-obsidian-visualize or directly requests the obsidian-visualize workflow in llm-wiki.
+- [wiki-obsidian-world](../../../plugins/llm-wiki/skills/wiki-obsidian-world/SKILL.md): Use when the user explicitly invokes wiki-obsidian-world or directly requests the obsidian-world workflow in llm-wiki.
+- [wiki-podcast](../../../plugins/llm-wiki/skills/wiki-podcast/SKILL.md): Use when the user explicitly invokes wiki-podcast or directly requests the podcast workflow in llm-wiki.
+- [wiki-research](../../../plugins/llm-wiki/skills/wiki-research/SKILL.md): Use when the user explicitly invokes wiki-research or directly requests the research workflow in llm-wiki.
+- [wiki-research-deep](../../../plugins/llm-wiki/skills/wiki-research-deep/SKILL.md): Use when the user explicitly invokes wiki-research-deep or directly requests the research-deep workflow in llm-wiki.
+- [wiki-vault-deep-synthesis](../../../plugins/llm-wiki/skills/wiki-vault-deep-synthesis/SKILL.md): Use when the user explicitly invokes wiki-vault-deep-synthesis or directly requests the vault-deep-synthesis workflow in llm-wiki.
+- [wiki-x-pulse](../../../plugins/llm-wiki/skills/wiki-x-pulse/SKILL.md): Use when the user explicitly invokes wiki-x-pulse or directly requests the x-pulse workflow in llm-wiki.
+- [wiki-x-read](../../../plugins/llm-wiki/skills/wiki-x-read/SKILL.md): Use when the user explicitly invokes wiki-x-read or directly requests the x-read workflow in llm-wiki.
+- [wiki-youtube](../../../plugins/llm-wiki/skills/wiki-youtube/SKILL.md): Use when the user explicitly invokes wiki-youtube or directly requests the youtube workflow in llm-wiki.

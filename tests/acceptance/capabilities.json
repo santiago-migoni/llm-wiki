@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-08",
+  "package_version": "0.1.0-dev.2",
+  "execution": "direct agent reasoning + native web + packaged CLI; no additional agents",
+  "evidence": "tests/fixtures/host-capabilities",
+  "positive_cases": {
+    "research_general": {
+      "status": "passed",
+      "source": "https://modelcontextprotocol.io/specification/2025-06-18/basic/transports",
+      "page_access": "native web open; stdio section",
+      "limits": "one primary source, not quality equivalence or academic acceptance"
+    },
+    "local_synthesis": {
+      "status": "passed",
+      "scanned": 13,
+      "read": 12,
+      "source_files_unchanged": true,
+      "created": [
+        "research/notebooklm/Piloto.md",
+        "tasks/Continuidad.md",
+        "daily/2026-10-08.md",
+        "log.md"
+      ],
+      "external_file_search": false
+    }
+  },
+  "host_observations": {
+    "web": "available",
+    "wiki_mcp_in_this_chat": "not exposed; isolated protocol and CLI tested separately",
+    "calendar": "optional Apple Calendar tools are present in this session, not called or made a dependency",
+    "telegram_queue": "no connected queue exercised",
+    "audio_video_extraction": "no route verified",
+    "hooks_schedules": "none configured or exercised",
+    "cost": "no per-workflow financial ledger measured"
+  },
+  "negative_cases": {
+    "without-web": {
+      "status": "pending",
+      "reason": "No runtime capability-isolated interaction executed; required diagnostic remains unverified."
+    },
+    "private-post": {
+      "status": "pending",
+      "reason": "No runtime capability-isolated interaction executed; required diagnostic remains unverified."
+    },
+    "podcast-without-transcript": {
+      "status": "pending",
+      "reason": "No runtime capability-isolated interaction executed; required diagnostic remains unverified."
+    },
+    "video-without-frames": {
+      "status": "pending",
+      "reason": "No runtime capability-isolated interaction executed; required diagnostic remains unverified."
+    },
+    "calendar-agenda-without-access": {
+      "status": "pending",
+      "reason": "No runtime capability-isolated interaction executed; required diagnostic remains unverified."
+    },
+    "calendar-reconcile-without-access": {
+      "status": "pending",
+      "reason": "No runtime capability-isolated interaction executed; required diagnostic remains unverified."
+    },
+    "calendar-meeting-provided-data": {
+      "status": "pending",
+      "reason": "No runtime capability-isolated interaction executed; required diagnostic remains unverified."
+    },
+    "calendar-schedule-without-access": {
+      "status": "pending",
+      "reason": "No runtime capability-isolated interaction executed; required diagnostic remains unverified."
+    },
+    "telegram-queue-absent": {
+      "status": "pending",
+      "reason": "No runtime capability-isolated interaction executed; required diagnostic remains unverified."
+    }
+  }
+}

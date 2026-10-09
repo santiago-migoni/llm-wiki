@@ -1,0 +1,431 @@
+---
+title: Arquitectura de llm-wiki
+status: draft
+version: v006
+responsible: Usuario promotor del proyecto
+created_at: "2026-10-08"
+updated_at: "2026-10-08"
+reviewed_at: null
+approval_reference: null
+---
+
+# Arquitectura de llm-wiki
+
+## Contexto y límites del sistema
+
+El producto busca ofrecer en Codex las capacidades completas de la referencia,
+mediante skills nativas y un núcleo compartido. Codex Desktop es el entorno
+principal de la primera entrega; el canal elegido es un marketplace agregado
+desde GitHub/Git. Obsidian es opcional para operar los archivos del vault, y se
+conservan sus formatos. Las integraciones se reevalúan por resultado bajo AC-019;
+las brechas no se declaran resueltas por adoptar Codex.
+
+- **Dirección de producto:** [Constitución vigente v003](CONSTITUTION.md); dirección aprobada en v001, base
+  `eaa8e3075c482dc3fd9cb9864b50b34e668d97a0:docs/superpowers/CONSTITUTION.md`.
+  Aplican PRI-001–PRI-005, OBJ-001–OBJ-003 y EXI-001–EXI-003.
+- **Diagnóstico:** [inventario v001](analysis/inventario-codex/README.md), base
+  `22fd2d36ea33415a8f44211ae346f2a775021553:docs/superpowers/analysis/inventario-codex/README.md`;
+  sus anexos pertenecen al mismo commit. El inventario aporta evidencia, no
+  aprobación de sus propuestas técnicas.
+- **Referencia de implementación ajena al nuevo producto:** fork local
+  `.repos/obsidian-second-brain`, commit `b0089f7666d0c1e3db41c9d587b6f3c997665235`.
+  Sus fuentes están identificadas en el inventario. No se modifican ni se proponen
+  como dependencia de ejecución del paquete instalado.
+- **Estado actual:** núcleo y paquete propio implementados en `43ee802`; artefacto macOS y evidencia de recuperación en `619fecb`. Instalación CLI de 0.1.0-dev.2 verificada. Desktop y paridad funcional siguen pendientes.
+- **Documentos relacionados:** [STRUCTURE.md](STRUCTURE.md) e [INFRASTRUCTURE.md](INFRASTRUCTURE.md) describen módulos, ejecución y límites observados; [evidencia](evidence/2026-10-08-implementation.md) registra pruebas.
+
+## Componentes, interfaces y flujos implementados
+
+MCP STDIO y CLI comparten `internal/service`. El registro mantiene identidad canónica por vault y asociaciones de proyectos; `vault` confina lectura y escritura, y coordina planes con journals y snapshots externos. Cada archivo se publica con precondiciones; un lote parcial tiene inspect/resume/rollback condicional. No se promete atomicidad global ni CAS frente a un editor que no respeta locks.
+
+Grafo, salud, bootstrap, init, migración, merge y exportación trabajan sobre las notas canónicas. Búsqueda usa un índice léxico reconstruible en memoria; reindex reporta cambios y retrieval-eval recibe gold cases explícitos. No hay embeddings ni cliente de proveedor. Catálogo combina 48 skills del paquete y workflows personales; leer un workflow no lo ejecuta ni instala.
+
+El paquete contiene un binario universal, manifiestos y checksums. Se ejecutó en arm64 sin toolchain de usuario; Intel y llamada desde Desktop no están acreditados. Razonamiento y web ocurren en Codex, no en el núcleo. Las brechas de host y vistas permanecen abiertas conforme la spec.
+
+## Restricciones técnicas y atributos de calidad
+
+| Restricción | Fuente de autoridad | Evidencia actual y límite |
+|---|---|---|
+| Conservar todas las capacidades, incluyendo calendario, captura remota y mantenimiento | PRI-001, OBJ-001 | Catálogo de 47 comandos y funciones adicionales; sin paridad demostrada |
+| Experiencia centrada en Codex Desktop e instalación desde marketplace Git | AC-001 y AC-002 | Instalación CLI dev.2 verificada; aceptación Desktop pendiente |
+| Operar sin Obsidian abierto y mantener sus formatos e integraciones | AC-003 | Operaciones sobre fixtures sin Obsidian; render/vistas pendientes |
+| Reutilizar lógica útil con skills nativas y núcleo compartido | AC-004 | Assets y núcleo Go compartido implementados; interacción por modalidad pendiente |
+| Conservar procedencia, historial y control sobre las escrituras | PRI-003, PRI-004, OBJ-003 | Hashes, bloqueo por vault y recuperación durable probados; límite ante editor externo documentado |
+| Distinguir equivalencia funcional de empaquetado correcto | PRI-005, EXI-001 | Build de referencia excluye calendario y omite vault_ops requerido por indexación |
+
+## Decisiones arquitectónicas
+
+### ADR-001 — Codex Desktop como entorno principal
+
+- **Elección:** diseñar la primera entrega para Codex Desktop.
+- **Motivo:** concentra la experiencia de instalación, interacción y automatización.
+- **Alternativas:** Desktop y CLI simultáneos; Desktop, CLI e IDE simultáneos.
+- **Consecuencias:** las demás superficies no reciben promesa de compatibilidad en
+  esta primera entrega; las capacidades funcionales siguen dentro de la meta.
+- **Decision status:** approved
+- **Fuente:** AC-001; no define sistemas operativos ni versiones mínimas.
+- **Implementation state:** partially_implemented
+- **Evidencia de implementación/verificación:** Instalación CLI y descubrimiento; Desktop pendiente. Ver registro de implementación.
+
+### ADR-002 — Distribución desde marketplace Git
+
+- **Elección:** permitir agregar un repositorio de marketplace en Complementos e
+  instalar el plugin desde ese catálogo.
+- **Motivo:** coincide con la experiencia de instalación solicitada por el usuario.
+- **Alternativas:** copia manual de skills; publicación en el directorio público
+  universal. Ninguna reemplaza el canal elegido.
+- **Consecuencias:** habrá catálogo y paquete versionado; instalación y actualización
+  deberán comprobarse desde un entorno limpio. Repositorio, referencias de release
+  y automatización de publicación quedan sin elegir.
+- **Decision status:** approved
+- **Fuente:** AC-002. Marketplace Git y directorio público son canales diferentes;
+  la elección no autoriza crear remotos, publicar ni instalar ahora.
+- **Implementation state:** partially_implemented
+- **Evidencia:** mecanismo descrito en la [documentación oficial de marketplaces](https://developers.openai.com/plugins/build/plugins), consultada el 2026-10-08; plugin propio no validado.
+
+### ADR-003 — Vault independiente de la aplicación Obsidian
+
+- **Elección:** operar sobre los archivos locales desde Codex sin exigir Obsidian
+  abierto, conservando compatibilidad con notas, wikilinks, canvas y complementos.
+- **Motivo:** conserva el enfoque de la referencia y permite usar Obsidian como
+  interfaz complementaria.
+- **Alternativas:** exigir la aplicación abierta; abandonar sus formatos e
+  integraciones. No corresponden al enfoque aceptado.
+- **Consecuencias:** las funciones visuales y el complemento lint de Obsidian se
+  verifican en esa aplicación cuando corresponda; no se promete reemplazarlos con
+  una interfaz nueva de Codex.
+- **Decision status:** approved
+- **Fuente:** AC-003.
+- **Implementation state:** implemented
+- **Evidencia de implementación/verificación:** Núcleo opera fixtures sin proceso Obsidian; vistas pendientes. Ver registro de implementación.
+
+### ADR-004 — Skills nativas con núcleo compartido
+
+- **Elección:** las skills conducen las tareas; un núcleo compartido gestiona acceso
+  al vault, búsqueda, escrituras e integraciones. Hooks y automatizaciones utilizan
+  las mismas operaciones. Se reutiliza el código útil del original.
+- **Motivo:** evita trasladar caminos incompatibles de escritura y dependencias
+  dispersas; preserva las capacidades conversacionales y las operaciones.
+- **Alternativas:** conversión directa del original; reescritura total desde cero.
+- **Consecuencias:** separar razonamiento del agente de operaciones deterministas;
+  mantener trazabilidad de cada capacidad del inventario. No decide aún lenguaje,
+  transporte, API, número de skills ni persistencia operativa.
+- **Decision status:** approved
+- **Fuente:** AC-004, limitada al enfoque presentado en el chat.
+- **Implementation state:** implemented
+- **Evidencia de implementación/verificación:** 48 assets + catálogo + servicios Go; aceptación de modalidades pendiente. Ver registro de implementación.
+
+### ADR-005 — Go para la implementación propia del plugin
+
+- **Elección:** implementar en Go el núcleo y las herramientas ejecutables propias
+  del plugin: servidor MCP, utilidades internas y lógica
+  de automatización. No conservar scripts Python como requisito de ejecución propio.
+  Las skills y reglas siguen siendo documentos; la elección no exige convertir
+  Markdown o los formatos del vault en código Go.
+- **Motivo:** elección expresa del usuario para el conjunto de la implementación,
+  sustituyendo la recomendación anterior de Python.
+- **Alternativas:** reutilización directa de Python; combinación Go/Python;
+  reimplementación en TypeScript. La elección actual descarta depender de Python
+  para la lógica propia, aunque el original sirve como referencia de comportamiento.
+- **Consecuencias:** portar y verificar los comportamientos inventariados. Reutilizar
+  conceptos, formatos, casos de prueba y contratos donde corresponda, en lugar de
+  copiar módulos Python para ejecutarlos. SDK, bibliotecas, versiones, binarios por
+  plataforma y mecanismo de distribución siguen pendientes de selección y prueba.
+- **Dependencias externas:** la elección no demuestra que bibliotecas o herramientas
+  externas como ffmpeg puedan eliminarse. Deben inventariarse y resolverse sin
+  asumir excepciones a la dirección elegida ni reducir capacidades.
+- **Integración Obsidian:** el complemento de lint de referencia usa TypeScript y la
+  API de Obsidian. AC-010 aprueba un adaptador mínimo, priorizando TypeScript,
+  únicamente para las funciones dentro de Obsidian que lo requieran. La lógica
+  permanece en Go; esta excepción no cambia el lenguaje del núcleo. Su mecanismo
+  concreto y validación permanecen pendientes.
+- **Decision status:** approved
+- **Fuente:** AC-005, limitada a la elección de lenguaje y dirección de portado;
+  no aprueba las interfaces ni el resto del borrador.
+- **Implementation state:** implemented
+- **Evidencia:** elección conversacional registrada; portado y validación pendientes.
+  La propuesta anterior de Python se conserva en
+  `5ff12e49f4126a9c27c1ec512543223af70be530:docs/superpowers/ARCHITECTURE.md`,
+  ADR-005 de v001, y nunca fue aprobada.
+
+## Diseño propuesto y trabajo pendiente
+
+Esta sección sigue sin implementación. Las aprobaciones parciales AC-006–AC-018
+delimitan los acuerdos; los contratos y detalles no cubiertos siguen propuestos.
+
+### Responsabilidades
+
+| Componente lógico | Responsabilidad propuesta | Límite |
+|---|---|---|
+| Skills | Guiar cada tarea, recuperar contexto, razonar, sintetizar y elegir las operaciones pertinentes | Los resultados de fuentes son datos; no autorizan acciones por sí mismos |
+| Núcleo del vault | Resolver vault/layout, leer, buscar, validar y ejecutar cambios coordinados sobre notas, índices, enlaces y logs | No decide por sí mismo qué afirmación semántica es verdadera |
+| Capacidades disponibles en Codex | Resolver investigación, síntesis y procesamiento con las capacidades del host | Sin adaptadores propios a proveedores ni claves externas; equivalencia y disponibilidad por verificar (AC-019) |
+| Adaptación a Codex | Conectar skills, herramientas, contexto de sesión, hooks y automatizaciones con las operaciones comunes | No depende de ejecutar Claude ni de sus settings |
+| Configuración y estado | Conservar selección del vault, preferencias, índices reconstruibles, registros y personalizaciones | Separados del paquete instalado; no se guardan secretos dentro de skills ni manifiestos |
+| Integración Obsidian | Mantener formatos y herramientas específicas de la aplicación | La aplicación conserva su propio runtime; no se exige para operar los archivos desde Codex |
+
+```mermaid
+flowchart TD
+    U[Usuario en Codex Desktop] --> S[Skills nativas]
+    S --> N[Núcleo compartido del vault]
+    H[Hooks y tareas autorizadas] --> S
+    H --> N
+    S --> P[Capacidades de Codex]
+    P --> N
+    N --> V[Notas, fuentes y adjuntos del vault]
+    N --> E[Configuración, índices y registro operativo]
+    O[Obsidian opcional] <--> V
+```
+
+El diagrama describe responsabilidades propuestas, no aislamiento de seguridad
+garantizado ni una restricción técnica ya aplicada a las herramientas de Codex.
+
+### Interfaces y contratos a definir
+
+| Interfaz | Propuesta | Fallos y límites que debe exponer |
+|---|---|---|
+| Skill a núcleo | Operaciones explícitas de lectura, búsqueda, captura, edición, movimiento, validación y mantenimiento | Vault/destino inválido, archivo ausente o cambiado, lectura parcial, operación no aplicada |
+| Núcleo a archivos | Respetar mapa de carpetas, fuentes originales, historial y contenido no afectado | Conflictos con editores externos, cambios concurrentes y fallo parcial del conjunto |
+| Codex a skill/núcleo | Contenido o resultado junto con fuente, fecha, cobertura y estado | Capacidad no disponible, contenido truncado o resultado insuficiente; sin recurrir a un proveedor externo propio |
+| Automatización a operaciones comunes | Contexto de ejecución y alcance previamente configurado | No aumentar permisos ni cambiar la política interactiva/desatendida implícitamente |
+| Marketplace a paquete | Instalar versión autocontenida con referencias resolubles | Dependencias faltantes, actualización incompleta y compatibilidad del host |
+
+El transporte aprobado para skill a núcleo es MCP local por STDIO;
+un CLI interno puede servir a hooks y diagnóstico reutilizando la misma lógica.
+AC-009 aprueba STDIO. El CLI interno continúa propuesto: la respuesta del usuario
+se limita expresamente a STDIO. Los nombres y contratos de herramientas siguen
+pendientes de diseño; el SDK oficial es una recomendación técnica, no una
+dependencia ya seleccionada y probada.
+
+### Flujos y fuentes canónicas
+
+1. **Consulta:** resolver el vault, leer sus convenciones y buscar con cobertura
+   explícita; la skill redacta la respuesta citando notas y señalando límites.
+   Las notas son la fuente del conocimiento; un índice es una ayuda reconstruible.
+2. **Captura y actualización:** la skill determina contenido y destinos dentro de
+   la autorización aplicable; el núcleo valida y ejecuta los cambios, incluyendo
+   enlaces, índice y log cuando el workflow los prescribe.
+3. **Investigación:** Codex recupera fuentes o medios con sus capacidades disponibles; la skill sintetiza;
+   el núcleo conserva originales nuevos y aplica el resultado derivado. No modifica
+   fuentes originales existentes. AC-019 elimina la obligación de conservar proveedores externos. Las modalidades
+   deben evaluarse por resultado; no se afirma equivalencia hasta comprobarla.
+4. **Mantenimiento:** las rutinas reutilizan operaciones comunes y conservan la
+   distinción original: reconciliación interactiva puede resolver casos claros;
+   la rutina nocturna registra conflictos abiertos y no los resuelve reescribiendo
+   páginas. Dry-run y ofertas opcionales permanecen donde corresponden.
+5. **Actualización del plugin:** reemplazar el paquete no reemplaza el conocimiento,
+   las preferencias ni las extensiones del usuario. La migración, si hace falta,
+   tendrá un alcance explícito y verificable.
+
+Para cambios compuestos propongo un registro de operación con archivos afectados,
+estado previo y resultado, que permita detectar modificaciones concurrentes y
+recuperar fallos. No se afirma una transacción atómica entre múltiples archivos ni
+entre el vault y servicios externos. El formato, la retención, las precondiciones
+y el procedimiento de recuperación quedan pendientes de diseño y aprobación.
+El registro técnico no añade una confirmación humana nueva a cada escritura.
+
+### Condiciones para verificar la propuesta
+
+- Mantener correspondencia con todos los registros F/I/T del inventario, incluyendo
+  modos y efectos opcionales/automáticos; las filas no son un porcentaje de paridad.
+- Verificar instalación y actualización reales desde marketplace en Codex Desktop.
+- Probar dependencias desde el paquete instalado, sin acceso accidental a `.repos`.
+- Comprobar lectura, propagación, conflictos y recuperación sobre vaults de prueba
+  con ambos layouts y contenido humano preexistente.
+- Verificar por separado integración MCP, confianza y eventos de hooks, tareas
+  programadas y experiencia de Obsidian. Reevaluar las capacidades originalmente
+  ligadas a proveedores, calendario y Telegram bajo AC-019, sin implementar
+  conectores externos para cerrar brechas.
+- Conservar las diferencias entre pruebas de empaquetado, funcionamiento y
+  resultados de usuario definidas en EXI-001–EXI-003.
+
+## Asuntos abiertos
+
+| Decisión o evidencia faltante | Cómo resolverla | Responsable |
+|---|---|---|
+| Runtime y dependencias Go | Seleccionar SDK MCP, bibliotecas y distribución por plataforma; lenguaje ya decidido en ADR-005 | Diseño posterior con evidencia técnica |
+| Integración lint de Obsidian y herramientas externas | Adaptador mínimo TypeScript aprobado por AC-010; resolver y validar el mecanismo y las dependencias externas | Usuario promotor con apoyo técnico |
+| Transporte y límites del núcleo | STDIO aprobado por AC-009; precisar CLI y contratos | Usuario promotor con apoyo técnico |
+| Coordinación de escrituras y recuperación | Precisar precondiciones, concurrencia, registro y fallos externos | Diseño posterior dentro del enfoque acordado |
+| Dependencias y compatibilidad Desktop | macOS primero y binarios precompilados aprobados; definir versiones, arquitecturas y configuración | Usuario promotor con evidencia del host |
+| Equivalencia usando solo Codex | AC-019 descarta integraciones externas y sus claves; comprobar alternativas por capacidad y registrar brechas | Diseño y validación técnica |
+| Paquete, personalizaciones y publicación | Definir versiones, ubicación del estado, extensión y repositorio de marketplace | Diseño posterior; publicación no autorizada por este documento |
+
+AC-008 delimita macOS como primera plataforma de validación; otras plataformas
+no se declaran soportadas sin pruebas. La selección
+del lenguaje tampoco determina el formato de notas, la disponibilidad offline ni
+las credenciales de proveedores. Esos límites deben definirse expresamente.
+
+## Historial de decisiones y cambios
+
+Las declaraciones siguientes se conservan desde este chat, sin enlace recuperable.
+Registran decisiones conversacionales concretas; no constituyen aprobación de los
+detalles nuevos de este borrador. El documento completo permanece en draft.
+
+| ID | Fecha | Declaración y contexto | Alcance |
+|---|---|---|---|
+| AC-001 | 2026-10-08 | «Avancemos con Codex Desktop.», respuesta a elegir el entorno principal de la primera entrega | ADR-001 |
+| AC-002 | 2026-10-08 | «Me gustaría que fuese un plugin instalable desde marketplace.», con captura de Agregar marketplace desde GitHub/URL de Git | ADR-002; no es petición de publicación en el directorio público |
+| AC-003 | 2026-10-08 | «Si, me gusta ese enfoque.», tras proponer operar desde Codex sin exigir Obsidian abierto, manteniendo formatos e integraciones | ADR-003 |
+| AC-004 | 2026-10-08 | «Si, avancemos con ese enfoque.», tras recomendar skills nativas, núcleo compartido, reutilización de código y operaciones comunes para hooks/automatizaciones | ADR-004; no decide lenguaje ni contratos todavía no presentados |
+| AC-005 | 2026-10-08 | «Yo avanzaría todo con Go.», en respuesta a la propuesta de Python para el núcleo de v001, presentada en `5ff12e49f4126a9c27c1ec512543223af70be530:docs/superpowers/ARCHITECTURE.md` | Selecciona Go para la implementación propia. Sustituye la propuesta Python; no aprueba todo el documento ni autoriza implementación |
+
+| Fecha | Versión | Cambio y fundamento | Fuente |
+|---|---|---|---|
+| 2026-10-08 | v001 | Primer borrador: registra acuerdos y propone responsabilidades, flujos y decisiones pendientes | Constitución e inventario fijados arriba; AC-001–AC-004 |
+| 2026-10-08 | v002 | Cambia ADR-005 a Go por decisión del usuario; explicita portado y pendientes de integración y dependencias | AC-005; base previa exacta `5ff12e49f4126a9c27c1ec512543223af70be530:docs/superpowers/ARCHITECTURE.md`; ADR-001–ADR-004 conservan su alcance |
+
+## Aprobaciones parciales de las recomendaciones consolidadas
+
+Fuente: anotaciones del usuario sobre el mensaje
+`msg_0a9075ab2a4808b2016ac7e44b7700819183e30367bef0e6ba`,
+2026-10-08. La propuesta fue conversacional; no se atribuye una presentación
+Git previa inexistente a esa tabla. Base documental previa preservada:
+`6d60342319a4a2d34262eade12d7e8b9e17b11ae:docs/superpowers/ARCHITECTURE.md`.
+Responsable de las decisiones: usuario promotor del proyecto. Todas las
+implementaciones y verificaciones siguen pendientes. La arquitectura completa
+permanece en draft; estas decisiones tienen el alcance indicado.
+
+| ID | Anotación | Declaración literal | Alcance |
+|---|---|---|---|
+| AC-006 | 1 | «Aprobado el nombre `llm-wiki`» | Nombre aprobado; no confirma por asociación la identidad nominal del responsable. |
+| AC-007 | 2 | «Si, aprobado.» | Referencia de equivalencia v0.17.0, commit b0089f7666d0c1e3db41c9d587b6f3c997665235; novedades futuras se evalúan por separado. |
+| AC-008 | 3 | «Si, avancemos para MacOS.» | macOS primero; preparar portabilidad sin declarar soporte adicional no probado. |
+| AC-009 | 4 | «Aprobado STDIO» | MCP local por STDIO aprobado; no atribuye aprobación explícita del CLI ni del SDK. |
+| AC-010 | 5 | «Me parece bien. Prioricemos Typescrypt.» | Adaptador mínimo Obsidian con preferencia TypeScript; lógica y núcleo Go. No es una migración general a TypeScript. |
+| AC-011 | 6 | «Aprobado.» | Binarios precompilados sin exigir Go; dependencias de medios configuradas al utilizar la función, con diagnóstico. |
+| AC-012 | 7 | «No entiendo esto.» | Pendiente: explicar proveedores, claves y sustituciones. No hay aprobación. |
+| AC-013 | 8 | «Si, aprobado.» | Operaciones locales sin servicios externos donde corresponda; red para investigación, transcripción remota y razonamiento Codex. |
+| AC-014 | 9 | «Dale.» | Markdown canónico, índices reconstruibles, configuración/secretos/extensiones fuera del paquete; vault explícito por proyecto. |
+| AC-015 | 10 | «Aprobado,» | Detección de concurrencia, registro recuperable y parada ante conflicto; sin confirmación nueva por escritura ni atomicidad global prometida. |
+| AC-016 | 11 | «Me parece bien.» | Horarios expresamente activados; preservar separación interactiva/desatendida y conflictos nocturnos sin reescritura resolutiva. |
+| AC-017 | 12 | «Si, aprobado.» | Catálogo Git, versiones identificables y retorno a anterior; verificar instalación/actualización. Publicación y visibilidad pendientes. |
+| AC-018 | 13 | «Dale.» | Entregas verificables, alcance final completo, paridad por capacidad/modalidad, pruebas de continuidad y recuperación. |
+
+Mantenimiento v003: registra aprobaciones parciales, reconcilia la excepción
+TypeScript, STDIO y macOS; no autoriza por asociación detalles no presentados.
+
+## AC-019 — Codex resuelve las tareas sin integraciones externas propias
+
+- **Fecha y responsable:** 2026-10-08, usuario promotor.
+- **Declaración literal:** «Yo no integraría otras herramientas. Quiero que todo lo resuelva Codex.»
+- **Estado de decisión:** approved, sobre la dirección expresada en el chat.
+- **Alcance:** no construir adaptadores a otros proveedores, solicitar sus claves
+  ni introducir otros servicios o conectores como solución a las tareas. Utilizar
+  las capacidades disponibles en Codex. Resuelve AC-012 y sustituye la propuesta
+  de mantener proveedores externos opcionales.
+- **Núcleo propio:** Go/MCP local conserva las operaciones deterministas del vault;
+  Codex conduce el razonamiento y los workflows. No es otro proveedor de IA.
+- **Límites:** no demuestra que Codex pueda reproducir cada integración original.
+  Inventariar equivalencias y brechas por resultado, especialmente medios, X,
+  calendario y Telegram. No ocultar pérdidas ni agregar dependencias externas
+  para resolverlas sin una nueva decisión. El adaptador opcional Obsidian
+  previamente aprobado y las dependencias de medios requieren reconciliación
+  con esta restricción antes de implementarse; no se dan por necesarias.
+- **Implementación y verificación:** pendientes. La arquitectura sigue en draft.
+
+Base anterior preservada: `5d42830ea1b8ff5f844935e0277807a3db39e825:docs/superpowers/ARCHITECTURE.md`.
+
+## Diseño técnico para la ejecución solicitada
+
+El usuario autorizó avanzar análisis, diseño/plan e implementación/verificación
+con subagentes Luna, en su anotación sobre el mensaje
+`msg_0a9075ab2a4808b2016ac7effa1c70819185bf4224b6038e7a`:
+«Dale, avanza con estas 4 usando subagentes luna.» Se conserva esa autorización;
+los contratos nuevos siguientes se presentan como propuesta técnica, sin ampliar
+el alcance a proveedores externos. Base anterior:
+`f27672f7a63039805784efd8ccd5478b089dda2e:docs/superpowers/ARCHITECTURE.md`.
+
+### ADR-006 — API local y mutaciones coordinadas (proposed)
+
+Servidor Go con SDK oficial MCP, sin HTTP ni clientes de IA. Los nombres públicos
+se normalizan a `wiki_*`; el catálogo enlaza los 12 nombres originales con los
+equivalentes. Un CLI mínimo reutiliza estos servicios para diagnóstico y recovery.
+Alternativa descartada para la propuesta: duplicar lógica de escritura en scripts
+y MCP, porque impediría aplicar consistentemente las precondiciones.
+
+Contratos propuestos, expresados en campos JSON:
+
+| Operación | Entrada | Salida/condición |
+|---|---|---|
+| `wiki_select_vault` | project_path, vault_path; selección explícita | vault_id, layout, timezone; no crea un vault existente ni lo modifica |
+| `wiki_read_note` | vault_id, path, offset=0, limit=20000 caracteres Unicode | text, hash SHA-256 de bytes completos, next_offset, truncated; nunca paginación por bytes rotos |
+| `wiki_search` | vault_id, query, limit=6 | matches con path/fragmento/línea/hash, scanned/excluded/errors/truncated; orden estable |
+| `wiki_save_note` | vault_id, path, content; create-only | operation_id y hash; rechaza sobrescritura |
+| `wiki_update_note` | vault_id, path, content, expected_hash | operación condicional; preservación semántica responsabilidad de la skill |
+| `wiki_replace_text` | vault_id, path, old_text, new_text, expected_hash | exige una sola coincidencia exacta |
+| `wiki_move_note` | vault_id, source, destination, expected_hash | plan incluye backlinks/index/log; destino existente es conflicto |
+| `wiki_capture` | vault_id, text, tags, fecha explícita | captura y diaria en lote; no infiere contenido ausente |
+| `wiki_validate_note` | vault_id, path | hallazgos estructurales/frescura por línea; sin mutaciones |
+| `wiki_backlinks` | vault_id, target | referencias resueltas/ambiguas y cobertura |
+| `wiki_vault_health` | vault_id | hallazgos + cobertura; sin arreglo automático |
+| `wiki_list_skills`, `wiki_get_skill` | vault_id; name para get | catálogo/instrucciones como datos con procedencia, sin instalación implícita |
+| `wiki_apply_changes` | vault_id, operation_id, changes[] | validate-only/dry-run o aplicación; hash esperado por archivo, creación exige ausencia |
+| `wiki_recover` | vault_id, operation_id, action=inspect/resume/rollback | precondiciones y estado verificable; inspect no muta |
+
+`changes[]` usa path relativo, contenido nuevo (o destino de move) y expected_hash.
+Operaciones repetidas con mismo ID y contenido devuelven resultado previo; mismo
+ID con payload diferente es error. Cambios en `.git`, rutas absolutas, `..`,
+symlinks que escapan o destinos ambiguos se rechazan. `raw/` existente es inmutable;
+se permiten nuevas fuentes con create-only. No herramienta de borrado arbitrario.
+
+Un único writer por vault. Validar todas las precondiciones antes del lote, guardar
+snapshots y journal antes de modificar, volver a validar el archivo inmediatamente
+antes de sustituirlo. Estado prepared/applying/committed/failed/recovered. Una falla
+parcial deja evidencia; no anuncia éxito ni revierte encima de cambios humanos.
+El bloqueo coordina instancias propias, no bloquea editores externos: los hashes
+reducen conflictos observables pero no garantizan aislamiento global del filesystem.
+
+### ADR-007 — Recuperación sin proveedor de embeddings (proposed)
+
+Búsqueda léxica Unicode con ranking determinista e índice reconstruible de texto y
+links. Codex puede ampliar consultas con sinónimos y leer notas completas, siempre
+reportando cobertura. No se llama a Ollama, APIs de embeddings ni runtime adicional.
+La ruta semántica de F-033 sigue siendo una brecha hasta medir recall@k/MRR con
+paráfrasis en el mismo corpus; reindexar texto no prueba paridad semántica.
+Alternativas: embedding externo contraviene AC-019; inventar vectores por prompt
+no proporciona un índice estable ni una equivalencia medida.
+
+### ADR-008 — Capacidades del host y formatos Obsidian (proposed)
+
+No construir adaptador TypeScript para el flujo centrado en Codex. Portar lint
+a Go y conservar Markdown, wikilinks, `.canvas` y `.base` como datos. La experiencia
+de lint en vivo dentro de Obsidian permanece explícitamente sin equivalencia; la
+excepción AC-010 no obliga a construirla y AC-019 exige reevaluarla. No incorporar
+FFmpeg, yt-dlp ni servicios de transcripción. Medios se procesan únicamente cuando
+Codex tenga una capacidad comprobada o el usuario proporcione transcripción/frames;
+esto último es una entrada alternativa, no la misma extracción automática.
+
+Un workflow puede consultar las capacidades disponibles en la sesión, pero el
+plugin no promete que sus herramientas internas se llamen igual o existan en
+otra cuenta. Ausencia produce `capability_unavailable`, detalle de lo no realizado
+y opciones de entrada manual, nunca un resultado ficticio. No usar navegador o
+plugins adicionales como sustitución oculta de integraciones prohibidas.
+
+### Compatibilidad y medición
+
+Las matrices de [equivalencias](analysis/equivalencias-codex/README.md) conservan
+47 registros F, 12 I y 44 T, con solapamientos: no son 103 funciones distintas.
+No se elimina ningún registro para mejorar cobertura. Cada modalidad recibe
+proposed/implemented/verified/blocked y evidencia; un test de presencia de skill
+no verifica su resultado. Los tests de continuidad y recovery requieren dos
+sesiones/procesos y fallo inducido respectivamente. Los umbrales de resultados
+con usuarios se mantienen abiertos; no se sustituyen por recuentos de tests.
+
+### Referencias actuales
+
+- [Empaquetado oficial](https://developers.openai.com/plugins/build/plugins):
+  catálogo y manifiestos; consultado 2026-10-08. Validación del host sigue pendiente.
+- [Skills oficiales](https://developers.openai.com/plugins/concepts/skills):
+  instrucciones de workflow alrededor de herramientas; no implementan capacidades
+  por sí solas.
+- Código de referencia: `scripts/eval/semantic_search.py` declara backend Ollama
+  local u OpenAI-compatible; se inspeccionó directamente, no se ejecutó.
+
+## Especificación funcional y plan actuales
+
+La [spec funcional v001](specs/2026-10-08-codex-plugin-spec.md) define historias
+y aceptación, separadas de los contratos técnicos. El [plan v002](plans/2026-10-08-codex-plugin.md)
+depende de su base exacta. Ambos son borradores: sus nuevos criterios y propuestas
+no heredan aprobación de esta arquitectura. Actualización de referencias del
+2026-10-08, sin cambio de decisiones técnicas.

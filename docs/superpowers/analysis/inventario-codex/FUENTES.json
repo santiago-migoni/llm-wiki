@@ -1,0 +1,1854 @@
+{
+  "source_commit": "b0089f7666d0c1e3db41c9d587b6f3c997665235",
+  "origin": "https://github.com/santiago-migoni/fork.eugeniughelbur-obsidian-second-brain.git",
+  "scope": "Inventario de archivos versionados; clasificación no equivale a lectura línea por línea ni validación funcional. SHA-256 sobre bytes completos del archivo.",
+  "total": 366,
+  "counts_by_directory": {
+    ".claude-plugin": 2,
+    ".github": 8,
+    "[root]": 23,
+    "_includes": 1,
+    "adapters": 10,
+    "commands": 47,
+    "docs": 49,
+    "examples": 9,
+    "hooks": 12,
+    "integrations": 22,
+    "media": 7,
+    "references": 14,
+    "scripts": 80,
+    "tests": 82
+  },
+  "files": [
+    {
+      "path": ".claude-plugin/marketplace.json",
+      "sha256": "e4495bca9182eedc99f71a63766e89abb94d58b44e76da4a6543987319e5f850",
+      "coverage_group": "metadatos-documentacion-y-distribucion"
+    },
+    {
+      "path": ".claude-plugin/plugin.json",
+      "sha256": "725d0589601597dd16cb4ce69670bae20c050828aad71a91fe050d20237b585f",
+      "coverage_group": "metadatos-documentacion-y-distribucion"
+    },
+    {
+      "path": ".env.example",
+      "sha256": "f24485588d782a1a5dd44eec244eb318e571386c0060b29af169eb88f82f6580",
+      "coverage_group": "metadatos-documentacion-y-distribucion"
+    },
+    {
+      "path": ".gitattributes",
+      "sha256": "b5252b95eaff801a1a83c4da82a2c10829a419a1cd94839478524561724bb438",
+      "coverage_group": "metadatos-documentacion-y-distribucion"
+    },
+    {
+      "path": ".github/FUNDING.yml",
+      "sha256": "6090431b662130ba52eec3a258c2493212ac713a221df955d7e080b6f3fbf569",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.yml",
+      "sha256": "d67f2f244b0b94d5679981469044794a9b713a2bcf03002f09b402838f39a432",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/config.yml",
+      "sha256": "53c596891bd1949f8843a1bacb79031003608136dc3ec0f24d1f8edea1d173d4",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.yml",
+      "sha256": "2e9556cc11effb2c3a9e073386cec303d5d14ea459f0e1cd5e99f4af7b5b7965",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "sha256": "745c22d0ae1456081821507c4616d5cc5358a4b11fd4c04125dc7ac975c22beb",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": ".github/dependabot.yml",
+      "sha256": "61fc3e6b2f9ccda45bf15f819fc51864db392b4e44e7ebb1f4ab941bbe6f2a3e",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "1be2d1bf93c6f745ad6bbaa1d8009f70f36af91350397f500ec0b7abfcb27a57",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": ".github/workflows/scorecard.yml",
+      "sha256": "61da438e6bfc8313f9abb5e127267cac38d73bc74f9368a4c4959ce3465affe0",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "5283fcf909c67daf3be5d85b5201856cf7e38130dbf279a0cd8d58dec66759ef",
+      "coverage_group": "metadatos-documentacion-y-distribucion"
+    },
+    {
+      "path": "AI-FIRST.md",
+      "sha256": "cb582020da7311d7fefb13e29e64dab54a86d13ce82dbc84de2bf73366a7ee85",
+      "coverage_group": "metadatos-documentacion-y-distribucion"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "1cc80939fab9ad3bac02d5b90fd3c38a3bb878c772d902e24811211ba5840e07",
+      "coverage_group": "metadatos-documentacion-y-distribucion"
+    },
+    {
+      "path": "CITATION.cff",
+      "sha256": "7bd0ec1a826eeee51ee12c88a344a4d87bd146e5d08e422ec5560ed38a6d7f77",
+      "coverage_group": "metadatos-documentacion-y-distribucion"
+    },
+    {
+      "path": "CLAUDE.md",
+      "sha256": "18edd009f6c382ced461296cd78a23c9116ff72ea9d8586f057a695836d5c5b2",
+      "coverage_group": "metadatos-documentacion-y-distribucion"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md",
+      "sha256": "686e7c2feecdb7fc05946448bdb5658ade1887fe6ad5c95235f407ccd25f6c31",
+      "coverage_group": "metadatos-documentacion-y-distribucion"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256": "35568ee0965b23749cddac9e846476506896a245064f9f9eecc1cf55f29834b7",
+      "coverage_group": "metadatos-documentacion-y-distribucion"
+    },
+    {
+      "path": "DEMOS.md",
+      "sha256": "c3b4495c2a845c090e26e4cd4879ad314d0fc2dbf8e0ba9161e56066844c902b",
+      "coverage_group": "metadatos-documentacion-y-distribucion"
+    },
+    {
+      "path": "ECOSYSTEM.md",
+      "sha256": "545f331e225bcb92b2e514355300d1dc211e1ebfc52cc532ed44b3d7f6208ce7",
+      "coverage_group": "metadatos-documentacion-y-distribucion"
+    },
+    {
+      "path": "FORK_INSIGHTS.md",
+      "sha256": "0f67173d32eb31607805a15f1a4ab9eeceae78d75fa2aed103d4b58b935ee5f1",
+      "coverage_group": "metadatos-documentacion-y-distribucion"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "94b7323d498415382c2bb5c36f6a0d0d530d0ab3f4a096b2260d5dce5aeb1b50",
+      "coverage_group": "metadatos-documentacion-y-distribucion"
+    },
+    {
+      "path": "README.md",
+      "sha256": "59e04ab842f3e63817f1dc0aa383d9a13e703cc3532404ec033ed5fba47585bf",
+      "coverage_group": "metadatos-documentacion-y-distribucion"
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "7bf304583b3cea834ff38fba55a942b9cb58cbe7bf4b060a4298b1398288edab",
+      "coverage_group": "metadatos-documentacion-y-distribucion"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "2f3dadd907a6541fa48e7e250e3c8dae0cb21380f600d589fc441a53a27cefec",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "_config.yml",
+      "sha256": "fa3b43b2dc329bf61f6ef7aeb4cb855b4017ca56c13e5ac5597c9897b94c8312",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "_includes/head_custom.html",
+      "sha256": "81fb1b838a97bacc309eb612d116f8b517c18c18c8b6026faf289315d7ed2957",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "adapters/OWNERS.md",
+      "sha256": "9bf1cbe727b0a595e8b0ffef22b3efa9d79685d61c1fa6e664c6f6113da5d39a",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "adapters/agent-skills/adapter.sh",
+      "sha256": "19df163c007b027f2eef2ed3d5d7f9d660808520df3d1e3074e59f6e6574992a",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "adapters/claude-code/adapter.sh",
+      "sha256": "e5a21bd66042ed82f9460b2a3ca8502d091c012406f6cd3116f8210362fbfe66",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "adapters/codex-cli/adapter.sh",
+      "sha256": "a9e7cbe63f199b8ae8cd4e54beef1a32ef966c221608c0189885599744ec074e",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "adapters/gemini-cli/adapter.sh",
+      "sha256": "03eaba85c2dc90e90c4353a46fd0022bc18d417a4a48fcbaab269d6e4f3373fd",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "adapters/grok-bot/adapter.sh",
+      "sha256": "1addd31fb88fe5fb4f9ea64b15f5ab1268658dc66c934fcb7336e5247243bffe",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "adapters/hermes/adapter.sh",
+      "sha256": "5d077da4867151f201be6c5105890513871b395c135b5b7fe3364b57eff2a555",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "adapters/lib.sh",
+      "sha256": "5f34bd539f2e7737eb50310b5dc12181d2e17787245410e97543142df836b0c6",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "adapters/opencode/adapter.sh",
+      "sha256": "4b49ffdca0b7f0dad58a70f1dccd0b67bb87808b845db99d04db56be8da13da2",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "adapters/pi/adapter.sh",
+      "sha256": "135169253c2fdee108ca1e6ec498285d661002b5a7751b3f46ea8bb5c4531583",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "architecture.md",
+      "sha256": "685e5df04898b8226eedae1057e3a6035dc89fb1a6135874035a98a4281c1dbf",
+      "coverage_group": "metadatos-documentacion-y-distribucion"
+    },
+    {
+      "path": "commands/create-command.md",
+      "sha256": "d357311728e506918028a81a65cf92fb446845317c62ecc921d2f6cac8c1553d",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/idea-discovery.md",
+      "sha256": "856c8c4ed2127c26cc746121418afeaf985f63cb7a462f9216976f7b2e73993a",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/notebooklm.md",
+      "sha256": "c140815cdafad3cb8f816e1017aedbb5f08d3174e244b64491e3b23626d9997c",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-architect.md",
+      "sha256": "7d8ee79068a443ba538fc34f41bb10c06667d9f970730d4cbaf098bbc378ccf6",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-board-hygiene.md",
+      "sha256": "98dcb890d71c6fa210dcaa24b62c4f65c65cb6ca5c0feffa8a84604eda048d64",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-board.md",
+      "sha256": "5ef2f3fe20ce1c640b7eecbf49cffaef182308bfb4e6b54ff78e3af6d9691deb",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-brainstorm.md",
+      "sha256": "629c21e0f0c7e933eea009a54e6e49375130165e06cdc1cb29363a26e0bef3c8",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-calendar.md",
+      "sha256": "76e3b16866ae55044e1ca19b696db584575e0cc0af26226ed205320cd919ec12",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-capture.md",
+      "sha256": "f6f8bfaf5cd570289407eb8a832d32224402123262b6b983e76c8f8801f79a0b",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-catchup.md",
+      "sha256": "4992dfcdb6b2bd24c5e7dab99d28768a4aee3ebffbe0056466ca4ea49b8af115",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-challenge.md",
+      "sha256": "81b896eb70f5b4ccd2949093177b1b6a86510002cefded5bc3f8408e9e811ee7",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-connect.md",
+      "sha256": "cceeef0db1284b79ab59279f1d02f3e8880abc0d6b79fcb1375f757d753a94ee",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-daily.md",
+      "sha256": "fc813795f4d19feccbd9f7e003f4f152324f8fc38e75b2a86d7deb4536a754ad",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-decide.md",
+      "sha256": "da4346780065d1152befbaca29ec25f6d7b23ed2783442524a81dd609030ff3f",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-distill.md",
+      "sha256": "e66ae27450c0a8afc9f1cb1988eda9ac673521babd78fc11541bd8129679482e",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-emerge.md",
+      "sha256": "b36230765b757bade4ed8852e454d52d3057362f44260bb67f16d78c31664d77",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-export.md",
+      "sha256": "2b0ef9de8afd128e079a19825030a2169546171af22a4e250b998aeb097d3443",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-find.md",
+      "sha256": "d1f98957413887cbc835ea1526a3df564c93111bb0956b9ae08edf061e6f5795",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-graduate.md",
+      "sha256": "470a1a41b826fdb658544c53f07443a5d759c7803d15c564545c22c5156d0a4e",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-health.md",
+      "sha256": "268b961687ad006ec68141c8dc1102132c07d9552e5ab3eed1724cbc2b9ad078",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-ingest.md",
+      "sha256": "f70dcd6a2084e6cf49587da02d897655b16574ed62739da938f4a73b92ed9631",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-init.md",
+      "sha256": "1677acb15741346b0bc85c7915db29bb7a631b828d8a9b396751355e90dda478",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-learn.md",
+      "sha256": "a8db4b9b794c8a83baf3e5cc0cd28426d6cca39ed84c65a917f5e2fcb5177307",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-log.md",
+      "sha256": "45b4c7ca6b233a3c94bf6e32213e6321c61ebecf9fb41c55cc96a90c3aee280d",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-merge.md",
+      "sha256": "8ddb611afae04fbd525997d55c47c196e2ae5a22988c86d3da658afa08c75c89",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-panel.md",
+      "sha256": "c933d06e7e47dbd71f8a7d2b6d680f975e3de3c805ed64ed0182201a517e5bd3",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-person.md",
+      "sha256": "4e3a82edc4e9644463163df64f43d6734a4269fdd1151b2c4c45b8ddf9dfb829",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-project.md",
+      "sha256": "038507c7135431430957e2fd1c5aaf2c7cbc2e1bdbed3d8e55c7789e71a12292",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-projects.md",
+      "sha256": "c6c863870f5538daf560b782afb8def3920947de791556e3794f800218ec26a2",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-recap.md",
+      "sha256": "26332959b7205b2acff25e127dc433907ea91a6f5eeae96489540c81fa5bbfed",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-reconcile.md",
+      "sha256": "60600f91c8e74c30b3036a17d4b98ca59e9560f4f302ff995ed369defe6e94ac",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-recurring.md",
+      "sha256": "f3d6a29f729af078ab8983c6b903c9878612908580c0728ea862dc257d6ad793",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-reindex.md",
+      "sha256": "4eea7c4fbfb863d9552521cab4c8dd896956b18a04402a6c56758e3980091fcb",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-retrieval-eval.md",
+      "sha256": "efbe268a57a6bf0548ccd2f5b2aaf0e301c759e4d2ab21d26ad432dc5d7551b8",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-review.md",
+      "sha256": "91386192e4f36d419f878aea2511e5fe2f9520a1e8791670529a141ced550c8d",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-save.md",
+      "sha256": "d0dcfe9fb659e99517d09cf1ccbf93031d3ff427cc351b91f445c554a25cd831",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-synthesize.md",
+      "sha256": "f5d1019a7cfbed254ca932552c209c5c5409636755b601ef77ced254b5be664a",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-task.md",
+      "sha256": "559ad5b59930ee3c5da5f72ce02442b77d352cef26fc0dad51f1fbaee33fdb24",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-visualize.md",
+      "sha256": "00b9528ae300501a6e7fecf780521eda8c0932cd204f54c92680e1f01c69f766",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/obsidian-world.md",
+      "sha256": "e81d0ebd042e2ad6c971315bd11d70344699c6ed6f17c5a3dad508f1a5e14c04",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/podcast.md",
+      "sha256": "aa0f36b55f46325177bffafaf064207c6377b2b1de6dd88b4942183563a0d364",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/research-deep.md",
+      "sha256": "e8fe662002203a456e6620adbd9e8ee922b1f82198d446328c3ac3f92c83445e",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/research.md",
+      "sha256": "3ae7320c402e60370844fa99a39680707324bf2a7a874cce2ced2ac58f741fda",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/vault-deep-synthesis.md",
+      "sha256": "1c1219078547c46a8d8793e7507c7a91373515c1cf2c82354425c61c28134226",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/x-pulse.md",
+      "sha256": "e559beb2277f1ec047b9108229b20d1a926f826fa7fc062b40e04d8db0305a71",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/x-read.md",
+      "sha256": "79f25d9211eb05e2e59af3fac5bc5a381dcecc7eb7c57efff71927ee91d34154",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "commands/youtube.md",
+      "sha256": "402f30fc3da241aeb8cb1984b64792087e9ad336a5bed99aa38b3b3a3849f55d",
+      "coverage_group": "comandos"
+    },
+    {
+      "path": "docs/.nojekyll",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/create-command.html",
+      "sha256": "7ab6343ebb14fcb9cda2b0db7ca62356b9f2e30ff569a0abe63930d74a846d16",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/idea-discovery.html",
+      "sha256": "94cc612fb1ceada12aaaae1a03e4eadbcdc30af68f940830aa4965b2cad48d31",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/notebooklm.html",
+      "sha256": "191965a6fd20f66e6770c722a5608a8a03379fdb44357d8263eb60f751fcdadf",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-architect.html",
+      "sha256": "7733f0a2630fbf7e94e98c32d6b21822861602674766ab782f9ec505f0383928",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-board-hygiene.html",
+      "sha256": "d8882a6f425dba28c6fd96c3a4194fc0b8b93a504f038d241dde2cb7a52a3d16",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-board.html",
+      "sha256": "fd1dd0cbe6203451b0d78ecc3317097d3909962816b63ac443e016c6f8b1d8ab",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-brainstorm.html",
+      "sha256": "56e4c2a23e6263c4f9c8b861553d4d9316aa034842c9afbd1a77568563922601",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-calendar.html",
+      "sha256": "11c5e050c7a8090e7cb575bb537a63a0af65803352106a1f09224dfed9200843",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-capture.html",
+      "sha256": "a9c7eb4727c2760c62f5601277de039923ad937d00f5b134f58621d65a07959b",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-catchup.html",
+      "sha256": "8bfede8f138966033cad89441c16898dd9f86aeb58ed38e9b6d164b7c384db4d",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-challenge.html",
+      "sha256": "0272674aec99559dc52efdedc4b90a7e05cc582aa591a3e7ceae2806a073d67b",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-connect.html",
+      "sha256": "28543458d7099f636a1989ba45a158d45c3666f2b9f2dbc9cd05d0c7bfcc68a2",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-daily.html",
+      "sha256": "e526d78f532c88d245d08f5d0924b4969388d631b318414f3557e0459f4bb8cc",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-decide.html",
+      "sha256": "daf6ef867d140502c17427f3f11cafae2a2c373e1dbbbb21de8607a890800426",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-distill.html",
+      "sha256": "09adefe82294973f2ebcfdb3ccec965c9822efbfb3dec51cd7cdb48b34c30cda",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-emerge.html",
+      "sha256": "6ef9a274cd919910d8ceb705800e90591fddcedd1b13b83152296f1cccd35abe",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-export.html",
+      "sha256": "4c24ade1a2d75c0075e91354fef188cc681fb909b09fa85e7679e21285b9c9e2",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-find.html",
+      "sha256": "d5d43a92ce230ed2805abb9e5e924d7e4c140625da17b1e56d1574cd5213231b",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-graduate.html",
+      "sha256": "3ee0b9343737b7ab68ead28a8f36821ab8c384d2abd7b283a5e3091d3530e0b7",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-health.html",
+      "sha256": "e589eecc2d3d255fded8a9177880ba101798e7adc2da14c919057b28e7453b3b",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-ingest.html",
+      "sha256": "0603748b061264b5b4cfed44a3226a681e934e2fead869a0d38e622213844773",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-init.html",
+      "sha256": "d923d62942fe557664a5eddadfac2817c3df25a8fcb58729dcb20b2890c549c0",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-learn.html",
+      "sha256": "d71a330f4b2661d878e91769b305e5cdbbc29a822dcfb815f29c27b3e3a84fc5",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-log.html",
+      "sha256": "4b8a45220eb2fba437da1602477de3ad478125ff31c7866e625508e2a8a47333",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-merge.html",
+      "sha256": "298e612b795d1fe995605ad4399d07d8804a65ba09c45ca3ede7f088dc7c3a6c",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-panel.html",
+      "sha256": "800fb28d4ddf8319d88d5631c8176fbed6da2190076e473f87159613a930d93b",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-person.html",
+      "sha256": "669921301a439f199436cc41de03c055c158ec362ee1038e2554e74704b8ff08",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-project.html",
+      "sha256": "b462c10feffaf0a5dc6a8c2f0f5cda587d2902e830ef0b50773afaf4a8fc51a4",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-projects.html",
+      "sha256": "7d2ef0d3339faee77fcee2252b51465917e8a2778c9595ec59acd09650f5619d",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-recap.html",
+      "sha256": "6c3b56bb16039921414b934789eb88acf3fe41da15f13e7bae1376dd58198f5f",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-reconcile.html",
+      "sha256": "67100c034976d68281551894375207225cb8b0a7f1a38c7a34d82438280e0781",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-recurring.html",
+      "sha256": "af82e82c76cebb8a992e85ddf21af3ae113e32efffbcc2bb4ed01d5810d6eb5c",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-reindex.html",
+      "sha256": "413955f8dba6795312187eacb1ce42e1436a3c3a264988fc007365c3edff0b70",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-retrieval-eval.html",
+      "sha256": "01cfea199b26b487f3865c660984bb5a9d720fb349f980fce19e44d5ab27756e",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-review.html",
+      "sha256": "e82549219e9ec897ef78c2b8a2547999b710029ee34fa629db62efe2e9f5841b",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-save.html",
+      "sha256": "6341d2d049ac7d855fee28a14220603467709c1731110981e6da1f1d5bfdc650",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-synthesize.html",
+      "sha256": "a6f54c27d20437d852e7a03aded0264ff30d0a1912f1f7a94b454a46875cd961",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-task.html",
+      "sha256": "3ab5689e7a80773205a5da05f905b995caae78cd4fcf647a139c402e2667df5c",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-visualize.html",
+      "sha256": "87d9f5306274c6803aaefe2d33ae2a84fcea5c84be3b3ced866b027c4b5904e8",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/obsidian-world.html",
+      "sha256": "cdd7b31abb5a4fbd4a15c0d2ed70da623921cc4d50b49746b6bef644fe4e4f10",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/podcast.html",
+      "sha256": "638a466edc38559f8646d3217f9f59fcb82fb72be0417e210e39186165bb03bc",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/research-deep.html",
+      "sha256": "b75f9eefd1aef4b47cdce5ce2af8a7c3b530957c75780b08089983b2437cc39a",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/research.html",
+      "sha256": "dd814f9cd6b3cb37173b81736407139a8cb54b7e694dc7bbe18de9b79b25394a",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/vault-deep-synthesis.html",
+      "sha256": "5070a641d9f1661d54de302061f1c03c9b7e68402e776e2ff22c7766d77b0b6e",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/x-pulse.html",
+      "sha256": "f7d73d8fb50cc15ffa088d27b1d3a5ba0cd661cc69e12df42735bd0248cdd232",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/x-read.html",
+      "sha256": "71c8c920135590563f7c13ade4b036ae1a9ecf9b506addc90b1d206ec849b2ca",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/commands/youtube.html",
+      "sha256": "5eb4c2d23a81d7bd70a2c035185103e56b0e343fcbea9e07fb895ea8422c150f",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "docs/index.html",
+      "sha256": "e5224b98d34d724a4d8c09b647b25906f72f25703740e9153a1446ac301d2691",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "examples/README.md",
+      "sha256": "ff880feebccf58e29440bd0e3b809bd0912f1e6e4973eba8ec963f8dca0bcb78",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "examples/sample-vault/Daily/2026-04-27.md",
+      "sha256": "4b469dad9033f593ff34aef643b770b096317767fdbc2776fc7339e733f796fe",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "examples/sample-vault/Ideas/2026-04-27 — Streak insurance feature.md",
+      "sha256": "205d2a7dd5881971e9ea1d79f21669d020c968797a7681dd81791a21503afa3e",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "examples/sample-vault/Projects/Tide.md",
+      "sha256": "2832b69752eb41e118e39953bd220e9b7dd3c6f8e23cc726541c1bb98b4a5b0b",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "examples/sample-vault/_CLAUDE.md",
+      "sha256": "a0c835a8e56955f0df4478e3e4bb3a9467db08350f1a491bb39dbc985f7bb11b",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "examples/sample-vault/people/Alex Rivera.md",
+      "sha256": "7412693f018ce594b834d2fdaf6bc79ab2b0cf3592b9f0413d01a2be129b5d9b",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "examples/sample-vault/people/Sam Patel.md",
+      "sha256": "2dc9839c90060d6e21d2805a85a53dac70acba34a898ea8dd9cfa5d1d607a0d2",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "examples/sample-vault/wiki/entities/Currentscale Labs.md",
+      "sha256": "4b8bcc7cec65217793ae22050cbf804af35b030753c5a00cb11f3a24855a5128",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "examples/sample-vault/wiki/logs/2026-04-27 — Tide retention rebuild.md",
+      "sha256": "36797f404288ace899e95beff67b34ae01005a89e19547f4780508d8e7449d06",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "hooks/hermes-hooks.config.example.yaml",
+      "sha256": "38a589f837af472b3e852995efd5aed25bca53ec78a5a74e46ebee8be3186ce4",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "hooks/hooks.json",
+      "sha256": "6b93b5dad1a6c28c2f1e27c968f128589bf09cdcd4edc6a33e077ee3ff0739cc",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "hooks/load_vault_context.py",
+      "sha256": "bbd601d5242da58bf6478f38d2e27c2ade59efee8b97bcbaaabe420458c54133",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "hooks/load_vault_context.sh",
+      "sha256": "a309246a595b7bb6447d451a617430f21a58c8780650e0a256c9646309933a6a",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "hooks/obsidian-bg-agent.hook.yaml",
+      "sha256": "6fdb9360187fc475a78ec511015364695d7e1dc8ee3ef6009fd2f484c26a2f15",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "hooks/obsidian-bg-agent.sh",
+      "sha256": "98eb23203788917f22a22227a881b5ab9e257d9b6ba834987197ca93100f4e2c",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "hooks/obsidian-hermes-session-end.sh",
+      "sha256": "96f2d27956e1d13f488ed15c477e18fbbd99c975458ecbc4607da01e2ed41edd",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "hooks/obsidian-recall.py",
+      "sha256": "78177d548984791dd42e97ca1f1fdd36894fd9757060afeb4f9ed38b83197f08",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "hooks/postcompact.hook.example.json",
+      "sha256": "eb78440580e2ec3e2ebd74e3d627e09038ab8e395539cc1cb3dd49eb4f977cc1",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "hooks/recall.hook.example.json",
+      "sha256": "34b7b2995d55b6ee6929e734a7f48e09be5f05c67776fbb0f02f05e37fbb5d4a",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "hooks/validate-ai-first.hook.yaml",
+      "sha256": "1924e31d388de54f9474b381510bddaceb6157de95610418ec00c02e5016e94f",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "hooks/validate-ai-first.sh",
+      "sha256": "8b99a549ae626b441f41eb2e60aec184a0b4d71f16a8f0e62cf1f7603afee40d",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "install.sh",
+      "sha256": "325ee49ac04c88c781ff3e3b98346bcb8631a7b8c9a7042f2d2c74cdd4c11a07",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "integrations/obsidian-mcp-server/README.md",
+      "sha256": "93ea6e1b016b6312d53d0989f0be85aa72d1c59c1a421b28de03623d71c8716e",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "integrations/obsidian-mcp-server/live_test.py",
+      "sha256": "092a0c913bc7ec7c6abfa0761ddd11996e48e3ab4662ccb4a0374beecb8b887f",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "integrations/obsidian-mcp-server/server.py",
+      "sha256": "b9eccd468f41d7465bdfe546b0f68c66a5cdb5a2ee266957f1c4fec899bc260e",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "integrations/obsidian-mcp-server/vault_ops.py",
+      "sha256": "6d6c0949e943fa2ab191ed71c872da6814c10207ea7d1c4896ec98653ea1e52f",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "integrations/obsidian-plugin/.gitignore",
+      "sha256": "b7772f7c851cf1a2300f2dde7acc2ab3c37bf9c66d5316ea47b0ad402775da2b",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "integrations/obsidian-plugin/README.md",
+      "sha256": "a07d9c75e9e29101b929de7ac2430d80e8ae15b2068ef89c1004c58ed15dd6f3",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "integrations/obsidian-plugin/esbuild.config.mjs",
+      "sha256": "6ab008bcbbbb65dcce19ad7f2ec36735e63f6d7d12d65a7fbbb777582e2c1c45",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "integrations/obsidian-plugin/manifest.json",
+      "sha256": "fe88b01dbf63826e0acb6198244bb33c5c56f650a8e8226483233eb17ed6b8b2",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "integrations/obsidian-plugin/package-lock.json",
+      "sha256": "e88b0ed6395e72dc89e3edeb73333737486f808a73b21196a2082a1e6e53b0c5",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "integrations/obsidian-plugin/package.json",
+      "sha256": "898e7334baee89ed0e85d1a58f36e0099411c3580a25189dc3cd3d7e828c1aa7",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "integrations/obsidian-plugin/src/lint.ts",
+      "sha256": "12dd66574576a15435116cc3e0dd5478d9e6711e786208120ca6d6dc4f94a09f",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "integrations/obsidian-plugin/src/main.ts",
+      "sha256": "f3404b9414c43bfa23a4348be52e4cff1ba853420eb55e8baa0aa3cd9b1f0a22",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "integrations/obsidian-plugin/styles.css",
+      "sha256": "3bcc731b89b506304a7c62becab49aa9966a93aca6d2c5e33356ee61862a825f",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "integrations/obsidian-plugin/test/lint.test.mjs",
+      "sha256": "77e3a2c0b8025950552f79054a319f946781e704c43bc1627a245f5bc5860fa5",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "integrations/obsidian-plugin/tsconfig.json",
+      "sha256": "8439a7301b39e7ad51216997d19fc23cd6bad04b37f0c7c0e047ff72b02d2761",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "integrations/obsidian-plugin/versions.json",
+      "sha256": "05a21302cdc4363d2e248b5b2952e7fc536adc653d6e46169e4f29bd33e557e8",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "integrations/telegram-journal/.gitignore",
+      "sha256": "d0807f063a306067c97e944d05388ef46de884274eede1fe8b5b2595f1cf1ad7",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "integrations/telegram-journal/README.md",
+      "sha256": "aa20c480592399b88483722156b35f8aa31c59195054d4fbeca2622b60164482",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "integrations/telegram-journal/com.user.telegram-journal.plist.example",
+      "sha256": "33c69970e4798e4004260405155c97616fc64a8a6fbf4ab99d4858e14eabb269",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "integrations/telegram-journal/setup.sh",
+      "sha256": "ed035e52ce1e971ce4fe772e8bcde41182f4a794b3b098e0ac452dc24aa97c88",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "integrations/telegram-journal/telegram_journal.env.example",
+      "sha256": "4bd149d054afb19dfeed3cfdc36db57aab94cb0c256324559918ed10f7733f34",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "integrations/telegram-journal/telegram_journal.py",
+      "sha256": "dec378dc07c10a0d5f7726f0ea560f22c56e9b62696104d97a96cfc379199553",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "llms.txt",
+      "sha256": "3faabfdef249a7b35b9e9d61f6794fe7bde07dafb9c7d507b15a6e44dc5a0ab1",
+      "coverage_group": "metadatos-documentacion-y-distribucion"
+    },
+    {
+      "path": "media/banner.png",
+      "sha256": "e0b9a3df40faaa52eda0c3c58af290d8f94116032d584f7b74ffc623a5306af3",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "media/bootstrap-health.gif",
+      "sha256": "808b5f9219da9564e6242276a7433f5532b0f7adf82e56f31c5a58fb5d7ba7e0",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "media/bootstrap-health.tape",
+      "sha256": "926e840449bd0735ef03af028338bca9f6048b506ada5eface7a173feba64772",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "media/obsidian-save.gif",
+      "sha256": "33d70be2acd1b3110e95f43123915018ce6b5c48db14d1bedec9d51801d0716c",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "media/obsidian-save.tape",
+      "sha256": "2a654117426e8a5be84e3c997e8725e9e01712f5ccd3aa234d5135e255274b74",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "media/plugin-install.gif",
+      "sha256": "df2f1ee9a545d9c93c2d00680c8ed2ed39fa3caa5633a28c5d31683cd4e58374",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "media/plugin-install.tape",
+      "sha256": "a5cbed00d3e0d07d905cb9e3e81080f40bf74d8d6670f110320c5a75e366ca8b",
+      "coverage_group": "sitio-y-demostraciones-no-ejecucion"
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "4f1e429220f21f70f7f725070828cd9c92060ee2311bf04c38e94a15dff00514",
+      "coverage_group": "metadatos-documentacion-y-distribucion"
+    },
+    {
+      "path": "references/DELTAS.template.md",
+      "sha256": "23819724b7f857757a86785f3a76926231854be2bcf1ce49de063bbd9bdcb6e0",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "references/ai-first-rules.md",
+      "sha256": "de2a1e346661e2260cb45a902bdd98df5664e2cea9df459bda3f7c5de72be164",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "references/bases/daily.base.template",
+      "sha256": "8c3486a67af8592f30b125b9ffc3033a81ff5e3584be1edcc25dfb7c2f0b2c24",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "references/bases/people.base.template",
+      "sha256": "c2b7e8d00cf14e70e81505af909a24d8f5df37e55b1571fc8dfaf2a789a45176",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "references/bases/projects.base.template",
+      "sha256": "3ae3c4e4fcd82370cdd16e357df7889697aa9f1b9e6b99707ef1ce19d5fb121a",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "references/bases/tasks.base.template",
+      "sha256": "3eece45b7d03a17c32a3d4604f170f1375542b85f4ca450a4a075f840a955e2f",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "references/claude-md-assistant-template.md",
+      "sha256": "4c1b034a1a541196a4eeb924c59b10214e84cbf3f4f54481d188fc74994d6a94",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "references/claude-md-template.md",
+      "sha256": "24fc902184d00338d0997457cba9f062c4bda7d7b587dade9eb1d234368b75d9",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "references/folder-map.md",
+      "sha256": "78ce085bf9da2a2e6eec0912540d9c08ce1cfab64eb2aa02a2b0534b9d99c8da",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "references/freshness-policy.md",
+      "sha256": "9b62e53fe0cfade6a343507dab1299e4d5812a60e7ba4343cbd5d96f328df608",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "references/pi-testing.md",
+      "sha256": "ca1fb1525b0d43a02ef139900134b422f3100519b3b487e8f6b63da65281de2c",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "references/taxonomy-format.md",
+      "sha256": "ed00a146b4f2b58e3fa922be472667979e7075a2a766f00e5ee9484fbc14ea47",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "references/vault-schema.md",
+      "sha256": "a6af67ebf5dafa356f0f8d43f1fdc07931eaed51a6613ecf7e5627bdcb512f64",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "references/write-rules.md",
+      "sha256": "9e73d3df26e13bf3d5f477786d1f53deb3ce8a47d8cca5424e76c7cb3ac1f52d",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/architect_scan.py",
+      "sha256": "e7718bf4988a96adc6d49b91fae3dffd74e4413754edc066180a0139f361afc0",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/bootstrap_vault.py",
+      "sha256": "dc207c32f7d6e088826376c8e0fec0d6b2f5aab184d6e5e01660d9042f7a012e",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/build.sh",
+      "sha256": "619d2b67ca16ebe6f062c96a4d6fa84620bd1e1c5bf000740dc4772b0e78291e",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/build_site.py",
+      "sha256": "9b858db34459aed225bc9ec0289d19d9c60512e2d680c225d5ed0cda74fbff26",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/conformance_report.py",
+      "sha256": "bf7812e529e113cbb1dcb9095b945608cd2bf3d68915f22a254381a5f3b8a539",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/eval/BASELINE.md",
+      "sha256": "6ed271bcd7559ae3bfd9fa745e8635953654c349982462ca74c68a4e06d0c285",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/eval/BENCHMARK.md",
+      "sha256": "d167abda75b201e918d888ca67222ecaa5f1bcdce98f0f6dcff4d638dd54e143",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/eval/README.md",
+      "sha256": "fb68c89ce3f4ee8fc0aa276eb557617be82d3e6b014d81680f7201a489539e6a",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/eval/behavior_cases.example.jsonl",
+      "sha256": "f9e88853f00c02e80cc7be7ebfd2b905d04a06f8ab8f7110c8067107a8cdf392",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/eval/behavior_eval.py",
+      "sha256": "8fc19aa3459f539731b3aad53e3b4624ab8e533fe606f1bc63824c52e57fe05f",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/eval/corpus.py",
+      "sha256": "cbbb4cb224b94b217869baa146b86f2739e098103bc4c3c01c97f742ae9869be",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/eval/diagnose.py",
+      "sha256": "f006eb6712d140e99e18b31c6085ad7b4af5295fffea5fbfd876554e5c288952",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/eval/retrieval_cases.example.jsonl",
+      "sha256": "bf9a1ef89e4f733283b203c2c0a74ea574fcdf2537225c8d1510af5677beca2f",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/eval/retrieval_eval.py",
+      "sha256": "12615318ef24dd10a4662ca76a2b05a3901e965d70c19615f95d30abfc62e3f7",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/eval/semantic_search.py",
+      "sha256": "588011e01eb0da90ed9a4ae7cd57a63a1059093a1d417be05e78841844a72e62",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/export_okf.py",
+      "sha256": "cb9ac2390be6639951004103db771a2c1b25ac4d7c170f44336ba1ffd6249285",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/freshness_lint.py",
+      "sha256": "bd2503670187ff4905a9395089d3220fcecc49a87db9d724f9724f22b5ccb9f5",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/heal_links.py",
+      "sha256": "000da056fa7da3bfc32050c8caa7b60bf51bdc3a8cb30131ab029cfc5bff5500",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/install-codex-wrappers.sh",
+      "sha256": "b08d499a3038e140d729b57bcf85121fc97ce78bb36a0e10bcc26db2defa3a5d",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/lib.sh",
+      "sha256": "22e2aea622e5fea6616e0bd7647e22d809c72fab05fb8033e12ffc1442d69016",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/link_graph.py",
+      "sha256": "0cb787567a00b97a934d5301d450bfb67d92cc0d21f567c04f665808956d4ea6",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/merge_notes.py",
+      "sha256": "9032efb6ef08d249b7173f93c2b7fb88e753d460e6513a7db17ca2f577236b16",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/migrate_log.py",
+      "sha256": "7b79ec26d8d38fd19d3d1d6e5059986bafacaed27a913b54c2857b0c52d615d0",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/mine_commit_decisions.py",
+      "sha256": "4fa4fe3fb31e73158d3174e2e463ea024b51b33cc4bb6d61cb6452a87f522735",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/note_io.py",
+      "sha256": "5c812755ee009488009a583b80c46dd9a6d21d966e7997b64811093495550a72",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/osb_env.py",
+      "sha256": "7bcc75773d2f2958aa8f4180567fb00f6bc1ea37204b9ac8b2f853137f129db0",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/platform-home.sh",
+      "sha256": "0b9db8a06c1d18d8982f5d442e352494d9085c5c3a9bfe9cbdc5b2bb2d340909",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/python-interpreter.sh",
+      "sha256": "a44c65b4c41c8f18f760f2a08360655722744cbf736e9106a6257dd4a76358d8",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/quick-install.sh",
+      "sha256": "6fa579b638747d9d0b3a6f491cf4302a0df2cf59bde3875f2f57d7b44f6811e4",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/research/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/aggregator.py",
+      "sha256": "5400af511eb634d8311a8c15455f871f17044d5aadfaba2cd4745a6f31b080cd",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/cache.py",
+      "sha256": "ef6156f66f9f0c29d851372aa9167179b6541e3450ac5a81a81c68daaedefca3",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/config.py",
+      "sha256": "f1d33d19da4da16c9c1ec13dde61fb0ce8ba3c534dc3ee7424f76cc4ded33378",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/gemini.py",
+      "sha256": "c8d69e092ba6e378bde71250442f687843ca8777913ec38dd12d191e40babfb8",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/gpt.py",
+      "sha256": "4a859c206e8bf3a763b1019a0c7abe6e1c4876f0f43e20e156afd2907fd4d2b0",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/grok.py",
+      "sha256": "f71b3cc24b9cacf5728546cd029221cc74668d0fc01d2015b8ddc77ae16e1e27",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/groq.py",
+      "sha256": "678bc7d8371b9c4a528d501576f5403d5529c71266f1c007441d97bfd589d0c1",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/http.py",
+      "sha256": "d5f9364234c824c2d09b3a162bc471bca363bcd7a0904fe1269a2dd00146be5c",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/perplexity.py",
+      "sha256": "7e6660c9757ec1e6f4dc6d8142b170f87bdfe5795720c236009f62a20ef8f606",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/podcast.py",
+      "sha256": "ec1df2db85b330a860d287c43d15e06470959e3499a19c48f5bad326f8845dd8",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/result.py",
+      "sha256": "6b17391ea481deb6009c0d755ed5b8a9580e578bb27c3369d02b7de049e36911",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/source_config.py",
+      "sha256": "225da1653e36fb64a60ac124f374118707e58e943a94f2137feb8f477d5e694e",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/sources/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/sources/arxiv.py",
+      "sha256": "7dd76c338ddea18f39b54b52803bd34183dbe4b6cd0d6cd33a0bcd2de14f714d",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/sources/brave.py",
+      "sha256": "795e25512b9d41144d7756355c82bb0b07eb51fa1cb2ee1ab97580236731fa07",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/sources/crossref.py",
+      "sha256": "14093edacda63456918a02da8cd909f8d807b915b13ed8ba93ca3a03e4952da8",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/sources/devto.py",
+      "sha256": "379183bf412fe026c1988fbe1c186831b684bb5aad3647c0dd9a980fad96240c",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/sources/duckduckgo.py",
+      "sha256": "41df6afa3ff7eb2d006a7076dee96e778c3a8eb06e8d63a4aa219159797199f9",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/sources/hackernews.py",
+      "sha256": "514445886ff8e03fcef36f7e17054cb8164e0a9240a24647fe0e2bfcc1853731",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/sources/lobsters.py",
+      "sha256": "afe8705a6557f043938b72756704ae93026bd7d35180e6236669a2b74771fc09",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/sources/openalex.py",
+      "sha256": "6350f6b25990cd50b04b84ac19975e5215e8d4514bec36b91e89ef2293e855d5",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/sources/reddit.py",
+      "sha256": "e2c1fdd8e9b8202e6529fab52549dac7867a0fabc2b3ddd6ad34b62dce7a3b46",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/sources/semantic_scholar.py",
+      "sha256": "2f130dd2cc5913400a1e921aef43451000f9b1eebf43479a8f3f63d487c5ac37",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/sources/tavily.py",
+      "sha256": "cb2a9765af843783db6329b235c27737f027ddf76d295f0aa6fbd5cac7a27459",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/sources/wikipedia.py",
+      "sha256": "5cf804495919bd1464d21f43570f00c172908b8a243ed451e13bd7bd1704594f",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/usage.py",
+      "sha256": "702072b511c54e4710caf3e82b1cd75045c42c4797d9bc06b205dc8a0e86f2a0",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/vault.py",
+      "sha256": "3c3223919a7e25e2dc471cdcc9b405bd95a0b8d49428ff7f96e5ea3fff3787fd",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/vault_terms.py",
+      "sha256": "c60262b76aa75b3ef0333381aadccdd310006f55f1e7caacb12d60d763b28c12",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/video_frames.py",
+      "sha256": "0c5fa879e2e0ba22280dcda05e4690c4152e4e707e0fe3061a444428c575b916",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/web_reader.py",
+      "sha256": "da7ff095c6b070936704e89029da2e0cc4be40726f22892e738e65097e09a8af",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/lib/youtube.py",
+      "sha256": "058ccd35572c5d71bfae522622e04aa1448035983d746be5877db225c1b11dfc",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/notebooklm.py",
+      "sha256": "3d807588647a2b7a34c08e8adf2a56980d5e6dfc7159e7f86f7d6475c15f75ff",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/podcast_extract.py",
+      "sha256": "48bd7d7fed5b3ae579b35c063dd2c8faeb06dfda7c11bba672be90a34962ee5a",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/research.py",
+      "sha256": "8712f7a2e8a73f583a23d9121ac4dc395a4aac9b4123a25934442f1039add657",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/research_deep.py",
+      "sha256": "8895141c000935c5b5a181523401575b667e0e037d6c9099da23c43f8a25d4e8",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/x_pulse.py",
+      "sha256": "a17a20de6a76e87fe81988ee5925df930cf360cb2c465ac05c5ea0fdab3d6e03",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/x_read.py",
+      "sha256": "0486e52869c69124ef33a18a1af153e54f9793179cf7730f789430b4ebd576ea",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/research/youtube_extract.py",
+      "sha256": "02130d5b1b35c026fd8a4285e440a01f5f676d535ecee6817acb178ef113c821",
+      "coverage_group": "integraciones-investigacion"
+    },
+    {
+      "path": "scripts/run-command.sh",
+      "sha256": "0c88f72f7a5612559dd4953030cc541a04fcb441e09815e50ba8ee236c4f380e",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/setup.sh",
+      "sha256": "ecef109417a3ecd6d3affa078f0f3bb1b1f2117bb441628015effc73609296ca",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/setup_settings_hook.py",
+      "sha256": "e84676e6c36a417a7379a1f14229b974655524beb8df96479f88acf454d8f7f5",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/star_prompt.py",
+      "sha256": "210ee34f3a7158841aa1ed14e8a1537da500120960dfe481d849eead0a8969a6",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/sweep_non_ascii.py",
+      "sha256": "2b5c178c3dbc33b8130ea0c6349417616b82de837a146138bcc22162afa44f97",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/triage_links.py",
+      "sha256": "23e0051418bad659873b0f1de95e8dfba22411c37b7d0f80f5764a1025d14bbd",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/update-vault-integration.sh",
+      "sha256": "4ba64462e905f7599efb5d68760831d40ce3a6983b4e64937343e5b6a54f2199",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/vault_health.py",
+      "sha256": "cbcd90e566ba1222f925ab6c84e7d583f894f538ae6b657c59b1db058edd29dd",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/vault_plugin_scan.py",
+      "sha256": "4059de38a05086554f6344664cc42ca1782c0d09405afad77349731f70ec955d",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/vault_scan.py",
+      "sha256": "791d7cfa3521e63d62f2790c8407bde83764ecce8edf5d68845a06a0e56e4985",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "scripts/vault_stats.py",
+      "sha256": "a3dbad8ebd87517d690289b7f0307894d869f165af9f8215c4f1ea720f6a6098",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "tests/_bash.py",
+      "sha256": "56a032a5f8875ed109ee38ef18d022bdb772c0f30fee2394e8af0ef97d20d1f7",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_adapter_frontmatter_robustness.py",
+      "sha256": "4d46e8ba0859ef5d665e70f37612dfbe688eaa6198d696c51b65dba10156b058",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_ai_first_spec.py",
+      "sha256": "87f5c3bfd12b0c8ec6a9340d2501289a6e291b0268fdf2569ce4dda058140051",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_bash_pinned.py",
+      "sha256": "b52b69c83c6c30afc4e7fad9ea735523fbd5eccc33c18a9a1876504898a6274f",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_behavior_eval.py",
+      "sha256": "a29f0988cd7db21e7fc383b430ef2ca594158ae9afc3347bac54f0e1712d91db",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_benchmark_corpus.py",
+      "sha256": "d023c652b0342006477b6df21a8c87aec7660de132074a4c2820c67a9d1f1ace",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_bg_agent_hook.py",
+      "sha256": "ab5d8052fbee091afb8d40b3e945ab1d76d1a39543afa0b57cc7e53561c30b73",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_bom_frontmatter.py",
+      "sha256": "4fc120a58fac5f269acb3854f35a2be1e9c32c79e5375142e8a4d7e94531fa22",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_bootstrap_style.py",
+      "sha256": "969ee7287d090e52489ca6f14bae1b2438e03a8b75faccd1786181ea42ce7ece",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_bootstrap_unit.py",
+      "sha256": "192f99914a90cf2c9c19448293710c917039130685842b8f9f8002236f63181d",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_build_conformance.py",
+      "sha256": "8e122da19e88222d838669fe0a5b2f93a604b64db01877a831b5453f0b12923b",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_build_site.py",
+      "sha256": "d5a886b6c68c2ae5b469f761ab90d64aedec5a5a714869459251ad51ebd647e5",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_concurrent_writes.py",
+      "sha256": "13b18b2c4d3e0fdd1def27f2709287269fe8233165a7fb4c438ecef02c46f487",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_config_int_knobs.py",
+      "sha256": "d3b69a1dc6949fb038fda0ab2924ef4a138e680c29bb94f699bdc236af76549f",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_dispatcher_prose.py",
+      "sha256": "2bbd08b522f74b0666db7079e9efa3ce0810a5ca1ab80d90d9ccae8acc2872ce",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_doc_command_names.py",
+      "sha256": "327bd5572eda39c6c4757aa93b0ee89d90c5d388cc716b2947232c053c09fa24",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_doc_roster.py",
+      "sha256": "bc0587da63f45195a1e42459bf48e325403ef4f83debe842a98c351c11cfa186",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_eval_diagnose.py",
+      "sha256": "3d2504d4fe511d7a508da03f6b21ca835bade00ee9a2e5bc91d2180a73d5db55",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_eval_ruler.py",
+      "sha256": "75c0952972cfa09d4bee002f67c742652acaf4a8f92d6ae11d7b48653f798bdb",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_exclude_policy.py",
+      "sha256": "789c1c25df7968358c1193453f72bab420148fdd1b506be2e0a436d07c12e087",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_export_and_alias_fidelity.py",
+      "sha256": "5f97b5e5b7b779a780f512102c55fe3fd86b04be44efed2e73c115db48189306",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_export_okf.py",
+      "sha256": "4047afe1f5f570f432175b6e795b10bcfd0d89cedffe451803267efe51aa6171",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_folder_map_compliance.py",
+      "sha256": "e68cbdc25d9918bebd5ac4aab5bc845775ad52d36c473552d8cdc0cf8d177002",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_freshness.py",
+      "sha256": "1332946a05a683accc1a59c076d13cdda3711e4c55cda71744aa902817f1ef91",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_freshness_lint.py",
+      "sha256": "0da47c2ba36838ad0acd25e0e9513b624db94fe692770af70582d672564d0f6d",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_front_door.py",
+      "sha256": "613980eb4e9035d671cc5ab19b24509d6238ddad3100c4e7be1b9899c32f377d",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_frontmatter_parity.py",
+      "sha256": "f02144e971158207324637b22877c1a1298390735fb023e56a720dfeede3922f",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_groq.py",
+      "sha256": "0dfca338bded0c43b49b8bae5cb47e6bcbcc17ba6fae04bf08c7b4518bd3dcc1",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_heal_precision.py",
+      "sha256": "ff826cfba353c87d8f19d05fb79d67f047b577f5d88c2de9329f8951fb7a08a4",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_index_robustness.py",
+      "sha256": "663b77392c588f9ce5eedc96062cfe5dc99bebf32d3f61b6e3ed8a335538dbe7",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_index_staleness.py",
+      "sha256": "bdccc1b3a77c609fe6c9d9b1f2cd1e02964895ffd7ac95ae24220b2fbf012901",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_install_portability.py",
+      "sha256": "70539b2905e7055362b9beef0d57697c26d26be0802ab26cd660cccc5f9e3c9a",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_link_graph_mirror.py",
+      "sha256": "702f4200f29e97b23071849926236877a73a79343629ce5482089c0272e67260",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_mcp_bookkeeping.py",
+      "sha256": "0f517d1d880b5e19814def8c84467ccb3c95b366bd4e47ae342d23ba665dfc4b",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_mcp_codex_parity.py",
+      "sha256": "b0ad6426af45c23dc22c96de3bcdafb29ef91c941cfebe52f1f64d5598ea0eca",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_mcp_vault_ops_safety.py",
+      "sha256": "d8a90c20f5e610c986f826bdd29133ee141fc59c3e06f1d65e6356d21427d510",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_merge_notes.py",
+      "sha256": "9c6c4b75fca6a1e720eecbac7eeedff4a4ea042eb06c5ce9ca8385ebc30b0022",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_migrate_log.py",
+      "sha256": "8808ec1dcc6cf333301533a82518c26782b99862f2df1c69959cf270384b8cc9",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_mine_commit_decisions_encoding.py",
+      "sha256": "4410cc437875688888a49d83e0f2bccf39e79f32cda6a7fe6d1cbc2772b5a7ad",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_multilingual_model.py",
+      "sha256": "9e52977a467f8213e1e676f83d75fa5f939a8619d746f6b6f4cbaa4019e119cb",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_no_banned_chars_in_instructions.py",
+      "sha256": "5ba1197cc4462a7551f015564186f55239b58ba6d74a9e329574572fe88399da",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_no_vault_content_in_eval_docs.py",
+      "sha256": "d085d87ae6eb154f400eda3889bc0f7fc1749cde74ea5a94159aca20460f0ebb",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_note_safety.py",
+      "sha256": "861cca3beb31bb917afd50e056be579d80c96623ce46fdb09331866253b47d8c",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_osb_env.py",
+      "sha256": "eccd35ca955721e41850e99219f37959c4b9f94ad3517f0b8f6380830d35ac9e",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_p1_p2_fixes.py",
+      "sha256": "44c16e73bc783a916b482f2ad3e9050bc326e57defa6cabf9ed5cd1f32c353cd",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_perplexity_empty_completion.py",
+      "sha256": "bdf66b919ea8acbf087e42e938047900a309400f33b6444b4e492c3be9833216",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_platform_home.py",
+      "sha256": "0c0e57486dd9686790dddfcec16591c4d24e6a9c1efdf9d1e7c688ac48514db5",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_platform_owners.py",
+      "sha256": "f2acb7003b6b6899e3b11084acb0ecd8b582d7a7813bc6c0937f7a9b558514e9",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_plugin_manifest.py",
+      "sha256": "4bae8219c4eaed10584402d9a96798d3c9dd80af77011add9e356e31a7737a55",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_podcast_resolution.py",
+      "sha256": "e70be39de49ec4550ff218420cb2f58854d8887ac18523a1be1839d369df0f07",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_podcast_transcript_schema.py",
+      "sha256": "556a99a148f0e9e3aa2d75160e993d1d28765967bf0c86fcb774d49574e2d635",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_python_interpreter.py",
+      "sha256": "dda75aa4308383d48367abfe539751398f9ea05f887b557c08246f4be67ecf1b",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_query_aware_default.py",
+      "sha256": "fe7d7fd92f8f249739b1ec10e56b747bd0e0b26b58f799d5f20bf3c25a32bcba",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_ranking_quality.py",
+      "sha256": "5732da94c1d5e70def6a329f50fa1396d1e063d14b0a25bc34412339d2a159c6",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_research_cjk_and_models.py",
+      "sha256": "ae426b7989f559b236294ac63d1508ee11581f1e68861f22e3f2a0d8aad7bde5",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_research_deep_fallback.py",
+      "sha256": "74909c237a85dda3bcee0639099d532b833fc1d7251830925d74fc1dfecf0114",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_research_sources.py",
+      "sha256": "a7d8792b2a41106ed3e0c63f911a066a70a76464ff93d786dd86ff0a7638ff02",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_scan_cache.py",
+      "sha256": "1f0cc1c3ee4c5aaa4b5ab0b55fa81aae1a19c577bb63ca735dcd53132beb3a9c",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_schema_coverage.py",
+      "sha256": "a13ed57dda01de92fd7f561e53322ca70f0bdbe2593ac16aa444e96978990efe",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_script_correctness.py",
+      "sha256": "068acf2a04400a898b227d18a5ab08b5a906afc813bd660bf44ebc6de9aa9dc9",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_search_cap.py",
+      "sha256": "c068ca55c0ad503e5611a8f53f4d30c8266f44de0d000de10ae4145c4a8121d1",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_session_context_cap.py",
+      "sha256": "e77f757bfa7d6a98a82f681016ea2a74a2bf4af2ab2144a12d96de0326eb6bad",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_setup_and_manual_drift.py",
+      "sha256": "de1b423547462e2cd2265dfcece877fd300a5f6d97cd941d7b8d8a0af0ad8230",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_setup_settings_hook.py",
+      "sha256": "8b8d15c229532e03e6483770d4f496d65a1940712ab9e4e47668194ded875caa",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_showroom.py",
+      "sha256": "faca41da701e9a15821e328effffb6d8c3b101315ded6a5a20417a8675511b85",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_smoke.py",
+      "sha256": "843a05463d96efbf57d293e385a34770579dfbce77e6e596c3a41a04df5a97bf",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_source_payload.py",
+      "sha256": "756c82d8c9aac4362e39512d26346a939e25767cfe4ec591e088ae79c3c0dcf8",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_star_prompt.py",
+      "sha256": "d6cf00db7944f918364a94148b2acb5c7d48716d408f9e7908cdfff6d7b34239",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_symlink_resilience.py",
+      "sha256": "44ea07c7fc62a3e7046f4aadfc3ac9b099e5a4087241127ed38be5ba29948e4e",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_taxonomy_audit.py",
+      "sha256": "908ce2e289deed6c4b9ab7f9faadcff677d04f4b0b85721f2e7dcfc07d467b71",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_telegram_ingest.py",
+      "sha256": "ade35bcbdec0d1a727ecc51781db5114e93ecc4eb064887fcf70a015efcecb4b",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_trigger_precedence.py",
+      "sha256": "1d8c55dc4a8939defe7c239cd00aaf1f99250029f1fd322263bca8fcad1c5207",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_untrusted_source_handling.py",
+      "sha256": "38b26eedad52523f28c3e305db2f3b66bb9a476c1e55cbcb383890e57f04d52e",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_user_excludes.py",
+      "sha256": "9c2539906db2cac7d4dab5d926aee25729e76df0b2545731c2ac6d702ca6d439",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_validate_hook_cjk.py",
+      "sha256": "943411493849c1b2bfc98feaac9ea32b75cded5659c5df80ddc4fa82e2b33af9",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_validate_hook_vault_scope.py",
+      "sha256": "ccec7851485e82169e12bdec7099ce2db9d09f91e893bec1d6d48c0d9d2e46ba",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_vault_health_precision.py",
+      "sha256": "918d2fd1fc97f258ebd10d55abf90d9ecd27879fc454d9bf5d5de6bed0bd8cfd",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_vault_health_unicode.py",
+      "sha256": "eae0a857656cd76b49e557dc1f5662c1a55cd824e500878701e9fdc2d1f5f88f",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_vault_plugin_scan.py",
+      "sha256": "7f71c1b7ad4de5062f0205bec9d02a897ad396605dc4ee41f19786b07f8c0a9d",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_vault_stats.py",
+      "sha256": "20d8d30cc7efe502c018653a3919e5f386b287a49c7983aeced4bc72aa24fa92",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_vector_math.py",
+      "sha256": "498b35c6d06c45107d6cd09aef2553fc66219c2afdb9a1b132bbdf10dabe320b",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "tests/test_windows_compat.py",
+      "sha256": "9b776219cc96cb504d0d8bdd1c0e7577ff12e46458b638a776207d17f21d749c",
+      "coverage_group": "soporte-pruebas-y-ejemplos-no-ejecucion"
+    },
+    {
+      "path": "update.sh",
+      "sha256": "a12c8849262248b64e2b0adeae0b7189aa11be9e6d5e88c6f8e844997f577586",
+      "coverage_group": "ciclo-de-vida"
+    },
+    {
+      "path": "uv.lock",
+      "sha256": "9c3983b0f2f9f987dae243baf6e1ea7f8f31a784a46dd22111e72f0ad2ac2d9c",
+      "coverage_group": "metadatos-documentacion-y-distribucion"
+    }
+  ]
+}
