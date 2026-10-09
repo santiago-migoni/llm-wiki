@@ -91,6 +91,10 @@ Reporta problemas en el chat de prueba con versión del plugin, macOS, acción y
 
 ## Desarrollo
 
+El trabajo con Codex se guía por [AGENTS.md](AGENTS.md) y la
+[configuración de desarrollo](.codex/README.md), que define roles para
+implementación, revisión de código, seguridad y distribución.
+
 ### Límites de recursos del runtime
 
 Las lecturas de notas, metadata (incluido el catálogo de workflows) y adjuntos admiten hasta 8 MiB por archivo. La paginación conserva el hash del archivo completo; superar el límite devuelve un error, sin presentar un hash parcial. El escaneo admite hasta 64 MiB de Markdown y 10.000 entradas, incluidos directorios y adjuntos. Al superar un límite, devuelve cobertura incompleta y detiene las operaciones que necesitan ese escaneo. La exportación limita también a 64 MiB la suma de notas y adjuntos cargados.
