@@ -4,7 +4,7 @@ Gestiona tus notas y tu conocimiento desde Codex Desktop.
 
 Busca información, guarda ideas y decisiones y relaciona notas. Tus archivos siguen siendo Markdown, compatibles con Obsidian.
 
-**Estado:** versión de desarrollo `0.1.0-dev.2`. El núcleo y la instalación por CLI se probaron en macOS con Apple Silicon; la validación completa en Desktop sigue pendiente.
+**Estado:** versión inicial `0.1.0`. El núcleo y el paquete `0.1.0` se probaron en macOS con Apple Silicon. La instalación por CLI tiene evidencia de versiones de desarrollo anteriores; la validación completa en Desktop sigue pendiente.
 
 ## Qué puedes hacer
 
@@ -79,6 +79,10 @@ La búsqueda actual es léxica: busca coincidencias de palabras, sin acreditar e
 Calendarios, Telegram, X, transcripción de medios, automatizaciones y vistas de Obsidian tienen pruebas o capacidades pendientes. No se activan hooks ni horarios al instalar. El binario incluye Intel, pero su ejecución en esa arquitectura aún no se verificó.
 
 Consulta el [plan y su avance](docs/superpowers/plans/2026-10-08-codex-plugin.md) y los [resultados de aceptación](tests/acceptance/results.json) para distinguir implementación de comportamiento verificado.
+
+Los informes de aceptación anteriores conservan las versiones de desarrollo que
+probaron. La validación del paquete actual se registra en
+[el informe de la versión 0.1.0](tests/acceptance/release-0.1.0.json).
 
 ## Ayuda y documentación
 

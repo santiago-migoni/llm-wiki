@@ -8,5 +8,7 @@
   "runtime_dependencies": [],
   "sdk": "github.com/modelcontextprotocol/go-sdk@v1.8.0",
   "source_commit": null,
-  "source_tree_sha256": "a9aeac28e2760fd8653b8304869d511d31736bd1096c1327dc5460cbbe516511"
+  "source_tree_sha256": "1e0af4f8074916a7a91d5df0c38ec6f57a7711beee3588ae0947178539a99fd8",
+  "source_tree_hash_format": "sha256 of sorted path + NUL + file sha256 hex + LF; cmd/**/*.go, internal/**/*.go, go.mod, go.sum",
+  "version": "0.1.0"
 }

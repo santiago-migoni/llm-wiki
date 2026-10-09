@@ -626,7 +626,7 @@
     "requirement": "La referencia de workflows generada y el reporte de conformidad corresponden al paquete concreto; no publican sitio ni transfieren contenido del vault a un servicio.",
     "input": {
       "package_version": "0.1.0-dev.2",
-      "report": "tests/acceptance/package-report.json",
+      "report": "tests/acceptance/package-report-0.1.0-dev.2.json",
       "workflow_reference": "docs/superpowers/evidence/2026-10-08-workflows.md"
     },
     "output_observed": "Reporte identifica commit del build e inventario SHA-256 del paquete probado; referencia generada de sus 48 skills. Sin publicación ni contenido de vault.",

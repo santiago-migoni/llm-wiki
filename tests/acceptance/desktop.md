@@ -1,4 +1,4 @@
-# Validación Desktop pendiente — llm-wiki 0.1.0-dev.2
+# Validación Desktop pendiente — llm-wiki 0.1.0
 
 Fuente del binario: `43ee802`. Paquete versionado en `619fecb`; macOS 27.0.1 arm64, CLI 0.135.0. Versión Desktop no capturada. No se declara soporte Intel por generar un binario universal.
 

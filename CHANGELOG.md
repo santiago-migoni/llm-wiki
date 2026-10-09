@@ -1,9 +1,8 @@
 # Changelog
 
-Registro de cambios del plugin llm-wiki. Las versiones de desarrollo pueden
-contener capacidades cuya validación sigue pendiente.
+Registro de cambios del plugin llm-wiki. La versión inicial contiene capacidades cuya validación sigue pendiente.
 
-## 0.1.0-dev.2 — 2026-10-09
+## 0.1.0 — 2026-10-09
 
 Primera versión registrada en el historial público del proyecto.
 
@@ -45,7 +44,11 @@ Primera versión registrada en el historial público del proyecto.
 
 ### Validación y límites conocidos
 
-- Núcleo e instalación por CLI probados en macOS con Apple Silicon.
+- Versión 0.1.0: suite Go con detector de carreras, vet, esquemas de manifiestos,
+  checksums, firma y prueba MCP aislada con persistencia entre procesos aprobados
+  en macOS con Apple Silicon. El handshake MCP confirma la versión 0.1.0.
+- La instalación por CLI tiene evidencia de versiones de desarrollo anteriores;
+  no se repitió la instalación de 0.1.0.
 - Validación completa de instalación y workflows en Codex Desktop pendiente.
 - El paquete incluye arquitectura Intel; su ejecución en Intel no está verificada.
 - La búsqueda es léxica; no se acredita equivalencia con búsqueda semántica.

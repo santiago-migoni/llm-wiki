@@ -1,0 +1,25 @@
+{
+  "version": "0.1.0",
+  "date": "2026-10-09",
+  "checks": {
+    "go_test_race_all": "passed",
+    "go_vet_all": "passed",
+    "packaged_binary_without_development_toolchain": "passed",
+    "mcp_server_version": "0.1.0",
+    "plugin_schema": "passed",
+    "mcp_schema": "passed",
+    "checksums": "passed",
+    "universal_architectures": [
+      "arm64",
+      "amd64"
+    ],
+    "ad_hoc_signature": "passed"
+  },
+  "limits": {
+    "desktop_acceptance": "pending",
+    "intel_execution": "pending",
+    "cli_plugin_installation": "not repeated for 0.1.0"
+  },
+  "package_report": "tests/acceptance/package-report.json",
+  "historical_evidence": "results.json and capabilities.json retain the versions actually tested; earlier package report is archived as package-report-0.1.0-dev.2.json"
+}
