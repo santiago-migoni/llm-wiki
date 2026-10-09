@@ -1,10 +1,10 @@
 ---
 title: Estructura de llm-wiki
 status: draft
-version: v002
+version: v003
 responsible: Usuario promotor del proyecto
 created_at: "2026-10-08"
-updated_at: "2026-10-08"
+updated_at: "2026-10-09"
 reviewed_at: null
 approval_reference: null
 ---
@@ -80,3 +80,55 @@ instrucción superior ni renombrarlo automáticamente.
   su contenido; no se versionan caches, configuración personal ni fixtures reales.
 
 Evidencia de pruebas y límites: [registro de implementación](evidence/2026-10-08-implementation.md). Desktop, modalidades y soporte Intel siguen pendientes.
+
+## Cambios propuestos para áreas definidas por el usuario
+
+La decisión canónica es [ARCHITECTURE.md](ARCHITECTURE.md), v007, ADR-009
+(proposed). Esta sección localiza los cambios futuros; no los describe como
+implementados ni autoriza ejecutarlos. La dirección aplicable permanece en
+[CONSTITUTION.md](CONSTITUTION.md), v003, PRI-003–005 y OBJ-002–003.
+Base exacta de archivos inspeccionados y constitución:
+`e703e1f9d898ccc797cb2d7eeed1ee4e68a3ee04`.
+
+| Ruta | Diferencia propuesta respecto de la base inspeccionada | Evidencia necesaria |
+| --- | --- | --- |
+| `internal/vault/layout.go` y pruebas cercanas | Reconocer tipo `area`, defaults por layout y mapa personalizado; no crear notas al resolverlo | Regresiones wiki/Obsidian, mapa explícito, ruta inválida y comportamiento previo sin áreas |
+| `internal/vault/` | Ubicar la enumeración determinista y lectura limitada de candidatos a áreas junto al acceso confinado | Cuotas, cancelación, metadata malformada y cobertura incompleta; ubicación final de archivos pendiente de especificación |
+| `internal/service/service.go`, `internal/mcp/` y consumidores CLI | Exponer el lector propuesto `wiki_list_areas` desde el servicio común | Contrato y errores equivalentes en CLI/MCP; no hay lector específico implementado en esta base |
+| `plugins/llm-wiki/skills/wiki-obsidian-area/SKILL.md` (nuevo, propuesto) | Workflow explícito de crear, consultar y vincular áreas | Descubrimiento en catálogo y ejecución sobre vault sintético; presencia del archivo no acredita el resultado |
+| `plugins/llm-wiki/references/folder-map.md` | Describir destino `area` respetando mapas existentes | Correspondencia con resolución del runtime y ausencia de migración implícita |
+| `plugins/llm-wiki/references/write-rules.md`, `ai-first-rules.md` y referencia de áreas propuesta | Convenciones de relaciones y autorización conforme a ADR-009 | Enlaces del cuerpo recuperables; contenido humano y políticas de cada workflow preservados |
+| `plugins/llm-wiki/skills/llm-wiki/SKILL.md` y skills que guardan contenido relacionado | Dispatch y reutilización opcional de áreas, sin categorías codificadas | Pruebas de activación explícita y de flujos anteriores sin áreas |
+| `plugins/llm-wiki/capabilities.json`, catálogo/referencias derivados y `README.md` | Registrar la extensión y sus límites cuando exista entrega; conservar intacta la identidad de F/I/T de referencia | Estado acorde a evidencia por componente, workflow y host; no declarar paridad por añadir una skill |
+| `tests/fixtures/`, `tests/acceptance/` y tests de paquetes afectados | Casos sintéticos y de continuidad definidos por ADR-009 | Resultados identificables por revisión y entorno; sin notas ni rutas personales |
+
+### Organización propuesta del vault
+
+Para estilo wiki sin mapa alternativo, después de una creación expresamente
+solicitada podría existir `wiki/areas/<nombre-seguro>.md`. La nota relacionada
+permanece en la carpeta de su tipo, con enlaces de áreas en el cuerpo. Son rutas
+de ejemplo del vault del usuario, no archivos nuevos del repositorio ni una
+plantilla con categorías fijas. En Obsidian o con mapa propio se usa el destino
+resuelto por ADR-009.
+
+El manual conserva la convención y los enlaces permiten recuperar relaciones;
+no se introduce un registro paralelo de áreas en el directorio técnico ni una
+copia por ámbito. El runtime sigue usando la persistencia y recuperación de
+[INFRASTRUCTURE.md](INFRASTRUCTURE.md). No se añade un paquete ejecutable,
+proveedor, daemon ni dependencia de instalación.
+
+### Alcance de esta revisión y referencias relacionadas
+
+Solo se presentan cambios documentales en arquitectura y estructura. Runtime,
+skills, catálogo, manifiestos, binario y criterios de aceptación instalados no
+se modifican. La spec y el plan existentes mantienen sus bases y aprobaciones;
+la propuesta requiere adopción explícita antes de incorporarse a una entrega.
+Las descripciones iniciales ligadas al paquete dev.2 conservan su carácter
+histórico; esta inspección acotada no actualiza toda la evidencia de distribución.
+
+### Historial de cambios
+
+2026-10-09, v003: localiza la integración propuesta de ADR-009 y sus requisitos
+de evidencia. Base anterior preservada:
+`e703e1f9d898ccc797cb2d7eeed1ee4e68a3ee04:docs/superpowers/STRUCTURE.md`.
+Estado draft, aprobación pendiente; no se altera el mapa de módulos implementados.

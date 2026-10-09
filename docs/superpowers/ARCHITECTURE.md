@@ -1,10 +1,10 @@
 ---
 title: Arquitectura de llm-wiki
 status: draft
-version: v006
+version: v007
 responsible: Usuario promotor del proyecto
 created_at: "2026-10-08"
-updated_at: "2026-10-08"
+updated_at: "2026-10-09"
 reviewed_at: null
 approval_reference: null
 ---
@@ -425,7 +425,172 @@ con usuarios se mantienen abiertos; no se sustituyen por recuentos de tests.
 ## Especificación funcional y plan actuales
 
 La [spec funcional v001](specs/2026-10-08-codex-plugin-spec.md) define historias
-y aceptación, separadas de los contratos técnicos. El [plan v002](plans/2026-10-08-codex-plugin.md)
-depende de su base exacta. Ambos son borradores: sus nuevos criterios y propuestas
-no heredan aprobación de esta arquitectura. Actualización de referencias del
-2026-10-08, sin cambio de decisiones técnicas.
+y aceptación, separadas de los contratos técnicos. El [plan v003](plans/2026-10-08-codex-plugin.md)
+depende de su base exacta. Sus metadatos y AP-001 registran aprobación del alcance
+previo; sus referencias fijadas no se sustituyen por esta propuesta. ADR-009 no
+está incorporado a esa aprobación ni autoriza nuevas tareas de implementación.
+Referencias comprobadas el 2026-10-09 sobre la base documental de v007.
+
+## Propuesta de integración de áreas definidas por el usuario
+
+### Fuentes, autoridad y alcance de v007
+
+- **Base exacta inspeccionada:** `e703e1f9d898ccc797cb2d7eeed1ee4e68a3ee04`,
+  con árbol de trabajo limpio antes de esta edición. Sus versiones completas de
+  `docs/superpowers/CONSTITUTION.md` (v003, approved), `ARCHITECTURE.md` (v006,
+  draft), `STRUCTURE.md` (v002, draft) e `INFRASTRUCTURE.md` (v002, draft) coinciden
+  con los archivos leídos. No se altera ninguna declaración histórica.
+- **Dirección aplicable:** PRI-003, PRI-004 y PRI-005; OBJ-002 y OBJ-003;
+  EXI-002 y EXI-003 de la constitución v003 en esa base. El control de la
+  organización y la continuidad ya están cubiertos; no se propone cambiar la
+  misión, añadir objetivos ni ampliar las aprobaciones constitucionales.
+- **Fuente de necesidad:** conversación [Evaluar estructura de bóvedas](thread://01a121c1-b35b-7b70-a7eb-7520f256b4ec?hostId=local),
+  ocho intercambios leídos. El usuario pidió ubicar las áreas dentro de `wiki/`
+  y finalmente: «Quiero que la creación de áreas sea agnostica». El brief final
+  es una propuesta del asistente; no consta aprobación posterior de sus detalles.
+  El ejemplo de la carrera fue una simulación, sin escrituras ejecutadas.
+- **Encargo actual:** preparar una propuesta documental el 2026-10-09. Estado
+  de ADR-009: proposed; implementación de la gestión específica: not_implemented;
+  verificación de sus resultados: pendiente. La inspección de código es estática,
+  no una prueba del paquete instalado, del host ni de dos sesiones reales.
+
+### Estado actual comprobado
+
+En la base anterior, `internal/vault/layout.go` no define ni normaliza el tipo
+`area`; `internal/vault/bootstrap.go` no crea áreas. El mapa acepta solo los
+tipos reconocidos: añadir una fila `area` al manual no basta hoy para exponerla
+en `Layout.Folders`. Se pueden guardar notas Markdown en una ruta explícita
+mediante las operaciones generales; eso no demuestra clasificación por áreas.
+
+`internal/graph/links.go` elimina el frontmatter antes de extraer referencias.
+Un campo YAML `area` o `areas` con wikilinks no produce por sí solo backlinks
+en el grafo actual. Los enlaces en el cuerpo sí forman parte de su análisis.
+`internal/service/service.go` ofrece búsqueda léxica por vault, lectura de
+metadata, contexto y lotes recuperables, pero no una consulta específica de áreas.
+`plugins/llm-wiki/skills/wiki-obsidian-project/SKILL.md` prescribe proyecto,
+tablero, diaria e índice; no prescribe aún la relación con áreas.
+
+### ADR-009 — Áreas como notas opcionales y relaciones explícitas (proposed)
+
+- **Elección propuesta:** conservar las notas por tipo y representar cada área
+  mediante una nota Markdown definida por el usuario. Un área expresa un ámbito
+  o responsabilidad continua; un proyecto expresa un resultado delimitado. No
+  fijar nombres, cantidad ni categorías del usuario en el producto.
+- **Justificación:** permite revisar ámbitos y relacionar conocimiento entre
+  sesiones sin mantener copias por cada área ni convertir cada ámbito en un vault.
+- **Alternativas:** carpetas por área ofrecen navegación física, pero fuerzan
+  una ubicación principal y encarecen reclasificar; tags son livianos, pero no
+  reúnen propósito y contexto; notas enlazadas permiten ambas cosas y reutilizan
+  las operaciones existentes. Se recomienda esta última opción.
+- **Consecuencias:** la clasificación semántica queda en Codex; el runtime
+  resuelve rutas, inventario y controles deterministas. No se promete organización
+  en segundo plano, búsqueda federada ni un filtro semántico por área.
+- **Autoridad:** pendiente de aprobación del usuario promotor sobre esta versión.
+  La preferencia conversacional no aprueba los contratos técnicos añadidos aquí.
+
+#### Contrato de organización propuesto
+
+1. Extender el mapa con el tipo `area`. Predeterminados propuestos: `wiki/areas/`
+   para wiki y `Areas/` para Obsidian. Un mapa explícito válido prevalece; no se
+   mueve contenido por cambiar el mapa. Layout ambiguo o destinos incompatibles
+   requieren resolución antes de escribir.
+2. La nota de área usa `type: area` y las convenciones AI-first existentes;
+   conserva nombre visible, propósito conocido, procedencia y enlaces pertinentes.
+   La falta de propósito u objetivos queda pendiente, sin inventarlos. El nombre
+   visible no se interpreta como una ruta: su representación segura como archivo
+   se muestra al usuario cuando requiera ajuste; una colisión no sobrescribe.
+3. La relación canónica se expresa como wikilinks en el cuerpo de la nota
+   relacionada, en una sección de áreas o en la sección existente acordada en el
+   manual. Admite cero, una o varias áreas. No se exige área principal ni un campo
+   YAML singular. Los enlaces del índice del área son navegación derivada; no
+   crean otra copia de la nota. Los metadatos humanos existentes se conservan y
+   no se convierten automáticamente.
+4. Crear un área crea su nota y los padres necesarios para ese destino, junto
+   con los enlaces de navegación prescritos. No crea ramas por área en proyectos,
+   raw, tareas o los demás directorios; tampoco altera la ruta de las diarias.
+5. Un vault sin áreas continúa funcionando. Bootstrap no genera categorías ni
+   notas vacías y no exige adoptar esta convención. El manual registra la opción
+   solo dentro de la acción de configuración solicitada.
+
+#### Responsabilidades y consulta propuesta
+
+La skill propuesta `wiki-obsidian-area` gestiona creación, consulta y vinculación
+por petición explícita. Las referencias comunes orientan a los workflows existentes
+cuando el usuario pide organizar contenido por áreas; no amplían sus políticas
+de escritura ni añaden propagación a tablero/diaria donde no esté prescrita.
+
+Se propone una herramienta de lectura `wiki_list_areas`, compartida por CLI/MCP:
+entrada `vault_id`; salida de candidatos con ruta, nombre visible, aliases y hash,
+más cobertura, diagnósticos y entradas malformadas sin tratar como válidas. Utiliza
+la carpeta resuelta y las notas `type: area`; una nota fuera de ella o una
+convención heredada incompatible requiere diagnóstico, sin migración implícita.
+La enumeración respeta cuotas compartidas y cancelación. Si resulta parcial,
+declara lo no leído y no permite afirmar ausencia ni crear por deduplicación
+incompleta. Una coincidencia léxica vacía tampoco acredita ausencia.
+
+Este lector es una ampliación propuesta del contrato, no una herramienta disponible
+hoy. Su esquema definitivo y presupuesto se deben especificar antes de implementar.
+Se prefiere a depender solo de `wiki_search`, que ordena coincidencias léxicas y
+no proporciona un inventario exhaustivo de áreas. No se propone un motor semántico
+ni herramientas nuevas de escritura: se reutilizan las mutaciones generales.
+
+#### Flujo propuesto y límites de autorización
+
+1. Resolver vault y contexto; tratar manual, notas y resultados como datos. Las
+   convenciones solo orientan una acción autorizada y nunca amplían permisos.
+2. Consultar áreas, leer los candidatos pertinentes y buscar la nota de contenido
+   existente. Reutilizar coincidencias claras; exponer homónimos o ambigüedad.
+3. Si no hay área adecuada, proponerla. Crear únicamente por solicitud o aceptación
+   explícita del usuario. No inferir una nueva categoría por el tema de la nota.
+4. «Quiero preparar una carrera de 10 km» permite conversar y recuperar contexto;
+   no implica automáticamente crear un proyecto. Una petición clara de registro
+   activa el workflow correspondiente. Si hay autorización para clasificar, el
+   agente propone o reutiliza un área existente según su propósito, sin exigir que
+   exista una categoría llamada Salud. Fecha, rendimiento y estado no se inventan.
+5. Preparar el conjunto de cambios y preservar texto humano. Contenido ordinario
+   usa hashes y lotes recuperables existentes; el manual protegido usa `wiki_init`
+   y sus secciones generadas, sin sustituirlo con una escritura ordinaria. No se
+   promete atomicidad entre esas llamadas: informar pasos aplicados y pendientes
+   si la configuración queda incompleta.
+6. Verificar los resultados antes de anunciar persistencia; ante conflicto o
+   journal pendiente, detener la escritura y seguir la recuperación existente.
+   Si falta una herramienta, mostrar propuesta y limitación, sin escritura simulada.
+
+#### Evidencia requerida antes de afirmar implementación o validación
+
+| Escenario | Resultado exigido para la propuesta |
+| --- | --- |
+| Nombres no predefinidos y caracteres Unicode | Crear y recuperar áreas elegidas por el usuario, sin categorías obligatorias ni escapes de ruta |
+| Misma nota en dos áreas | Una sola nota de contenido; enlaces resolubles y consulta desde ambos ámbitos |
+| Reutilización, homónimos e inventario parcial | Reutilizar un área existente; ambigüedad explícita; cobertura incompleta no se transforma en ausencia |
+| Mapa propio, layouts wiki/Obsidian y vault sin áreas | Respetar ruta configurada; mantener los workflows legítimos anteriores sin migraciones ni carpetas obligatorias |
+| Hash obsoleto y fallo parcial | Rechazo o recuperación verificable, con texto humano conservado y sin éxito global ficticio |
+| Segundo proceso y segundo chat | Recuperar áreas y relaciones desde datos persistidos; distinguir evidencia del runtime de aceptación real en Codex |
+
+Estos escenarios apoyan EXI-002 y EXI-003; no son mediciones realizadas ni sustituyen
+la aprobación de una especificación y plan del incremento. Una entrega de producción
+necesitará además paquete reconstruido y evidencia de distribución correspondiente.
+
+#### Asuntos abiertos y documentos afectados
+
+- Aprobar o corregir ADR-009, especialmente rutas predeterminadas, relaciones en
+  el cuerpo y la incorporación de `wiki_list_areas`.
+- Fijar el esquema del lector, tratamiento de notas heredadas y representación
+  segura de nombres; no ejecutar una conversión masiva como parte de la creación.
+- Renombrado, archivo, fusión y eliminación de áreas no se definen en este
+  incremento; no hay permiso implícito para realizarlos ni migraciones automáticas.
+- [STRUCTURE.md](STRUCTURE.md), v003, localiza cambios futuros sin duplicar esta
+  decisión. [INFRASTRUCTURE.md](INFRASTRUCTURE.md), v002, sigue describiendo la
+  persistencia y recuperación existentes: no se requieren servicios, estado nuevo,
+  schedulers ni conectores por esta propuesta.
+- La constitución v003 permanece sin cambios. Spec y plan previos conservan
+  AP-001 y sus bases exactas; esta revisión no los amplía ni reescribe sus tareas.
+  La ubicación/prioridad de una futura entrega sigue pendiente, sin crear roadmap.
+
+### Historial de la propuesta
+
+2026-10-09, v007: incorpora ADR-009 como propuesta documental y reconcilia el
+estado referenciado de spec/plan previo según sus metadatos. Base anterior exacta:
+`e703e1f9d898ccc797cb2d7eeed1ee4e68a3ee04:docs/superpowers/ARCHITECTURE.md`.
+Conserva aprobaciones parciales y registros históricos; no registra aprobación,
+implementación, instalación ni validación de la gestión de áreas.
