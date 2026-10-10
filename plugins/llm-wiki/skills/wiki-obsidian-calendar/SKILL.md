@@ -15,6 +15,13 @@ Modos independientes:
 - `meeting`: acepta selector de evento si hay acceso; si no, datos de reunión aportados por el usuario bastan. Escribe nota meeting con evento/participantes provistos, secciones Notes/Decisions/Actions sin inventar, enlaza attendees existentes, task y daily.
 - `schedule`: exige integración de calendario real. Busca tarea, asistentes/emails, TZ, slot y conflictos; muestra conflicto y espera elección antes de crear. Propaga IDs/URL a task/person/log solo después de verificar respuesta de evento. Sin integración, entrega borrador local si se solicita y declara que no se programó.
 
+## Áreas opcionales
+
+Si la solicitud o convención adoptada activa áreas en este alcance, sigue
+[areas.md](../../references/areas.md) para consulta, propósito, ambigüedad y enlaces
+canónicos sin duplicar la unidad. Sin ese modo, conserva el flujo previo.
+Aplica a la nota local del modo `meeting` con datos aportados/comprobados. Un área elegida no activa `schedule` ni crea eventos remotos; conserva los permisos de cada modo.
+
 ## Salida
 
 Salida incluye siempre el modo, fuente, ventana/TZ, cobertura, eventos/contradicciones y escrituras. Sin integración, solo quedan bloqueadas las fases que requieren lectura/escritura del calendario vivo: consulta externa de `agenda`, comparación externa de `reconcile` y creación de `schedule`. `agenda` puede producir un snapshot limitado a eventos aportados por el usuario, marcado como tal y sin afirmar lectura del calendario. `meeting` basado en datos aportados sigue usable.

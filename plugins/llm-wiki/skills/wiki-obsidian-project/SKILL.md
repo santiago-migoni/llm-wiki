@@ -13,6 +13,13 @@ Run this workflow only when the user explicitly invokes it or clearly asks for t
 2. Para nuevo proyecto escribe descripción, objetivo, estado, personas/relaciones y repo si consta. No inventes status/deadline.
 3. Crea/actualiza card en board configurado, enlaza en daily y mantiene índice. Si ya existía, inyecta datos en sección de proyecto sin sobreescribir otros apartados.
 
+## Áreas opcionales
+
+Si la solicitud o convención adoptada activa áreas en este alcance, sigue
+[areas.md](../../references/areas.md) para consulta, propósito, ambigüedad y enlaces
+canónicos sin duplicar la unidad. Sin ese modo, conserva el flujo previo.
+Vincula en el proyecto único; conserva board, diaria e índice prescritos. No heredes áreas por parentesco sin pertinencia y autorización.
+
 ## Salida
 
 Salida: nota de proyecto y tarjeta/link asociados; match/ambigüedades y datos TBD.

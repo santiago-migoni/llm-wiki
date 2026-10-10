@@ -13,6 +13,13 @@ Run this workflow only when the user explicitly invokes it or clearly asks for t
 2. Lee la regla/configuración del board para saber qué fechas cuentan como `This Week`/“cercano”. Si no hay umbral definido, pregunta al usuario o usa `Backlog` y deja la fecha explícita en la tarjeta; no inventes el umbral. Agrega una card; crea nota de task aparte solo si la descripción es sustancial o excede una línea.
 3. Enlaza tarea desde proyecto y daily cuando existan; formato de fecha `@{YYYY-MM-DD}` y convención de tablero del vault.
 
+## Áreas opcionales
+
+Si la solicitud o convención adoptada activa áreas en este alcance, sigue
+[areas.md](../../references/areas.md) para consulta, propósito, ambigüedad y enlaces
+canónicos sin duplicar la unidad. Sin ese modo, conserva el flujo previo.
+Tarea breve: links dentro de la tarjeta, sin nota adicional para áreas. Nota sustancial: links en su cuerpo. Mantén columnas Kanban, fechas y prioridades del flujo original.
+
 ## Salida
 
 Salida: texto/tarjeta, columna, prioridad y fecha con fuente/confianza, nota separada si aplica y links.

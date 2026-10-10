@@ -1,0 +1,835 @@
+{
+  "schema_version": 1,
+  "release": "0.2.0",
+  "interpretation": "Workflow acceptance matrix; runtime tests and simulated pressure responses do not prove installed Codex execution.",
+  "cases": [
+    {
+      "id": "project_authorized_areas",
+      "workflow": "project",
+      "input": {
+        "request": "Execute project with explicit links to Exploración and Comunidad",
+        "vault": "synthetic wiki",
+        "area_mode": "authorized_areas",
+        "sources": [
+          "explicit human request",
+          "full current notes and hashes"
+        ],
+        "inventory": "two typed areas, complete=true"
+      },
+      "expected": {
+        "destination": "wiki/projects/Nexo.md",
+        "relations": [
+          "[[wiki/areas/Exploración]]",
+          "[[wiki/areas/Comunidad]]"
+        ],
+        "permitted_writes": "project board/index/daily prescribed",
+        "forbidden": [
+          "move or duplicate canonical note",
+          "modify raw bytes",
+          "rewrite human metadata",
+          "add Kanban columns",
+          "implicit external calendar or area creation"
+        ]
+      },
+      "host_result": "pending",
+      "evidence": "not yet run on installed host"
+    },
+    {
+      "id": "project_previous_without_areas",
+      "workflow": "project",
+      "input": {
+        "request": "Execute project without area classification",
+        "vault": "synthetic wiki",
+        "area_mode": "previous_without_areas",
+        "sources": [
+          "explicit human request",
+          "full current notes and hashes"
+        ],
+        "inventory": "two typed areas, complete=true"
+      },
+      "expected": {
+        "destination": "wiki/projects/Nexo.md",
+        "relations": [],
+        "permitted_writes": "project board/index/daily prescribed",
+        "forbidden": [
+          "move or duplicate canonical note",
+          "modify raw bytes",
+          "rewrite human metadata",
+          "add Kanban columns",
+          "implicit external calendar or area creation"
+        ]
+      },
+      "host_result": "pending",
+      "evidence": "not yet run on installed host"
+    },
+    {
+      "id": "projects_authorized_areas",
+      "workflow": "projects",
+      "input": {
+        "request": "Execute projects with explicit links to Exploración and Comunidad",
+        "vault": "synthetic wiki",
+        "area_mode": "authorized_areas",
+        "sources": [
+          "explicit human request",
+          "full current notes and hashes"
+        ],
+        "inventory": "two typed areas, complete=true"
+      },
+      "expected": {
+        "destination": "wiki/projects/Nexo.md",
+        "relations": [
+          "[[wiki/areas/Exploración]]",
+          "[[wiki/areas/Comunidad]]"
+        ],
+        "permitted_writes": "Last overview only",
+        "forbidden": [
+          "move or duplicate canonical note",
+          "modify raw bytes",
+          "rewrite human metadata",
+          "add Kanban columns",
+          "implicit external calendar or area creation"
+        ]
+      },
+      "host_result": "pending",
+      "evidence": "not yet run on installed host"
+    },
+    {
+      "id": "projects_previous_without_areas",
+      "workflow": "projects",
+      "input": {
+        "request": "Execute projects without area classification",
+        "vault": "synthetic wiki",
+        "area_mode": "previous_without_areas",
+        "sources": [
+          "explicit human request",
+          "full current notes and hashes"
+        ],
+        "inventory": "two typed areas, complete=true"
+      },
+      "expected": {
+        "destination": "wiki/projects/Nexo.md",
+        "relations": [],
+        "permitted_writes": "Last overview only",
+        "forbidden": [
+          "move or duplicate canonical note",
+          "modify raw bytes",
+          "rewrite human metadata",
+          "add Kanban columns",
+          "implicit external calendar or area creation"
+        ]
+      },
+      "host_result": "pending",
+      "evidence": "not yet run on installed host"
+    },
+    {
+      "id": "person_authorized_areas",
+      "workflow": "person",
+      "input": {
+        "request": "Execute person with explicit links to Exploración and Comunidad",
+        "vault": "synthetic wiki",
+        "area_mode": "authorized_areas",
+        "sources": [
+          "explicit human request",
+          "full current notes and hashes"
+        ],
+        "inventory": "two typed areas, complete=true"
+      },
+      "expected": {
+        "destination": "wiki/entities/Ada.md",
+        "relations": [
+          "[[wiki/areas/Exploración]]",
+          "[[wiki/areas/Comunidad]]"
+        ],
+        "permitted_writes": "person interaction daily and existing index",
+        "forbidden": [
+          "move or duplicate canonical note",
+          "modify raw bytes",
+          "rewrite human metadata",
+          "add Kanban columns",
+          "implicit external calendar or area creation"
+        ]
+      },
+      "host_result": "pending",
+      "evidence": "not yet run on installed host"
+    },
+    {
+      "id": "person_previous_without_areas",
+      "workflow": "person",
+      "input": {
+        "request": "Execute person without area classification",
+        "vault": "synthetic wiki",
+        "area_mode": "previous_without_areas",
+        "sources": [
+          "explicit human request",
+          "full current notes and hashes"
+        ],
+        "inventory": "two typed areas, complete=true"
+      },
+      "expected": {
+        "destination": "wiki/entities/Ada.md",
+        "relations": [],
+        "permitted_writes": "person interaction daily and existing index",
+        "forbidden": [
+          "move or duplicate canonical note",
+          "modify raw bytes",
+          "rewrite human metadata",
+          "add Kanban columns",
+          "implicit external calendar or area creation"
+        ]
+      },
+      "host_result": "pending",
+      "evidence": "not yet run on installed host"
+    },
+    {
+      "id": "capture_authorized_areas",
+      "workflow": "capture",
+      "input": {
+        "request": "Execute capture with explicit links to Exploración and Comunidad",
+        "vault": "synthetic wiki",
+        "area_mode": "authorized_areas",
+        "sources": [
+          "explicit human request",
+          "full current notes and hashes"
+        ],
+        "inventory": "two typed areas, complete=true"
+      },
+      "expected": {
+        "destination": "wiki/concepts/Idea.md",
+        "relations": [
+          "[[wiki/areas/Exploración]]",
+          "[[wiki/areas/Comunidad]]"
+        ],
+        "permitted_writes": "idea and common daily",
+        "forbidden": [
+          "move or duplicate canonical note",
+          "modify raw bytes",
+          "rewrite human metadata",
+          "add Kanban columns",
+          "implicit external calendar or area creation"
+        ]
+      },
+      "host_result": "pending",
+      "evidence": "not yet run on installed host"
+    },
+    {
+      "id": "capture_previous_without_areas",
+      "workflow": "capture",
+      "input": {
+        "request": "Execute capture without area classification",
+        "vault": "synthetic wiki",
+        "area_mode": "previous_without_areas",
+        "sources": [
+          "explicit human request",
+          "full current notes and hashes"
+        ],
+        "inventory": "two typed areas, complete=true"
+      },
+      "expected": {
+        "destination": "wiki/concepts/Idea.md",
+        "relations": [],
+        "permitted_writes": "idea and common daily",
+        "forbidden": [
+          "move or duplicate canonical note",
+          "modify raw bytes",
+          "rewrite human metadata",
+          "add Kanban columns",
+          "implicit external calendar or area creation"
+        ]
+      },
+      "host_result": "pending",
+      "evidence": "not yet run on installed host"
+    },
+    {
+      "id": "save_authorized_areas",
+      "workflow": "save",
+      "input": {
+        "request": "Execute save with explicit links to Exploración and Comunidad",
+        "vault": "synthetic wiki",
+        "area_mode": "authorized_areas",
+        "sources": [
+          "explicit human request",
+          "full current notes and hashes"
+        ],
+        "inventory": "two typed areas, complete=true"
+      },
+      "expected": {
+        "destination": "existing note or card by item type",
+        "relations": [
+          "[[wiki/areas/Exploración]]",
+          "[[wiki/areas/Comunidad]]"
+        ],
+        "permitted_writes": "existing propagation only",
+        "forbidden": [
+          "move or duplicate canonical note",
+          "modify raw bytes",
+          "rewrite human metadata",
+          "add Kanban columns",
+          "implicit external calendar or area creation"
+        ]
+      },
+      "host_result": "pending",
+      "evidence": "not yet run on installed host"
+    },
+    {
+      "id": "save_previous_without_areas",
+      "workflow": "save",
+      "input": {
+        "request": "Execute save without area classification",
+        "vault": "synthetic wiki",
+        "area_mode": "previous_without_areas",
+        "sources": [
+          "explicit human request",
+          "full current notes and hashes"
+        ],
+        "inventory": "two typed areas, complete=true"
+      },
+      "expected": {
+        "destination": "existing note or card by item type",
+        "relations": [],
+        "permitted_writes": "existing propagation only",
+        "forbidden": [
+          "move or duplicate canonical note",
+          "modify raw bytes",
+          "rewrite human metadata",
+          "add Kanban columns",
+          "implicit external calendar or area creation"
+        ]
+      },
+      "host_result": "pending",
+      "evidence": "not yet run on installed host"
+    },
+    {
+      "id": "task_authorized_areas",
+      "workflow": "task",
+      "input": {
+        "request": "Execute task with explicit links to Exploración and Comunidad",
+        "vault": "synthetic wiki",
+        "area_mode": "authorized_areas",
+        "sources": [
+          "explicit human request",
+          "full current notes and hashes"
+        ],
+        "inventory": "two typed areas, complete=true"
+      },
+      "expected": {
+        "destination": "boards/Trabajo.md card or wiki/tasks/Substantial.md",
+        "relations": [
+          "[[wiki/areas/Exploración]]",
+          "[[wiki/areas/Comunidad]]"
+        ],
+        "permitted_writes": "board, existing project/daily",
+        "forbidden": [
+          "move or duplicate canonical note",
+          "modify raw bytes",
+          "rewrite human metadata",
+          "add Kanban columns",
+          "implicit external calendar or area creation"
+        ]
+      },
+      "host_result": "pending",
+      "evidence": "not yet run on installed host"
+    },
+    {
+      "id": "task_previous_without_areas",
+      "workflow": "task",
+      "input": {
+        "request": "Execute task without area classification",
+        "vault": "synthetic wiki",
+        "area_mode": "previous_without_areas",
+        "sources": [
+          "explicit human request",
+          "full current notes and hashes"
+        ],
+        "inventory": "two typed areas, complete=true"
+      },
+      "expected": {
+        "destination": "boards/Trabajo.md card or wiki/tasks/Substantial.md",
+        "relations": [],
+        "permitted_writes": "board, existing project/daily",
+        "forbidden": [
+          "move or duplicate canonical note",
+          "modify raw bytes",
+          "rewrite human metadata",
+          "add Kanban columns",
+          "implicit external calendar or area creation"
+        ]
+      },
+      "host_result": "pending",
+      "evidence": "not yet run on installed host"
+    },
+    {
+      "id": "calendar_authorized_areas",
+      "workflow": "calendar",
+      "input": {
+        "request": "Execute calendar with explicit links to Exploración and Comunidad",
+        "vault": "synthetic wiki",
+        "area_mode": "authorized_areas",
+        "sources": [
+          "explicit human request",
+          "full current notes and hashes"
+        ],
+        "inventory": "two typed areas, complete=true"
+      },
+      "expected": {
+        "destination": "wiki/meetings/Reunión.md",
+        "relations": [
+          "[[wiki/areas/Exploración]]",
+          "[[wiki/areas/Comunidad]]"
+        ],
+        "permitted_writes": "meeting mode local note and provided attendees/daily",
+        "forbidden": [
+          "move or duplicate canonical note",
+          "modify raw bytes",
+          "rewrite human metadata",
+          "add Kanban columns",
+          "implicit external calendar or area creation"
+        ]
+      },
+      "host_result": "pending",
+      "evidence": "not yet run on installed host"
+    },
+    {
+      "id": "calendar_previous_without_areas",
+      "workflow": "calendar",
+      "input": {
+        "request": "Execute calendar without area classification",
+        "vault": "synthetic wiki",
+        "area_mode": "previous_without_areas",
+        "sources": [
+          "explicit human request",
+          "full current notes and hashes"
+        ],
+        "inventory": "two typed areas, complete=true"
+      },
+      "expected": {
+        "destination": "wiki/meetings/Reunión.md",
+        "relations": [],
+        "permitted_writes": "meeting mode local note and provided attendees/daily",
+        "forbidden": [
+          "move or duplicate canonical note",
+          "modify raw bytes",
+          "rewrite human metadata",
+          "add Kanban columns",
+          "implicit external calendar or area creation"
+        ]
+      },
+      "host_result": "pending",
+      "evidence": "not yet run on installed host"
+    },
+    {
+      "id": "daily_authorized_areas",
+      "workflow": "daily",
+      "input": {
+        "request": "Execute daily with explicit links to Exploración and Comunidad",
+        "vault": "synthetic wiki",
+        "area_mode": "authorized_areas",
+        "sources": [
+          "explicit human request",
+          "full current notes and hashes"
+        ],
+        "inventory": "two typed areas, complete=true"
+      },
+      "expected": {
+        "destination": "wiki/daily/2026-10-10.md",
+        "relations": [
+          "[[wiki/areas/Exploración]]",
+          "[[wiki/areas/Comunidad]]"
+        ],
+        "permitted_writes": "single general daily",
+        "forbidden": [
+          "move or duplicate canonical note",
+          "modify raw bytes",
+          "rewrite human metadata",
+          "add Kanban columns",
+          "implicit external calendar or area creation"
+        ]
+      },
+      "host_result": "pending",
+      "evidence": "not yet run on installed host"
+    },
+    {
+      "id": "daily_previous_without_areas",
+      "workflow": "daily",
+      "input": {
+        "request": "Execute daily without area classification",
+        "vault": "synthetic wiki",
+        "area_mode": "previous_without_areas",
+        "sources": [
+          "explicit human request",
+          "full current notes and hashes"
+        ],
+        "inventory": "two typed areas, complete=true"
+      },
+      "expected": {
+        "destination": "wiki/daily/2026-10-10.md",
+        "relations": [],
+        "permitted_writes": "single general daily",
+        "forbidden": [
+          "move or duplicate canonical note",
+          "modify raw bytes",
+          "rewrite human metadata",
+          "add Kanban columns",
+          "implicit external calendar or area creation"
+        ]
+      },
+      "host_result": "pending",
+      "evidence": "not yet run on installed host"
+    },
+    {
+      "id": "log_authorized_areas",
+      "workflow": "log",
+      "input": {
+        "request": "Execute log with explicit links to Exploración and Comunidad",
+        "vault": "synthetic wiki",
+        "area_mode": "authorized_areas",
+        "sources": [
+          "explicit human request",
+          "full current notes and hashes"
+        ],
+        "inventory": "two typed areas, complete=true"
+      },
+      "expected": {
+        "destination": "wiki/logs/2026-10-10 - Nexo.md",
+        "relations": [
+          "[[wiki/areas/Exploración]]",
+          "[[wiki/areas/Comunidad]]"
+        ],
+        "permitted_writes": "project/date log plus prescribed project/daily",
+        "forbidden": [
+          "move or duplicate canonical note",
+          "modify raw bytes",
+          "rewrite human metadata",
+          "add Kanban columns",
+          "implicit external calendar or area creation"
+        ]
+      },
+      "host_result": "pending",
+      "evidence": "not yet run on installed host"
+    },
+    {
+      "id": "log_previous_without_areas",
+      "workflow": "log",
+      "input": {
+        "request": "Execute log without area classification",
+        "vault": "synthetic wiki",
+        "area_mode": "previous_without_areas",
+        "sources": [
+          "explicit human request",
+          "full current notes and hashes"
+        ],
+        "inventory": "two typed areas, complete=true"
+      },
+      "expected": {
+        "destination": "wiki/logs/2026-10-10 - Nexo.md",
+        "relations": [],
+        "permitted_writes": "project/date log plus prescribed project/daily",
+        "forbidden": [
+          "move or duplicate canonical note",
+          "modify raw bytes",
+          "rewrite human metadata",
+          "add Kanban columns",
+          "implicit external calendar or area creation"
+        ]
+      },
+      "host_result": "pending",
+      "evidence": "not yet run on installed host"
+    },
+    {
+      "id": "review_authorized_areas",
+      "workflow": "review",
+      "input": {
+        "request": "Execute review with explicit links to Exploración and Comunidad",
+        "vault": "synthetic wiki",
+        "area_mode": "authorized_areas",
+        "sources": [
+          "explicit human request",
+          "full current notes and hashes"
+        ],
+        "inventory": "two typed areas, complete=true"
+      },
+      "expected": {
+        "destination": "wiki/reviews/2026-10-10.md",
+        "relations": [
+          "[[wiki/areas/Exploración]]",
+          "[[wiki/areas/Comunidad]]"
+        ],
+        "permitted_writes": "same period and last daily",
+        "forbidden": [
+          "move or duplicate canonical note",
+          "modify raw bytes",
+          "rewrite human metadata",
+          "add Kanban columns",
+          "implicit external calendar or area creation"
+        ]
+      },
+      "host_result": "pending",
+      "evidence": "not yet run on installed host"
+    },
+    {
+      "id": "review_previous_without_areas",
+      "workflow": "review",
+      "input": {
+        "request": "Execute review without area classification",
+        "vault": "synthetic wiki",
+        "area_mode": "previous_without_areas",
+        "sources": [
+          "explicit human request",
+          "full current notes and hashes"
+        ],
+        "inventory": "two typed areas, complete=true"
+      },
+      "expected": {
+        "destination": "wiki/reviews/2026-10-10.md",
+        "relations": [],
+        "permitted_writes": "same period and last daily",
+        "forbidden": [
+          "move or duplicate canonical note",
+          "modify raw bytes",
+          "rewrite human metadata",
+          "add Kanban columns",
+          "implicit external calendar or area creation"
+        ]
+      },
+      "host_result": "pending",
+      "evidence": "not yet run on installed host"
+    },
+    {
+      "id": "synthesize_authorized_areas",
+      "workflow": "synthesize",
+      "input": {
+        "request": "Execute synthesize with explicit links to Exploración and Comunidad",
+        "vault": "synthetic wiki",
+        "area_mode": "authorized_areas",
+        "sources": [
+          "explicit human request",
+          "full current notes and hashes"
+        ],
+        "inventory": "two typed areas, complete=true"
+      },
+      "expected": {
+        "destination": "wiki/concepts/Synthesis - Nexo.md",
+        "relations": [
+          "[[wiki/areas/Exploración]]",
+          "[[wiki/areas/Comunidad]]"
+        ],
+        "permitted_writes": "thresholds and existing propagation, raw unchanged",
+        "forbidden": [
+          "move or duplicate canonical note",
+          "modify raw bytes",
+          "rewrite human metadata",
+          "add Kanban columns",
+          "implicit external calendar or area creation"
+        ]
+      },
+      "host_result": "pending",
+      "evidence": "not yet run on installed host"
+    },
+    {
+      "id": "synthesize_previous_without_areas",
+      "workflow": "synthesize",
+      "input": {
+        "request": "Execute synthesize without area classification",
+        "vault": "synthetic wiki",
+        "area_mode": "previous_without_areas",
+        "sources": [
+          "explicit human request",
+          "full current notes and hashes"
+        ],
+        "inventory": "two typed areas, complete=true"
+      },
+      "expected": {
+        "destination": "wiki/concepts/Synthesis - Nexo.md",
+        "relations": [],
+        "permitted_writes": "thresholds and existing propagation, raw unchanged",
+        "forbidden": [
+          "move or duplicate canonical note",
+          "modify raw bytes",
+          "rewrite human metadata",
+          "add Kanban columns",
+          "implicit external calendar or area creation"
+        ]
+      },
+      "host_result": "pending",
+      "evidence": "not yet run on installed host"
+    },
+    {
+      "id": "distill_authorized_areas",
+      "workflow": "distill",
+      "input": {
+        "request": "Execute distill with explicit links to Exploración and Comunidad",
+        "vault": "synthetic wiki",
+        "area_mode": "authorized_areas",
+        "sources": [
+          "explicit human request",
+          "full current notes and hashes"
+        ],
+        "inventory": "two typed areas, complete=true"
+      },
+      "expected": {
+        "destination": "wiki/concepts/Distillation - Fuente.md",
+        "relations": [
+          "[[wiki/areas/Exploración]]",
+          "[[wiki/areas/Comunidad]]"
+        ],
+        "permitted_writes": "cited claims, source creation only and daily/log",
+        "forbidden": [
+          "move or duplicate canonical note",
+          "modify raw bytes",
+          "rewrite human metadata",
+          "add Kanban columns",
+          "implicit external calendar or area creation"
+        ]
+      },
+      "host_result": "pending",
+      "evidence": "not yet run on installed host"
+    },
+    {
+      "id": "distill_previous_without_areas",
+      "workflow": "distill",
+      "input": {
+        "request": "Execute distill without area classification",
+        "vault": "synthetic wiki",
+        "area_mode": "previous_without_areas",
+        "sources": [
+          "explicit human request",
+          "full current notes and hashes"
+        ],
+        "inventory": "two typed areas, complete=true"
+      },
+      "expected": {
+        "destination": "wiki/concepts/Distillation - Fuente.md",
+        "relations": [],
+        "permitted_writes": "cited claims, source creation only and daily/log",
+        "forbidden": [
+          "move or duplicate canonical note",
+          "modify raw bytes",
+          "rewrite human metadata",
+          "add Kanban columns",
+          "implicit external calendar or area creation"
+        ]
+      },
+      "host_result": "pending",
+      "evidence": "not yet run on installed host"
+    },
+    {
+      "id": "ShortTaskKeepsCard",
+      "input": {
+        "fixture": "synthetic",
+        "request": "scenario ShortTaskKeepsCard"
+      },
+      "expected": "one existing board card, no standalone task solely for areas",
+      "host_result": "pending",
+      "evidence": "requires installed host workflow execution"
+    },
+    {
+      "id": "KanbanKeepsColumns",
+      "input": {
+        "fixture": "synthetic",
+        "request": "scenario KanbanKeepsColumns"
+      },
+      "expected": "unchanged H2 columns and kanban frontmatter; links in card",
+      "host_result": "pending",
+      "evidence": "requires installed host workflow execution"
+    },
+    {
+      "id": "RawBytesUnchanged",
+      "input": {
+        "fixture": "synthetic",
+        "request": "scenario RawBytesUnchanged"
+      },
+      "expected": "all original raw bytes equal; area links on derived note",
+      "host_result": "pending",
+      "evidence": "requires installed host workflow execution"
+    },
+    {
+      "id": "HumanMetadataPreserved",
+      "input": {
+        "fixture": "synthetic",
+        "request": "scenario HumanMetadataPreserved"
+      },
+      "expected": "existing frontmatter and human text preserved; links in body",
+      "host_result": "pending",
+      "evidence": "requires installed host workflow execution"
+    },
+    {
+      "id": "UnknownOKRValuesPending",
+      "input": {
+        "fixture": "synthetic",
+        "request": "scenario UnknownOKRValuesPending"
+      },
+      "expected": "unknown metric/baseline/target/date/owner remain pending; no inferred board or calendar",
+      "host_result": "pending",
+      "evidence": "requires installed host workflow execution"
+    },
+    {
+      "id": "GeneralIntentDoesNotWrite",
+      "input": {
+        "fixture": "synthetic",
+        "request": "scenario GeneralIntentDoesNotWrite"
+      },
+      "expected": "general intent without explicit workflow/area scope produces no writes",
+      "host_result": "pending",
+      "evidence": "requires installed host workflow execution"
+    },
+    {
+      "id": "RepeatedLinkRequestWithCurrentHash",
+      "input": {
+        "fixture": "synthetic",
+        "request": "scenario RepeatedLinkRequestWithCurrentHash"
+      },
+      "expected": "reread full note/hash; one path and link per area, no write if already satisfied; other authorized edits new ID/current hash",
+      "host_result": "pending",
+      "evidence": "requires installed host workflow execution"
+    },
+    {
+      "id": "AddSecondAreaPreservesFirst",
+      "input": {
+        "fixture": "synthetic",
+        "request": "scenario AddSecondAreaPreservesFirst"
+      },
+      "expected": "read current hash and purpose, add only missing second area; retain first and human content",
+      "host_result": "pending",
+      "evidence": "requires installed host workflow execution"
+    },
+    {
+      "id": "IncompleteInventoryDoesNotCreate",
+      "input": {
+        "fixture": "synthetic",
+        "request": "scenario IncompleteInventoryDoesNotCreate"
+      },
+      "expected": "partial reader result plus error blocks absence conclusion and dedup creation",
+      "host_result": "pending",
+      "evidence": "requires installed host workflow execution"
+    },
+    {
+      "id": "AmbiguousAreaDoesNotSelect",
+      "input": {
+        "fixture": "synthetic",
+        "request": "scenario AmbiguousAreaDoesNotSelect"
+      },
+      "expected": "show distinct homonyms and ask before choosing",
+      "host_result": "pending",
+      "evidence": "requires installed host workflow execution"
+    },
+    {
+      "id": "UnsafeAreaNameDoesNotEscape",
+      "input": {
+        "fixture": "synthetic",
+        "request": "scenario UnsafeAreaNameDoesNotEscape"
+      },
+      "expected": "show safe filename alternative before creation, no overwritten targets",
+      "host_result": "pending",
+      "evidence": "requires installed host workflow execution"
+    },
+    {
+      "id": "MissingToolDoesNotSimulate",
+      "input": {
+        "fixture": "synthetic",
+        "request": "scenario MissingToolDoesNotSimulate"
+      },
+      "expected": "report unavailable reader or skill, never replace by fictitious inventory or shell mutation",
+      "host_result": "pending",
+      "evidence": "requires installed host workflow execution"
+    }
+  ]
+}

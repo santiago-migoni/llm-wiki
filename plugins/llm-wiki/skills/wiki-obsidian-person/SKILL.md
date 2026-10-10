@@ -13,6 +13,13 @@ Run this workflow only when the user explicitly invokes it or clearly asks for t
 2. Crea/actualiza ficha con solo datos declarados o citados: rol, compañía, relación y fecha de interacción. No inventes email, perfil ni strength; deja desconocido vacío/TBD. Conserva source por atributo.
 3. Registra interacción real en daily y People index si existe; añade links cruzados sin duplicar persona.
 
+## Áreas opcionales
+
+Si la solicitud o convención adoptada activa áreas en este alcance, sigue
+[areas.md](../../references/areas.md) para consulta, propósito, ambigüedad y enlaces
+canónicos sin duplicar la unidad. Sin ese modo, conserva el flujo previo.
+Mantén una ficha por entidad y enlaces en su cuerpo; no generes otra persona por área. Preserva atributos humanos y sus fuentes.
+
 ## Salida
 
 Salida: persona enlazada, match elegido, atributos escritos y su fuente; interacción diaria/index.

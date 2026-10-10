@@ -13,6 +13,13 @@ Modo interactivo: lee index, los últimos 2–3 logs (o últimas 20 entradas de 
 Modo programado: solo con opt-in y evento scheduler real; ejecuta el mismo límite de scope. No resuelve contradicciones por reescritura.
 Para cada patrón que alcance umbral, crea `Synthesis - Title.md` en concepts con patrón, fuentes/notas enlazadas, significado y acción sugerida; enlaza la síntesis desde todas sus fuentes, actualiza index afectado y log, y añade un resumen a daily si existe. No conviertas asociación en hecho ni repitas síntesis existente.
 
+## Áreas opcionales
+
+Si la solicitud o convención adoptada activa áreas en este alcance, sigue
+[areas.md](../../references/areas.md) para consulta, propósito, ambigüedad y enlaces
+canónicos sin duplicar la unidad. Sin ese modo, conserva el flujo previo.
+Conserva umbrales cross-source y procedencia. Áreas se vinculan en la síntesis/unidades autorizadas; raw nunca se modifica ni recibe backlinks añadidos.
+
 ## Salida
 
 Salida: patrón/claims fuente/evidencia/interpretación/confianza/acción; conteos de síntesis, conexiones y enlaces rescatados. Scheduled mode debe identificarse como tal.
