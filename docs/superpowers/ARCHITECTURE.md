@@ -761,3 +761,8 @@ Estado draft; no registra aprobación ni implementación nuevas.
 - **Registro:** conserva v008; las menciones a proposed/pending dentro de los
   relatos de v007/v008 son históricas. AA-001 fija la autoridad vigente del alcance
   aprobado, sin transformar evidencia pendiente en verificación.
+
+Documentos dependientes preparados por este encargo: [spec de áreas v001](specs/2026-10-10-areas-transversales-design.md)
+y [plan de áreas v001](plans/2026-10-10-areas-transversales.md), ambos draft.
+AA-001 no aprueba sus detalles ni habilita ejecución; sus bases exactas se
+presentan mediante sus propios commits. AP-001 y el incremento anterior permanecen intactos.
