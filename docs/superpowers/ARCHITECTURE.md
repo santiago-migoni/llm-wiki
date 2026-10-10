@@ -766,3 +766,16 @@ Documentos dependientes preparados por este encargo: [spec de áreas v001](specs
 y [plan de áreas v001](plans/2026-10-10-areas-transversales.md), ambos draft.
 AA-001 no aprueba sus detalles ni habilita ejecución; sus bases exactas se
 presentan mediante sus propios commits. AP-001 y el incremento anterior permanecen intactos.
+
+## Estado de implementación del incremento de áreas — 2026-10-10
+
+AA-002 aprobó spec/plan v001 y ejecución directa. La versión asignada por el
+usuario es 0.2.0. Rutas: `Layout.ResolveFolder` con errores de mapa; inventario:
+`internal/vault/areas.go`, lector público `wiki_list_areas` en el servicio compartido.
+Skills `wiki-obsidian-area` y `wiki-obsidian-okr`, referencia `areas.md` e integración
+opcional en doce workflows. Sin cambios de parser de enlaces ni nuevos journals.
+
+Las secciones de propuesta anteriores conservan su contexto histórico. La
+[evidencia de entrega](evidence/2026-10-10-areas.md) distingue pruebas del runtime,
+catálogo, propuestas de aplicación y criterios del host pendientes. No acredita
+aceptación total, instalación ni dos chats por la existencia de estos archivos.

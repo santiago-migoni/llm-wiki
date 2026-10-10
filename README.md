@@ -4,13 +4,15 @@ Gestiona tus notas y tu conocimiento desde Codex Desktop.
 
 Busca información, guarda ideas y decisiones y relaciona notas. Tus archivos siguen siendo Markdown, compatibles con Obsidian.
 
-**Estado:** versión inicial `0.1.0`. El núcleo y el paquete `0.1.0` se probaron en macOS con Apple Silicon. La instalación por CLI tiene evidencia de versiones de desarrollo anteriores; la validación completa en Desktop sigue pendiente.
+**Estado:** versión `0.2.0`, con áreas opcionales y workflow de OKRs. El núcleo y el paquete se probaron en macOS con Apple Silicon. La instalación por CLI tiene evidencia de versiones de desarrollo anteriores; la validación completa en Desktop sigue pendiente.
 
 ## Qué puedes hacer
 
 - Buscar y leer notas para recuperar contexto entre sesiones.
 - Guardar ideas, decisiones y tareas mediante los workflows del plugin.
 - Revisar enlaces, organización y vigencia de la información.
+- Consultar áreas y vincular una misma nota con varias, conservando su ubicación.
+- Crear o actualizar OKRs con datos aportados y campos pendientes explícitos.
 - Preparar la estructura de un vault y exportar notas a JSON, Markdown u OKF.
 
 Un **vault** es tu carpeta de notas. No necesitas mantener Obsidian abierto ni configurar claves de IA adicionales.
@@ -82,7 +84,22 @@ Consulta el [plan y su avance](docs/superpowers/plans/2026-10-08-codex-plugin.md
 
 Los informes de aceptación anteriores conservan las versiones de desarrollo que
 probaron. La validación del paquete actual se registra en
-[el informe de la versión 0.1.0](tests/acceptance/release-0.1.0.json).
+[la evidencia de áreas 0.2.0](docs/superpowers/evidence/2026-10-10-areas.md).
+El [informe 0.1.0](tests/acceptance/release-0.1.0.json) conserva su alcance histórico.
+
+### Áreas y OKRs
+
+Solicita «consulta mis áreas», «crea el área …» o «vincula esta nota con …»;
+para OKRs, solicita crear, consultar o actualizar el objetivo. Áreas usan
+`wiki/areas/` o `Areas/`; OKRs `wiki/okrs/` o `OKRs/`, salvo mapa explícito.
+Los enlaces se guardan en el cuerpo. La clasificación es opcional: no duplica
+notas, cambia metadata humana ni crea categorías obligatorias.
+
+`wiki_list_areas` informa cobertura y diagnósticos; un inventario incompleto no
+permite afirmar que un área no existe. La ejecución de los workflows en el host
+y el ensayo con dos chats del paquete nuevo siguen pendientes. Consulta la
+[matriz de casos](tests/acceptance/areas-cases.json) y el
+[plan de este incremento](docs/superpowers/plans/2026-10-10-areas-transversales.md).
 
 ## Ayuda y documentación
 

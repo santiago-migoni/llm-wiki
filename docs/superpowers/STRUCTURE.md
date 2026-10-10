@@ -173,3 +173,16 @@ revisión y el estado global draft: esta aprobación no cubre todos los pendient
 históricos ni describe código nuevo como implementado. Se autoriza preparar
 spec y plan, pendientes de su propia revisión. El registro canónico de la decisión
 es AA-001; las menciones previas a aprobación pendiente son históricas.
+
+## Estado de implementación del incremento de áreas — 2026-10-10
+
+AA-002 aprobó spec/plan v001 y ejecución directa. La versión asignada por el
+usuario es 0.2.0. Rutas: `Layout.ResolveFolder` con errores de mapa; inventario:
+`internal/vault/areas.go`, lector público `wiki_list_areas` en el servicio compartido.
+Skills `wiki-obsidian-area` y `wiki-obsidian-okr`, referencia `areas.md` e integración
+opcional en doce workflows. Sin cambios de parser de enlaces ni nuevos journals.
+
+Las secciones de propuesta anteriores conservan su contexto histórico. La
+[evidencia de entrega](evidence/2026-10-10-areas.md) distingue pruebas del runtime,
+catálogo, propuestas de aplicación y criterios del host pendientes. No acredita
+aceptación total, instalación ni dos chats por la existencia de estos archivos.

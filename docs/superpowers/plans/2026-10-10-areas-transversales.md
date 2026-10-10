@@ -90,7 +90,7 @@ La aprobación de este plan acepta las interfaces internas propuestas siguientes
 tests `vault_test.go`, `bootstrap_test.go`, `notes_test.go`.
 **Consume:** C-002 y ADR-010. **Produce:** ResolveFolder y FolderErrors del mapa anterior.
 
-- [ ] Añadir `TestLayoutAreaEntityOKRPrecedence`: tabla wiki/Obsidian con claves de
+- [x] Añadir `TestLayoutAreaEntityOKRPrecedence`: tabla wiki/Obsidian con claves de
   C-002; comprobar subtipo explícito > entity explícito > default; company/companies
   resuelven organization; sin entity nuevo, person conserva comportamiento anterior.
 
@@ -102,20 +102,20 @@ tests `vault_test.go`, `bootstrap_test.go`, `notes_test.go`.
       t.Fatalf("folder=%q err=%v", folder, err)
   }
   ```
-- [ ] Añadir `TestLayoutInvalidExplicitFolderDoesNotFallback`: ruta protegida,
+- [x] Añadir `TestLayoutInvalidExplicitFolderDoesNotFallback`: ruta protegida,
   absoluta, traversal, layout ambiguo y override válido posterior; comprobar error
   del tipo afectado y resolución legítima del otro tipo. Clone no comparte mapas.
-- [ ] Ejecutar `go test ./internal/vault -run 'TestLayout(AreaEntityOKRPrecedence|InvalidExplicitFolderDoesNotFallback)'`;
+- [x] Ejecutar `go test ./internal/vault -run 'TestLayout(AreaEntityOKRPrecedence|InvalidExplicitFolderDoesNotFallback)'`;
   observar fallos por las claves/diagnósticos ausentes antes de implementar.
-- [ ] Extender normalización/defaults y parser detallado. Combinar _CLAUDE primero,
+- [x] Extender normalización/defaults y parser detallado. Combinar _CLAUDE primero,
   manual después por clave; una fila efectiva inválida conserva error. Aplicar la
   precedencia de C-002 después de resolver las entradas explícitas por origen.
-- [ ] Usar ResolveFolder para daily en PlanCapture/PlanSave, que hoy leen Folders
+- [x] Usar ResolveFolder para daily en PlanCapture/PlanSave, que hoy leen Folders
   directamente. Conservar uso de rutas explícitas y controles de mutación existentes.
-- [ ] Añadir filas reconocidas en bootstrap preservando presets; no crear notas
+- [x] Añadir filas reconocidas en bootstrap preservando presets; no crear notas
   de área. Probar `TestBootstrapNewKindsPreserveExisting` y `TestCaptureInvalidDailyMap`:
   no reemplazo de archivos, no carpeta creada al resolver, captura válida sin áreas.
-- [ ] Ejecutar `go test ./internal/vault`, gofmt de archivos modificados y diff --check;
+- [x] Ejecutar `go test ./internal/vault`, gofmt de archivos modificados y diff --check;
   revisar y registrar commit solo de los archivos asignados. Resultado esperado:
   tests nuevos y previos pasan; fallos/bloqueos se registran como tales.
 
@@ -124,10 +124,10 @@ tests `vault_test.go`, `bootstrap_test.go`, `notes_test.go`.
 **Archivos:** crear `internal/vault/areas.go`, `areas_test.go`.
 **Consume:** T1 ResolveFolder y ScanResult. **Produce:** tipos y ListAreas definidos arriba.
 
-- [ ] Añadir `TestListAreasStableIdentityAndNames`: dos áreas Unicode con aliases
+- [x] Añadir `TestListAreasStableIdentityAndNames`: dos áreas Unicode con aliases
   escalar/lista, título/H1/basename, homónimos y ruta anidada; comprobar orden,
   hashes completos, arrays no nulos y ambiguous_name sin colapsar identidades.
-- [ ] Añadir `TestListAreasIncompleteAndLegacy`: carpeta ausente válida, nota sin
+- [x] Añadir `TestListAreasIncompleteAndLegacy`: carpeta ausente válida, nota sin
   tipo en destino, YAML roto, título/alias no string, área fuera del mapa, mapa
   inválido, symlink excluido y lectura fallida. Afirmar códigos de C-001, complete
   y error; el caso vacío válido es []/complete=true y no crea archivos.
@@ -140,14 +140,14 @@ tests `vault_test.go`, `bootstrap_test.go`, `notes_test.go`.
       t.Fatalf("result=%+v err=%v", result, err)
   }
   ```
-- [ ] Añadir `TestListAreasBudgetsAndCancellation`: presupuestos pequeños mediante
+- [x] Añadir `TestListAreasBudgetsAndCancellation`: presupuestos pequeños mediante
   helper privado y contexto cancelado; complete=false, errores conservados y
   hashes parciales nunca presentados como completos. Comparar archivos antes/después.
-- [ ] Ejecutar `go test ./internal/vault -run TestListAreas`; confirmar que falla
+- [x] Ejecutar `go test ./internal/vault -run TestListAreas`; confirmar que falla
   antes de implementar por API ausente, no por fixtures incorrectos.
-- [ ] Implementar ListAreas con un único scan, Parse existente y reglas C-001;
+- [x] Implementar ListAreas con un único scan, Parse existente y reglas C-001;
   chequear cancelación en el análisis posterior al scan. Sin nuevo índice o caché.
-- [ ] Ejecutar `go test ./internal/vault`, gofmt y diff --check; revisar y commit
+- [x] Ejecutar `go test ./internal/vault`, gofmt y diff --check; revisar y commit
   de areas.go/areas_test.go. Solo procede T3 cuando contrato y tests estén conformes.
 
 ## T3 — Exponer el lector en servicio, CLI y MCP
@@ -156,18 +156,18 @@ tests `vault_test.go`, `bootstrap_test.go`, `notes_test.go`.
 `internal/mcp/server_test.go` y `cmd/llm-wiki/main_test.go`.
 **Consume:** T2 ListAreas. **Produce:** contrato público wiki_list_areas de C-001.
 
-- [ ] Añadir `TestListAreasContractAndPartialError` en service: vault-id ausente/
+- [x] Añadir `TestListAreasContractAndPartialError` en service: vault-id ausente/
   desconocido, entrada legítima, layout ambiguo, mapa inválido y scan parcial.
   Comparar result/error y asegurar que no se aplica ninguna mutación.
-- [ ] Añadir `TestMCPListAreasMatchesService` y `TestCLIListAreasMatchesService`:
+- [x] Añadir `TestMCPListAreasMatchesService` y `TestCLIListAreasMatchesService`:
   mismo fixture/resultado, MCP IsError con parcial y CLI error; serve no imprime
   cuerpos de notas/diagnósticos ajenos al protocolo en stdout.
-- [ ] Ejecutar `go test ./internal/service ./internal/mcp ./cmd/llm-wiki -run ListAreas`;
+- [x] Ejecutar `go test ./internal/service ./internal/mcp ./cmd/llm-wiki -run ListAreas`;
   verificar fallos por herramienta ausente antes de registrar la definición.
-- [ ] Registrar definición y dispatch al lector antes del scan genérico del servicio
+- [x] Registrar definición y dispatch al lector antes del scan genérico del servicio
   para no duplicar el recorrido; transporte MCP actual consume Definitions sin
   otro adaptador. Conservar resultado parcial en el envoltorio result/error.
-- [ ] Ejecutar `go test ./internal/service ./internal/mcp ./cmd/llm-wiki`, gofmt,
+- [x] Ejecutar `go test ./internal/service ./internal/mcp ./cmd/llm-wiki`, gofmt,
   diff --check, revisión y commit de archivos asignados.
 
 ## T4 — Skills de áreas y OKR con reglas compartidas
@@ -178,18 +178,18 @@ modificar `folder-map.md`, `ai-first-rules.md`, `write-rules.md` y router llm-wi
 extender `internal/catalog/catalog_test.go` y registro de capacidades de extensión.
 **Consume:** T1 rutas/T3 lector. **Produce:** flujos US-001/006 y reglas para T5.
 
-- [ ] Definir escenario fallido de aceptación antes de añadir skills: solicitar
+- [x] Definir escenario fallido de aceptación antes de añadir skills: solicitar
   área arbitraria y OKR incompleto; falta del lector/skill se reporta, no se simula.
-- [ ] Escribir flujos de crear/consultar/vincular área y crear/consultar/actualizar
+- [x] Escribir flujos de crear/consultar/vincular área y crear/consultar/actualizar
   OKR; lectura completa, reutilización, aprobación de nuevas áreas y pendientes
   explícitos según spec. Consulta sola no escribe; manual usa wiki_init.
-- [ ] Registrar extensiones sin reutilizar F/I/T originales; si hace falta una
+- [x] Registrar extensiones sin reutilizar F/I/T originales; si hace falta una
   sección extensions, usar IDs locales EXT-AREA/EXT-OKR y estados acordes a evidencia,
   sin cambiar el inventario original. Documentar la ubicación en el catálogo.
-- [ ] Añadir `TestCatalogDiscoversAreaAndOKRExtensions`: skill parseable y
+- [x] Añadir `TestCatalogDiscoversAreaAndOKRExtensions`: skill parseable y
   descubrible, personalización del usuario preservada. Este test acredita catálogo,
   no clasificación ni resultados del agente.
-- [ ] Ejecutar `go test ./internal/catalog ./internal/packaging`; validar YAML,
+- [x] Ejecutar `go test ./internal/catalog ./internal/packaging`; validar YAML,
   JSON/enlaces y revisar políticas antes del commit de archivos asignados.
 
 ## T5 — Integración en workflows pertinentes
@@ -199,26 +199,26 @@ daily/log/review/synthesize/distill; referencia areas.md de T4; crear
 `tests/acceptance/areas-scenarios.md` y matriz `areas-cases.json`.
 **Consume:** T4 reglas comunes. **Produce:** US-004 sin ampliar permisos de cada workflow.
 
-- [ ] Escribir casos de matriz antes de editar skills: por cada fila de arquitectura,
+- [x] Escribir casos de matriz antes de editar skills: por cada fila de arquitectura,
   modo con clasificación autorizada y modo previo sin áreas; expected paths,
   relaciones, escrituras permitidas y fuentes. Ninguna skill nueva sustituye otras.
-- [ ] Integrar consulta/vinculación opcional, reutilización y manejo de ausencia/
+- [x] Integrar consulta/vinculación opcional, reutilización y manejo de ausencia/
   ambigüedad. No replicar reglas completas: enlazar referencia canónica areas.md.
-- [ ] Añadir casos `ShortTaskKeepsCard`, `KanbanKeepsColumns`, `RawBytesUnchanged`,
+- [x] Añadir casos `ShortTaskKeepsCard`, `KanbanKeepsColumns`, `RawBytesUnchanged`,
   `HumanMetadataPreserved`, `UnknownOKRValuesPending` y `GeneralIntentDoesNotWrite`;
   verificar manualmente cambios de políticas contra los originales de la base.
-- [ ] Añadir `RepeatedLinkRequestWithCurrentHash`: el usuario vuelve a solicitar
+- [x] Añadir `RepeatedLinkRequestWithCurrentHash`: el usuario vuelve a solicitar
   vincular la misma nota a las mismas áreas; el agente relee la nota/hash vigente
   y determina que los enlaces ya existen. Afirmar nota única, misma ruta y un solo
   enlace por área; si hay otra actualización autorizada, debe usar un nuevo ID y
   hash vigente sin duplicar vínculos. No aceptar replay del ID anterior como
   sustituto de esta prueba del workflow. Ejecutar también el caso legítimo de
   añadir una segunda área previamente ausente, conservando la primera.
-- [ ] Validar sintaxis JSON/YAML y enlaces; ejecutar `go test ./internal/catalog`.
+- [x] Validar sintaxis JSON/YAML y enlaces; ejecutar `go test ./internal/catalog`.
   Ejecutar casos con agente/host si está disponible, registrando por caso entrada,
   operaciones y diffs observados. Si no lo está, marcar aceptación pendiente:
   la lectura de skills no cuenta como ejecución aprobada.
-- [ ] Revisar y commit del diff asignado y matriz; no modificar raw reales ni
+- [x] Revisar y commit del diff asignado y matriz; no modificar raw reales ni
   mantener categorías del usuario en fixtures versionados.
 
 ## T6 — Regresiones de relaciones, continuidad y recuperación
@@ -228,10 +228,10 @@ daily/log/review/synthesize/distill; referencia areas.md de T4; crear
 extender `internal/graph/graph_test.go`, `internal/vault/process_recovery_test.go`.
 **Consume:** T1–T5. **Produce:** evidencia técnica y matriz de aceptación distinguibles.
 
-- [ ] Añadir `TestAreaRelationsSingleNoteAndRepeatedLink`: una nota con dos áreas,
+- [x] Añadir `TestAreaRelationsSingleNoteAndRepeatedLink`: una nota con dos áreas,
   grafo/backlinks desde ambas, ruta sin cambio y una nota canónica; repetir el lote
   con mismo operation_id/payload es idempotente. Otro ID con hash stale debe fallar.
-- [ ] Añadir `TestAreaLinksInBodyNotFrontmatter`: cuerpo resuelto, YAML preservado
+- [x] Añadir `TestAreaLinksInBodyNotFrontmatter`: cuerpo resuelto, YAML preservado
   y no interpretado; múltiples aliases Unicode conservan reglas existentes.
 
   Aserción con scan de fixture que contiene un proyecto único enlazado a dos áreas:
@@ -245,19 +245,19 @@ extender `internal/graph/graph_test.go`, `internal/vault/process_recovery_test.g
       }
   }
   ```
-- [ ] Añadir `TestAreaSecondProcessAndRecovery`: reiniciar proceso con mismo estado,
+- [x] Añadir `TestAreaSecondProcessAndRecovery`: reiniciar proceso con mismo estado,
   leer áreas y backlinks; inducir fallo parcial, edición humana y journal pendiente;
   reanudar/rollback solo donde hashes permiten. No afirmar aislamiento global.
-- [ ] Correr primero los tests nuevos para observar fallos antes de agregar soporte
+- [x] Correr primero los tests nuevos para observar fallos antes de agregar soporte
   o fixtures definitivos; si las primitivas ya satisfacen un caso, conservarlo como
   prueba de compatibilidad sin fabricar un fallo. No ampliar el grafo a YAML.
-- [ ] Ejecutar `go test ./internal/vault ./internal/graph ./internal/service ./tests/acceptance`;
+- [x] Ejecutar `go test ./internal/vault ./internal/graph ./internal/service ./tests/acceptance`;
   cerrar casos de formato/coverage de Review Focus. Tests con llamadas prediseñadas
   acreditan runtime, no decisiones semánticas de un agente.
 - [ ] Ejecutar escenario de dos chats Codex sobre fixtures sintéticos; registrar
   host/plugin, entrada, operaciones/diffs y fuentes recuperadas. Ausencia del host
   deja este criterio pendiente sin sustituirlo por dos procesos.
-- [ ] Ejecutar `go test -race ./...`, `go vet ./...`, gofmt y `git diff --check`;
+- [x] Ejecutar `go test -race ./...`, `go vet ./...`, gofmt y `git diff --check`;
   revisión final del diff y commit de archivos propios. No repetir suite sin cambios.
 
 ## T7 — Paquete y documentación de entrega
@@ -303,15 +303,14 @@ solo después de asignar release. **Consume:** T6 y versión elegida antes de di
 Orden T1 → T2 → T3 → T4 → T5 → T6 → T7; no escribir archivos compartidos en
 paralelo. Cada tarea termina con revisión/commit limitado. La preparación de este
 plan verificó cobertura de historias, consistencia de firmas, comandos y foco de
-revisión; no ejecutó sus tests. Los checkboxes siguen abiertos deliberadamente.
+revisión; no ejecutó sus tests. Los checkboxes se actualizan con la evidencia de ejecución; aceptación del host queda pendiente.
 
 ## Handoff y pendientes
 
-Revisar spec y plan, aprobar sus bases y elegir ejecución directa o con subagentes.
-Se recomienda directa por la dependencia secuencial de rutas, lector y workflows,
-con revisión independiente al cierre. La elección no elimina las pruebas ni las
-puertas de aprobación. Versión de entrega y acceso al host quedan pendientes para
-T7 y aceptación real respectivamente; no bloquean revisar los documentos.
+AA-002 aprueba las bases y ejecución directa. Versión elegida: 0.2.0.
+Resultados y decisiones: [evidencia de áreas](../evidence/2026-10-10-areas.md).
+T1–T6 completadas técnicamente; T7 y revisión final en curso. La aceptación del
+host instalado/dos chats queda pendiente y conserva su casilla abierta.
 
 2026-10-10, v001: borrador solicitado sobre AA-001 y spec v001 draft fijada arriba.
 No ejecutado ni aprobado; no cambia el plan anterior del plugin.

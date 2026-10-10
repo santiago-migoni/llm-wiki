@@ -55,6 +55,18 @@ func TestPackagedBinaryWithoutDevelopmentToolchain(t *testing.T) {
 		return session
 	}
 	session := connect()
+	tools, err := session.ListTools(ctx, &mcp.ListToolsParams{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	names := map[string]bool{}
+	for _, tool := range tools.Tools {
+		names[tool.Name] = true
+	}
+	if !names["wiki_list_areas"] {
+		t.Fatal("packaged area reader missing")
+	}
+
 	result, e := session.CallTool(ctx, &mcp.CallToolParams{Name: "wiki_select_vault", Arguments: map[string]any{"project_path": project, "vault_path": vault, "timezone": "UTC", "layout": "wiki"}})
 	if e != nil || result.IsError {
 		t.Fatal("select failed", e, result)
@@ -78,11 +90,12 @@ func TestPackagedBinaryWithoutDevelopmentToolchain(t *testing.T) {
 		}
 		return r
 	}
+	call("wiki_save_note", map[string]any{"path": "wiki/areas/Exploración.md", "content": "---\ntype: area\n---\n# Exploración\n\n## Propósito\nPrueba de continuidad.", "operation_id": "package-area"})
 	call("wiki_save_note", map[string]any{"path": "Decision.md", "content": "Second-session evidence", "operation_id": "save"})
 	call("wiki_save_workflow", map[string]any{"name": "custom", "content": "---\nname: custom\ndescription: User workflow\n---\nUser customization.\n", "operation_id": "workflow"})
 	r := call("wiki_list_skills", map[string]any{})
 	b, _ = json.Marshal(r.StructuredContent)
-	if !strings.Contains(string(b), "wiki-obsidian-save") || !strings.Contains(string(b), "User customization") {
+	if !strings.Contains(string(b), "wiki-obsidian-save") || !strings.Contains(string(b), "User customization") || !strings.Contains(string(b), "wiki-obsidian-area") || !strings.Contains(string(b), "wiki-obsidian-okr") {
 		t.Fatal("package or user catalog missing")
 	}
 	session.Close()
@@ -94,6 +107,25 @@ func TestPackagedBinaryWithoutDevelopmentToolchain(t *testing.T) {
 		t.Fatal("lost persisted decision after process restart")
 	}
 	call("wiki_get_skill", map[string]any{"name": "custom"})
+	call("wiki_get_skill", map[string]any{"name": "wiki-obsidian-area"})
+	call("wiki_get_skill", map[string]any{"name": "wiki-obsidian-okr"})
+	r = call("wiki_list_areas", map[string]any{})
+	b, _ = json.Marshal(r.StructuredContent)
+	var areaPayload struct {
+		Result struct {
+			Complete bool `json:"complete"`
+			Areas    []struct {
+				Path, Name, Hash string
+				Aliases          []string
+			} `json:"areas"`
+		} `json:"result"`
+	}
+	if err := json.Unmarshal(b, &areaPayload); err != nil {
+		t.Fatal(err)
+	}
+	if !areaPayload.Result.Complete || len(areaPayload.Result.Areas) != 1 || areaPayload.Result.Areas[0].Path != "wiki/areas/Exploración.md" || len(areaPayload.Result.Areas[0].Hash) != 64 || areaPayload.Result.Areas[0].Aliases == nil {
+		t.Fatalf("packaged reader after restart: %s", b)
+	}
 	session.Close()
 	if previous := os.Getenv("LLM_WIKI_PREVIOUS_PACKAGE"); previous != "" {
 		if e := packaging.VerifyChecksums(previous); e != nil {

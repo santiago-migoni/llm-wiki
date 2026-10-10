@@ -1641,10 +1641,11 @@
       "id": "EXT-OKR",
       "name": "obsidian-okr",
       "skill": "skills/wiki-obsidian-okr/SKILL.md",
-      "status": "planned",
-      "evidence": "catalog discovery only; agent/host acceptance pending",
+      "status": "component_verified",
+      "evidence": "internal/catalog/catalog_test.go; internal/vault/vault_test.go (OKR routing); workflow host acceptance pending",
       "behavior_verified": false,
       "host_acceptance": "pending"
     }
-  ]
+  ],
+  "extension_evidence": "docs/superpowers/evidence/2026-10-10-areas.md; tests/acceptance/areas-cases.json"
 }

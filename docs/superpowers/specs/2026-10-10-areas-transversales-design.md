@@ -216,11 +216,9 @@ No se altera la ruta de diarias por año/mes ni las demás claves existentes.
 
 ## Pendientes y autoridad
 
-- Aprobar los contratos detallados C-001/C-002 y criterios de esta v001; son la
-  propuesta de concreción del alcance aprobado, no evidencia de implementación.
-- Revisar el plan dependiente antes de ejecutar y elegir método de ejecución.
-- Asignar versión de entrega antes de cambiar versiones del plugin/manifiestos.
-  No bloquea la preparación de spec/plan; sí la presentación como nueva release.
+- C-001/C-002 y criterios v001 aprobados mediante AA-002; ejecución directa.
+- Versión de entrega 0.2.0 elegida expresamente por el usuario. La aprobación
+  autoriza implementación y verificación, sin instalación/publicación implícitas.
 - La prueba real en dos chats Codex requiere capacidades del host y un entorno
   sintético. Si no está disponible, queda pendiente y se conserva evidencia del
   runtime por separado; no sustituirla por una prueba de catálogo o dos procesos.
