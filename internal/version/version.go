@@ -1,4 +1,4 @@
 // Package version identifies the backend shipped in the current development package.
 package version
 
-const Current = "0.2.0"
+const Current = "0.2.1"

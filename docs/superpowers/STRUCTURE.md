@@ -1,7 +1,7 @@
 ---
 title: Estructura de llm-wiki
 status: draft
-version: v005
+version: v006
 responsible: Usuario promotor del proyecto
 created_at: "2026-10-08"
 updated_at: "2026-10-10"
@@ -11,13 +11,13 @@ approval_reference: null
 
 # Estructura de llm-wiki
 
-Entrega relacionada: **v0.2.0**; runtime/manifiestos `0.2.0`.
-[Changelog](../../CHANGELOG.md) y [evidencia de áreas](evidence/2026-10-10-areas.md).
+Entrega relacionada: **v0.2.1**; runtime/manifiestos `0.2.1`.
+[Changelog](../../CHANGELOG.md), [informe 0.2.1](../../tests/acceptance/release-0.2.1.json) y [aceptación Desktop](evidence/2026-10-10-desktop-areas.md).
 
-Estructura vigente para `v0.2.0`: resolución e inventario de áreas, dos skills nuevas
+Estructura vigente para `v0.2.1`: resolución e inventario de áreas, dos skills nuevas
 y paquete universal verificado. Base histórica `43ee802`, ensayo 0.1.0-dev.2.
 La dirección aplicable está en
-[CONSTITUTION.md](CONSTITUTION.md), v003, y [ARCHITECTURE.md](ARCHITECTURE.md),
+[CONSTITUTION.md](CONSTITUTION.md), v004, y [ARCHITECTURE.md](ARCHITECTURE.md),
 AC-019. Base previa: `f27672f7a63039805784efd8ccd5478b089dda2e`.
 El inventario original se conserva intacto. No se utiliza `.repos` en ejecución.
 
@@ -91,7 +91,7 @@ Evidencia de pruebas y límites: [registro de implementación](evidence/2026-10-
 La decisión canónica es [ARCHITECTURE.md](ARCHITECTURE.md), v008, ADR-009
 (approved, AA-001). Esta sección localiza los cambios futuros; no los describe como
 implementados ni autoriza ejecutarlos. La dirección aplicable permanece en
-[CONSTITUTION.md](CONSTITUTION.md), v003, PRI-003–005 y OBJ-002–003.
+[CONSTITUTION.md](CONSTITUTION.md), v004, PRI-003–005 y OBJ-002–003.
 Base exacta de archivos inspeccionados y constitución:
 `e703e1f9d898ccc797cb2d7eeed1ee4e68a3ee04`.
 
@@ -191,3 +191,11 @@ Las secciones de propuesta anteriores conservan su contexto histórico. La
 [evidencia de entrega](evidence/2026-10-10-areas.md) distingue pruebas del runtime,
 catálogo, propuestas de aplicación y criterios del host pendientes. No acredita
 aceptación total, instalación ni dos chats por la existencia de estos archivos.
+
+## Corrección descriptiva v0.2.1
+
+Esquemas array en `internal/service/service.go`; regresiones de catálogo y lotes
+STDIO en `internal/mcp/server_test.go`. Validación de ambos manifiestos en
+`internal/packaging/`; lanzamiento y alternancia con identidad en
+`tests/acceptance/package_test.go`. La evidencia Desktop 0.2.0 permanece histórica
+y separada del [informe de paquete 0.2.1](../../tests/acceptance/release-0.2.1.json).

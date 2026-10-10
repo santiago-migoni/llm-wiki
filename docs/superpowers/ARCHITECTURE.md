@@ -1,7 +1,7 @@
 ---
 title: Arquitectura de llm-wiki
 status: draft
-version: v009
+version: v010
 responsible: Usuario promotor del proyecto
 created_at: "2026-10-08"
 updated_at: "2026-10-10"
@@ -11,8 +11,8 @@ approval_reference: null
 
 # Arquitectura de llm-wiki
 
-Entrega relacionada: **v0.2.0**; runtime/manifiestos `0.2.0`.
-[Changelog](../../CHANGELOG.md) y [evidencia de áreas](evidence/2026-10-10-areas.md).
+Entrega relacionada: **v0.2.1**; runtime/manifiestos `0.2.1`.
+[Changelog](../../CHANGELOG.md), [informe 0.2.1](../../tests/acceptance/release-0.2.1.json) y [aceptación Desktop](evidence/2026-10-10-desktop-areas.md).
 
 ## Contexto y límites del sistema
 
@@ -23,7 +23,7 @@ desde GitHub/Git. Obsidian es opcional para operar los archivos del vault, y se
 conservan sus formatos. Las integraciones se reevalúan por resultado bajo AC-019;
 las brechas no se declaran resueltas por adoptar Codex.
 
-- **Dirección de producto:** [Constitución vigente v003](CONSTITUTION.md); dirección aprobada en v001, base
+- **Dirección de producto:** [Constitución vigente v004](CONSTITUTION.md); dirección aprobada en v001, base
   `eaa8e3075c482dc3fd9cb9864b50b34e668d97a0:docs/superpowers/CONSTITUTION.md`.
   Aplican PRI-001–PRI-005, OBJ-001–OBJ-003 y EXI-001–EXI-003.
 - **Diagnóstico:** [inventario v001](analysis/inventario-codex/README.md), base
@@ -34,7 +34,7 @@ las brechas no se declaran resueltas por adoptar Codex.
   `.repos/obsidian-second-brain`, commit `b0089f7666d0c1e3db41c9d587b6f3c997665235`.
   Sus fuentes están identificadas en el inventario. No se modifican ni se proponen
   como dependencia de ejecución del paquete instalado.
-- **Estado actual:** entrega `v0.2.0`, con áreas/OKRs y correcciones del PR #1. Paquete compilado desde `22194406f7d9d7137b3f8d38fcf4824b98e6897a`; suite con carreras, vet y MCP aislado verificados. Instalación CLI histórica de 0.1.0-dev.2; Desktop y paridad funcional siguen pendientes.
+- **Estado actual:** entrega local `v0.2.1`, con correcciones del arranque y arrays MCP. La corrección local 0.2.0 tiene aceptación sintética de 24 casos de workflows, 14 guardas y continuidad entre dos chats Desktop. La instalación de 0.2.1 y la recarga de declaraciones en sesiones existentes siguen pendientes; no se afirma paridad funcional completa.
 - **Documentos relacionados:** [STRUCTURE.md](STRUCTURE.md) e [INFRASTRUCTURE.md](INFRASTRUCTURE.md) describen módulos, ejecución y límites observados; [evidencia](evidence/2026-10-08-implementation.md) registra pruebas.
 
 ## Componentes, interfaces y flujos implementados
@@ -43,7 +43,7 @@ MCP STDIO y CLI comparten `internal/service`. El registro mantiene identidad can
 
 Grafo, salud, bootstrap, init, migración, merge y exportación trabajan sobre las notas canónicas. Búsqueda usa un índice léxico reconstruible en memoria; reindex reporta cambios y retrieval-eval recibe gold cases explícitos. No hay embeddings ni cliente de proveedor. Catálogo combina 50 skills del paquete y workflows personales; leer un workflow no lo ejecuta ni instala.
 
-El paquete contiene un binario universal, manifiestos y checksums. Se ejecutó en arm64 sin toolchain de usuario; Intel y llamada desde Desktop no están acreditados. Razonamiento y web ocurren en Codex, no en el núcleo. Las brechas de host y vistas permanecen abiertas conforme la spec.
+El paquete contiene un binario universal, manifiestos y checksums. Se ejecutó en arm64 sin toolchain de usuario; Intel no se ejecutó. Las llamadas Desktop tienen evidencia sintética sobre 0.2.0, no sobre una instalación 0.2.1. Razonamiento y web ocurren en Codex, no en el núcleo. Las brechas de host y vistas permanecen abiertas conforme la spec.
 
 ## Restricciones técnicas y atributos de calidad
 
@@ -782,3 +782,10 @@ Las secciones de propuesta anteriores conservan su contexto histórico. La
 [evidencia de entrega](evidence/2026-10-10-areas.md) distingue pruebas del runtime,
 catálogo, propuestas de aplicación y criterios del host pendientes. No acredita
 aceptación total, instalación ni dos chats por la existencia de estos archivos.
+
+## Corrección descriptiva v0.2.1
+
+`internal/service/service.go` publica items de changes/cases como objetos y
+relevant/scope como strings. CLI y MCP conservan los mismos servicios y errores.
+La compatibilidad del transporte se verifica ejecutando los dos manifiestos
+con rutas relativas; no requiere expansión de PLUGIN_ROOT. Decisiones sin cambios.

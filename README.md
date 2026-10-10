@@ -4,9 +4,9 @@ Gestiona tus notas y tu conocimiento desde Codex Desktop.
 
 Busca información, guarda ideas y decisiones y relaciona notas. Tus archivos siguen siendo Markdown, compatibles con Obsidian.
 
-**Estado:** versión `0.2.0` (tag `v0.2.0`), con áreas opcionales y workflow de OKRs. El núcleo y el paquete se probaron en macOS con Apple Silicon. La instalación por CLI tiene evidencia de versiones de desarrollo anteriores; la validación completa en Desktop sigue pendiente.
+**Estado:** versión `0.2.1` (tag local `v0.2.1`), con correcciones de arranque y esquemas MCP. En la corrección local 0.2.0 se verificaron 24 casos de los doce workflows, 14 escenarios de guardas y continuidad entre dos chats reales de Codex Desktop en Apple Silicon. La instalación de 0.2.1 en Desktop aún no se repitió.
 
-Cambios de esta entrega: [changelog v0.2.0](CHANGELOG.md).
+Cambios de esta entrega: [changelog v0.2.1](CHANGELOG.md).
 
 ## Qué puedes hacer
 
@@ -25,11 +25,11 @@ Necesitas Codex Desktop en macOS. El paquete incluye el ejecutable `plugins/llm-
 
 ### Desde GitHub en Codex Desktop
 
-El repositorio [santiago-migoni/llm-wiki](https://github.com/santiago-migoni/llm-wiki) contiene el catálogo y el paquete de esta entrega en la referencia Git `v0.2.0`.
+El catálogo y paquete 0.2.1 están preparados en este clon. La instalación desde GitHub con `v0.2.1` requiere publicar antes el tag; mientras tanto, usa la instalación desde el clon local. Repositorio: [santiago-migoni/llm-wiki](https://github.com/santiago-migoni/llm-wiki).
 
 1. Abre **Complementos → Agregar → Agregar marketplace**.
 2. En **Origen**, introduce `santiago-migoni/llm-wiki` o `https://github.com/santiago-migoni/llm-wiki.git`.
-3. En **Referencia de Git**, introduce `v0.2.0`. Deja **Rutas dispersas** vacío.
+3. En **Referencia de Git**, introduce `v0.2.1`. Deja **Rutas dispersas** vacío.
 4. Pulsa **Agregar marketplace**, selecciona el marketplace **llm-wiki** e instala el plugin **llm-wiki**.
 5. Abre un chat nuevo. Si el plugin no aparece, reinicia la aplicación.
 
@@ -44,10 +44,10 @@ Si el marketplace ya registrado apunta a un clon o worktree antiguo y falla al c
 
 ### Desde la terminal
 
-Para instalar la entrega `v0.2.0` desde GitHub, con el CLI de Codex disponible:
+Para instalar la entrega `v0.2.1` desde GitHub, con el CLI de Codex disponible:
 
 ```sh
-codex plugin marketplace add https://github.com/santiago-migoni/llm-wiki.git --ref v0.2.0
+codex plugin marketplace add https://github.com/santiago-migoni/llm-wiki.git --ref v0.2.1
 codex plugin add llm-wiki@llm-wiki
 codex plugin list --marketplace llm-wiki
 ```
@@ -86,7 +86,8 @@ Consulta el [plan y su avance](docs/superpowers/plans/2026-10-08-codex-plugin.md
 
 Los informes de aceptación anteriores conservan las versiones de desarrollo que
 probaron. La validación del paquete actual se registra en
-[la evidencia de áreas 0.2.0](docs/superpowers/evidence/2026-10-10-areas.md).
+[el informe 0.2.1](tests/acceptance/release-0.2.1.json).
+La [aceptación Desktop sobre la corrección local 0.2.0](docs/superpowers/evidence/2026-10-10-desktop-areas.md) conserva el binario y alcance realmente probados.
 El [informe 0.1.0](tests/acceptance/release-0.1.0.json) conserva su alcance histórico.
 
 ### Áreas y OKRs
@@ -98,8 +99,11 @@ Los enlaces se guardan en el cuerpo. La clasificación es opcional: no duplica
 notas, cambia metadata humana ni crea categorías obligatorias.
 
 `wiki_list_areas` informa cobertura y diagnósticos; un inventario incompleto no
-permite afirmar que un área no existe. La ejecución de los workflows en el host
-y el ensayo con dos chats del paquete nuevo siguen pendientes. Consulta la
+permite afirmar que un área no existe. La ejecución sintética de los doce workflows y la recuperación en dos chats
+se verificaron sobre la corrección local 0.2.0. Los chats abiertos aún conservaban
+la declaración antigua de los lotes después de reinstalar: el cargador nuevo
+ya publicaba los esquemas correctos. La recarga de esas sesiones y la instalación
+Desktop de 0.2.1 permanecen pendientes. Consulta la
 [matriz de casos](tests/acceptance/areas-cases.json) y el
 [plan de este incremento](docs/superpowers/plans/2026-10-10-areas-transversales.md).
 

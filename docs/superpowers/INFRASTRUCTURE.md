@@ -1,7 +1,7 @@
 ---
 title: Ejecución y distribución de llm-wiki
 status: draft
-version: v003
+version: v004
 responsible: Usuario promotor del proyecto
 created_at: "2026-10-08"
 updated_at: "2026-10-10"
@@ -11,12 +11,13 @@ approval_reference: null
 
 # Ejecución y distribución de llm-wiki
 
-Entrega relacionada: **v0.2.0**; runtime/manifiestos `0.2.0`.
-[Changelog](../../CHANGELOG.md) y [evidencia de áreas](evidence/2026-10-10-areas.md).
+Entrega relacionada: **v0.2.1**; runtime/manifiestos `0.2.1`.
+[Changelog](../../CHANGELOG.md), [informe 0.2.1](../../tests/acceptance/release-0.2.1.json) y [aceptación Desktop](evidence/2026-10-10-desktop-areas.md).
 
-Estado de entrega: paquete `v0.2.0` verificado en macOS arm64, con firma ad hoc,
-checksums y procedencia; MCP con PATH del sistema y persistencia comprobados.
-Instalación CLI histórica: 0.1.0-dev.2. Instalación de 0.2.0/Desktop e Intel pendientes.
+Estado de entrega: paquete local `v0.2.1`; identidad, procedencia y checksums
+se registran en el informe de esta entrega. La corrección local 0.2.0 se instaló
+con el CLI incluido en Desktop y se probó con MCP en dos chats reales. Instalación
+Desktop de 0.2.1, recarga de declaraciones e Intel pendientes.
 Fuentes: [arquitectura](ARCHITECTURE.md) y
 [estudio de empaquetado](analysis/equivalencias-codex/EMPAQUETADO.md).
 
@@ -25,9 +26,9 @@ Fuentes: [arquitectura](ARCHITECTURE.md) y
 | Entorno | Función | Evidencia actual |
 |---|---|---|
 | Desarrollo macOS | Go, SDK MCP, tests, generación de paquete | Go 1.27.2 aislado, SDK MCP Go 1.8.0; race/vet pasan |
-| Paquete v0.2.0 | Binario Go universal, 50 skills y manifiestos | Fuentes `2219440`; firma, checksums, procedencia y MCP aislado verificados. Ensayos dev.1/dev.2 históricos |
-| Codex Desktop macOS | Carga de skills y proceso MCP local STDIO | Evidencia CLI histórica de 48 skills; 50 empaquetadas en 0.2.0. Instalación/aceptación Desktop de esta versión pendientes |
-| Distribución Git | Catálogo y paquete por referencia versionada | Repositorio GitHub `santiago-migoni/llm-wiki`; tag `v0.2.0` autorizado por el usuario. PR #1 hacia main |
+| Paquete v0.2.1 | Binario Go universal, 50 skills y manifiestos | Procedencia y validación en el informe 0.2.1; aceptación Desktop 0.2.0 separada |
+| Codex Desktop macOS | Carga de skills y proceso MCP local STDIO | 30 herramientas y dos chats reales verificados sobre 0.2.0; 0.2.1 aún no instalado |
+| Distribución Git | Catálogo y paquete por referencia versionada | Repositorio GitHub `santiago-migoni/llm-wiki`; tag local `v0.2.1` autorizado; publicación remota pendiente. PR #1 previo integrado en main |
 
 Se compilan arm64 y amd64 y se ensamblan con `lipo` en desarrollo. Esto no prueba
 que ambas arquitecturas funcionen: cada una exige ejecución real antes de figurar
@@ -90,6 +91,7 @@ No se fuerza un bloqueo abandonado sin inspección del journal y proceso dueño.
 5. Interrumpir un lote, reiniciar, recuperar y verificar hashes de todos los archivos.
 6. Probar proceso real por cada arquitectura declarada compatible. Compilar no basta.
 
+El siguiente registro de instalación y autorización v0.2.0 es histórico.
 El alta de marketplace y la instalación local forman parte de la etapa solicitada
 por el usuario, y se ejecutaron mediante Codex CLI 0.135.0. La interfaz Desktop no pudo verificarse por restricción de la herramienta de control visual. La entrega `v0.2.0` tiene autorización explícita para commit, tag y push; una
 GitHub Release, el directorio público y la instalación de esta versión quedan pendientes. No se reinicia la app durante un chat activo
@@ -111,8 +113,16 @@ Fuente del paquete dev.2: `43ee802`; macOS 27.0.1 arm64. Se probó alternar proc
 ## Evidencia de la entrega v0.2.0
 
 Fuentes del binario: `22194406f7d9d7137b3f8d38fcf4824b98e6897a`;
-procedencia en `plugins/llm-wiki/build.json`, hashes en `checksums.json`.
+procedencia histórica en el informe 0.2.0; build.json/checksums.json identifican ahora el paquete vigente.
 La [evidencia de áreas](evidence/2026-10-10-areas.md) y el
 [informe de entrega](../../tests/acceptance/release-0.2.0.json) registran pruebas
 y pendientes. El tag `v0.2.0` incluye documentación/changelog y esas fuentes;
-no sustituye las pruebas pendientes de instalación, dos chats reales o Intel.
+La aceptación posterior de dos chats está registrada separadamente; Intel sigue pendiente.
+
+## Entrega local v0.2.1
+
+Fuentes y artefactos en [release-0.2.1.json](../../tests/acceptance/release-0.2.1.json).
+La revisión usa origin/main actualizado por fetch; commit y tag son locales.
+No se reinstala Desktop ni se publica por preparar esta entrega. Un proceso nuevo
+del cargador vio los schemas corregidos en 0.2.0; las sesiones existentes seguían
+mostrando arrays de strings. La prueba pendiente es refrescar su declaración.

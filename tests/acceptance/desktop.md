@@ -1,3 +1,14 @@
+# Validación Desktop de llm-wiki
+
+Estado vigente: aceptación sintética en dos chats reales sobre la corrección local
+0.2.0, con 30 herramientas MCP por chat, 24 casos de workflows y 14 guardas.
+[Informe y límites](../../docs/superpowers/evidence/2026-10-10-desktop-areas.md).
+El paquete 0.2.1 incorpora las correcciones; su instalación Desktop aún no se repitió.
+Permanece pendiente la recarga del esquema de arrays de las sesiones existentes.
+No se acredita interfaz visual, todos los permisos/modos ni ejecución Intel.
+
+## Registro histórico 0.1.0 (sin cambios)
+
 # Validación Desktop pendiente — llm-wiki 0.1.0
 
 Fuente del binario: `43ee802`. Paquete versionado en `619fecb`; macOS 27.0.1 arm64, CLI 0.135.0. Versión Desktop no capturada. No se declara soporte Intel por generar un binario universal.

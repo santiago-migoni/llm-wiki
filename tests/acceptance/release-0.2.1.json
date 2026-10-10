@@ -1,0 +1,34 @@
+{
+  "version": "0.2.1",
+  "date": "2026-10-10",
+  "status": "preparing",
+  "installed": false,
+  "published": false,
+  "git_tag": "v0.2.1",
+  "changes": [
+    "plugin-relative MCP command/cwd in both manifests",
+    "explicit MCP array items",
+    "package switch runtime identity assertion"
+  ],
+  "historical_Desktop_acceptance": {
+    "version": "0.2.0 local correction",
+    "report": "tests/acceptance/release-0.2.0.json",
+    "observations": "tests/acceptance/desktop-areas-observed.json",
+    "workflow_cases": 24,
+    "guard_cases": 14,
+    "two_real_chats": true,
+    "scope": "Synthetic agent-executed declarative workflows, calendar meeting local mode; no claim that 0.2.1 was installed"
+  },
+  "tests": {},
+  "pending": [
+    "Desktop installation of 0.2.1",
+    "existing Desktop model declarations refresh",
+    "Intel execution",
+    "Obsidian rendering and remote calendar",
+    "EXI-002 and EXI-003 user outcomes"
+  ],
+  "distribution": {
+    "channel": "local Git commit and annotated tag",
+    "remote_pushed": false
+  }
+}

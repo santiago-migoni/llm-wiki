@@ -1,7 +1,7 @@
 ---
 title: Constitución de llm-wiki
 status: approved
-version: v003
+version: v004
 responsible: Usuario promotor del proyecto
 created_at: "2026-10-08"
 updated_at: "2026-10-10"
@@ -11,8 +11,8 @@ approval_reference: "D-005 (dirección sin cambios); D-006 (nombre y referencia)
 
 # Constitución de llm-wiki
 
-Entrega relacionada: **v0.2.0**; runtime/manifiestos `0.2.0`.
-[Changelog](../../CHANGELOG.md) y [evidencia de áreas](evidence/2026-10-10-areas.md).
+Entrega relacionada: **v0.2.1**; runtime/manifiestos `0.2.1`.
+[Changelog](../../CHANGELOG.md), [informe 0.2.1](../../tests/acceptance/release-0.2.1.json) y [aceptación Desktop](evidence/2026-10-10-desktop-areas.md).
 
 ## Misión
 
@@ -203,3 +203,10 @@ verificar equivalencia. No aprueba una reducción funcional no identificada.
 ARCHITECTURE.md, AC-019, registra las consecuencias técnicas y pendientes.
 
 Base anterior preservada: `5d42830ea1b8ff5f844935e0277807a3db39e825:docs/superpowers/CONSTITUTION.md`.
+
+## Actualización editorial de entrega — 2026-10-10
+
+Referencia vigente v0.2.1; propósito y decisiones aprobadas sin cambios.
+La dirección anterior queda preservada en
+`5c2829f92b08d6756745361e49572e7530122300:docs/superpowers/CONSTITUTION.md`; esta actualización no amplía
+la aprobación de D-005/D-006/D-007 a resultados de usuario todavía pendientes.

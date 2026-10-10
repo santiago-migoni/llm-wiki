@@ -2,6 +2,32 @@
 
 Registro de cambios del plugin llm-wiki. La versión inicial contiene capacidades cuya validación sigue pendiente.
 
+## v0.2.1 — 2026-10-10
+
+### Correcciones
+
+- Arranque MCP compatible con el cargador de Codex Desktop: ambos manifiestos
+  usan `./bin/llm-wiki`, `serve` y `cwd: "./"`, sin placeholders en el comando.
+- Validación de ambos descriptores y prueba de arranque desde una ruta con espacios.
+- Arrays MCP con tipos explícitos: objetos en `changes` y `cases`, strings en
+  `scope` y `relevant`, contenido binario base64 y destino nullable.
+- La prueba de alternancia de paquetes verifica la versión real de cada proceso;
+  no ejecuta inadvertidamente el paquete nuevo durante downgrade.
+
+### Documentación y validación
+
+- Evidencia real de 24 casos de doce workflows, 14 escenarios de guardas y
+  recuperación en dos chats Desktop sobre la corrección local 0.2.0. Fuentes raw,
+  metadata humana y columnas Kanban preservadas; OKRs desconocidos pendientes.
+- Documentación vigente actualizada y paquete universal 0.2.1 reconstruido.
+- Conservados los límites: recarga del esquema en sesiones existentes, instalación
+  Desktop de 0.2.1, renderizado Obsidian, calendario remoto, ejecución Intel y
+  resultados de usuario EXI-002/003 pendientes. No se presume equivalencia completa.
+- Entrega preparada localmente; el tag 0.2.1 aún no se publica en el remoto.
+
+Evidencia: [informe 0.2.1](tests/acceptance/release-0.2.1.json) y
+[aceptación Desktop 0.2.0](docs/superpowers/evidence/2026-10-10-desktop-areas.md).
+
 ## v0.2.0 — 2026-10-10
 
 ### Funcionalidades
