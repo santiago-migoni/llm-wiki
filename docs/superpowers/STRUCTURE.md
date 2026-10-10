@@ -4,7 +4,7 @@ status: draft
 version: v004
 responsible: Usuario promotor del proyecto
 created_at: "2026-10-08"
-updated_at: "2026-10-09"
+updated_at: "2026-10-10"
 reviewed_at: null
 approval_reference: null
 ---
@@ -84,7 +84,7 @@ Evidencia de pruebas y límites: [registro de implementación](evidence/2026-10-
 ## Cambios propuestos para áreas definidas por el usuario
 
 La decisión canónica es [ARCHITECTURE.md](ARCHITECTURE.md), v008, ADR-009
-(proposed). Esta sección localiza los cambios futuros; no los describe como
+(approved, AA-001). Esta sección localiza los cambios futuros; no los describe como
 implementados ni autoriza ejecutarlos. La dirección aplicable permanece en
 [CONSTITUTION.md](CONSTITUTION.md), v003, PRI-003–005 y OBJ-002–003.
 Base exacta de archivos inspeccionados y constitución:
@@ -136,7 +136,7 @@ Estado draft, aprobación pendiente; no se altera el mapa de módulos implementa
 ## Localización de la propuesta transversal
 
 Extiende el mapa anterior con la integración de ADR-009 y la resolución de tipos
-de ADR-010, ambos propuestos en [ARCHITECTURE.md](ARCHITECTURE.md), v008.
+de ADR-010, ambos aprobados por AA-001 en [ARCHITECTURE.md](ARCHITECTURE.md), v008.
 Fuente de esta revisión: selección del usuario de los cuatro puntos de la
 verificación de carpetas. Base exacta:
 `16da4583ab65a124d461cfdd41470020cb8a8073:docs/superpowers/STRUCTURE.md`.
@@ -162,3 +162,14 @@ Constitución v003 e infraestructura v002 conservan sus bases. Spec/plan y
 evidencias previas no se repuntan a este borrador ni se amplía AP-001.
 2026-10-09, v004: añade localización del alcance transversal y referencias a
 ADR-010, con estado draft y aprobación pendiente.
+
+### Aprobación del alcance propuesto
+
+AA-001, en [ARCHITECTURE.md](ARCHITECTURE.md), registra la aprobación explícita
+del usuario del 2026-10-10 sobre esta v004 presentada en
+`1b4b6e00bfc4ea939140007196cfe820b04e8d38:docs/superpowers/STRUCTURE.md`,
+secciones de cambios propuestos y localización transversal. Se conserva la
+revisión y el estado global draft: esta aprobación no cubre todos los pendientes
+históricos ni describe código nuevo como implementado. Se autoriza preparar
+spec y plan, pendientes de su propia revisión. El registro canónico de la decisión
+es AA-001; las menciones previas a aprobación pendiente son históricas.

@@ -4,7 +4,7 @@ status: draft
 version: v008
 responsible: Usuario promotor del proyecto
 created_at: "2026-10-08"
-updated_at: "2026-10-09"
+updated_at: "2026-10-10"
 reviewed_at: null
 approval_reference: null
 ---
@@ -470,7 +470,7 @@ metadata, contexto y lotes recuperables, pero no una consulta específica de ár
 `plugins/llm-wiki/skills/wiki-obsidian-project/SKILL.md` prescribe proyecto,
 tablero, diaria e índice; no prescribe aún la relación con áreas.
 
-### ADR-009 — Áreas como notas opcionales y relaciones explícitas (proposed)
+### ADR-009 — Áreas como notas opcionales y relaciones explícitas (approved, AA-001)
 
 - **Elección propuesta:** conservar las notas por tipo y representar cada área
   mediante una nota Markdown definida por el usuario. Un área expresa un ámbito
@@ -485,8 +485,9 @@ tablero, diaria e índice; no prescribe aún la relación con áreas.
 - **Consecuencias:** la clasificación semántica queda en Codex; el runtime
   resuelve rutas, inventario y controles deterministas. No se promete organización
   en segundo plano, búsqueda federada ni un filtro semántico por área.
-- **Autoridad:** pendiente de aprobación del usuario promotor sobre esta versión.
-  La preferencia conversacional no aprueba los contratos técnicos añadidos aquí.
+- **Autoridad vigente:** AA-001 aprueba el alcance presentado de esta decisión
+  y su integración transversal. Los contratos detallados de la nueva spec
+  requieren revisión propia; la implementación sigue pendiente.
 
 #### Contrato de organización propuesto
 
@@ -674,7 +675,7 @@ específico de organizaciones o herramientas que aún no existe.
 - Mantener hashes, controles de rutas y recuperación de ADR-009. Las convenciones
   no crean una autorización general para tocar otras notas, tableros o el manual.
 
-### ADR-010 — Tipos explícitos para OKRs y entidades, con rutas configurables (proposed)
+### ADR-010 — Tipos explícitos para OKRs y entidades, con rutas configurables (approved, AA-001)
 
 - **Elección propuesta:** añadir claves de resolución `okr`, `entity`,
   `organization` y `tool`, conservando `person`. Reconocer `company`/`companies`
@@ -704,9 +705,9 @@ específico de organizaciones o herramientas que aún no existe.
 - **Consecuencias:** agregar tipos y alias a código, reglas y plantillas requiere
   regresiones de precedencia y consumidores. No implica clasificación semántica
   en Go ni agregar nuevas herramientas de escritura.
-- **Autoridad y evidencia:** propuesta del asistente por el encargo actual;
-  aprobación pendiente. Implementación not_implemented, validación pendiente.
-  Los esquemas finales deben especificarse antes de adoptar el incremento.
+- **Autoridad y evidencia vigente:** AA-001 aprueba la decisión presentada.
+  Implementación not_implemented, validación pendiente. Los esquemas finales
+  se presentan en la nueva spec y requieren aprobación propia antes de ejecutar.
 
 ### Verificación requerida para el alcance ampliado
 
@@ -741,3 +742,22 @@ que todos los usuarios activen áreas ni que modifiquen su estructura para hacer
 ADR-010. Base presentada anterior:
 `16da4583ab65a124d461cfdd41470020cb8a8073:docs/superpowers/ARCHITECTURE.md`.
 Estado draft; no registra aprobación ni implementación nuevas.
+
+## AA-001 — Aprobación de la propuesta transversal
+
+- **Fecha/responsable:** 2026-10-10, usuario promotor del proyecto.
+- **Declaración literal:** «Perfecto, apruebo la propuesta. Prepara la especificación
+  y el plan de implementación para integrar estos cambios en llm-wiki.»
+- **Fuente recuperable:** este [chat de propuesta](thread://01a121db-70f4-7b61-96f9-4a0f8f1b8c93?hostId=local),
+  mensaje de aprobación posterior a la presentación de `1b4b6e0`.
+- **Base exacta presentada:** `1b4b6e00bfc4ea939140007196cfe820b04e8d38:docs/superpowers/ARCHITECTURE.md`,
+  v008, propuesta de áreas y ampliación transversal, ADR-009 y ADR-010;
+  `1b4b6e00bfc4ea939140007196cfe820b04e8d38:docs/superpowers/STRUCTURE.md`,
+  v004, secciones de cambios propuestos y localización transversal.
+- **Alcance:** aprueba esas decisiones y localizaciones; solicita elaborar spec
+  y plan. No aprueba contratos detallados que aún no fueron presentados ni autoriza
+  implementación, instalación o publicación. El resto del documento conserva su
+  autoridad anterior: el estado global permanece draft por sus otros pendientes.
+- **Registro:** conserva v008; las menciones a proposed/pending dentro de los
+  relatos de v007/v008 son históricas. AA-001 fija la autoridad vigente del alcance
+  aprobado, sin transformar evidencia pendiente en verificación.
