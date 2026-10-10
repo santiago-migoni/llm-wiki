@@ -45,11 +45,40 @@ func definition(name, desc string, required []string, fields map[string]string) 
 	}
 	return Definition{name, desc, append([]string{"vault_id"}, required...), props}
 }
+
+// arrayDefinition declares item types explicitly so MCP clients can preserve
+// structured arguments instead of inferring arrays of strings.
+func arrayDefinition(d Definition, field string, items map[string]any) Definition {
+	d.Properties[field] = map[string]any{"type": "array", "items": items}
+	return d
+}
+
 func Definitions() []Definition {
+	change := map[string]any{
+		"type": "object",
+		"properties": map[string]any{
+			"path": property("string"), "content": property("string"),
+			"expected_hash": property("string"), "destination": property("string"),
+			"kind":                property("string"),
+			"binary_content":      map[string]any{"type": "string", "contentEncoding": "base64"},
+			"destination_content": map[string]any{"type": []string{"string", "null"}},
+		},
+		"required":             []string{"path", "kind"},
+		"additionalProperties": false,
+	}
+	goldCase := map[string]any{
+		"type": "object",
+		"properties": map[string]any{
+			"query":    property("string"),
+			"relevant": map[string]any{"type": "array", "items": property("string")},
+		},
+		"required":             []string{"query", "relevant"},
+		"additionalProperties": false,
+	}
 	return []Definition{
 		definition("wiki_list_areas", "Enumerate typed areas with full hashes, coverage and diagnostics; read-only, incomplete inventory returns partial result and error.", nil, nil),
 		definition("wiki_reindex", "Rebuild the in-memory lexical index, reporting before/after coverage and changed paths; not semantic.", nil, nil),
-		definition("wiki_retrieval_eval", "Evaluate supplied gold cases on this corpus without generating/replacing cases or writing a report.", []string{"cases"}, map[string]string{"cases": "array", "k": "integer"}),
+		arrayDefinition(definition("wiki_retrieval_eval", "Evaluate supplied gold cases on this corpus without generating/replacing cases or writing a report.", []string{"cases"}, map[string]string{"cases": "array", "k": "integer"}), "cases", goldCase),
 		definition("wiki_init", "Update explicit generated manual/index blocks and append audit entry without replacing human context.", []string{"manual", "index", "log_entry"}, map[string]string{"manual": "string", "index": "string", "log_entry": "string", "operation_id": "string", "dry_run": "boolean"}),
 		definition("wiki_bootstrap", "Plan/apply the selected preset without replacing existing human files; root must already be selected.", []string{"style", "preset", "owner"}, map[string]string{"style": "string", "preset": "string", "owner": "string", "subject": "string", "assistant": "boolean", "operation_id": "string", "dry_run": "boolean"}),
 		definition("wiki_migrate_log", "Archive full legacy log and migrate every dated section; refuse collisions.", []string{"source", "destination"}, map[string]string{"source": "string", "destination": "string", "operation_id": "string", "dry_run": "boolean"}),
@@ -70,10 +99,10 @@ func Definitions() []Definition {
 		definition("wiki_vault_health", "Report health statistics, semantic-review flags, and coverage.", nil, map[string]string{"date": "string"}),
 		definition("wiki_list_skills", "List package and user workflows as data with category/platform filters.", nil, map[string]string{"category": "string", "platform": "string"}),
 		definition("wiki_get_skill", "Read one workflow; never installs or executes it.", []string{"name"}, map[string]string{"name": "string"}),
-		definition("wiki_apply_changes", "Apply a hash-guarded recoverable batch.", []string{"operation_id", "changes"}, map[string]string{"operation_id": "string", "changes": "array", "dry_run": "boolean"}),
+		arrayDefinition(definition("wiki_apply_changes", "Apply a hash-guarded recoverable batch.", []string{"operation_id", "changes"}, map[string]string{"operation_id": "string", "changes": "array", "dry_run": "boolean"}), "changes", change),
 		definition("wiki_recover", "Inspect, resume, or rollback a persisted operation conditionally.", []string{"operation_id", "action"}, map[string]string{"operation_id": "string", "action": "string"}),
 		definition("wiki_purge_history", "Explicitly purge terminal history only; pending recovery is kept.", []string{"retention_days"}, map[string]string{"retention_days": "integer", "dry_run": "boolean"}),
-		definition("wiki_visualize", "Generate scoped Canvas, summary and log; rendering is separate.", []string{"canvas_path", "summary_path", "log_path", "date"}, map[string]string{"canvas_path": "string", "summary_path": "string", "log_path": "string", "date": "string", "scope": "array", "operation_id": "string", "dry_run": "boolean"}),
+		arrayDefinition(definition("wiki_visualize", "Generate scoped Canvas, summary and log; rendering is separate.", []string{"canvas_path", "summary_path", "log_path", "date"}, map[string]string{"canvas_path": "string", "summary_path": "string", "log_path": "string", "date": "string", "scope": "array", "operation_id": "string", "dry_run": "boolean"}), "scope", map[string]any{"type": "string"}),
 		definition("wiki_heal_links", "Plan or apply only unambiguous link repairs.", nil, map[string]string{"operation_id": "string", "dry_run": "boolean"}),
 	}
 }
