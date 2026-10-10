@@ -6,12 +6,14 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"reflect"
 	"strings"
 	"testing"
 	"time"
 
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 	"github.com/santiago-migoni/llm-wiki/internal/config"
+	"github.com/santiago-migoni/llm-wiki/internal/service"
 )
 
 func TestMCPInitializeAndList(t *testing.T) {
@@ -142,5 +144,67 @@ func TestMCPWriteReadAndStaleHash(t *testing.T) {
 		}
 	case <-ctx.Done():
 		t.Fatal("server did not terminate")
+	}
+}
+
+func TestMCPListAreasMatchesService(t *testing.T) {
+	registry, err := config.Open(t.TempDir())
+	if err != nil {
+		t.Fatal(err)
+	}
+	root := t.TempDir()
+	os.MkdirAll(filepath.Join(root, "wiki/areas"), 0700)
+	os.WriteFile(filepath.Join(root, "wiki/areas/One.md"), []byte("---\ntype: area\n---\n# One"), 0600)
+	ref, err := registry.SelectWithTimezone(t.TempDir(), root, "UTC")
+	if err != nil {
+		t.Fatal(err)
+	}
+	inR, inW := io.Pipe()
+	outR, outW := io.Pipe()
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	done := make(chan error, 1)
+	go func() { done <- RunWithRoot(ctx, inR, outW, io.Discard, registry, "") }()
+	client := mcp.NewClient(&mcp.Implementation{Name: "area-test", Version: "1"}, nil)
+	session, err := client.Connect(ctx, &mcp.IOTransport{Reader: outR, Writer: inW}, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer func() {
+		session.Close()
+		inW.Close()
+		select {
+		case err := <-done:
+			if err != nil {
+				t.Error(err)
+			}
+		case <-ctx.Done():
+			t.Error("server did not stop")
+		}
+	}()
+	runtime := service.Runtime{Registry: registry}
+	args := map[string]any{"vault_id": ref.ID}
+	encoded, _ := json.Marshal(args)
+	for _, partial := range []bool{false, true} {
+		if partial {
+			os.WriteFile(filepath.Join(root, "wiki/areas/Legacy.md"), []byte("# Legacy"), 0600)
+		}
+		expected, serviceErr := runtime.Call(ctx, "wiki_list_areas", encoded)
+		got, err := session.CallTool(ctx, &mcp.CallToolParams{Name: "wiki_list_areas", Arguments: args})
+		if err != nil {
+			t.Fatal(err)
+		}
+		wantPayload := map[string]any{"result": expected}
+		if serviceErr != nil {
+			wantPayload["error"] = serviceErr.Error()
+		}
+		want, _ := json.Marshal(wantPayload)
+		actual, _ := json.Marshal(got.StructuredContent)
+		var wantJSON, actualJSON any
+		json.Unmarshal(want, &wantJSON)
+		json.Unmarshal(actual, &actualJSON)
+		if !reflect.DeepEqual(actualJSON, wantJSON) || got.IsError != (serviceErr != nil) {
+			t.Fatalf("MCP=%s want=%s error=%v", actual, want, got.IsError)
+		}
 	}
 }
