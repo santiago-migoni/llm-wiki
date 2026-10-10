@@ -252,3 +252,29 @@ func TestHeadingOnlyWikilinkResolvesToOwnNote(t *testing.T) {
 		t.Fatalf("self heading refs: %+v", refs)
 	}
 }
+
+func TestAreaLinksInBodyNotFrontmatter(t *testing.T) {
+	v, err := vault.Open(filepath.Join("..", "..", "tests", "fixtures", "areas-wiki"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer v.Close()
+	scan, err := v.Scan(context.Background())
+	if err != nil {
+		t.Fatal(err)
+	}
+	g := Build(scan)
+	for _, target := range []string{"wiki/areas/Exploración.md", "wiki/areas/Comunidad.md"} {
+		refs := g.Backlinks(target)
+		if len(refs) != 1 || refs[0].Source != "wiki/projects/Nexo.md" {
+			t.Fatalf("target=%s refs=%+v", target, refs)
+		}
+	}
+	if refs := g.Backlinks("wiki/areas/Metadata.md"); len(refs) != 0 {
+		t.Fatalf("YAML produced relation %+v", refs)
+	}
+	page, err := v.Read("wiki/projects/Nexo.md", 0, 0)
+	if err != nil || !strings.Contains(page.Text, `custom: "human"`) || !strings.Contains(page.Text, `"[[wiki/areas/Metadata]]"`) {
+		t.Fatalf("metadata damaged %+v %v", page, err)
+	}
+}
