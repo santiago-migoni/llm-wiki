@@ -25,5 +25,20 @@
       "wiki/areas/Exploración.md": "56e69f35fdb481dec60c6f403e1997fc245e3cc2cebc37a440293ea04db2be3b",
       "wiki/areas/Comunidad.md": "a48d6336bd6e04deb68c0321e1622b6c4b9f4024dfbffb12db63b3035f06280f"
     }
+  },
+  "post_install_schema_probe": {
+    "runtime_version": "0.2.0",
+    "dry_run": "prepared; no target created",
+    "retrieval": {
+      "recall_at_k": 1,
+      "mrr": 0.3333333333333333,
+      "k": 10,
+      "coverage_scanned": 20,
+      "errors": [],
+      "truncated": false,
+      "report_written": false
+    },
+    "model_declarations": "changes/cases still cached as Array<string>; official new loader exposes object items",
+    "scope": "No real vault mutation; does not demonstrate model declaration refresh"
   }
 }

@@ -223,3 +223,26 @@ para conservar su procedencia. Scope: workflows declarativos interpretados por e
 agente, reunión calendar local y fixtures sintéticos. No acredita renderizado
 Obsidian, eventos remotos, ejecución Intel, todas las ramas semánticas ni resultados
 de usuario EXI-002/003. El tag histórico y publicación no cambian.
+
+### Paquete del esquema reconstruido e instalado
+
+Fuentes comprometidas: `3955c6c105929bf1a67e0a31cf5873d569a1525d`.
+Fingerprint del dominio Go: `13832d760578c1b7e03ae3c469969f80966946d2227e30d62d1212036ef0fe85`.
+Binario: `65ebe9b3b29476fd99d895e1ecccc51b4dac0cce5e867d117e40ca8028e91136`.
+Los 70 checksums coinciden entre salida nueva, repositorio, origen registrado
+y cache instalado. Firma ad hoc verificada, arm64/x86_64 presentes. La aceptación
+del paquete final volvió a aprobar arranque por manifiesto y alternancia 0.1.0.
+Reinstalación mediante remove/add del CLI oficial, sin edición manual del cache.
+
+Un proceso nuevo del cargador oficial anuncia 30 herramientas y los items
+correctos: changes/cases objeto, scope string. Esto es diagnóstico del cargador,
+no una tercera conversación de aceptación. El segundo chat real aceptó un lote
+con objeto en dry-run, confirmó que el destino no existe y evaluó casos con
+objetos (recall@10=1, MRR=1/3; sin informe persistido).
+
+**Límite de recarga pendiente:** las sesiones existentes aún describen changes
+y cases como Array<string> en ALL_TOOLS. La ejecución con objetos funciona, pero
+la declaración expuesta al modelo conserva el cache anterior. Un reinicio posterior
+permitirá volver a verificar esa declaración; no se afirma que ya se haya refrescado.
+Las pruebas funcionales de áreas, OKRs, workflows y continuidad sí están cerradas
+en su alcance explícito. Versión local 0.2.0, sin mover tags ni publicar/push.
