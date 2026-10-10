@@ -1,12 +1,12 @@
 ---
 title: Especificación de áreas y organización transversal en llm-wiki
-status: draft
+status: approved
 version: v001
 responsible: Usuario promotor del proyecto
 created_at: "2026-10-10"
 updated_at: "2026-10-10"
-reviewed_at: null
-approval_reference: null
+reviewed_at: "2026-10-10"
+approval_reference: AA-002
 ---
 
 # Especificación de áreas y organización transversal
@@ -229,3 +229,11 @@ No se altera la ruta de diarias por año/mes ni las demás claves existentes.
 
 2026-10-10, v001: primer borrador del incremento solicitado sobre AA-001.
 Estado draft; ningún criterio está aprobado o verificado por la creación del archivo.
+
+## AA-002 — Aprobación y ejecución directa
+
+- Fecha: 2026-10-10. Responsable: usuario promotor del proyecto.
+- Fuente: mensaje humano en esta conversación: «Apruebo la especificación y el plan. Avanza con la implementación directa y verifica los cambios según el plan.»
+- Spec presentada: `e5121812e74fa53eeaf37e03c9496147cd68ffde:docs/superpowers/specs/2026-10-10-areas-transversales-design.md`.
+- Plan presentado: `bc9f6fa2c7d333c3a1e2d42fd840b5c1c8e7e527:docs/superpowers/plans/2026-10-10-areas-transversales.md`.
+- Alcance: especificación v001, tareas T1–T7 y ejecución directa con verificación; no autoriza publicación, instalación ni push. Conserva AA-001 y AP-001.

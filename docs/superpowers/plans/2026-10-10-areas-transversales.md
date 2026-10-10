@@ -1,20 +1,20 @@
 ---
 title: Plan de implementación de áreas y organización transversal
-status: draft
+status: approved
 version: v001
 responsible: Usuario promotor del proyecto
 created_at: "2026-10-10"
 updated_at: "2026-10-10"
-reviewed_at: null
-approval_reference: null
+reviewed_at: "2026-10-10"
+approval_reference: AA-002
 ---
 
 # Plan de implementación de áreas y organización transversal
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development
 > or superpowers:executing-plans to implement this plan task-by-task. Steps use
-> checkbox syntax for tracking. Método pendiente de elección del usuario; este
-> borrador no autoriza ejecución.
+> checkbox syntax for tracking. Método aprobado: ejecución directa por el agente
+> principal, con revisión independiente final (AA-002).
 
 **Goal:** integrar áreas opcionales, relaciones múltiples y destinos de OKRs y
 entidades sin duplicar conocimiento ni alterar los workflows legítimos previos.
@@ -29,14 +29,13 @@ fixtures sintéticos. Sin nuevas dependencias de instalación o proveedores.
 
 **Spec:** [especificación v001](../specs/2026-10-10-areas-transversales-design.md),
 base exacta `e5121812e74fa53eeaf37e03c9496147cd68ffde:docs/superpowers/specs/2026-10-10-areas-transversales-design.md`.
-Estado draft. AA-001 aprueba propuesta arquitectónica, no esta spec ni el plan.
+Estado approved mediante AA-002. AA-001 conserva su alcance arquitectónico.
 Base de aprobación: `3feb3410e72ee5795dae24b9eef3515106432210:docs/superpowers/ARCHITECTURE.md`.
 No hay release numerada asignada. Spec/plan previos y AP-001 quedan intactos.
 
 ## Puerta de ejecución y restricciones globales
 
-- [ ] Obtener aprobación explícita de la spec y este plan presentados, identificar
-  sus commits/paths y registrar la aprobación antes de T1. Elegir método de ejecución.
+- [x] Aprobación explícita registrada mediante AA-002 antes de T1; método directo.
 - Go 1.27 o posterior es requisito de desarrollo; no es dependencia de instalación.
 - C-001 mantiene cuotas: 8 MiB por archivo, 64 MiB por scan y 10.000 entradas.
 - Vault explícito; rutas confinadas, estado técnico protegido, raw existente
@@ -316,3 +315,11 @@ T7 y aceptación real respectivamente; no bloquean revisar los documentos.
 
 2026-10-10, v001: borrador solicitado sobre AA-001 y spec v001 draft fijada arriba.
 No ejecutado ni aprobado; no cambia el plan anterior del plugin.
+
+## AA-002 — Aprobación y ejecución directa
+
+- Fecha: 2026-10-10. Responsable: usuario promotor del proyecto.
+- Fuente: mensaje humano en esta conversación: «Apruebo la especificación y el plan. Avanza con la implementación directa y verifica los cambios según el plan.»
+- Spec presentada: `e5121812e74fa53eeaf37e03c9496147cd68ffde:docs/superpowers/specs/2026-10-10-areas-transversales-design.md`.
+- Plan presentado: `bc9f6fa2c7d333c3a1e2d42fd840b5c1c8e7e527:docs/superpowers/plans/2026-10-10-areas-transversales.md`.
+- Alcance: especificación v001, tareas T1–T7 y ejecución directa con verificación; no autoriza publicación, instalación ni push. Conserva AA-001 y AP-001.
