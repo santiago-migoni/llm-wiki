@@ -94,17 +94,27 @@ func Validate(root string) error {
 	if compat.Name != portable.Name || compat.Version != portable.Version {
 		return errors.New("compatibility identity mismatch")
 	}
-	var mcp struct {
-		Servers map[string]struct {
-			Type, Command string
-			Args          []string
-		} `json:"mcpServers"`
-	}
-	data, _ = r.ReadFile("mcp.json")
-	json.Unmarshal(data, &mcp)
-	server, ok := mcp.Servers["llm-wiki"]
-	if !ok || server.Type != "stdio" || server.Command != "${PLUGIN_ROOT}/bin/llm-wiki" || len(server.Args) != 1 || server.Args[0] != "serve" {
-		return errors.New("invalid local MCP command")
+	// Both descriptors must launch the packaged executable without host-specific
+	// variable expansion. The native descriptor may omit the stdio type.
+	for _, name := range []string{"mcp.json", ".mcp.json"} {
+		var descriptor struct {
+			Servers map[string]struct {
+				Type, Command, Cwd string
+				Args               []string
+			} `json:"mcpServers"`
+		}
+		data, err := r.ReadFile(name)
+		if err != nil {
+			return err
+		}
+		if err := json.Unmarshal(data, &descriptor); err != nil {
+			return err
+		}
+		server, ok := descriptor.Servers["llm-wiki"]
+		validType := server.Type == "stdio" || (name == ".mcp.json" && server.Type == "")
+		if !ok || len(descriptor.Servers) != 1 || !validType || server.Command != "./bin/llm-wiki" || server.Cwd != "./" || len(server.Args) != 1 || server.Args[0] != "serve" {
+			return fmt.Errorf("invalid local MCP launch in %s", name)
+		}
 	}
 	info, e := r.Stat("bin/llm-wiki")
 	if e != nil {

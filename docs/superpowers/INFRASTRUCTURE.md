@@ -53,8 +53,12 @@ no por suposición a partir del host del desarrollador.
 
 ## Arranque y recursos
 
-Codex ejecuta `${PLUGIN_ROOT}/bin/llm-wiki serve` según manifiesto compatible
-validado. STDOUT contiene únicamente MCP; STDERR diagnósticos sin contenido de
+Los manifiestos portable y compatible declaran `./bin/llm-wiki serve` con
+`cwd: "./"`, relativo a la raíz instalada del plugin. Ambos descriptores se
+validan y la aceptación del paquete los ejecuta desde una ruta con espacios,
+sin requerir expansión de variables en el comando. La disponibilidad en los
+chats exige además comprobar la carga real del host. STDOUT contiene únicamente
+MCP; STDERR diagnósticos sin contenido de
 notas ni credenciales. No daemon HTTP, puertos, servicios de nube, telemetry ni
 descargas en arranque. El proceso Go no llama a LLMs ni endpoints externos.
 Codex puede utilizar sus capacidades de red disponibles para los workflows; esto

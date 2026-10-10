@@ -22,6 +22,13 @@ func TestPackagedBinaryWithoutDevelopmentToolchain(t *testing.T) {
 	if root == "" {
 		t.Skip("set LLM_WIKI_PACKAGE to a built plugin directory")
 	}
+	// Relocate the complete package: launch must work outside the repository,
+	// including a plugin root containing spaces, without variable expansion.
+	isolatedRoot := filepath.Join(t.TempDir(), "plugin with spaces")
+	if err := os.CopyFS(isolatedRoot, os.DirFS(root)); err != nil {
+		t.Fatal(err)
+	}
+	root = isolatedRoot
 	if e := packaging.Validate(root); e != nil {
 		t.Fatal(e)
 	}
@@ -44,8 +51,28 @@ func TestPackagedBinaryWithoutDevelopmentToolchain(t *testing.T) {
 	state, vault, project := t.TempDir(), t.TempDir(), t.TempDir()
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
+	launchIndex := 0
 	connect := func() *mcp.ClientSession {
-		cmd := exec.Command(binary, "serve", "--state-dir", state)
+		descriptor := []string{"mcp.json", ".mcp.json"}[launchIndex%2]
+		launchIndex++
+		data, err := os.ReadFile(filepath.Join(root, descriptor))
+		if err != nil {
+			t.Fatal(err)
+		}
+		var launch struct {
+			Servers map[string]struct {
+				Command, Cwd string
+				Args         []string
+			} `json:"mcpServers"`
+		}
+		if err := json.Unmarshal(data, &launch); err != nil {
+			t.Fatal(err)
+		}
+		server := launch.Servers["llm-wiki"]
+		// The state override isolates test data; executable, cwd and serve come
+		// directly from the descriptor as the host consumes them.
+		cmd := exec.Command(server.Command, append(server.Args, "--state-dir", state)...)
+		cmd.Dir = filepath.Join(root, server.Cwd)
 		cmd.Env = []string{"PATH=/usr/bin:/bin"}
 		client := mcp.NewClient(&mcp.Implementation{Name: "isolated-package", Version: "1"}, nil)
 		session, e := client.Connect(ctx, &mcp.CommandTransport{Command: cmd}, nil)

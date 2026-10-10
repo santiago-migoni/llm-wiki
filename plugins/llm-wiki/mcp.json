@@ -3,10 +3,11 @@
   "mcpServers": {
     "llm-wiki": {
       "type": "stdio",
-      "command": "${PLUGIN_ROOT}/bin/llm-wiki",
+      "command": "./bin/llm-wiki",
       "args": [
         "serve"
-      ]
+      ],
+      "cwd": "./"
     }
   }
 }
