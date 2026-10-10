@@ -163,3 +163,34 @@ func TestListAreasCancelAfterScan(t *testing.T) {
 		t.Fatalf("postscan cancellation: %+v %v", got, err)
 	}
 }
+
+func TestListAreasHeadingLiteralHashesAndFences(t *testing.T) {
+	for _, tc := range []struct{ body, want string }{
+		{"# C#\n", "C#"}, {"# Name ###\n", "Name"},
+		{"# ###\n# Real\n", "Real"},
+		{"````markdown\n```\n# False\n````\n# Real\n", "Real"},
+		{"~~~~\n~~~\n# False\n~~~~\n# Real\n", "Real"},
+		{"```markdown\n``` not a closing fence\n# False\n```\n# Real\n", "Real"},
+		{"#\tTabbed name\n", "Tabbed name"},
+	} {
+		t.Run(tc.want+tc.body, func(t *testing.T) {
+			v := areasVault(t, map[string]string{"wiki/areas/Name.md": "---\ntype: area\n---\n" + tc.body})
+			got, err := v.ListAreas(context.Background())
+			if err != nil || !got.Complete || len(got.Areas) != 1 || got.Areas[0].Name != tc.want {
+				t.Fatalf("%+v %v want %q", got, err, tc.want)
+			}
+		})
+	}
+}
+
+func TestListAreasRejectsFileAsMappedFolder(t *testing.T) {
+	for _, folder := range []string{"Blocked", "Blocked/sub"} {
+		t.Run(folder, func(t *testing.T) {
+			v := areasVault(t, map[string]string{"Blocked": "asset bytes", "_CLAUDE.md": "## Folder Map\n| Type | Folder |\n| --- | --- |\n| area | " + folder + " |"})
+			got, err := v.ListAreas(context.Background())
+			if err == nil || got.Complete || got.Folder != "" || !hasAreaDiagnostic(got, "invalid_folder") {
+				t.Fatalf("invalid folder accepted %+v %v", got, err)
+			}
+		})
+	}
+}

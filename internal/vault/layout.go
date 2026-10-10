@@ -2,7 +2,9 @@ package vault
 
 import (
 	"bufio"
+	"errors"
 	"fmt"
+	"io/fs"
 	"os"
 	"path/filepath"
 	"strings"
@@ -97,6 +99,14 @@ func inheritedLayout(v *Vault, style string) Layout {
 	if data, exists, err := v.current(".llm-wiki/manual.md"); err == nil && exists {
 		overlay(data)
 	}
+	// Validate existing components before generic-entity propagation. Missing
+	// parents are legitimate; planning or reading must not create them.
+	for key, folder := range explicit {
+		if err := v.validateMappedFolder(folder); err != nil {
+			problems[key] = err.Error()
+			delete(explicit, key)
+		}
+	}
 	for _, key := range []string{"person", "organization", "tool"} {
 		if _, own := explicit[key]; own {
 			continue
@@ -113,10 +123,35 @@ func inheritedLayout(v *Vault, style string) Layout {
 	for key, value := range explicit {
 		folders[key] = value
 	}
+	for key, folder := range folders {
+		if err := v.validateMappedFolder(folder); err != nil {
+			problems[key] = err.Error()
+		}
+	}
 	for key := range problems {
 		delete(folders, key)
 	}
 	return Layout{Style: style, Folders: folders, FolderErrors: problems}
+}
+
+// Check through the same confined resolver as reads, without requiring that
+// a future directory already exists. ResolveFolder itself remains pure.
+func (v *Vault) validateMappedFolder(folder string) error {
+	resolved, err := v.resolvePath(folder)
+	if err != nil {
+		return err
+	}
+	info, err := v.root.Stat(resolved)
+	if errors.Is(err, fs.ErrNotExist) {
+		return nil
+	}
+	if err != nil {
+		return fmt.Errorf("inspect mapped folder: %w", err)
+	}
+	if !info.IsDir() {
+		return fmt.Errorf("mapped destination %q is not a directory", folder)
+	}
+	return nil
 }
 
 func defaultFolders(style string, root *os.Root) map[string]string {

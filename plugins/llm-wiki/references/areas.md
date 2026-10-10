@@ -24,6 +24,27 @@ el runtime. `invalid_folder`, `invalid_metadata`, `misplaced_area` e
 `incomplete_scan` requieren resolver el diagnóstico antes de concluir ausencia o
 crear para deduplicar. No migres una nota de área fuera del mapa.
 
+## Nombres y destinos compatibles
+
+El nombre visible puede ser arbitrario; el destino de archivo debe ser confinado
+**y representable por el parser de enlaces actual**. Antes de crear o vincular,
+comprueba la ruta relativa completa, incluidos los padres del mapa. Para
+wikilinks, `#` y `^` separan fragmentos, `|` separa alias y `[`/`]` o saltos de
+línea interfieren con delimitadores. No uses esos caracteres literalmente en el
+destino del wikilink ni asumas que percent-encoding los resuelve en este grafo.
+
+Ejemplo: «C#» puede conservar `title: C#` y nombre visible, pero el agente presenta
+`wiki/areas/C-sharp.md` como alternativa antes de crear y, tras aceptación, enlaza
+`[[wiki/areas/C-sharp|C#]]`. «Exploración compartida» admite su filename Unicode
+con espacios. Comprueba backlinks al destino exacto antes de afirmar relación.
+
+Si un área existente o su carpeta ya tiene caracteres incompatibles, informa
+el límite y deja esa vinculación pendiente; no migres, renombres ni enlaces a un
+destino parecido automáticamente. Con `C.md` y `C#.md`, nunca uses
+`[[wiki/areas/C#|C#]]`: recorta el destino a C y puede resolver a otra nota o
+quedar ambiguo por normalización. La alternativa se presenta para
+una decisión explícita dentro del alcance, conservando el título del usuario.
+
 ## Vinculación
 
 Admite cero, una o varias áreas, sin principal obligatoria. Mantén la unidad en

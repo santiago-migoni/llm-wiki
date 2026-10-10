@@ -618,3 +618,36 @@ func TestLayoutInvalidExplicitFolderDoesNotFallback(t *testing.T) {
 		t.Fatal("ambiguous layout fell back")
 	}
 }
+
+func TestLayoutMappedFolderFilesystemValidity(t *testing.T) {
+	root := t.TempDir()
+	if err := os.WriteFile(filepath.Join(root, "Blocked"), []byte("file"), 0600); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.Mkdir(filepath.Join(root, "Existing"), 0700); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.Symlink("Blocked", filepath.Join(root, "FileAlias")); err != nil {
+		t.Fatal(err)
+	}
+	for _, tc := range []struct {
+		folder string
+		valid  bool
+	}{{"Blocked", false}, {"Blocked/sub", false}, {"FileAlias", false}, {"Existing", true}, {"NotYet/areas", true}} {
+		t.Run(tc.folder, func(t *testing.T) {
+			os.WriteFile(filepath.Join(root, "_CLAUDE.md"), []byte("## Folder Map\n| Type | Folder |\n| --- | --- |\n| area | "+tc.folder+" |\n| project | Existing |"), 0600)
+			v, err := Open(root)
+			if err != nil {
+				t.Fatal(err)
+			}
+			defer v.Close()
+			got, err := v.Layout().ResolveFolder("area")
+			if (err == nil) != tc.valid {
+				t.Fatalf("folder=%q err=%v want valid=%v", got, err, tc.valid)
+			}
+			if valid, e := v.Layout().ResolveFolder("project"); e != nil || valid != "Existing" {
+				t.Fatalf("unrelated mapping blocked %s %v", valid, e)
+			}
+		})
+	}
+}

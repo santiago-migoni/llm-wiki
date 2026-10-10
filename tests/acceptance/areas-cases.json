@@ -830,6 +830,29 @@
       "expected": "report unavailable reader or skill, never replace by fictitious inventory or shell mutation",
       "host_result": "pending",
       "evidence": "requires installed host workflow execution"
+    },
+    {
+      "id": "ReservedAreaNameSafeTarget",
+      "input": {
+        "request": "crea C# y vincula Nexo",
+        "inventory": "complete, C.md exists, C# absent"
+      },
+      "expected": "propose C-sharp.md before creation, preserve title C#, canonical link targets C-sharp; no C.md edge",
+      "host_result": "pending",
+      "evidence": "agent proposed-call pressure and graph characterization only"
+    },
+    {
+      "id": "LegacyReservedAreaDoesNotMislink",
+      "input": {
+        "request": "link Nexo to existing C#",
+        "paths": [
+          "wiki/areas/C.md",
+          "wiki/areas/C#.md"
+        ]
+      },
+      "expected": "diagnose incompatible canonical path, no automatic migration or C.md link",
+      "host_result": "pending",
+      "evidence": "agent proposed-call pressure only"
     }
   ]
 }

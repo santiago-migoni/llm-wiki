@@ -176,22 +176,50 @@ func (v *Vault) listAreasWithLimits(ctx context.Context, maxBytes, maxEntries in
 }
 
 func firstAreaHeading(body string) string {
-	fence := ""
+	var fence byte
+	width := 0
 	for _, line := range strings.Split(body, "\n") {
-		trimmed := strings.TrimSpace(line)
-		if strings.HasPrefix(trimmed, "```") || strings.HasPrefix(trimmed, "~~~") {
-			mark := trimmed[:3]
-			if fence == "" {
-				fence = mark
-			} else if fence == mark {
-				fence = ""
+		line = strings.TrimSuffix(line, "\r")
+		text := strings.TrimLeft(line, " ")
+		if len(line)-len(text) > 3 {
+			continue
+		}
+		marker, count := byte(0), 0
+		if len(text) > 0 && (text[0] == '`' || text[0] == '~') {
+			marker = text[0]
+			for count < len(text) && text[count] == marker {
+				count++
+			}
+		}
+		if fence != 0 {
+			if marker == fence && count >= width && strings.TrimSpace(text[count:]) == "" {
+				fence = 0
+				width = 0
 			}
 			continue
 		}
-		if fence == "" && strings.HasPrefix(line, "# ") {
-			if name := strings.TrimSpace(strings.TrimRight(strings.TrimSpace(line[2:]), "#")); name != "" {
-				return name
-			}
+		if count >= 3 && (marker != '`' || !strings.ContainsRune(text[count:], '`')) {
+			fence = marker
+			width = count
+			continue
+		}
+		if len(text) < 2 || text[0] != '#' || (text[1] != ' ' && text[1] != '\t') {
+			continue
+		}
+		name := strings.TrimSpace(text[2:])
+		// A closing ATX hash sequence requires preceding whitespace; C# is literal.
+		closing := len(name)
+		for closing > 0 && name[closing-1] == '#' {
+			closing--
+		}
+		if closing == 0 {
+			name = ""
+		}
+		if closing < len(name) && closing > 0 && (name[closing-1] == ' ' || name[closing-1] == '\t') {
+			name = strings.TrimSpace(name[:closing])
+		}
+		if name != "" {
+			return name
 		}
 	}
 	return ""

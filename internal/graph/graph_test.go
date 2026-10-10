@@ -278,3 +278,36 @@ func TestAreaLinksInBodyNotFrontmatter(t *testing.T) {
 		t.Fatalf("metadata damaged %+v %v", page, err)
 	}
 }
+
+// The parser's fragment syntax is unchanged: new workflows must choose a safe
+// canonical filename while preserving the user's visible title.
+func TestAreaReservedNameSafeCanonicalPath(t *testing.T) {
+	scan := vault.ScanResult{Notes: []vault.Note{
+		{Path: "wiki/areas/C.md", Text: "---\ntype: area\n---\n# C"},
+		{Path: "wiki/areas/C#.md", Text: "---\ntype: area\n---\n# C#"},
+		{Path: "wiki/areas/C-sharp.md", Text: "---\ntype: area\ntitle: C#\n---\n# C#"},
+		{Path: "wiki/areas/Exploración compartida.md", Text: "---\ntype: area\n---\n# Exploración compartida"},
+		{Path: "Unsafe.md", Text: "[[wiki/areas/C#|C#]]"},
+		{Path: "Nexo.md", Text: "[[wiki/areas/C-sharp|C#]] [[wiki/areas/Exploración compartida|Exploración compartida]]"},
+	}}
+	g := Build(scan)
+	for _, target := range []string{"wiki/areas/C.md", "wiki/areas/C#.md"} {
+		if refs := g.Backlinks(target); len(refs) != 0 {
+			t.Fatalf("ambiguous reserved paths unexpectedly resolved %+v", refs)
+		}
+	}
+	hazard := false
+	for _, ref := range g.References() {
+		if ref.Source == "Unsafe.md" {
+			hazard = ref.Text == "wiki/areas/C" && ref.Ambiguous && !ref.Resolved
+		}
+	}
+	if !hazard {
+		t.Fatal("unsafe link no longer exposes the preexisting parser collision")
+	}
+	for _, target := range []string{"wiki/areas/C-sharp.md", "wiki/areas/Exploración compartida.md"} {
+		if refs := g.Backlinks(target); len(refs) != 1 || refs[0].Source != "Nexo.md" {
+			t.Fatalf("safe canonical path %s %+v", target, refs)
+		}
+	}
+}

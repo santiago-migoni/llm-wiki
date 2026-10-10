@@ -20,8 +20,9 @@ y [write-rules.md](../../references/write-rules.md). Selecciona el vault explíc
    diagnostica el problema. Homónimos/similitud dudosa necesitan elección humana.
 2. Para crear, reutiliza la coincidencia confirmada. Sin coincidencia y con
    cobertura suficiente, resuelve la carpeta `area` del mapa efectivo. Nombre
-   arbitrario: si no sirve como archivo confinado, presenta la alternativa segura
-   antes de guardar. No sobrescribas destinos ni crees categorías/carpetas paralelas.
+   arbitrario: valida confinamiento y compatibilidad del destino completo con
+   enlaces del grafo según areas.md. Si necesita ajuste, presenta la alternativa
+   segura antes de guardar, conservando el nombre visible en title/aliases. No sobrescribas destinos ni crees categorías/carpetas paralelas.
 3. Crea nota `type: area`, fecha local de captura, tags, `ai-first: true`, título,
    `## For future agent`, propósito conocido y procedencia de la solicitud. Lo no
    declarado queda pendiente; no inventes responsabilidades o jerarquías.
