@@ -68,3 +68,36 @@ Fuentes de diagnóstico: [configuración MCP oficial](https://developers.openai.
 y [paquete e instalación local de plugins](https://developers.openai.com/plugins/build/plugins).
 No se modificó configuración, instalación, runtime o paquete. No se repitieron
 la suite Go, carreras ni vet: este intento sólo añade evidencia documental.
+
+## Repetición después del reinicio
+
+El usuario confirmó haber reiniciado Desktop y pidió continuar la prueba el
+2026-10-10. Se reutilizaron los dos chats existentes; no se creó otro chat.
+
+- Principal: búsqueda por nombre y descripción en `ALL_TOOLS`, cero herramientas
+  llm-wiki. Segundo chat: nuevo turno autorizado, mismo resultado tras el reinicio.
+- Inventario CLI: plugin instalado y habilitado `0.2.0`. Configuración de usuario
+  habilitada; no se encontró una anulación del plugin en la configuración del
+  proyecto. Esto no comprueba la configuración efectiva completa del host.
+- Revisión dirigida de registros de arranque actuales: sin fallo de discovery
+  identificado para llm-wiki. Los fallos encontrados para otro servidor no se
+  atribuyen a este plugin ni se modifican dentro de esta prueba.
+- Diagnóstico separado del binario instalado: proceso `serve --state-dir` con
+  estado temporal aislado; `initialize` y `tools/list` respondieron sin error.
+  Identidad `llm-wiki 0.2.0`, protocolo `2025-03-26`, **30 herramientas**,
+  incluidas `wiki_list_areas`, `wiki_read_note`, `wiki_select_vault`,
+  `wiki_save_note` y `wiki_update_note`. Proceso cerrado y estado temporal
+  eliminado. No se invocó `tools/call` ni se seleccionó o modificó un vault.
+
+El binario responde al MCP en el diagnóstico directo, mientras los dos chats
+siguen sin recibir esas herramientas. Esto acota la investigación a la carga
+o exposición del servidor en el host; no determina todavía su causa.
+El reinicio no resolvió el síntoma observado. Se solicitó al usuario el estado
+o error visible del servidor en Desktop porque el acceso automático a esa
+interfaz está restringido. No se propone reinstalar, cambiar permisos ni
+registrar un servidor alternativo sin conocer el diagnóstico del host.
+
+Resultado conservado: **0/38 casos funcionales ejecutados** y continuidad de
+vault sin verificar. El intercambio de mensajes entre chats sí fue comprobado,
+pero no equivale a recuperar conocimiento persistido. El JSON de entrega
+registra ambas comprobaciones de disponibilidad por separado.

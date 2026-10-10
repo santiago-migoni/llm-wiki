@@ -40,7 +40,20 @@
     "runtime_tools_exposed_per_chat": [0, 0],
     "workflow_cases_executed": 0,
     "vault_continuity_verified": false,
-    "cause": "Undetermined: wiki_* tools absent in both independent chats",
+    "cause": "Undetermined: wiki_* tools absent in both independent chats, including after Desktop restart",
+    "after_user_reported_restart": {
+      "runtime_tools_exposed_per_chat": [0, 0],
+      "installed_binary_direct_MCP": {
+        "initialize": "passed",
+        "tools_list": "passed",
+        "tool_count": 30,
+        "server_version": "0.2.0",
+        "protocol_version": "2025-03-26",
+        "scope": "Diagnostic subprocess with isolated temporary state; not Desktop workflow acceptance"
+      },
+      "workflow_cases_executed": 0,
+      "host_server_status": "awaiting visible host diagnostic"
+    },
     "evidence": "docs/superpowers/evidence/2026-10-10-desktop-areas.md"
   },
   "published": false,
