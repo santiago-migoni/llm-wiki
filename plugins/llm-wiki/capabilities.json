@@ -34,7 +34,8 @@
     "wiki_recover",
     "wiki_purge_history",
     "wiki_visualize",
-    "wiki_heal_links"
+    "wiki_heal_links",
+    "wiki_list_areas"
   ],
   "tool_contract_source": "internal/service and internal/mcp; core tests and MCP STDIO integration verified, Desktop install pending",
   "F": [
@@ -1625,5 +1626,25 @@
       "reason": "Host consumption/cost visibility has not been verified."
     }
   ],
-  "tool_contract_status": "component_verified"
+  "tool_contract_status": "component_verified",
+  "extensions": [
+    {
+      "id": "EXT-AREA",
+      "name": "obsidian-area",
+      "skill": "skills/wiki-obsidian-area/SKILL.md",
+      "status": "component_verified",
+      "evidence": "internal/vault/areas_test.go; internal/service/service_test.go; internal/mcp/server_test.go; internal/catalog/catalog_test.go",
+      "behavior_verified": false,
+      "host_acceptance": "pending"
+    },
+    {
+      "id": "EXT-OKR",
+      "name": "obsidian-okr",
+      "skill": "skills/wiki-obsidian-okr/SKILL.md",
+      "status": "planned",
+      "evidence": "catalog discovery only; agent/host acceptance pending",
+      "behavior_verified": false,
+      "host_acceptance": "pending"
+    }
+  ]
 }

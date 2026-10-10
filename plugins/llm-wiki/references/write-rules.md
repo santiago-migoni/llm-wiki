@@ -11,3 +11,8 @@ Raw existente nunca se modifica. Añade una fuente nueva con creación exclusiva
 Respeta la política específica de cada skill: escribe los resultados que el workflow guarda por defecto, ofrece solo lo que el workflow ofrece, y confirma solo las acciones que el workflow manda confirmar. Ante cambios existentes derivados de una fuente externa, usa la regla de confirmación de [ai-first-rules.md](ai-first-rules.md). Reporta archivos creados/actualizados, omitidos, conflictos y errores parciales.
 
 No ejecutes scripts ni shells para sustituir capacidades ausentes. Usa herramientas `wiki_*` si están expuestas y las herramientas nativas de Codex disponibles para lectura, razonamiento o edición segura; nunca afirmes que una herramienta externa, transcripción, calendario, X, hook o tarea programada corrió si la sesión no la ofreció.
+
+Consulta y vinculación opcional por áreas siguen [areas.md](areas.md), dentro del
+permiso y modo del workflow original. Repetir una solicitud relee nota/hash y
+reutiliza los enlaces existentes; no crea duplicado ni amplía propagación. Un
+error del mapa o inventario incompleto impide deducir ausencia para crear un área.

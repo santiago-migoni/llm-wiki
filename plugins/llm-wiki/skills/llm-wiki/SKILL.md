@@ -12,3 +12,11 @@ Before vault operations, read the vault manual and establish its explicit projec
 Use [workflows.json](../../references/workflows.json) for the 47 F-ID-to-skill mappings, acceptance cases and original write policies. The detailed skill is the procedure: keep its mode distinctions, output shape, and persistence policy. Do not chain an optional follow-up unless requested.
 
 Use available `wiki_*` tools and inspect returned results. A catalog entry is not proof that a tool ran. If a capability is absent, continue the portions supported by available/readable input and name the stage that could not run.
+
+Local extensions are catalogued separately from the 47 reference F-IDs:
+[wiki-obsidian-area](../wiki-obsidian-area/SKILL.md) for explicitly requested area
+creation/consultation/linking; [wiki-obsidian-okr](../wiki-obsidian-okr/SKILL.md) for
+explicit OKR creation/consultation/update. See `extensions` in
+[capabilities.json](../../capabilities.json). Optional area integration follows
+[areas.md](../../references/areas.md) inside the chosen workflow's permission;
+general organization intent does not adopt this convention or start writes.
