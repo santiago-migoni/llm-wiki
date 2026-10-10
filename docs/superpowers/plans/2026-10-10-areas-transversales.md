@@ -267,12 +267,12 @@ afectados, evidencia nueva `docs/superpowers/evidence/2026-10-10-areas.md`;
 artefactos generados por cmd/package. Versiones de internal/version y manifiestos
 solo después de asignar release. **Consume:** T6 y versión elegida antes de distribuir.
 
-- [ ] Registrar resultados, omisiones y límites por componente/workflow/host;
+- [x] Registrar resultados, omisiones y límites por componente/workflow/host;
   mantener EXI-002/003 como resultados de usuario pendientes cuando corresponda.
-- [ ] Asignar versión de entrega con el usuario antes de editar versiones; no
+- [x] Asignar versión de entrega con el usuario antes de editar versiones; no
   inventarla durante ejecución. Conservar licencias/atribuciones y no crear changelog
   por este plan. No instalar, publicar ni hacer push por asociación.
-- [ ] Construir en salida nueva:
+- [x] Construir en salida nueva:
 
   ```sh
   package_parent=$(mktemp -d)
@@ -280,11 +280,11 @@ solo después de asignar release. **Consume:** T6 y versión elegida antes de di
   LLM_WIKI_PACKAGE="$package_parent/marketplace/plugins/llm-wiki" go test ./tests/acceptance -run TestPackagedBinaryWithoutDevelopmentToolchain -count=1
   ```
 
-- [ ] Extender aceptación empaquetada para descubrir wiki_list_areas/skills nuevas
+- [x] Extender aceptación empaquetada para descubrir wiki_list_areas/skills nuevas
   y ejecutar lectura tras reinicio, conservando las pruebas previas. Comprobar
   manifests, identidad/versiones, firma, arquitecturas, checksums y source fingerprint
   contra las fuentes reales; build con cambios locales se registra como tal.
-- [ ] Copiar únicamente artefactos comprobados al paquete versionado y registrar
+- [x] Copiar únicamente artefactos comprobados al paquete versionado y registrar
   procedencia. Compilar Intel no acredita ejecución Intel. Confirmar diff y commit
   de artefactos/evidencia propios; no marcar completa la aceptación de host pendiente.
 
@@ -309,7 +309,7 @@ revisión; no ejecutó sus tests. Los checkboxes se actualizan con la evidencia 
 
 AA-002 aprueba las bases y ejecución directa. Versión elegida: 0.2.0.
 Resultados y decisiones: [evidencia de áreas](../evidence/2026-10-10-areas.md).
-T1–T6 completadas técnicamente; T7 y revisión final en curso. La aceptación del
+T1–T7 completadas técnicamente; revisión independiente final en curso. La aceptación del
 host instalado/dos chats queda pendiente y conserva su casilla abierta.
 
 2026-10-10, v001: borrador solicitado sobre AA-001 y spec v001 draft fijada arriba.

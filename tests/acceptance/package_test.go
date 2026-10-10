@@ -55,6 +55,17 @@ func TestPackagedBinaryWithoutDevelopmentToolchain(t *testing.T) {
 		return session
 	}
 	session := connect()
+	manifestBytes, err := os.ReadFile(filepath.Join(root, "plugin.json"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	var manifest struct{ Name, Version string }
+	if err := json.Unmarshal(manifestBytes, &manifest); err != nil {
+		t.Fatal(err)
+	}
+	if info := session.InitializeResult().ServerInfo; info.Name != manifest.Name || info.Version != manifest.Version {
+		t.Fatalf("binary/manifest mismatch: %+v vs %+v", info, manifest)
+	}
 	tools, err := session.ListTools(ctx, &mcp.ListToolsParams{})
 	if err != nil {
 		t.Fatal(err)

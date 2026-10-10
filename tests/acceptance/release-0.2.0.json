@@ -1,0 +1,34 @@
+{
+  "version": "0.2.0",
+  "date": "2026-10-10",
+  "status": "component_verified",
+  "source_commit": "2eaa7c427492cd3a4bc31a833cb6b9ff5eb8b28f",
+  "source_tree_sha256": "93df0f8583d44ae13348a2b64d93073584d902c15bab53462dc89e3dc9230b03",
+  "binary_sha256": "2ce096a828a3af34476b09677a6e7b8f940736bc87a8d76e047049e97830160d",
+  "runtime_dependencies": [],
+  "architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "signature": "ad-hoc; codesign --verify --strict passed",
+  "tests": {
+    "runtime_race": "passed",
+    "vet": "passed",
+    "packaged_MCP_system_PATH": "passed",
+    "package_manifest_runtime_version": "passed",
+    "new_skills_catalog": "passed",
+    "area_reader_after_process_restart": "passed",
+    "previous_package_process_reads_preserve_state": "passed",
+    "workflow_instruction_pressure": "simulated proposals only"
+  },
+  "pending": [
+    "installed Codex Desktop workflows",
+    "two real Codex chats",
+    "Intel execution",
+    "EXI-002 and EXI-003 user outcomes"
+  ],
+  "evidence": "docs/superpowers/evidence/2026-10-10-areas.md",
+  "matrix": "tests/acceptance/areas-cases.json",
+  "installed": false,
+  "published": false
+}
