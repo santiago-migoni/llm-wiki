@@ -13,6 +13,13 @@ Run this workflow only when the user explicitly invokes it or clearly asks for t
 2. Usa template `Review.md` si existe; si no, resume logros, decisiones, personas, aprendizajes y qué llevar adelante. Añade 4–5 preguntas futuras con wikilink a fuente por pregunta.
 3. Guarda en Reviews por fecha y enlaza desde la última daily del periodo; conserva revisiones existentes.
 
+## Áreas opcionales
+
+Si la solicitud o convención adoptada activa áreas en este alcance, sigue
+[areas.md](../../references/areas.md) para consulta, propósito, ambigüedad y enlaces
+canónicos sin duplicar la unidad. Sin ese modo, conserva el flujo previo.
+Recupera relaciones sustentadas dentro del mismo periodo y cobertura. Revisión por área solo cuando se pide; no cambia el periodo ni inventa actividad.
+
 ## Salida
 
 Salida: nota de revisión, periodo, fuentes/fechas faltantes, link desde última daily.

@@ -13,6 +13,13 @@ Run this workflow only when the user explicitly invokes it or clearly asks for t
 2. Añade tareas vencidas y para hoy de boards, con prioridad y enlaces. Agrega eventos solo si calendario se leyó realmente; si no, indica esa ausencia en respuesta y no crees sección con eventos supuestos.
 3. Incorpora solo contexto sustentado de esta conversación. Revisa el log de ayer para cambios nocturnos reales; si no existe, omite “overnight”.
 
+## Áreas opcionales
+
+Si la solicitud o convención adoptada activa áreas en este alcance, sigue
+[areas.md](../../references/areas.md) para consulta, propósito, ambigüedad y enlaces
+canónicos sin duplicar la unidad. Sin ese modo, conserva el flujo previo.
+Vincula entradas pertinentes en la diaria común de esa fecha. No crees diarios por área ni eventos no leídos.
+
 ## Salida
 
 Salida: path/date/TZ, tareas/eventos/contexto que añadió y qué fuente no estuvo disponible.

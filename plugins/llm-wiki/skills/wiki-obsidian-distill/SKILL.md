@@ -13,6 +13,13 @@ Run this workflow only when the user explicitly invokes it or clearly asks for t
 2. Segmenta en unidades citables (heading/párrafo/página/timestamp) como B1…Bn; extrae una oración por claim, cita bloque(s) y asigna confidence. Facts externos volátiles llevan fecha/fuente. Separa inferencias.
 3. Si es nueva fuente local accesible, conserva raw intacta; compara URL/hash para evitar duplicado. Crea distillation con fuente, count, claims agrupados, inference section y source-blocks. Enlaza desde fuente y daily/log.
 
+## Áreas opcionales
+
+Si la solicitud o convención adoptada activa áreas en este alcance, sigue
+[areas.md](../../references/areas.md) para consulta, propósito, ambigüedad y enlaces
+canónicos sin duplicar la unidad. Sin ese modo, conserva el flujo previo.
+Vincula la destilación derivada y preserva claims/localizadores. Fuente raw intacta byte a byte; no añade frontmatter ni enlaces a su cuerpo.
+
 ## Salida
 
 Salida: claims agrupados con `(src: Bn)`, inference separada, lista de bloques con localizadores y número de claims omitidos por no tener evidencia.

@@ -13,6 +13,13 @@ Run this workflow only when the user explicitly invokes it or clearly asks for t
 2. Redacta dev log fechado con sesión, trabajo, decisiones, resultados y próximos pasos solo a partir de la conversación. Si ya hay log de proyecto/fecha, actualízalo.
 3. Crea/actualiza el log, añade link en Recent Activity del proyecto y Work section de daily, manteniendo formato y append-only history.
 
+## Áreas opcionales
+
+Si la solicitud o convención adoptada activa áreas en este alcance, sigue
+[areas.md](../../references/areas.md) para consulta, propósito, ambigüedad y enlaces
+canónicos sin duplicar la unidad. Sin ese modo, conserva el flujo previo.
+Vincula en el log único del proyecto/fecha, preservando historial y links de proyecto/diaria; no crees logs paralelos por área.
+
 ## Salida
 
 Salida: proyecto elegido, log path, texto resumido y backlinks de proyecto/diaria.

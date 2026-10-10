@@ -202,3 +202,28 @@ func TestCapturePlansMissingParentsWithoutWriting(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCaptureInvalidDailyMap(t *testing.T) {
+	v := testWritableVault(t)
+	os.WriteFile(filepath.Join(v.rootPath, "_CLAUDE.md"), []byte("## Folder Map\n| Type | Folder |\n| --- | --- |\n| daily | ../escape |"), 0600)
+	if err := v.SelectLayout(LayoutWiki); err != nil {
+		t.Fatal(err)
+	}
+	req := CaptureRequest{Path: "wiki/concepts/Idea.md", Content: "idea", Date: time.Date(2026, 10, 10, 0, 0, 0, 0, time.UTC), Timezone: "UTC"}
+	if changes, err := v.PlanCapture(req); err == nil || len(changes) > 0 {
+		t.Fatalf("invalid daily allowed capture: %+v %v", changes, err)
+	}
+	if changes, err := v.PlanSave(SaveRequest{Path: req.Path, Content: req.Content, Date: req.Date, Timezone: req.Timezone}); err == nil || len(changes) > 0 {
+		t.Fatalf("invalid daily allowed save: %+v %v", changes, err)
+	}
+	os.WriteFile(filepath.Join(v.rootPath, "_CLAUDE.md"), []byte("## Folder Map\n| Type | Folder |\n| --- | --- |\n| daily | wiki/daily |"), 0600)
+	if err := v.SelectLayout(LayoutWiki); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := v.PlanCapture(req); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := os.Stat(filepath.Join(v.rootPath, "wiki/areas")); !os.IsNotExist(err) {
+		t.Fatal("capture created areas")
+	}
+}

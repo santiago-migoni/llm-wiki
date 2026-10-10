@@ -47,6 +47,7 @@ func definition(name, desc string, required []string, fields map[string]string) 
 }
 func Definitions() []Definition {
 	return []Definition{
+		definition("wiki_list_areas", "Enumerate typed areas with full hashes, coverage and diagnostics; read-only, incomplete inventory returns partial result and error.", nil, nil),
 		definition("wiki_reindex", "Rebuild the in-memory lexical index, reporting before/after coverage and changed paths; not semantic.", nil, nil),
 		definition("wiki_retrieval_eval", "Evaluate supplied gold cases on this corpus without generating/replacing cases or writing a report.", []string{"cases"}, map[string]string{"cases": "array", "k": "integer"}),
 		definition("wiki_init", "Update explicit generated manual/index blocks and append audit entry without replacing human context.", []string{"manual", "index", "log_entry"}, map[string]string{"manual": "string", "index": "string", "log_entry": "string", "operation_id": "string", "dry_run": "boolean"}),
@@ -185,6 +186,8 @@ func (r *Runtime) Call(ctx context.Context, name string, args json.RawMessage) (
 	}
 	read := func(path string) (vault.ReadResult, error) { return v.ReadContext(ctx, path, 0, 0) }
 	switch name {
+	case "wiki_list_areas":
+		return v.ListAreas(ctx)
 	case "wiki_init":
 		changes, e := v.PlanInit(vault.InitRequest{Manual: a.Manual, Index: a.Index, LogEntry: a.LogEntry})
 		if e != nil {

@@ -51,3 +51,34 @@ func TestCategoryAndPlatformAreReadOnlyFilters(t *testing.T) {
 		t.Fatal("ignored platform filter")
 	}
 }
+
+func TestCatalogDiscoversAreaAndOKRExtensions(t *testing.T) {
+	root := t.TempDir()
+	plugin := filepath.Join("..", "..", "plugins", "llm-wiki")
+	for _, name := range []string{"wiki-obsidian-area", "wiki-obsidian-okr"} {
+		got, err := Get(root, plugin, name)
+		if err != nil || got.Name != name || got.Source != "package" {
+			t.Fatalf("extension %s: %+v %v", name, got, err)
+		}
+	}
+	target := filepath.Join(root, ".llm-wiki/workflows/wiki-obsidian-area/SKILL.md")
+	os.MkdirAll(filepath.Dir(target), 0700)
+	os.WriteFile(target, []byte("---\nname: wiki-obsidian-area\ndescription: Custom area workflow\n---\nHuman customization"), 0600)
+	got, err := Get(root, plugin, "wiki-obsidian-area")
+	if err != nil || got.Source != "user" || got.Body != "Human customization" {
+		t.Fatalf("override: %+v %v", got, err)
+	}
+	skills, err := List(root, plugin)
+	if err != nil {
+		t.Fatal(err)
+	}
+	count := 0
+	for _, s := range skills {
+		if s.Name == "wiki-obsidian-area" {
+			count++
+		}
+	}
+	if count != 1 {
+		t.Fatalf("override duplicated %d", count)
+	}
+}

@@ -2,9 +2,12 @@ package vault
 
 import (
 	"bufio"
+	"errors"
 	"fmt"
+	"io/fs"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 )
 
@@ -18,12 +21,20 @@ const (
 // note kinds to vault-relative paths; entries from `_CLAUDE.md`'s Folder Map
 // override defaults. This is read-only metadata and is never written back.
 type Layout struct {
-	Style   string            `json:"style"`
-	Folders map[string]string `json:"folders"`
+	Style        string            `json:"style"`
+	Folders      map[string]string `json:"folders"`
+	FolderErrors map[string]string `json:"folder_errors,omitempty"`
+	MapErrors    map[string]string `json:"map_errors,omitempty"`
 }
 
 func (l Layout) clone() Layout {
-	copy := Layout{Style: l.Style, Folders: make(map[string]string, len(l.Folders))}
+	copy := Layout{Style: l.Style, Folders: make(map[string]string, len(l.Folders)), FolderErrors: make(map[string]string, len(l.FolderErrors)), MapErrors: make(map[string]string, len(l.MapErrors))}
+	for key, value := range l.MapErrors {
+		copy.MapErrors[key] = value
+	}
+	for key, value := range l.FolderErrors {
+		copy.FolderErrors[key] = value
+	}
 	for key, value := range l.Folders {
 		copy.Folders[key] = value
 	}
@@ -51,32 +62,137 @@ func detectLayout(v *Vault) Layout {
 	} else if obsidian {
 		style = LayoutObsidian
 	}
+	return inheritedLayout(v, style)
+}
+
+// ResolveFolder never silently falls back from an invalid effective mapping.
+func (l Layout) ResolveFolder(kind string) (string, error) {
+	key := normalizeKind(kind)
+	if key == "" {
+		return "", fmt.Errorf("unknown note kind %q", kind)
+	}
+	if len(l.MapErrors) > 0 {
+		sources := make([]string, 0, len(l.MapErrors))
+		for source := range l.MapErrors {
+			sources = append(sources, source)
+		}
+		sort.Strings(sources)
+		failures := make([]error, 0, len(sources))
+		for _, source := range sources {
+			failures = append(failures, fmt.Errorf("%s: %s", source, l.MapErrors[source]))
+		}
+		return "", fmt.Errorf("cannot resolve folder for %s: %w", key, errors.Join(failures...))
+	}
+	if problem := l.FolderErrors[key]; problem != "" {
+		return "", fmt.Errorf("invalid folder for %s: %s", key, problem)
+	}
+	folder := l.Folders[key]
+	if folder == "" {
+		return "", fmt.Errorf("layout %s has no folder for %s", l.Style, key)
+	}
+	return folder, nil
+}
+
+func inheritedLayout(v *Vault, style string) Layout {
 	folders := map[string]string{}
 	if style != LayoutAmbiguous {
-		folders = defaultFolders(style, root)
+		folders = defaultFolders(style, v.root)
+	}
+	explicit, problems := map[string]string{}, map[string]string{}
+	mapErrors := map[string]string{}
+	overlay := func(data []byte) {
+		valid, invalid := parseFolderMapDetailed(string(data), style)
+		for key, value := range valid {
+			explicit[key] = value
+			delete(problems, key)
+		}
+		for key, value := range invalid {
+			problems[key] = value
+			delete(explicit, key)
+		}
 	}
 	if data, err := v.readFile("_CLAUDE.md", nil); err == nil {
-		for key, value := range parseFolderMap(string(data), style) {
-			folders[key] = value
+		overlay(data)
+	} else if !errors.Is(err, fs.ErrNotExist) {
+		mapErrors["_CLAUDE.md"] = err.Error()
+	}
+	// current requires write parents, while a missing manual (including a
+	// missing .llm-wiki parent) is normal for inherited/default layouts.
+	if _, err := v.root.Lstat(".llm-wiki/manual.md"); !errors.Is(err, fs.ErrNotExist) {
+		if err != nil {
+			mapErrors[".llm-wiki/manual.md"] = err.Error()
+		} else if data, exists, err := v.current(".llm-wiki/manual.md"); err != nil {
+			mapErrors[".llm-wiki/manual.md"] = err.Error()
+		} else if exists {
+			overlay(data)
 		}
 	}
-	if data, exists, err := v.current(".llm-wiki/manual.md"); err == nil && exists {
-		for key, value := range parseFolderMap(string(data), style) {
-			folders[key] = value
+	// Validate existing components before generic-entity propagation. Missing
+	// parents are legitimate; planning or reading must not create them.
+	for key, folder := range explicit {
+		if err := v.validateMappedFolder(folder); err != nil {
+			problems[key] = err.Error()
+			delete(explicit, key)
 		}
 	}
-	return Layout{Style: style, Folders: folders}
+	for _, key := range []string{"person", "organization", "tool"} {
+		if _, own := explicit[key]; own {
+			continue
+		}
+		if _, invalid := problems[key]; invalid {
+			continue
+		}
+		if problem, invalid := problems["entity"]; invalid {
+			problems[key] = problem
+		} else if folder, ok := explicit["entity"]; ok {
+			folders[key] = folder
+		}
+	}
+	for key, value := range explicit {
+		folders[key] = value
+	}
+	for key, folder := range folders {
+		if err := v.validateMappedFolder(folder); err != nil {
+			problems[key] = err.Error()
+		}
+	}
+	for key := range problems {
+		delete(folders, key)
+	}
+	return Layout{Style: style, Folders: folders, FolderErrors: problems, MapErrors: mapErrors}
+}
+
+// Check through the same confined resolver as reads, without requiring that
+// a future directory already exists. ResolveFolder itself remains pure.
+func (v *Vault) validateMappedFolder(folder string) error {
+	resolved, err := v.resolvePath(folder)
+	if err != nil {
+		return err
+	}
+	info, err := v.root.Stat(resolved)
+	if errors.Is(err, fs.ErrNotExist) {
+		return nil
+	}
+	if err != nil {
+		return fmt.Errorf("inspect mapped folder: %w", err)
+	}
+	if !info.IsDir() {
+		return fmt.Errorf("mapped destination %q is not a directory", folder)
+	}
+	return nil
 }
 
 func defaultFolders(style string, root *os.Root) map[string]string {
 	if style == LayoutObsidian {
 		return map[string]string{
+			"area": "Areas", "okr": "OKRs", "entity": "Entities", "organization": "Companies", "tool": "Tools",
 			"project": existingDir(root, "Projects"), "person": existingDir(root, "People", "people"), "idea": existingDir(root, "Ideas"), "daily": existingDir(root, "Daily"),
 			"log": existingDir(root, "Dev Logs"), "task": existingDir(root, "Tasks"), "decision": existingDir(root, "Knowledge"), "meeting": existingDir(root, "Meetings"),
 			"raw": existingDir(root, "raw"), "research": existingDir(root, "Research"), "board": existingDir(root, "Boards"), "review": existingDir(root, "Reviews"),
 		}
 	}
 	return map[string]string{
+		"area": "wiki/areas", "okr": "wiki/okrs", "entity": "wiki/entities", "organization": "wiki/entities", "tool": "wiki/entities",
 		"project": "wiki/projects", "person": "wiki/entities", "idea": "wiki/concepts", "daily": "wiki/daily",
 		"log": "wiki/logs", "task": "wiki/tasks", "decision": "wiki/decisions", "meeting": "wiki/meetings",
 		"raw": existingDir(root, "raw"), "research": existingDir(root, "Research"), "board": existingDir(root, "boards"), "review": "wiki/reviews",
@@ -96,14 +212,16 @@ func existingDir(root *os.Root, candidates ...string) string {
 }
 
 func parseFolderMap(manual, style string) map[string]string {
-	result := make(map[string]string)
-	return parseMapRows(manual, style, result)
+	result, _ := parseFolderMapDetailed(manual, style)
+	return result
 }
 
-func parseMapRows(manual, style string, result map[string]string) map[string]string {
+func parseFolderMapDetailed(manual, style string) (map[string]string, map[string]string) {
+	result, problems := map[string]string{}, map[string]string{}
 	section := false
 	var headers []string
 	scanner := bufio.NewScanner(strings.NewReader(manual))
+	scanner.Buffer(make([]byte, 4096), MaxFileBytes+1)
 	for scanner.Scan() {
 		line := strings.TrimSpace(scanner.Text())
 		if strings.HasPrefix(line, "#") {
@@ -146,20 +264,36 @@ func parseMapRows(manual, style string, result map[string]string) map[string]str
 				}
 			}
 		}
-		if typeColumn >= len(cells) || folderColumn < 0 || folderColumn >= len(cells) {
+		// A naming-pattern table does not define destinations. Only rows in
+		// a table with a resolved folder column can invalidate a route.
+		if folderColumn < 0 {
+			continue
+		}
+		if typeColumn >= len(cells) {
 			continue
 		}
 		kind := normalizeKind(cells[typeColumn])
+		if kind == "" {
+			continue
+		}
+		if folderColumn >= len(cells) {
+			problems[kind] = "folder column cannot be resolved"
+			delete(result, kind)
+			continue
+		}
 		folder := strings.TrimSpace(cells[folderColumn])
 		folder = strings.Trim(folder, "`\"'")
 		folder = filepath.ToSlash(strings.TrimSuffix(folder, "/"))
 		cleanFolder, pathErr := cleanRelativePath(folder)
-		if kind == "" || folder == "" || pathErr != nil || isProtectedPath(cleanFolder) {
+		if folder == "" || pathErr != nil || isProtectedPath(cleanFolder) {
+			problems[kind] = "destination must be a confined, nontechnical relative path"
+			delete(result, kind)
 			continue
 		}
 		result[kind] = cleanFolder
+		delete(problems, kind)
 	}
-	return result
+	return result, problems
 }
 
 func normalizeKind(kind string) string {
@@ -167,6 +301,18 @@ func normalizeKind(kind string) string {
 	kind = strings.Trim(kind, "`*_ ")
 	if idx := strings.Index(kind, " ("); idx >= 0 {
 		kind = kind[:idx]
+	}
+	switch kind {
+	case "area", "areas":
+		return "area"
+	case "okr", "okrs":
+		return "okr"
+	case "entity", "entities":
+		return "entity"
+	case "organization", "organizations", "company", "companies":
+		return "organization"
+	case "tool", "tools":
+		return "tool"
 	}
 	if strings.HasPrefix(kind, "project") {
 		return "project"
@@ -236,17 +382,6 @@ func (v *Vault) SelectLayout(style string) error {
 	if style != LayoutWiki && style != LayoutObsidian {
 		return fmt.Errorf("invalid layout %q", style)
 	}
-	folders := defaultFolders(style, v.root)
-	if data, err := v.readFile("_CLAUDE.md", nil); err == nil {
-		for key, value := range parseFolderMap(string(data), style) {
-			folders[key] = value
-		}
-	}
-	if data, exists, err := v.current(".llm-wiki/manual.md"); err == nil && exists {
-		for key, value := range parseFolderMap(string(data), style) {
-			folders[key] = value
-		}
-	}
-	v.layout = Layout{Style: style, Folders: folders}
+	v.layout = inheritedLayout(v, style)
 	return nil
 }

@@ -531,3 +531,123 @@ func TestExplicitLayoutResolvesAmbiguityPreservesFolderMap(t *testing.T) {
 		t.Fatal("accepted invalid style")
 	}
 }
+
+func TestLayoutAreaEntityOKRPrecedence(t *testing.T) {
+	for _, tc := range []struct{ style, manual, kind, want string }{
+		{LayoutWiki, "", "area", "wiki/areas"}, {LayoutWiki, "", "okr", "wiki/okrs"},
+		{LayoutWiki, "", "entity", "wiki/entities"}, {LayoutWiki, "", "person", "wiki/entities"},
+		{LayoutWiki, "", "company", "wiki/entities"}, {LayoutWiki, "", "companies", "wiki/entities"},
+		{LayoutWiki, "", "tool", "wiki/entities"}, {LayoutObsidian, "", "area", "Areas"},
+		{LayoutObsidian, "", "okr", "OKRs"}, {LayoutObsidian, "", "entity", "Entities"},
+		{LayoutObsidian, "", "person", "People"}, {LayoutObsidian, "", "organization", "Companies"},
+		{LayoutObsidian, "", "tool", "Tools"},
+		{LayoutObsidian, "| entity | Shared |", "person", "Shared"},
+		{LayoutObsidian, "| entity | Shared |\n| person | Humans |", "person", "Humans"},
+		{LayoutWiki, "| companies | Orgs |", "organization", "Orgs"},
+	} {
+		t.Run(tc.style+tc.kind+tc.manual, func(t *testing.T) {
+			root := t.TempDir()
+			if tc.manual != "" {
+				if err := os.WriteFile(filepath.Join(root, "_CLAUDE.md"), []byte("## Folder Map\n| Type | Folder |\n| --- | --- |\n"+tc.manual), 0600); err != nil {
+					t.Fatal(err)
+				}
+			}
+			v, err := Open(root)
+			if err != nil {
+				t.Fatal(err)
+			}
+			defer v.Close()
+			if err = v.SelectLayout(tc.style); err != nil {
+				t.Fatal(err)
+			}
+			got, err := v.Layout().ResolveFolder(tc.kind)
+			if err != nil || got != tc.want {
+				t.Fatalf("got=%q want=%q err=%v", got, tc.want, err)
+			}
+			if _, err = os.Stat(filepath.Join(root, tc.want)); !os.IsNotExist(err) {
+				t.Fatalf("resolving folder created it: %v", err)
+			}
+		})
+	}
+}
+
+func TestLayoutInvalidExplicitFolderDoesNotFallback(t *testing.T) {
+	for _, dest := range []string{".llm-wiki/state", "/outside", "../outside", ""} {
+		t.Run(dest, func(t *testing.T) {
+			root := t.TempDir()
+			os.WriteFile(filepath.Join(root, "_CLAUDE.md"), []byte("## Folder Map\n| Type | Folder |\n| --- | --- |\n| area | "+dest+" |\n| project | Works |"), 0600)
+			v, err := Open(root)
+			if err != nil {
+				t.Fatal(err)
+			}
+			defer v.Close()
+			l := v.Layout()
+			if got, e := l.ResolveFolder("area"); e == nil || got != "" {
+				t.Fatalf("invalid map fell back: %q %v", got, e)
+			}
+			if got, e := l.ResolveFolder("project"); e != nil || got != "Works" {
+				t.Fatalf("other key blocked: %q %v", got, e)
+			}
+			l.FolderErrors["area"] = "changed"
+			if v.Layout().FolderErrors["area"] == "changed" {
+				t.Fatal("clone shares errors")
+			}
+			l.Folders["project"] = "changed"
+			if v.Layout().Folders["project"] == "changed" {
+				t.Fatal("clone shares folders")
+			}
+			os.Mkdir(filepath.Join(root, ".llm-wiki"), 0700)
+			os.WriteFile(filepath.Join(root, ".llm-wiki/manual.md"), []byte("## Folder Map\n| Type | Folder |\n| --- | --- |\n| area | New Areas |"), 0600)
+			if err = v.SelectLayout(LayoutWiki); err != nil {
+				t.Fatal(err)
+			}
+			if got, e := v.Layout().ResolveFolder("area"); e != nil || got != "New Areas" {
+				t.Fatalf("manual override: %q %v", got, e)
+			}
+		})
+	}
+	root := t.TempDir()
+	os.Mkdir(filepath.Join(root, "wiki"), 0700)
+	os.Mkdir(filepath.Join(root, "Projects"), 0700)
+	v, err := Open(root)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer v.Close()
+	if _, err = v.Layout().ResolveFolder("area"); err == nil {
+		t.Fatal("ambiguous layout fell back")
+	}
+}
+
+func TestLayoutMappedFolderFilesystemValidity(t *testing.T) {
+	root := t.TempDir()
+	if err := os.WriteFile(filepath.Join(root, "Blocked"), []byte("file"), 0600); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.Mkdir(filepath.Join(root, "Existing"), 0700); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.Symlink("Blocked", filepath.Join(root, "FileAlias")); err != nil {
+		t.Fatal(err)
+	}
+	for _, tc := range []struct {
+		folder string
+		valid  bool
+	}{{"Blocked", false}, {"Blocked/sub", false}, {"FileAlias", false}, {"Existing", true}, {"NotYet/areas", true}} {
+		t.Run(tc.folder, func(t *testing.T) {
+			os.WriteFile(filepath.Join(root, "_CLAUDE.md"), []byte("## Folder Map\n| Type | Folder |\n| --- | --- |\n| area | "+tc.folder+" |\n| project | Existing |"), 0600)
+			v, err := Open(root)
+			if err != nil {
+				t.Fatal(err)
+			}
+			defer v.Close()
+			got, err := v.Layout().ResolveFolder("area")
+			if (err == nil) != tc.valid {
+				t.Fatalf("folder=%q err=%v want valid=%v", got, err, tc.valid)
+			}
+			if valid, e := v.Layout().ResolveFolder("project"); e != nil || valid != "Existing" {
+				t.Fatalf("unrelated mapping blocked %s %v", valid, e)
+			}
+		})
+	}
+}

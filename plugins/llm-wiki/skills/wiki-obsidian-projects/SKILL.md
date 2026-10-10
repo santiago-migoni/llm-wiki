@@ -13,6 +13,13 @@ Run this workflow only when the user explicitly invokes it or clearly asks for t
 2. Por cada proyecto, lee estado y actividad; ignora `## Last overview` previo para no dar feedback de actividad. Si `repo:` es accesible, consulta Git reciente/estado y primera nota TODO/NOTES existente. Si no es repo, falta o falla, declara fuente omitida.
 3. Resume status/last session/next action/blocker, preferencia por evidencia más reciente. Ordena active, stalled, idle, archived; actualiza solo `## Last overview` con fecha/fuente.
 
+## Áreas opcionales
+
+Si la solicitud o convención adoptada activa áreas en este alcance, sigue
+[areas.md](../../references/areas.md) para consulta, propósito, ambigüedad y enlaces
+canónicos sin duplicar la unidad. Sin ese modo, conserva el flujo previo.
+Recupera áreas existentes para el overview cuando se pide; cualquier vínculo nuevo queda dentro de `## Last overview` y de su permiso. No reclasifiques ni propagues a diaria/índice.
+
 ## Salida
 
 Salida: bloque por proyecto con status, repo, vault note, last session, next action y blocker; un apartado de repos no rastreados si aplica.

@@ -4,12 +4,15 @@ status: approved
 version: v003
 responsible: Usuario promotor del proyecto
 created_at: "2026-10-08"
-updated_at: "2026-10-08"
+updated_at: "2026-10-10"
 reviewed_at: "2026-10-08"
 approval_reference: "D-005 (dirección sin cambios); D-006 (nombre y referencia); D-007 (Codex sin proveedores externos) — Historial de decisiones"
 ---
 
 # Constitución de llm-wiki
+
+Entrega relacionada: **v0.2.0**; runtime/manifiestos `0.2.0`.
+[Changelog](../../CHANGELOG.md) y [evidencia de áreas](evidence/2026-10-10-areas.md).
 
 ## Misión
 

@@ -1,0 +1,43 @@
+{
+  "version": "0.2.0",
+  "date": "2026-10-10",
+  "status": "component_verified",
+  "source_commit": "22194406f7d9d7137b3f8d38fcf4824b98e6897a",
+  "source_tree_sha256": "cefa3d7a443401980fd9f23dd72f340e1699c63b433bf1a106fe32df3eb2d19c",
+  "binary_sha256": "556600690bda3d338184d621a60f38875545692ad196b0a2f886899f6f1e53ce",
+  "runtime_dependencies": [],
+  "architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "signature": "ad-hoc; codesign --verify --strict passed",
+  "tests": {
+    "runtime_race": "passed",
+    "vet": "passed",
+    "packaged_MCP_system_PATH": "passed",
+    "package_manifest_runtime_version": "passed",
+    "new_skills_catalog": "passed",
+    "area_reader_after_process_restart": "passed",
+    "previous_package_process_reads_preserve_state": "passed",
+    "workflow_instruction_pressure": "simulated proposals only",
+    "final_review": "initial three Important and PR three P2 corrected; ordered-list regression corrected",
+    "PR_review_fixes": "three P2 fixed; packaged reproductions passed"
+  },
+  "pending": [
+    "installed Codex Desktop workflows",
+    "two real Codex chats",
+    "Intel execution",
+    "EXI-002 and EXI-003 user outcomes"
+  ],
+  "evidence": "docs/superpowers/evidence/2026-10-10-areas.md",
+  "matrix": "tests/acceptance/areas-cases.json",
+  "installed": false,
+  "published": false,
+  "distribution": {
+    "repository": "https://github.com/santiago-migoni/llm-wiki",
+    "git_tag": "v0.2.0",
+    "channel": "git",
+    "github_release_created": false
+  },
+  "publication_scope": "GitHub Release or plugin directory"
+}

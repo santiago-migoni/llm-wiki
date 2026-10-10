@@ -13,6 +13,13 @@ Run this workflow only when the user explicitly invokes it or clearly asks for t
 2. Busca tema, alias y backlinks; si es la misma idea, añade contexto a la nota existente sin duplicarla. Si es ambigua, enseña matches y pregunta.
 3. Crea nota breve con status `captured`, fecha, idea en palabras del usuario y contexto fuente; captura rápida no expande un brief largo. Enlaza desde diario.
 
+## Áreas opcionales
+
+Si la solicitud o convención adoptada activa áreas en este alcance, sigue
+[areas.md](../../references/areas.md) para consulta, propósito, ambigüedad y enlaces
+canónicos sin duplicar la unidad. Sin ese modo, conserva el flujo previo.
+Clasifica la misma idea capturada; conserva brevedad y diaria común. No añade tarjetas ni registros paralelos por área.
+
 ## Salida
 
 Salida: ruta/link de la idea y diaria; reporta si creó una nota o enriqueció una existente.

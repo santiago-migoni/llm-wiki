@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/santiago-migoni/llm-wiki/internal/config"
 	"github.com/santiago-migoni/llm-wiki/internal/health"
+	"github.com/santiago-migoni/llm-wiki/internal/vault"
 	"os"
 	"path/filepath"
 	"strings"
@@ -227,5 +228,102 @@ func TestSearchDefaultsReindexAndEvaluationDoNotWriteNotes(t *testing.T) {
 	entries, _ := os.ReadDir(root)
 	if len(entries) != 2 {
 		t.Fatal("evaluation generated report/cases implicitly")
+	}
+}
+
+func TestListAreasContractAndPartialError(t *testing.T) {
+	root := t.TempDir()
+	os.MkdirAll(filepath.Join(root, "wiki/areas"), 0700)
+	os.WriteFile(filepath.Join(root, "wiki/areas/One.md"), []byte("---\ntype: area\naliases: First\n---\n# One"), 0600)
+	registry, err := config.Open(t.TempDir())
+	if err != nil {
+		t.Fatal(err)
+	}
+	ref, err := registry.SelectWithTimezone(t.TempDir(), root, "UTC")
+	if err != nil {
+		t.Fatal(err)
+	}
+	r := Runtime{Registry: registry}
+	for _, args := range []string{`{}`, `{"vault_id":"unknown"}`, `{"vault_id":"` + ref.ID + `","path":"wiki/areas"}`} {
+		if _, err = r.Call(context.Background(), "wiki_list_areas", json.RawMessage(args)); err == nil {
+			t.Fatalf("accepted %s", args)
+		}
+	}
+	args := json.RawMessage(`{"vault_id":"` + ref.ID + `"}`)
+	raw, err := r.Call(context.Background(), "wiki_list_areas", args)
+	if err != nil {
+		t.Fatal(err)
+	}
+	got := raw.(vault.AreaListResult)
+	if !got.Complete || len(got.Areas) != 1 || got.Areas[0].Path != "wiki/areas/One.md" || got.Areas[0].Name != "One" {
+		t.Fatalf("%+v", got)
+	}
+	os.WriteFile(filepath.Join(root, "wiki/areas/Legacy.md"), []byte("# Unknown"), 0600)
+	raw, err = r.Call(context.Background(), "wiki_list_areas", args)
+	if err == nil {
+		t.Fatal("partial succeeded")
+	}
+	got = raw.(vault.AreaListResult)
+	if got.Complete || len(got.Areas) != 1 || len(got.Diagnostics) == 0 {
+		t.Fatalf("lost partial: %+v", got)
+	}
+	os.WriteFile(filepath.Join(root, "_CLAUDE.md"), []byte("## Folder Map\n| Type | Folder |\n| --- | --- |\n| area | ../outside |"), 0600)
+	raw, err = r.Call(context.Background(), "wiki_list_areas", args)
+	if err == nil || raw.(vault.AreaListResult).Folder != "" {
+		t.Fatalf("invalid map %v %v", raw, err)
+	}
+	os.Remove(filepath.Join(root, "_CLAUDE.md"))
+	os.Mkdir(filepath.Join(root, "Projects"), 0700)
+	if _, err = r.Call(context.Background(), "wiki_list_areas", args); err == nil {
+		t.Fatal("ambiguous layout succeeded")
+	}
+	os.Remove(filepath.Join(root, "Projects"))
+	os.Symlink(".", filepath.Join(root, "cycle"))
+	raw, err = r.Call(context.Background(), "wiki_list_areas", args)
+	if err == nil || raw.(vault.AreaListResult).Complete {
+		t.Fatal("scan exclusion accepted")
+	}
+	if b, _ := os.ReadFile(filepath.Join(root, "wiki/areas/One.md")); string(b) != "---\ntype: area\naliases: First\n---\n# One" {
+		t.Fatal("reader changed note")
+	}
+}
+
+func TestAreaInventoryRejectsUnreadableContextMap(t *testing.T) {
+	root := t.TempDir()
+	if err := os.Mkdir(filepath.Join(root, ".llm-wiki"), 0700); err != nil {
+		t.Fatal(err)
+	}
+	manual := filepath.Join(root, ".llm-wiki/manual.md")
+	if err := os.WriteFile(manual, []byte(strings.Repeat("x", vault.MaxFileBytes+1)), 0600); err != nil {
+		t.Fatal(err)
+	}
+	registry, err := config.Open(t.TempDir())
+	if err != nil {
+		t.Fatal(err)
+	}
+	ref, err := registry.SelectWithTimezone(t.TempDir(), root, "UTC")
+	if err != nil {
+		t.Fatal(err)
+	}
+	r := Runtime{Registry: registry}
+	args, _ := json.Marshal(map[string]string{"vault_id": ref.ID})
+	ctxResult, err := r.Call(context.Background(), "wiki_get_context", args)
+	if err != nil {
+		t.Fatal(err)
+	}
+	layout := ctxResult.(map[string]any)["layout"].(vault.Layout)
+	if layout.MapErrors[".llm-wiki/manual.md"] == "" {
+		t.Fatalf("context lost source failure: %+v", layout)
+	}
+	result, err := r.Call(context.Background(), "wiki_list_areas", args)
+	if err == nil || result.(vault.AreaListResult).Complete {
+		t.Fatalf("unreadable map allowed absence: %+v %v", result, err)
+	}
+	if err := os.Remove(manual); err != nil {
+		t.Fatal(err)
+	}
+	result, err = r.Call(context.Background(), "wiki_list_areas", args)
+	if err != nil || !result.(vault.AreaListResult).Complete {
+		t.Fatalf("legitimate missing map: %+v %v", result, err)
 	}
 }
