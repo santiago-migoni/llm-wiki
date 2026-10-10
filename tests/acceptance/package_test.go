@@ -52,10 +52,10 @@ func TestPackagedBinaryWithoutDevelopmentToolchain(t *testing.T) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 	launchIndex := 0
-	connect := func() *mcp.ClientSession {
+	connect := func(launchRoot string) *mcp.ClientSession {
 		descriptor := []string{"mcp.json", ".mcp.json"}[launchIndex%2]
 		launchIndex++
-		data, err := os.ReadFile(filepath.Join(root, descriptor))
+		data, err := os.ReadFile(filepath.Join(launchRoot, descriptor))
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -72,7 +72,14 @@ func TestPackagedBinaryWithoutDevelopmentToolchain(t *testing.T) {
 		// The state override isolates test data; executable, cwd and serve come
 		// directly from the descriptor as the host consumes them.
 		cmd := exec.Command(server.Command, append(server.Args, "--state-dir", state)...)
-		cmd.Dir = filepath.Join(root, server.Cwd)
+		cmd.Dir = filepath.Join(launchRoot, server.Cwd)
+		if launchRoot != root {
+			// Legacy 0.1.0 is exercised only for runtime/state compatibility using
+			// its known absolute executable. This does not validate its host launch
+			// descriptor, which predates the portable command/cwd correction.
+			cmd = exec.Command(filepath.Join(launchRoot, "bin/llm-wiki"), "serve", "--state-dir", state)
+			cmd.Dir = launchRoot
+		}
 		cmd.Env = []string{"PATH=/usr/bin:/bin"}
 		client := mcp.NewClient(&mcp.Implementation{Name: "isolated-package", Version: "1"}, nil)
 		session, e := client.Connect(ctx, &mcp.CommandTransport{Command: cmd}, nil)
@@ -81,7 +88,7 @@ func TestPackagedBinaryWithoutDevelopmentToolchain(t *testing.T) {
 		}
 		return session
 	}
-	session := connect()
+	session := connect(root)
 	manifestBytes, err := os.ReadFile(filepath.Join(root, "plugin.json"))
 	if err != nil {
 		t.Fatal(err)
@@ -137,7 +144,7 @@ func TestPackagedBinaryWithoutDevelopmentToolchain(t *testing.T) {
 		t.Fatal("package or user catalog missing")
 	}
 	session.Close()
-	session = connect()
+	session = connect(root)
 	defer session.Close()
 	r = call("wiki_read_note", map[string]any{"path": "Decision.md"})
 	b, _ = json.Marshal(r.StructuredContent)
@@ -198,8 +205,14 @@ func TestPackagedBinaryWithoutDevelopmentToolchain(t *testing.T) {
 		}
 		before := snapshot()
 		for _, packageRoot := range []string{previous, root, previous, root} {
-			binary = filepath.Join(packageRoot, "bin/llm-wiki")
-			session = connect()
+			session = connect(packageRoot)
+			wantVersion := manifest.Version
+			if packageRoot == previous {
+				wantVersion = "0.1.0"
+			}
+			if info := session.InitializeResult().ServerInfo; info.Name != "llm-wiki" || info.Version != wantVersion {
+				t.Fatalf("package switch started wrong runtime: got %+v, want llm-wiki %s", info, wantVersion)
+			}
 			call("wiki_read_note", map[string]any{"path": "Decision.md"})
 			call("wiki_get_skill", map[string]any{"name": "custom"})
 			session.Close()
