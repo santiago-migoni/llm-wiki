@@ -31,7 +31,18 @@
   ],
   "evidence": "docs/superpowers/evidence/2026-10-10-areas.md",
   "matrix": "tests/acceptance/areas-cases.json",
-  "installed": false,
+  "installed": true,
+  "installation_scope": "CLI plugin inventory reports installed and enabled 0.2.0; installed files match packaged binary; Desktop MCP tools unavailable",
+  "desktop_attempt": {
+    "date": "2026-10-10",
+    "status": "blocked",
+    "local_chats_checked": 2,
+    "runtime_tools_exposed_per_chat": [0, 0],
+    "workflow_cases_executed": 0,
+    "vault_continuity_verified": false,
+    "cause": "Undetermined: wiki_* tools absent in both independent chats",
+    "evidence": "docs/superpowers/evidence/2026-10-10-desktop-areas.md"
+  },
   "published": false,
   "distribution": {
     "repository": "https://github.com/santiago-migoni/llm-wiki",
