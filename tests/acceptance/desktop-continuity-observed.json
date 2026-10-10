@@ -1,0 +1,29 @@
+{
+  "verified": true,
+  "method": "Two existing real Desktop chats, writer MCP mutations and reader MCP recovery; stable second read pass",
+  "tools_per_chat": [
+    30,
+    30
+  ],
+  "reader_wrote": false,
+  "first_pass_snapshot": false,
+  "stable_pass": {
+    "coverage": {
+      "scanned": 20,
+      "errors": [],
+      "truncated": false
+    },
+    "areas": 2,
+    "backlinks_per_area": 12,
+    "ambiguous": 0,
+    "unresolved": 0,
+    "hashes": {
+      "wiki/projects/Nexo.md": "34284edb1409ea7f29c1e053f1af22292f6472ab330a0d523c87be458c47c358",
+      "wiki/okrs/Aprendizaje.md": "6a1180bffd0df51588c5eef1374593373779e54a92677708cd38a3a0193621da",
+      "boards/Trabajo.md": "51de61b0c4ce250f5ca24972dcaf51a504226db13f3c9cdd1a9a5e161d24ba5d",
+      "raw/Fuente A.md": "d4885ac712464dd0d092b3bc0229fd242015411d66562467721985a92101515f",
+      "wiki/areas/Exploración.md": "56e69f35fdb481dec60c6f403e1997fc245e3cc2cebc37a440293ea04db2be3b",
+      "wiki/areas/Comunidad.md": "a48d6336bd6e04deb68c0321e1622b6c4b9f4024dfbffb12db63b3035f06280f"
+    }
+  }
+}

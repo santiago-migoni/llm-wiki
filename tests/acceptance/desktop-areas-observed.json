@@ -1,0 +1,1195 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-10",
+  "host": "Codex Desktop 26.1007.21159",
+  "plugin_version": "0.2.0",
+  "installed_source_commit": "d985fa177274aac764f187a623add06e0cc4a0d2",
+  "installed_binary_sha256": "f964722942b97154ba9e12441211e69c93296998226261e6cb47ca6e8f5ddd8c",
+  "scope": "Actual MCP calls from writer Desktop chat; synthetic fixtures only. Workflow bodies are declarative, interpreted by agent. Not a standalone workflow engine or UI rendering test.",
+  "runs": [
+    {
+      "id": "project_previous_without_areas",
+      "operation_id": "desktop-project_previous_without_areas",
+      "status": "committed",
+      "before": {
+        "wiki/projects/Nexo.md": null,
+        "boards/Trabajo.md": {
+          "hash": "c6b305572bda94776ac2918ac557f68e0dc6a41fc4fee5b21dcc56833cb891b9",
+          "text": "---\nkanban-plugin: basic\nhuman-owner: Equipo sintético\n---\n\n## Backlog\n\n## In Progress\n\n## Done\n"
+        },
+        "wiki/daily/2026-10-10.md": null,
+        "index.md": {
+          "hash": "9a1968e9bd363806601d6d3caf0b10920e1dfae6531cd1db550c4a405364ddc8",
+          "text": "<!-- llm-wiki:generated:start -->\n# Índice de aceptación\n\n<!-- llm-wiki:generated:end -->\n"
+        }
+      },
+      "after": {
+        "wiki/projects/Nexo.md": {
+          "hash": "24fff0c1c197d788c5531cbc0ce00ce3eaf033306c9a2e89ced58d9ddeca6dcb",
+          "text": "---\ndate: 2026-10-10\ntype: project\ntags: [prueba]\nai-first: true\nowner: Equipo sintético\ncustom: conservar\n---\n# Nexo\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Objetivo\nDocumentar experimentos y compartir aprendizajes.\n\n## Estado\nActivo (dato del caso sintético).\n\n## Next Actions\nPreparar prototipo.\n\n## People\n\n## Key Decisions\n\n## Recent Activity\n\n## Last overview\nPendiente.\n\n## Texto humano\nConservar este párrafo y los atributos owner/custom.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        },
+        "boards/Trabajo.md": {
+          "hash": "329b15c4c8d93da7bb48a93ac00cad88937e6f28b65760eae9e693bc3587d175",
+          "text": "---\nkanban-plugin: basic\nhuman-owner: Equipo sintético\n---\n\n## Backlog\n\n- [ ] [[wiki/projects/Nexo|Nexo]] — Documentar experimentos y compartir aprendizajes.\n\n## In Progress\n\n## Done\n"
+        },
+        "wiki/daily/2026-10-10.md": {
+          "hash": "3abf66b3d75dff7436bdeb4aa2c27670e5578c7c7884788edf61b7dad645cb4d",
+          "text": "---\ndate: 2026-10-10\ntype: daily\ntags: [prueba]\nai-first: true\n---\n# 2026-10-10\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Today\nSin tareas con vencimiento todavía.\n\n## Interactions\n\n## Work\n- Proyecto [[wiki/projects/Nexo]] creado; próximo paso: preparar prototipo.\n\n## Notes\n\n## Calendar\nNo consultado; sin eventos inferidos.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        },
+        "index.md": {
+          "hash": "fbd40c468e1a31c874e2b46c20ed0d80a5dfab049224bf7b6d525ae9209250c0",
+          "text": "<!-- llm-wiki:generated:start -->\n# Índice de aceptación\n\n- [[wiki/projects/Nexo]]\n<!-- llm-wiki:generated:end -->\n"
+        }
+      }
+    },
+    {
+      "id": "projects_previous_without_areas",
+      "operation_id": "desktop-projects_previous_without_areas",
+      "status": "committed",
+      "before": {
+        "wiki/projects/Nexo.md": {
+          "hash": "24fff0c1c197d788c5531cbc0ce00ce3eaf033306c9a2e89ced58d9ddeca6dcb",
+          "text": "---\ndate: 2026-10-10\ntype: project\ntags: [prueba]\nai-first: true\nowner: Equipo sintético\ncustom: conservar\n---\n# Nexo\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Objetivo\nDocumentar experimentos y compartir aprendizajes.\n\n## Estado\nActivo (dato del caso sintético).\n\n## Next Actions\nPreparar prototipo.\n\n## People\n\n## Key Decisions\n\n## Recent Activity\n\n## Last overview\nPendiente.\n\n## Texto humano\nConservar este párrafo y los atributos owner/custom.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        }
+      },
+      "after": {
+        "wiki/projects/Nexo.md": {
+          "hash": "2ce798783ff6121dd234d87ade4ee91e6b47de44506841758bdd3bec0d079c7a",
+          "text": "---\ndate: 2026-10-10\ntype: project\ntags: [prueba]\nai-first: true\nowner: Equipo sintético\ncustom: conservar\n---\n# Nexo\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Objetivo\nDocumentar experimentos y compartir aprendizajes.\n\n## Estado\nActivo (dato del caso sintético).\n\n## Next Actions\nPreparar prototipo.\n\n## People\n\n## Key Decisions\n\n## Recent Activity\n\n## Last overview\n2026-10-10: activo; próximo paso explícito: preparar prototipo. No hay fecha límite proporcionada.\n\n## Texto humano\nConservar este párrafo y los atributos owner/custom.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        }
+      }
+    },
+    {
+      "id": "person_previous_without_areas",
+      "operation_id": "desktop-person_previous_without_areas",
+      "status": "committed",
+      "before": {
+        "wiki/entities/Ada.md": null,
+        "wiki/projects/Nexo.md": {
+          "hash": "2ce798783ff6121dd234d87ade4ee91e6b47de44506841758bdd3bec0d079c7a",
+          "text": "---\ndate: 2026-10-10\ntype: project\ntags: [prueba]\nai-first: true\nowner: Equipo sintético\ncustom: conservar\n---\n# Nexo\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Objetivo\nDocumentar experimentos y compartir aprendizajes.\n\n## Estado\nActivo (dato del caso sintético).\n\n## Next Actions\nPreparar prototipo.\n\n## People\n\n## Key Decisions\n\n## Recent Activity\n\n## Last overview\n2026-10-10: activo; próximo paso explícito: preparar prototipo. No hay fecha límite proporcionada.\n\n## Texto humano\nConservar este párrafo y los atributos owner/custom.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        },
+        "wiki/daily/2026-10-10.md": {
+          "hash": "3abf66b3d75dff7436bdeb4aa2c27670e5578c7c7884788edf61b7dad645cb4d",
+          "text": "---\ndate: 2026-10-10\ntype: daily\ntags: [prueba]\nai-first: true\n---\n# 2026-10-10\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Today\nSin tareas con vencimiento todavía.\n\n## Interactions\n\n## Work\n- Proyecto [[wiki/projects/Nexo]] creado; próximo paso: preparar prototipo.\n\n## Notes\n\n## Calendar\nNo consultado; sin eventos inferidos.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        },
+        "index.md": {
+          "hash": "fbd40c468e1a31c874e2b46c20ed0d80a5dfab049224bf7b6d525ae9209250c0",
+          "text": "<!-- llm-wiki:generated:start -->\n# Índice de aceptación\n\n- [[wiki/projects/Nexo]]\n<!-- llm-wiki:generated:end -->\n"
+        }
+      },
+      "after": {
+        "wiki/entities/Ada.md": {
+          "hash": "0c85d4960eb7cfff545fc389f7359aabdcd5e366287fd76262ef92bc22b9d28b",
+          "text": "---\ndate: 2026-10-10\ntype: person\ntags: [prueba]\nai-first: true\nhuman-label: conservar\n---\n# Ada\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Contexto\nColaboradora del equipo sintético. Contacto: pendiente.\n\n## Interactions\n- 2026-10-10: registrada como participante del proyecto [[wiki/projects/Nexo]].\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        },
+        "wiki/projects/Nexo.md": {
+          "hash": "38d01e184e7cde5f4e3058b7a90c1ff27cde16508d5c776d9382fc32881366ef",
+          "text": "---\ndate: 2026-10-10\ntype: project\ntags: [prueba]\nai-first: true\nowner: Equipo sintético\ncustom: conservar\n---\n# Nexo\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Objetivo\nDocumentar experimentos y compartir aprendizajes.\n\n## Estado\nActivo (dato del caso sintético).\n\n## Next Actions\nPreparar prototipo.\n\n## People\n- [[wiki/entities/Ada]]\n\n## Key Decisions\n\n## Recent Activity\n\n## Last overview\n2026-10-10: activo; próximo paso explícito: preparar prototipo. No hay fecha límite proporcionada.\n\n## Texto humano\nConservar este párrafo y los atributos owner/custom.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        },
+        "wiki/daily/2026-10-10.md": {
+          "hash": "cfada34356d6c9012d8fc6549fd617ff4a33c4a1c1078b61cc3005d4b8cdee3f",
+          "text": "---\ndate: 2026-10-10\ntype: daily\ntags: [prueba]\nai-first: true\n---\n# 2026-10-10\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Today\nSin tareas con vencimiento todavía.\n\n## Interactions\n- Registrada [[wiki/entities/Ada]], colaboradora sintética de [[wiki/projects/Nexo]].\n\n## Work\n- Proyecto [[wiki/projects/Nexo]] creado; próximo paso: preparar prototipo.\n\n## Notes\n\n## Calendar\nNo consultado; sin eventos inferidos.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        },
+        "index.md": {
+          "hash": "a515057bf691d078d3bebf864be1e0f6c5f38c4359698011df96b7e35514b484",
+          "text": "<!-- llm-wiki:generated:start -->\n# Índice de aceptación\n\n- [[wiki/projects/Nexo]]\n- [[wiki/entities/Ada]]\n<!-- llm-wiki:generated:end -->\n"
+        }
+      }
+    },
+    {
+      "id": "capture_previous_without_areas",
+      "operation_id": "desktop-capture_previous_without_areas",
+      "status": "committed",
+      "after": {
+        "wiki/concepts/Idea.md": {
+          "hash": "f62e1692f55602955c485f66ab1bbc360826008b36d7507a9129340ea0d67dbc",
+          "text": "---\ndate: 2026-10-10\ntype: idea\ntags: [prueba]\nai-first: true\n---\n# Idea\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Idea\nRegistrar la hipótesis antes de probar un prototipo.\n\nEstado: captured.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        },
+        "wiki/daily/2026-10-10.md": {
+          "text": "---\ndate: 2026-10-10\ntype: daily\ntags: [prueba]\nai-first: true\n---\n# 2026-10-10\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Today\nSin tareas con vencimiento todavía.\n\n## Interactions\n- Registrada [[wiki/entities/Ada]], colaboradora sintética de [[wiki/projects/Nexo]].\n\n## Work\n- Proyecto [[wiki/projects/Nexo]] creado; próximo paso: preparar prototipo.\n\n## Notes\n\n## Calendar\nNo consultado; sin eventos inferidos.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n<!-- llm-wiki:generated:start -->\nCapture\n\n- [[wiki/concepts/Idea]]\n<!-- llm-wiki:generated:end -->\n",
+          "hash": "ec394ff68cd71db5e22be42ffe8016a67f263f29902fd83c10085376da2d28c6",
+          "next_offset": -1,
+          "truncated": false
+        }
+      }
+    },
+    {
+      "id": "save_previous_without_areas",
+      "operation_id": "desktop-save_previous_without_areas",
+      "status": "committed",
+      "before": {
+        "wiki/projects/Nexo.md": {
+          "hash": "38d01e184e7cde5f4e3058b7a90c1ff27cde16508d5c776d9382fc32881366ef",
+          "text": "---\ndate: 2026-10-10\ntype: project\ntags: [prueba]\nai-first: true\nowner: Equipo sintético\ncustom: conservar\n---\n# Nexo\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Objetivo\nDocumentar experimentos y compartir aprendizajes.\n\n## Estado\nActivo (dato del caso sintético).\n\n## Next Actions\nPreparar prototipo.\n\n## People\n- [[wiki/entities/Ada]]\n\n## Key Decisions\n\n## Recent Activity\n\n## Last overview\n2026-10-10: activo; próximo paso explícito: preparar prototipo. No hay fecha límite proporcionada.\n\n## Texto humano\nConservar este párrafo y los atributos owner/custom.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        },
+        "wiki/daily/2026-10-10.md": {
+          "hash": "ec394ff68cd71db5e22be42ffe8016a67f263f29902fd83c10085376da2d28c6",
+          "text": "---\ndate: 2026-10-10\ntype: daily\ntags: [prueba]\nai-first: true\n---\n# 2026-10-10\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Today\nSin tareas con vencimiento todavía.\n\n## Interactions\n- Registrada [[wiki/entities/Ada]], colaboradora sintética de [[wiki/projects/Nexo]].\n\n## Work\n- Proyecto [[wiki/projects/Nexo]] creado; próximo paso: preparar prototipo.\n\n## Notes\n\n## Calendar\nNo consultado; sin eventos inferidos.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n<!-- llm-wiki:generated:start -->\nCapture\n\n- [[wiki/concepts/Idea]]\n<!-- llm-wiki:generated:end -->\n"
+        }
+      },
+      "after": {
+        "wiki/projects/Nexo.md": {
+          "hash": "e8b1b9a5328b8f14b6d24d30fb75ec4be8ba0b97f2516168a409c933f040263a",
+          "text": "---\ndate: 2026-10-10\ntype: project\ntags: [prueba]\nai-first: true\nowner: Equipo sintético\ncustom: conservar\n---\n# Nexo\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Objetivo\nDocumentar experimentos y compartir aprendizajes.\n\n## Estado\nActivo (dato del caso sintético).\n\n## Next Actions\nPreparar prototipo.\n\n## People\n- [[wiki/entities/Ada]]\n\n## Key Decisions\n- 2026-10-10: decisión explícita del fixture: registrar hipótesis antes de probar.\n\n## Recent Activity\n\n## Last overview\n2026-10-10: activo; próximo paso explícito: preparar prototipo. No hay fecha límite proporcionada.\n\n## Texto humano\nConservar este párrafo y los atributos owner/custom.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        },
+        "wiki/daily/2026-10-10.md": {
+          "hash": "b954a1fdd474034e2e8391d2fd849b2f31f2982473d4d812cbef04831b412201",
+          "text": "---\ndate: 2026-10-10\ntype: daily\ntags: [prueba]\nai-first: true\n---\n# 2026-10-10\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Today\nSin tareas con vencimiento todavía.\n\n## Interactions\n- Registrada [[wiki/entities/Ada]], colaboradora sintética de [[wiki/projects/Nexo]].\n\n## Work\n- Proyecto [[wiki/projects/Nexo]] creado; próximo paso: preparar prototipo.\n\n## Notes\n- Decisión de [[wiki/projects/Nexo]]: registrar hipótesis antes de probar.\n\n## Calendar\nNo consultado; sin eventos inferidos.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n<!-- llm-wiki:generated:start -->\nCapture\n\n- [[wiki/concepts/Idea]]\n<!-- llm-wiki:generated:end -->\n"
+        }
+      }
+    },
+    {
+      "id": "task_previous_without_areas",
+      "operation_id": "desktop-task_previous_without_areas",
+      "status": "committed",
+      "before": {
+        "boards/Trabajo.md": {
+          "hash": "329b15c4c8d93da7bb48a93ac00cad88937e6f28b65760eae9e693bc3587d175",
+          "text": "---\nkanban-plugin: basic\nhuman-owner: Equipo sintético\n---\n\n## Backlog\n\n- [ ] [[wiki/projects/Nexo|Nexo]] — Documentar experimentos y compartir aprendizajes.\n\n## In Progress\n\n## Done\n"
+        },
+        "wiki/projects/Nexo.md": {
+          "hash": "e8b1b9a5328b8f14b6d24d30fb75ec4be8ba0b97f2516168a409c933f040263a",
+          "text": "---\ndate: 2026-10-10\ntype: project\ntags: [prueba]\nai-first: true\nowner: Equipo sintético\ncustom: conservar\n---\n# Nexo\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Objetivo\nDocumentar experimentos y compartir aprendizajes.\n\n## Estado\nActivo (dato del caso sintético).\n\n## Next Actions\nPreparar prototipo.\n\n## People\n- [[wiki/entities/Ada]]\n\n## Key Decisions\n- 2026-10-10: decisión explícita del fixture: registrar hipótesis antes de probar.\n\n## Recent Activity\n\n## Last overview\n2026-10-10: activo; próximo paso explícito: preparar prototipo. No hay fecha límite proporcionada.\n\n## Texto humano\nConservar este párrafo y los atributos owner/custom.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        },
+        "wiki/daily/2026-10-10.md": {
+          "hash": "b954a1fdd474034e2e8391d2fd849b2f31f2982473d4d812cbef04831b412201",
+          "text": "---\ndate: 2026-10-10\ntype: daily\ntags: [prueba]\nai-first: true\n---\n# 2026-10-10\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Today\nSin tareas con vencimiento todavía.\n\n## Interactions\n- Registrada [[wiki/entities/Ada]], colaboradora sintética de [[wiki/projects/Nexo]].\n\n## Work\n- Proyecto [[wiki/projects/Nexo]] creado; próximo paso: preparar prototipo.\n\n## Notes\n- Decisión de [[wiki/projects/Nexo]]: registrar hipótesis antes de probar.\n\n## Calendar\nNo consultado; sin eventos inferidos.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n<!-- llm-wiki:generated:start -->\nCapture\n\n- [[wiki/concepts/Idea]]\n<!-- llm-wiki:generated:end -->\n"
+        }
+      },
+      "after": {
+        "boards/Trabajo.md": {
+          "hash": "bc36c5562b6b9aded8622d5d8e53fe3f99efe6d05b647e544659fb7e2a16668c",
+          "text": "---\nkanban-plugin: basic\nhuman-owner: Equipo sintético\n---\n\n## Backlog\n\n- [ ] Preparar prototipo @{2026-10-10} — [[wiki/projects/Nexo]]\n\n- [ ] [[wiki/projects/Nexo|Nexo]] — Documentar experimentos y compartir aprendizajes.\n\n## In Progress\n\n## Done\n"
+        },
+        "wiki/projects/Nexo.md": {
+          "hash": "b2ce7e93cb15a7b97d7a292abcfa9d60b660efbf09c49c1e05a88499b3efabd3",
+          "text": "---\ndate: 2026-10-10\ntype: project\ntags: [prueba]\nai-first: true\nowner: Equipo sintético\ncustom: conservar\n---\n# Nexo\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Objetivo\nDocumentar experimentos y compartir aprendizajes.\n\n## Estado\nActivo (dato del caso sintético).\n\n## Next Actions\nPreparar prototipo (tarea corta en [[boards/Trabajo]], vencimiento proporcionado: 2026-10-10; prioridad pendiente).\n\n## People\n- [[wiki/entities/Ada]]\n\n## Key Decisions\n- 2026-10-10: decisión explícita del fixture: registrar hipótesis antes de probar.\n\n## Recent Activity\n\n## Last overview\n2026-10-10: activo; próximo paso explícito: preparar prototipo. No hay fecha límite proporcionada.\n\n## Texto humano\nConservar este párrafo y los atributos owner/custom.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        },
+        "wiki/daily/2026-10-10.md": {
+          "hash": "7a606d7d598fa6bdeb6c678e28e105abd7cc380339ede76acf96a322ff0fae39",
+          "text": "---\ndate: 2026-10-10\ntype: daily\ntags: [prueba]\nai-first: true\n---\n# 2026-10-10\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Today\n- [ ] Preparar prototipo — [[boards/Trabajo]] / [[wiki/projects/Nexo]]; vencimiento explícito: 2026-10-10.\n\n## Interactions\n- Registrada [[wiki/entities/Ada]], colaboradora sintética de [[wiki/projects/Nexo]].\n\n## Work\n- Proyecto [[wiki/projects/Nexo]] creado; próximo paso: preparar prototipo.\n\n## Notes\n- Decisión de [[wiki/projects/Nexo]]: registrar hipótesis antes de probar.\n\n## Calendar\nNo consultado; sin eventos inferidos.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n<!-- llm-wiki:generated:start -->\nCapture\n\n- [[wiki/concepts/Idea]]\n<!-- llm-wiki:generated:end -->\n"
+        }
+      }
+    },
+    {
+      "id": "calendar_previous_without_areas",
+      "operation_id": "desktop-calendar_previous_without_areas",
+      "status": "committed",
+      "before": {
+        "wiki/meetings/Reunión.md": null,
+        "wiki/entities/Ada.md": {
+          "hash": "0c85d4960eb7cfff545fc389f7359aabdcd5e366287fd76262ef92bc22b9d28b",
+          "text": "---\ndate: 2026-10-10\ntype: person\ntags: [prueba]\nai-first: true\nhuman-label: conservar\n---\n# Ada\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Contexto\nColaboradora del equipo sintético. Contacto: pendiente.\n\n## Interactions\n- 2026-10-10: registrada como participante del proyecto [[wiki/projects/Nexo]].\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        },
+        "wiki/daily/2026-10-10.md": {
+          "hash": "7a606d7d598fa6bdeb6c678e28e105abd7cc380339ede76acf96a322ff0fae39",
+          "text": "---\ndate: 2026-10-10\ntype: daily\ntags: [prueba]\nai-first: true\n---\n# 2026-10-10\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Today\n- [ ] Preparar prototipo — [[boards/Trabajo]] / [[wiki/projects/Nexo]]; vencimiento explícito: 2026-10-10.\n\n## Interactions\n- Registrada [[wiki/entities/Ada]], colaboradora sintética de [[wiki/projects/Nexo]].\n\n## Work\n- Proyecto [[wiki/projects/Nexo]] creado; próximo paso: preparar prototipo.\n\n## Notes\n- Decisión de [[wiki/projects/Nexo]]: registrar hipótesis antes de probar.\n\n## Calendar\nNo consultado; sin eventos inferidos.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n<!-- llm-wiki:generated:start -->\nCapture\n\n- [[wiki/concepts/Idea]]\n<!-- llm-wiki:generated:end -->\n"
+        }
+      },
+      "after": {
+        "wiki/meetings/Reunión.md": {
+          "hash": "ff041b5adb3611572f30b4fa1804af87abd364ac29264961f80a3b441450c455",
+          "text": "---\ndate: 2026-10-10\ntype: meeting\ntags: [prueba]\nai-first: true\n---\n# Reunión\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Details\nFecha proporcionada por el fixture: 2026-10-10, 10:00–10:30, America/Argentina/Mendoza.\nParticipante proporcionada: [[wiki/entities/Ada]]. Proyecto: [[wiki/projects/Nexo]].\nModo meeting local; calendario externo no consultado ni modificado.\n\n## Notes\nEncuentro sintético para compartir el planteo del experimento.\n\n## Decisions\nPendiente: no se proporcionaron decisiones.\n\n## Actions\nPendiente: no se proporcionaron acciones.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        },
+        "wiki/entities/Ada.md": {
+          "hash": "060c1d18767d5b1efbb7fb2884d1835090b5a9eb850f650b205f859a4fc4d336",
+          "text": "---\ndate: 2026-10-10\ntype: person\ntags: [prueba]\nai-first: true\nhuman-label: conservar\n---\n# Ada\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Contexto\nColaboradora del equipo sintético. Contacto: pendiente.\n\n## Interactions\n- 2026-10-10: participante declarada de [[wiki/meetings/Reunión]].\n- 2026-10-10: registrada como participante del proyecto [[wiki/projects/Nexo]].\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        },
+        "wiki/daily/2026-10-10.md": {
+          "hash": "b47a5103a3b2a95be8a837343ad8dbeeafce478975969efee11827253af546b9",
+          "text": "---\ndate: 2026-10-10\ntype: daily\ntags: [prueba]\nai-first: true\n---\n# 2026-10-10\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Today\n- [ ] Preparar prototipo — [[boards/Trabajo]] / [[wiki/projects/Nexo]]; vencimiento explícito: 2026-10-10.\n\n## Interactions\n- Nota local de [[wiki/meetings/Reunión]] con [[wiki/entities/Ada]]; no se creó evento remoto.\n- Registrada [[wiki/entities/Ada]], colaboradora sintética de [[wiki/projects/Nexo]].\n\n## Work\n- Proyecto [[wiki/projects/Nexo]] creado; próximo paso: preparar prototipo.\n\n## Notes\n- Decisión de [[wiki/projects/Nexo]]: registrar hipótesis antes de probar.\n\n## Calendar\nNo consultado; sin eventos inferidos.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n<!-- llm-wiki:generated:start -->\nCapture\n\n- [[wiki/concepts/Idea]]\n<!-- llm-wiki:generated:end -->\n"
+        }
+      }
+    },
+    {
+      "id": "daily_previous_without_areas",
+      "operation_id": "desktop-daily_previous_without_areas",
+      "status": "committed",
+      "before": {
+        "wiki/daily/2026-10-10.md": {
+          "hash": "b47a5103a3b2a95be8a837343ad8dbeeafce478975969efee11827253af546b9",
+          "text": "---\ndate: 2026-10-10\ntype: daily\ntags: [prueba]\nai-first: true\n---\n# 2026-10-10\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Today\n- [ ] Preparar prototipo — [[boards/Trabajo]] / [[wiki/projects/Nexo]]; vencimiento explícito: 2026-10-10.\n\n## Interactions\n- Nota local de [[wiki/meetings/Reunión]] con [[wiki/entities/Ada]]; no se creó evento remoto.\n- Registrada [[wiki/entities/Ada]], colaboradora sintética de [[wiki/projects/Nexo]].\n\n## Work\n- Proyecto [[wiki/projects/Nexo]] creado; próximo paso: preparar prototipo.\n\n## Notes\n- Decisión de [[wiki/projects/Nexo]]: registrar hipótesis antes de probar.\n\n## Calendar\nNo consultado; sin eventos inferidos.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n<!-- llm-wiki:generated:start -->\nCapture\n\n- [[wiki/concepts/Idea]]\n<!-- llm-wiki:generated:end -->\n"
+        }
+      },
+      "after": {
+        "wiki/daily/2026-10-10.md": {
+          "hash": "f915cc15c7ce989536c4884c3ade9f38c4f2a35877d301b73a86d176d764109e",
+          "text": "---\ndate: 2026-10-10\ntype: daily\ntags: [prueba]\nai-first: true\n---\n# 2026-10-10\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Today\nTareas leídas del tablero para el día explícito 2026-10-10. No hay daily de ayer; cobertura parcial del historial.\n- [ ] Preparar prototipo — [[boards/Trabajo]] / [[wiki/projects/Nexo]]; vencimiento explícito: 2026-10-10.\n\n## Interactions\n- Nota local de [[wiki/meetings/Reunión]] con [[wiki/entities/Ada]]; no se creó evento remoto.\n- Registrada [[wiki/entities/Ada]], colaboradora sintética de [[wiki/projects/Nexo]].\n\n## Work\n- Proyecto [[wiki/projects/Nexo]] creado; próximo paso: preparar prototipo.\n\n## Notes\n- Decisión de [[wiki/projects/Nexo]]: registrar hipótesis antes de probar.\n\n## Calendar\nNo consultado; sin eventos inferidos.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n<!-- llm-wiki:generated:start -->\nCapture\n\n- [[wiki/concepts/Idea]]\n<!-- llm-wiki:generated:end -->\n"
+        }
+      }
+    },
+    {
+      "id": "log_previous_without_areas",
+      "operation_id": "desktop-log_previous_without_areas",
+      "status": "committed",
+      "before": {
+        "wiki/logs/2026-10-10 - Nexo.md": null,
+        "wiki/projects/Nexo.md": {
+          "hash": "b2ce7e93cb15a7b97d7a292abcfa9d60b660efbf09c49c1e05a88499b3efabd3",
+          "text": "---\ndate: 2026-10-10\ntype: project\ntags: [prueba]\nai-first: true\nowner: Equipo sintético\ncustom: conservar\n---\n# Nexo\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Objetivo\nDocumentar experimentos y compartir aprendizajes.\n\n## Estado\nActivo (dato del caso sintético).\n\n## Next Actions\nPreparar prototipo (tarea corta en [[boards/Trabajo]], vencimiento proporcionado: 2026-10-10; prioridad pendiente).\n\n## People\n- [[wiki/entities/Ada]]\n\n## Key Decisions\n- 2026-10-10: decisión explícita del fixture: registrar hipótesis antes de probar.\n\n## Recent Activity\n\n## Last overview\n2026-10-10: activo; próximo paso explícito: preparar prototipo. No hay fecha límite proporcionada.\n\n## Texto humano\nConservar este párrafo y los atributos owner/custom.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        },
+        "wiki/daily/2026-10-10.md": {
+          "hash": "f915cc15c7ce989536c4884c3ade9f38c4f2a35877d301b73a86d176d764109e",
+          "text": "---\ndate: 2026-10-10\ntype: daily\ntags: [prueba]\nai-first: true\n---\n# 2026-10-10\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Today\nTareas leídas del tablero para el día explícito 2026-10-10. No hay daily de ayer; cobertura parcial del historial.\n- [ ] Preparar prototipo — [[boards/Trabajo]] / [[wiki/projects/Nexo]]; vencimiento explícito: 2026-10-10.\n\n## Interactions\n- Nota local de [[wiki/meetings/Reunión]] con [[wiki/entities/Ada]]; no se creó evento remoto.\n- Registrada [[wiki/entities/Ada]], colaboradora sintética de [[wiki/projects/Nexo]].\n\n## Work\n- Proyecto [[wiki/projects/Nexo]] creado; próximo paso: preparar prototipo.\n\n## Notes\n- Decisión de [[wiki/projects/Nexo]]: registrar hipótesis antes de probar.\n\n## Calendar\nNo consultado; sin eventos inferidos.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n<!-- llm-wiki:generated:start -->\nCapture\n\n- [[wiki/concepts/Idea]]\n<!-- llm-wiki:generated:end -->\n"
+        }
+      },
+      "after": {
+        "wiki/logs/2026-10-10 - Nexo.md": {
+          "hash": "4ff05faf44ce5b199c3259646dca93af6e7d5d39299c824d7fe903ff1e8a7daf",
+          "text": "---\ndate: 2026-10-10\ntype: log\ntags: [prueba]\nai-first: true\n---\n# 2026-10-10 - Nexo\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Work\nSe registró la hipótesis inicial para [[wiki/projects/Nexo]]. Fuente: entrada explícita del fixture.\n\n## Next\nPreparar prototipo (dato proporcionado); resultado del experimento pendiente.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        },
+        "wiki/projects/Nexo.md": {
+          "hash": "b02fbb61cff1675696923c5b553188bdebf6ca14b63054c60fa7e79da8b7f37c",
+          "text": "---\ndate: 2026-10-10\ntype: project\ntags: [prueba]\nai-first: true\nowner: Equipo sintético\ncustom: conservar\n---\n# Nexo\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Objetivo\nDocumentar experimentos y compartir aprendizajes.\n\n## Estado\nActivo (dato del caso sintético).\n\n## Next Actions\nPreparar prototipo (tarea corta en [[boards/Trabajo]], vencimiento proporcionado: 2026-10-10; prioridad pendiente).\n\n## People\n- [[wiki/entities/Ada]]\n\n## Key Decisions\n- 2026-10-10: decisión explícita del fixture: registrar hipótesis antes de probar.\n\n## Recent Activity\n- 2026-10-10: [[wiki/logs/2026-10-10 - Nexo]] — hipótesis inicial registrada.\n\n## Last overview\n2026-10-10: activo; próximo paso explícito: preparar prototipo. No hay fecha límite proporcionada.\n\n## Texto humano\nConservar este párrafo y los atributos owner/custom.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        },
+        "wiki/daily/2026-10-10.md": {
+          "hash": "33f54aff8e0e2164d19578a6dfd1f507faba983cc1563ee4c7787043a1768ea6",
+          "text": "---\ndate: 2026-10-10\ntype: daily\ntags: [prueba]\nai-first: true\n---\n# 2026-10-10\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Today\nTareas leídas del tablero para el día explícito 2026-10-10. No hay daily de ayer; cobertura parcial del historial.\n- [ ] Preparar prototipo — [[boards/Trabajo]] / [[wiki/projects/Nexo]]; vencimiento explícito: 2026-10-10.\n\n## Interactions\n- Nota local de [[wiki/meetings/Reunión]] con [[wiki/entities/Ada]]; no se creó evento remoto.\n- Registrada [[wiki/entities/Ada]], colaboradora sintética de [[wiki/projects/Nexo]].\n\n## Work\n- [[wiki/logs/2026-10-10 - Nexo]]: hipótesis inicial registrada.\n- Proyecto [[wiki/projects/Nexo]] creado; próximo paso: preparar prototipo.\n\n## Notes\n- Decisión de [[wiki/projects/Nexo]]: registrar hipótesis antes de probar.\n\n## Calendar\nNo consultado; sin eventos inferidos.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n<!-- llm-wiki:generated:start -->\nCapture\n\n- [[wiki/concepts/Idea]]\n<!-- llm-wiki:generated:end -->\n"
+        }
+      }
+    },
+    {
+      "id": "review_previous_without_areas",
+      "operation_id": "desktop-review_previous_without_areas",
+      "status": "committed",
+      "before": {
+        "wiki/reviews/2026-10-10.md": null,
+        "wiki/daily/2026-10-10.md": {
+          "hash": "33f54aff8e0e2164d19578a6dfd1f507faba983cc1563ee4c7787043a1768ea6",
+          "text": "---\ndate: 2026-10-10\ntype: daily\ntags: [prueba]\nai-first: true\n---\n# 2026-10-10\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Today\nTareas leídas del tablero para el día explícito 2026-10-10. No hay daily de ayer; cobertura parcial del historial.\n- [ ] Preparar prototipo — [[boards/Trabajo]] / [[wiki/projects/Nexo]]; vencimiento explícito: 2026-10-10.\n\n## Interactions\n- Nota local de [[wiki/meetings/Reunión]] con [[wiki/entities/Ada]]; no se creó evento remoto.\n- Registrada [[wiki/entities/Ada]], colaboradora sintética de [[wiki/projects/Nexo]].\n\n## Work\n- [[wiki/logs/2026-10-10 - Nexo]]: hipótesis inicial registrada.\n- Proyecto [[wiki/projects/Nexo]] creado; próximo paso: preparar prototipo.\n\n## Notes\n- Decisión de [[wiki/projects/Nexo]]: registrar hipótesis antes de probar.\n\n## Calendar\nNo consultado; sin eventos inferidos.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n<!-- llm-wiki:generated:start -->\nCapture\n\n- [[wiki/concepts/Idea]]\n<!-- llm-wiki:generated:end -->\n"
+        }
+      },
+      "after": {
+        "wiki/reviews/2026-10-10.md": {
+          "hash": "32cf248364bff0cb73501b7cb083368cd250e9888e672c0163f77cf55e6a2e34",
+          "text": "---\ndate: 2026-10-10\ntype: review\ntags: [prueba]\nai-first: true\n---\n# Revisión semanal 2026-10-10\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Periodo y cobertura\n2026-10-04..2026-10-10. Sólo existe [[wiki/daily/2026-10-10]]; faltan 04, 05, 06, 07, 08 y 09. No es una revisión completa de siete días.\n\n## Patterns\nSe registró una hipótesis y su próximo paso en [[wiki/projects/Nexo]]. No hay experimento terminado.\n\n## Questions for Future\n- ¿Qué evidencia contrastará la hipótesis de [[wiki/concepts/Idea]]?\n- ¿Qué resultado registrar en [[wiki/projects/Nexo]] tras preparar el prototipo?\n- ¿Qué aprendizaje compartir con [[wiki/entities/Ada]]?\n- ¿Qué completar en [[wiki/meetings/Reunión]] cuando existan decisiones?\n- ¿Qué cobertura falta en [[wiki/daily/2026-10-10]] para una revisión semanal completa?\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        },
+        "wiki/daily/2026-10-10.md": {
+          "hash": "2d456b96def3d467746f1006b16c8705acdc2724f545ea987cef3b94584789d4",
+          "text": "---\ndate: 2026-10-10\ntype: daily\ntags: [prueba]\nai-first: true\n---\n# 2026-10-10\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Today\nTareas leídas del tablero para el día explícito 2026-10-10. No hay daily de ayer; cobertura parcial del historial.\n- [ ] Preparar prototipo — [[boards/Trabajo]] / [[wiki/projects/Nexo]]; vencimiento explícito: 2026-10-10.\n\n## Interactions\n- Nota local de [[wiki/meetings/Reunión]] con [[wiki/entities/Ada]]; no se creó evento remoto.\n- Registrada [[wiki/entities/Ada]], colaboradora sintética de [[wiki/projects/Nexo]].\n\n## Work\n- [[wiki/logs/2026-10-10 - Nexo]]: hipótesis inicial registrada.\n- Proyecto [[wiki/projects/Nexo]] creado; próximo paso: preparar prototipo.\n\n## Notes\n- Revisión con cobertura parcial: [[wiki/reviews/2026-10-10]].\n- Decisión de [[wiki/projects/Nexo]]: registrar hipótesis antes de probar.\n\n## Calendar\nNo consultado; sin eventos inferidos.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n<!-- llm-wiki:generated:start -->\nCapture\n\n- [[wiki/concepts/Idea]]\n<!-- llm-wiki:generated:end -->\n"
+        }
+      }
+    },
+    {
+      "id": "synthesize_previous_without_areas",
+      "operation_id": "desktop-synthesize_previous_without_areas",
+      "status": "committed",
+      "before": {
+        "wiki/concepts/Synthesis - Nexo.md": null,
+        "wiki/concepts/Fuente A.md": {
+          "hash": "664de0aa4aebfc8a22c04118eac71756775c07c4a2168541785678f1febbd895",
+          "text": "---\ndate: 2026-10-10\ntype: concept\ntags: [prueba]\nai-first: true\n---\n# Fuente A\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Registro\nEn el ensayo A, registrar la hipótesis antes de probar facilitó comparar el resultado con lo esperado.\nFuente: [[raw/Fuente A]].\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        },
+        "wiki/concepts/Fuente B.md": {
+          "hash": "48307fae162554925cc4c5c16b5f201b865c013bb0e52b4a2c85cf12f46343c1",
+          "text": "---\ndate: 2026-10-10\ntype: concept\ntags: [prueba]\nai-first: true\n---\n# Fuente B\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Registro\nEn el encuentro B, registrar la hipótesis antes de probar facilitó compartir el aprendizaje con el grupo.\nFuente: [[raw/Fuente B]].\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        },
+        "index.md": {
+          "hash": "a515057bf691d078d3bebf864be1e0f6c5f38c4359698011df96b7e35514b484",
+          "text": "<!-- llm-wiki:generated:start -->\n# Índice de aceptación\n\n- [[wiki/projects/Nexo]]\n- [[wiki/entities/Ada]]\n<!-- llm-wiki:generated:end -->\n"
+        },
+        "log.md": {
+          "hash": "33c56a61a8fb56b9241bf29ecf9e975775e4490b2f87c37500c5f575c36d2520",
+          "text": "<!-- llm-wiki:generated:start -->\nOperations\n\n2026-10-10: inicialización explícita del fixture de aceptación Desktop.\n<!-- llm-wiki:generated:end -->\n"
+        },
+        "wiki/daily/2026-10-10.md": {
+          "hash": "2d456b96def3d467746f1006b16c8705acdc2724f545ea987cef3b94584789d4",
+          "text": "---\ndate: 2026-10-10\ntype: daily\ntags: [prueba]\nai-first: true\n---\n# 2026-10-10\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Today\nTareas leídas del tablero para el día explícito 2026-10-10. No hay daily de ayer; cobertura parcial del historial.\n- [ ] Preparar prototipo — [[boards/Trabajo]] / [[wiki/projects/Nexo]]; vencimiento explícito: 2026-10-10.\n\n## Interactions\n- Nota local de [[wiki/meetings/Reunión]] con [[wiki/entities/Ada]]; no se creó evento remoto.\n- Registrada [[wiki/entities/Ada]], colaboradora sintética de [[wiki/projects/Nexo]].\n\n## Work\n- [[wiki/logs/2026-10-10 - Nexo]]: hipótesis inicial registrada.\n- Proyecto [[wiki/projects/Nexo]] creado; próximo paso: preparar prototipo.\n\n## Notes\n- Revisión con cobertura parcial: [[wiki/reviews/2026-10-10]].\n- Decisión de [[wiki/projects/Nexo]]: registrar hipótesis antes de probar.\n\n## Calendar\nNo consultado; sin eventos inferidos.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n<!-- llm-wiki:generated:start -->\nCapture\n\n- [[wiki/concepts/Idea]]\n<!-- llm-wiki:generated:end -->\n"
+        }
+      },
+      "after": {
+        "wiki/concepts/Synthesis - Nexo.md": {
+          "hash": "fe1c9dfb7935b5ec52107460502a7f1dc2c346e2976fe638854cc5547c551f0d",
+          "text": "---\ndate: 2026-10-10\ntype: concept\ntags: [prueba]\nai-first: true\n---\n# Synthesis - Nexo\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Patrón candidato\nDocumentar la hipótesis antes de probar puede facilitar comparación y transferencia del aprendizaje.\n\n## Evidencia\n- Ensayo de prototipos: [[wiki/concepts/Fuente A]], B2 de [[raw/Fuente A]]; facilitó comparar lo esperado con el resultado.\n- Encuentro de colaboración: [[wiki/concepts/Fuente B]], B2 de [[raw/Fuente B]]; facilitó compartir el aprendizaje.\n\n## Inferencia y límites\nInferencia del agente, confianza media: patrón transversal sustentado por dos contextos distintos. No afirma causalidad universal. Umbral cross-pollination de dos notas satisfecho; concept-evolution no se ejecuta: no hay tres actualizaciones.\n\n## Aplicación posible\nContrastar en [[wiki/projects/Nexo]]; no es una tarea ni evento creado.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        },
+        "wiki/concepts/Fuente A.md": {
+          "hash": "6f328998c594c1d91a36437c0c5d2a7ba2f3d92f2d3e73d24a036845b67069c3",
+          "text": "---\ndate: 2026-10-10\ntype: concept\ntags: [prueba]\nai-first: true\n---\n# Fuente A\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Registro\nEn el ensayo A, registrar la hipótesis antes de probar facilitó comparar el resultado con lo esperado.\nFuente: [[raw/Fuente A]].\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n## Backlinks derivados\n- [[wiki/concepts/Synthesis - Nexo]]\n"
+        },
+        "wiki/concepts/Fuente B.md": {
+          "hash": "1cac6be5c4cc355a88a3dfef25fd2ba1a1fba0a55666f31c0b686d13934d126c",
+          "text": "---\ndate: 2026-10-10\ntype: concept\ntags: [prueba]\nai-first: true\n---\n# Fuente B\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Registro\nEn el encuentro B, registrar la hipótesis antes de probar facilitó compartir el aprendizaje con el grupo.\nFuente: [[raw/Fuente B]].\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n## Backlinks derivados\n- [[wiki/concepts/Synthesis - Nexo]]\n"
+        },
+        "index.md": {
+          "hash": "84ba7a9fd19466001e6bb3dad362c2b74c27b2c156eb47a7e6f692aae33c88e4",
+          "text": "<!-- llm-wiki:generated:start -->\n# Índice de aceptación\n\n- [[wiki/projects/Nexo]]\n- [[wiki/entities/Ada]]\n- [[wiki/concepts/Synthesis - Nexo]]\n<!-- llm-wiki:generated:end -->\n"
+        },
+        "log.md": {
+          "hash": "52a182aa5dc4ce53f7e48069d9e94d52a90d6d2de7ed74ff3ec8a48bbc3fae0e",
+          "text": "<!-- llm-wiki:generated:start -->\nOperations\n\n2026-10-10: inicialización explícita del fixture de aceptación Desktop.\n<!-- llm-wiki:generated:end -->\n\n## 2026-10-10\nSíntesis interactiva de dos fuentes sintéticas: [[wiki/concepts/Synthesis - Nexo]].\n"
+        },
+        "wiki/daily/2026-10-10.md": {
+          "hash": "fa744d082e8cf601037cae21db64ab4b9f9db9714d2b1cc1ffbb906ac1bd784e",
+          "text": "---\ndate: 2026-10-10\ntype: daily\ntags: [prueba]\nai-first: true\n---\n# 2026-10-10\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Today\nTareas leídas del tablero para el día explícito 2026-10-10. No hay daily de ayer; cobertura parcial del historial.\n- [ ] Preparar prototipo — [[boards/Trabajo]] / [[wiki/projects/Nexo]]; vencimiento explícito: 2026-10-10.\n\n## Interactions\n- Nota local de [[wiki/meetings/Reunión]] con [[wiki/entities/Ada]]; no se creó evento remoto.\n- Registrada [[wiki/entities/Ada]], colaboradora sintética de [[wiki/projects/Nexo]].\n\n## Work\n- [[wiki/logs/2026-10-10 - Nexo]]: hipótesis inicial registrada.\n- Proyecto [[wiki/projects/Nexo]] creado; próximo paso: preparar prototipo.\n\n## Notes\n- [[wiki/concepts/Synthesis - Nexo]]: patrón candidato de dos contextos.\n- Revisión con cobertura parcial: [[wiki/reviews/2026-10-10]].\n- Decisión de [[wiki/projects/Nexo]]: registrar hipótesis antes de probar.\n\n## Calendar\nNo consultado; sin eventos inferidos.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n<!-- llm-wiki:generated:start -->\nCapture\n\n- [[wiki/concepts/Idea]]\n<!-- llm-wiki:generated:end -->\n"
+        }
+      }
+    },
+    {
+      "id": "distill_previous_without_areas",
+      "operation_id": "desktop-distill_previous_without_areas",
+      "status": "committed",
+      "before": {
+        "wiki/concepts/Distillation - Fuente.md": null,
+        "wiki/concepts/Fuente A.md": {
+          "hash": "6f328998c594c1d91a36437c0c5d2a7ba2f3d92f2d3e73d24a036845b67069c3",
+          "text": "---\ndate: 2026-10-10\ntype: concept\ntags: [prueba]\nai-first: true\n---\n# Fuente A\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Registro\nEn el ensayo A, registrar la hipótesis antes de probar facilitó comparar el resultado con lo esperado.\nFuente: [[raw/Fuente A]].\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n## Backlinks derivados\n- [[wiki/concepts/Synthesis - Nexo]]\n"
+        },
+        "wiki/daily/2026-10-10.md": {
+          "hash": "fa744d082e8cf601037cae21db64ab4b9f9db9714d2b1cc1ffbb906ac1bd784e",
+          "text": "---\ndate: 2026-10-10\ntype: daily\ntags: [prueba]\nai-first: true\n---\n# 2026-10-10\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Today\nTareas leídas del tablero para el día explícito 2026-10-10. No hay daily de ayer; cobertura parcial del historial.\n- [ ] Preparar prototipo — [[boards/Trabajo]] / [[wiki/projects/Nexo]]; vencimiento explícito: 2026-10-10.\n\n## Interactions\n- Nota local de [[wiki/meetings/Reunión]] con [[wiki/entities/Ada]]; no se creó evento remoto.\n- Registrada [[wiki/entities/Ada]], colaboradora sintética de [[wiki/projects/Nexo]].\n\n## Work\n- [[wiki/logs/2026-10-10 - Nexo]]: hipótesis inicial registrada.\n- Proyecto [[wiki/projects/Nexo]] creado; próximo paso: preparar prototipo.\n\n## Notes\n- [[wiki/concepts/Synthesis - Nexo]]: patrón candidato de dos contextos.\n- Revisión con cobertura parcial: [[wiki/reviews/2026-10-10]].\n- Decisión de [[wiki/projects/Nexo]]: registrar hipótesis antes de probar.\n\n## Calendar\nNo consultado; sin eventos inferidos.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n<!-- llm-wiki:generated:start -->\nCapture\n\n- [[wiki/concepts/Idea]]\n<!-- llm-wiki:generated:end -->\n"
+        },
+        "log.md": {
+          "hash": "52a182aa5dc4ce53f7e48069d9e94d52a90d6d2de7ed74ff3ec8a48bbc3fae0e",
+          "text": "<!-- llm-wiki:generated:start -->\nOperations\n\n2026-10-10: inicialización explícita del fixture de aceptación Desktop.\n<!-- llm-wiki:generated:end -->\n\n## 2026-10-10\nSíntesis interactiva de dos fuentes sintéticas: [[wiki/concepts/Synthesis - Nexo]].\n"
+        }
+      },
+      "after": {
+        "wiki/concepts/Distillation - Fuente.md": {
+          "hash": "bd2e5d2970e82fbcf80d1528b8e6b11b6193bbc72ddd1cf3aeba9bb447942480",
+          "text": "---\ndate: 2026-10-10\ntype: concept\ntags: [prueba]\nai-first: true\n---\n# Distillation - Fuente\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Source\nFuente completa: [[raw/Fuente A]], SHA-256 d4885ac712464dd0d092b3bc0229fd242015411d66562467721985a92101515f.\nB1: título Experimento de prototipos. B2: párrafo del ensayo A.\n\n## Claim\nRegistrar la hipótesis antes de probar facilitó comparar resultado y expectativa en el ensayo A. [source: [[raw/Fuente A]], bloque B2; confianza alta, declaración textual del fixture].\n\n## Inferencia separada\nPodría ayudar al seguimiento de [[wiki/projects/Nexo]]; confianza media, pendiente de contrastar. No se generaliza como hecho.\n\n## Connections\n[[wiki/concepts/Fuente A]] y [[wiki/concepts/Synthesis - Nexo]].\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        },
+        "wiki/concepts/Fuente A.md": {
+          "hash": "54a1a9307768c33bda9aa07e8bf29bd2f574c016239526b94287599ebe68cda7",
+          "text": "---\ndate: 2026-10-10\ntype: concept\ntags: [prueba]\nai-first: true\n---\n# Fuente A\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Registro\nEn el ensayo A, registrar la hipótesis antes de probar facilitó comparar el resultado con lo esperado.\nFuente: [[raw/Fuente A]].\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n## Backlinks derivados\n- [[wiki/concepts/Synthesis - Nexo]]\n- [[wiki/concepts/Distillation - Fuente]]\n"
+        },
+        "wiki/daily/2026-10-10.md": {
+          "hash": "fbeb5b1a550c35e978dd1157752fcea11af134b1dad893f42b987c4ae20fb2f4",
+          "text": "---\ndate: 2026-10-10\ntype: daily\ntags: [prueba]\nai-first: true\n---\n# 2026-10-10\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Today\nTareas leídas del tablero para el día explícito 2026-10-10. No hay daily de ayer; cobertura parcial del historial.\n- [ ] Preparar prototipo — [[boards/Trabajo]] / [[wiki/projects/Nexo]]; vencimiento explícito: 2026-10-10.\n\n## Interactions\n- Nota local de [[wiki/meetings/Reunión]] con [[wiki/entities/Ada]]; no se creó evento remoto.\n- Registrada [[wiki/entities/Ada]], colaboradora sintética de [[wiki/projects/Nexo]].\n\n## Work\n- [[wiki/logs/2026-10-10 - Nexo]]: hipótesis inicial registrada.\n- Proyecto [[wiki/projects/Nexo]] creado; próximo paso: preparar prototipo.\n\n## Notes\n- [[wiki/concepts/Distillation - Fuente]]: claim citado a B2.\n- [[wiki/concepts/Synthesis - Nexo]]: patrón candidato de dos contextos.\n- Revisión con cobertura parcial: [[wiki/reviews/2026-10-10]].\n- Decisión de [[wiki/projects/Nexo]]: registrar hipótesis antes de probar.\n\n## Calendar\nNo consultado; sin eventos inferidos.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n<!-- llm-wiki:generated:start -->\nCapture\n\n- [[wiki/concepts/Idea]]\n<!-- llm-wiki:generated:end -->\n"
+        },
+        "log.md": {
+          "hash": "a443b24b6c47f1744d6060a2d1754a8421b8c5aac96f81c83181d5c23fcb0c2d",
+          "text": "<!-- llm-wiki:generated:start -->\nOperations\n\n2026-10-10: inicialización explícita del fixture de aceptación Desktop.\n<!-- llm-wiki:generated:end -->\n\n## 2026-10-10\nSíntesis interactiva de dos fuentes sintéticas: [[wiki/concepts/Synthesis - Nexo]].\n\nDestilación interactiva: [[wiki/concepts/Distillation - Fuente]]; fuente raw conservada.\n"
+        }
+      }
+    },
+    {
+      "id": "projects_authorized_areas",
+      "operation_id": "desktop-projects_authorized_areas",
+      "status": "committed",
+      "before": {
+        "wiki/projects/Nexo.md": {
+          "hash": "b02fbb61cff1675696923c5b553188bdebf6ca14b63054c60fa7e79da8b7f37c",
+          "text": "---\ndate: 2026-10-10\ntype: project\ntags: [prueba]\nai-first: true\nowner: Equipo sintético\ncustom: conservar\n---\n# Nexo\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Objetivo\nDocumentar experimentos y compartir aprendizajes.\n\n## Estado\nActivo (dato del caso sintético).\n\n## Next Actions\nPreparar prototipo (tarea corta en [[boards/Trabajo]], vencimiento proporcionado: 2026-10-10; prioridad pendiente).\n\n## People\n- [[wiki/entities/Ada]]\n\n## Key Decisions\n- 2026-10-10: decisión explícita del fixture: registrar hipótesis antes de probar.\n\n## Recent Activity\n- 2026-10-10: [[wiki/logs/2026-10-10 - Nexo]] — hipótesis inicial registrada.\n\n## Last overview\n2026-10-10: activo; próximo paso explícito: preparar prototipo. No hay fecha límite proporcionada.\n\n## Texto humano\nConservar este párrafo y los atributos owner/custom.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        }
+      },
+      "after": {
+        "wiki/projects/Nexo.md": {
+          "hash": "34284edb1409ea7f29c1e053f1af22292f6472ab330a0d523c87be458c47c358",
+          "text": "---\ndate: 2026-10-10\ntype: project\ntags: [prueba]\nai-first: true\nowner: Equipo sintético\ncustom: conservar\n---\n# Nexo\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Objetivo\nDocumentar experimentos y compartir aprendizajes.\n\n## Estado\nActivo (dato del caso sintético).\n\n## Next Actions\nPreparar prototipo (tarea corta en [[boards/Trabajo]], vencimiento proporcionado: 2026-10-10; prioridad pendiente).\n\n## People\n- [[wiki/entities/Ada]]\n\n## Key Decisions\n- 2026-10-10: decisión explícita del fixture: registrar hipótesis antes de probar.\n\n## Recent Activity\n- 2026-10-10: [[wiki/logs/2026-10-10 - Nexo]] — hipótesis inicial registrada.\n\n## Last overview\nÁreas consultadas y autorizadas: [[wiki/areas/Exploración]] · [[wiki/areas/Comunidad]].\n2026-10-10: activo; próximo paso explícito: preparar prototipo. No hay fecha límite proporcionada.\n\n## Texto humano\nConservar este párrafo y los atributos owner/custom.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        }
+      }
+    },
+    {
+      "id": "project_authorized_areas",
+      "status": "no_write_already_satisfied",
+      "after": {
+        "wiki/projects/Nexo.md": {
+          "text": "---\ndate: 2026-10-10\ntype: project\ntags: [prueba]\nai-first: true\nowner: Equipo sintético\ncustom: conservar\n---\n# Nexo\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Objetivo\nDocumentar experimentos y compartir aprendizajes.\n\n## Estado\nActivo (dato del caso sintético).\n\n## Next Actions\nPreparar prototipo (tarea corta en [[boards/Trabajo]], vencimiento proporcionado: 2026-10-10; prioridad pendiente).\n\n## People\n- [[wiki/entities/Ada]]\n\n## Key Decisions\n- 2026-10-10: decisión explícita del fixture: registrar hipótesis antes de probar.\n\n## Recent Activity\n- 2026-10-10: [[wiki/logs/2026-10-10 - Nexo]] — hipótesis inicial registrada.\n\n## Last overview\nÁreas consultadas y autorizadas: [[wiki/areas/Exploración]] · [[wiki/areas/Comunidad]].\n2026-10-10: activo; próximo paso explícito: preparar prototipo. No hay fecha límite proporcionada.\n\n## Texto humano\nConservar este párrafo y los atributos owner/custom.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n",
+          "hash": "34284edb1409ea7f29c1e053f1af22292f6472ab330a0d523c87be458c47c358",
+          "next_offset": -1,
+          "truncated": false
+        }
+      },
+      "note": "Reused current body links; no redundant write."
+    },
+    {
+      "id": "save_authorized_areas",
+      "status": "no_write_already_satisfied",
+      "after": {
+        "wiki/projects/Nexo.md": {
+          "text": "---\ndate: 2026-10-10\ntype: project\ntags: [prueba]\nai-first: true\nowner: Equipo sintético\ncustom: conservar\n---\n# Nexo\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Objetivo\nDocumentar experimentos y compartir aprendizajes.\n\n## Estado\nActivo (dato del caso sintético).\n\n## Next Actions\nPreparar prototipo (tarea corta en [[boards/Trabajo]], vencimiento proporcionado: 2026-10-10; prioridad pendiente).\n\n## People\n- [[wiki/entities/Ada]]\n\n## Key Decisions\n- 2026-10-10: decisión explícita del fixture: registrar hipótesis antes de probar.\n\n## Recent Activity\n- 2026-10-10: [[wiki/logs/2026-10-10 - Nexo]] — hipótesis inicial registrada.\n\n## Last overview\nÁreas consultadas y autorizadas: [[wiki/areas/Exploración]] · [[wiki/areas/Comunidad]].\n2026-10-10: activo; próximo paso explícito: preparar prototipo. No hay fecha límite proporcionada.\n\n## Texto humano\nConservar este párrafo y los atributos owner/custom.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n",
+          "hash": "34284edb1409ea7f29c1e053f1af22292f6472ab330a0d523c87be458c47c358",
+          "next_offset": -1,
+          "truncated": false
+        }
+      },
+      "note": "Reused current body links; no redundant write."
+    },
+    {
+      "id": "person_authorized_areas",
+      "operation_id": "desktop-person_authorized_areas",
+      "status": "committed",
+      "before": {
+        "wiki/entities/Ada.md": {
+          "hash": "060c1d18767d5b1efbb7fb2884d1835090b5a9eb850f650b205f859a4fc4d336",
+          "text": "---\ndate: 2026-10-10\ntype: person\ntags: [prueba]\nai-first: true\nhuman-label: conservar\n---\n# Ada\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Contexto\nColaboradora del equipo sintético. Contacto: pendiente.\n\n## Interactions\n- 2026-10-10: participante declarada de [[wiki/meetings/Reunión]].\n- 2026-10-10: registrada como participante del proyecto [[wiki/projects/Nexo]].\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        }
+      },
+      "after": {
+        "wiki/entities/Ada.md": {
+          "hash": "caf2063b6b55199701a3ab9ca176087313a1a807e9a37239c60f802755cbe28a",
+          "text": "---\ndate: 2026-10-10\ntype: person\ntags: [prueba]\nai-first: true\nhuman-label: conservar\n---\n# Ada\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Contexto\nColaboradora del equipo sintético. Contacto: pendiente.\n\n## Interactions\n- 2026-10-10: participante declarada de [[wiki/meetings/Reunión]].\n- 2026-10-10: registrada como participante del proyecto [[wiki/projects/Nexo]].\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n## Áreas\n[[wiki/areas/Exploración]] · [[wiki/areas/Comunidad]]\n"
+        }
+      }
+    },
+    {
+      "id": "capture_authorized_areas",
+      "operation_id": "desktop-capture_authorized_areas",
+      "status": "committed",
+      "before": {
+        "wiki/concepts/Idea.md": {
+          "hash": "f62e1692f55602955c485f66ab1bbc360826008b36d7507a9129340ea0d67dbc",
+          "text": "---\ndate: 2026-10-10\ntype: idea\ntags: [prueba]\nai-first: true\n---\n# Idea\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Idea\nRegistrar la hipótesis antes de probar un prototipo.\n\nEstado: captured.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        }
+      },
+      "after": {
+        "wiki/concepts/Idea.md": {
+          "hash": "d7cc7567e04c3479c23edfa00a4096d6ab9b2193a0b9c6ed2adff4069b66a08f",
+          "text": "---\ndate: 2026-10-10\ntype: idea\ntags: [prueba]\nai-first: true\n---\n# Idea\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Idea\nRegistrar la hipótesis antes de probar un prototipo.\n\nEstado: captured.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n## Áreas\n[[wiki/areas/Exploración]] · [[wiki/areas/Comunidad]]\n"
+        }
+      }
+    },
+    {
+      "id": "calendar_authorized_areas",
+      "operation_id": "desktop-calendar_authorized_areas",
+      "status": "committed",
+      "before": {
+        "wiki/meetings/Reunión.md": {
+          "hash": "ff041b5adb3611572f30b4fa1804af87abd364ac29264961f80a3b441450c455",
+          "text": "---\ndate: 2026-10-10\ntype: meeting\ntags: [prueba]\nai-first: true\n---\n# Reunión\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Details\nFecha proporcionada por el fixture: 2026-10-10, 10:00–10:30, America/Argentina/Mendoza.\nParticipante proporcionada: [[wiki/entities/Ada]]. Proyecto: [[wiki/projects/Nexo]].\nModo meeting local; calendario externo no consultado ni modificado.\n\n## Notes\nEncuentro sintético para compartir el planteo del experimento.\n\n## Decisions\nPendiente: no se proporcionaron decisiones.\n\n## Actions\nPendiente: no se proporcionaron acciones.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        }
+      },
+      "after": {
+        "wiki/meetings/Reunión.md": {
+          "hash": "a44cc59de580ddadb9eaec4542aaa639619e4aa4d479cd680f13771b188ac91a",
+          "text": "---\ndate: 2026-10-10\ntype: meeting\ntags: [prueba]\nai-first: true\n---\n# Reunión\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Details\nFecha proporcionada por el fixture: 2026-10-10, 10:00–10:30, America/Argentina/Mendoza.\nParticipante proporcionada: [[wiki/entities/Ada]]. Proyecto: [[wiki/projects/Nexo]].\nModo meeting local; calendario externo no consultado ni modificado.\n\n## Notes\nEncuentro sintético para compartir el planteo del experimento.\n\n## Decisions\nPendiente: no se proporcionaron decisiones.\n\n## Actions\nPendiente: no se proporcionaron acciones.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n## Áreas\n[[wiki/areas/Exploración]] · [[wiki/areas/Comunidad]]\n"
+        }
+      }
+    },
+    {
+      "id": "daily_authorized_areas",
+      "operation_id": "desktop-daily_authorized_areas",
+      "status": "committed",
+      "before": {
+        "wiki/daily/2026-10-10.md": {
+          "hash": "fbeb5b1a550c35e978dd1157752fcea11af134b1dad893f42b987c4ae20fb2f4",
+          "text": "---\ndate: 2026-10-10\ntype: daily\ntags: [prueba]\nai-first: true\n---\n# 2026-10-10\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Today\nTareas leídas del tablero para el día explícito 2026-10-10. No hay daily de ayer; cobertura parcial del historial.\n- [ ] Preparar prototipo — [[boards/Trabajo]] / [[wiki/projects/Nexo]]; vencimiento explícito: 2026-10-10.\n\n## Interactions\n- Nota local de [[wiki/meetings/Reunión]] con [[wiki/entities/Ada]]; no se creó evento remoto.\n- Registrada [[wiki/entities/Ada]], colaboradora sintética de [[wiki/projects/Nexo]].\n\n## Work\n- [[wiki/logs/2026-10-10 - Nexo]]: hipótesis inicial registrada.\n- Proyecto [[wiki/projects/Nexo]] creado; próximo paso: preparar prototipo.\n\n## Notes\n- [[wiki/concepts/Distillation - Fuente]]: claim citado a B2.\n- [[wiki/concepts/Synthesis - Nexo]]: patrón candidato de dos contextos.\n- Revisión con cobertura parcial: [[wiki/reviews/2026-10-10]].\n- Decisión de [[wiki/projects/Nexo]]: registrar hipótesis antes de probar.\n\n## Calendar\nNo consultado; sin eventos inferidos.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n<!-- llm-wiki:generated:start -->\nCapture\n\n- [[wiki/concepts/Idea]]\n<!-- llm-wiki:generated:end -->\n"
+        }
+      },
+      "after": {
+        "wiki/daily/2026-10-10.md": {
+          "hash": "3617b41525cdd7004a347c57d678d0c327296d7df6928926235dc72419139085",
+          "text": "---\ndate: 2026-10-10\ntype: daily\ntags: [prueba]\nai-first: true\n---\n# 2026-10-10\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Today\nTareas leídas del tablero para el día explícito 2026-10-10. No hay daily de ayer; cobertura parcial del historial.\n- [ ] Preparar prototipo — [[boards/Trabajo]] / [[wiki/projects/Nexo]]; vencimiento explícito: 2026-10-10.\n\n## Interactions\n- Nota local de [[wiki/meetings/Reunión]] con [[wiki/entities/Ada]]; no se creó evento remoto.\n- Registrada [[wiki/entities/Ada]], colaboradora sintética de [[wiki/projects/Nexo]].\n\n## Work\n- [[wiki/logs/2026-10-10 - Nexo]]: hipótesis inicial registrada.\n- Proyecto [[wiki/projects/Nexo]] creado; próximo paso: preparar prototipo.\n\n## Notes\n- [[wiki/concepts/Distillation - Fuente]]: claim citado a B2.\n- [[wiki/concepts/Synthesis - Nexo]]: patrón candidato de dos contextos.\n- Revisión con cobertura parcial: [[wiki/reviews/2026-10-10]].\n- Decisión de [[wiki/projects/Nexo]]: registrar hipótesis antes de probar.\n\n## Calendar\nNo consultado; sin eventos inferidos.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n<!-- llm-wiki:generated:start -->\nCapture\n\n- [[wiki/concepts/Idea]]\n<!-- llm-wiki:generated:end -->\n\n## Áreas\n[[wiki/areas/Exploración]] · [[wiki/areas/Comunidad]]\n"
+        }
+      }
+    },
+    {
+      "id": "log_authorized_areas",
+      "operation_id": "desktop-log_authorized_areas",
+      "status": "committed",
+      "before": {
+        "wiki/logs/2026-10-10 - Nexo.md": {
+          "hash": "4ff05faf44ce5b199c3259646dca93af6e7d5d39299c824d7fe903ff1e8a7daf",
+          "text": "---\ndate: 2026-10-10\ntype: log\ntags: [prueba]\nai-first: true\n---\n# 2026-10-10 - Nexo\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Work\nSe registró la hipótesis inicial para [[wiki/projects/Nexo]]. Fuente: entrada explícita del fixture.\n\n## Next\nPreparar prototipo (dato proporcionado); resultado del experimento pendiente.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        }
+      },
+      "after": {
+        "wiki/logs/2026-10-10 - Nexo.md": {
+          "hash": "77187d60ccd7a1f2ed7de0ac3b6cf741abb8e30598f7f222962d40b92a18b3fc",
+          "text": "---\ndate: 2026-10-10\ntype: log\ntags: [prueba]\nai-first: true\n---\n# 2026-10-10 - Nexo\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Work\nSe registró la hipótesis inicial para [[wiki/projects/Nexo]]. Fuente: entrada explícita del fixture.\n\n## Next\nPreparar prototipo (dato proporcionado); resultado del experimento pendiente.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n## Áreas\n[[wiki/areas/Exploración]] · [[wiki/areas/Comunidad]]\n"
+        }
+      }
+    },
+    {
+      "id": "review_authorized_areas",
+      "operation_id": "desktop-review_authorized_areas",
+      "status": "committed",
+      "before": {
+        "wiki/reviews/2026-10-10.md": {
+          "hash": "32cf248364bff0cb73501b7cb083368cd250e9888e672c0163f77cf55e6a2e34",
+          "text": "---\ndate: 2026-10-10\ntype: review\ntags: [prueba]\nai-first: true\n---\n# Revisión semanal 2026-10-10\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Periodo y cobertura\n2026-10-04..2026-10-10. Sólo existe [[wiki/daily/2026-10-10]]; faltan 04, 05, 06, 07, 08 y 09. No es una revisión completa de siete días.\n\n## Patterns\nSe registró una hipótesis y su próximo paso en [[wiki/projects/Nexo]]. No hay experimento terminado.\n\n## Questions for Future\n- ¿Qué evidencia contrastará la hipótesis de [[wiki/concepts/Idea]]?\n- ¿Qué resultado registrar en [[wiki/projects/Nexo]] tras preparar el prototipo?\n- ¿Qué aprendizaje compartir con [[wiki/entities/Ada]]?\n- ¿Qué completar en [[wiki/meetings/Reunión]] cuando existan decisiones?\n- ¿Qué cobertura falta en [[wiki/daily/2026-10-10]] para una revisión semanal completa?\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        }
+      },
+      "after": {
+        "wiki/reviews/2026-10-10.md": {
+          "hash": "6a1d4e6c47e5dbc94c07b640e5ff0ccb1b4d5203e980605ad850252697964362",
+          "text": "---\ndate: 2026-10-10\ntype: review\ntags: [prueba]\nai-first: true\n---\n# Revisión semanal 2026-10-10\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Periodo y cobertura\n2026-10-04..2026-10-10. Sólo existe [[wiki/daily/2026-10-10]]; faltan 04, 05, 06, 07, 08 y 09. No es una revisión completa de siete días.\n\n## Patterns\nSe registró una hipótesis y su próximo paso en [[wiki/projects/Nexo]]. No hay experimento terminado.\n\n## Questions for Future\n- ¿Qué evidencia contrastará la hipótesis de [[wiki/concepts/Idea]]?\n- ¿Qué resultado registrar en [[wiki/projects/Nexo]] tras preparar el prototipo?\n- ¿Qué aprendizaje compartir con [[wiki/entities/Ada]]?\n- ¿Qué completar en [[wiki/meetings/Reunión]] cuando existan decisiones?\n- ¿Qué cobertura falta en [[wiki/daily/2026-10-10]] para una revisión semanal completa?\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n## Áreas\n[[wiki/areas/Exploración]] · [[wiki/areas/Comunidad]]\n"
+        }
+      }
+    },
+    {
+      "id": "synthesize_authorized_areas",
+      "operation_id": "desktop-synthesize_authorized_areas",
+      "status": "committed",
+      "before": {
+        "wiki/concepts/Synthesis - Nexo.md": {
+          "hash": "fe1c9dfb7935b5ec52107460502a7f1dc2c346e2976fe638854cc5547c551f0d",
+          "text": "---\ndate: 2026-10-10\ntype: concept\ntags: [prueba]\nai-first: true\n---\n# Synthesis - Nexo\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Patrón candidato\nDocumentar la hipótesis antes de probar puede facilitar comparación y transferencia del aprendizaje.\n\n## Evidencia\n- Ensayo de prototipos: [[wiki/concepts/Fuente A]], B2 de [[raw/Fuente A]]; facilitó comparar lo esperado con el resultado.\n- Encuentro de colaboración: [[wiki/concepts/Fuente B]], B2 de [[raw/Fuente B]]; facilitó compartir el aprendizaje.\n\n## Inferencia y límites\nInferencia del agente, confianza media: patrón transversal sustentado por dos contextos distintos. No afirma causalidad universal. Umbral cross-pollination de dos notas satisfecho; concept-evolution no se ejecuta: no hay tres actualizaciones.\n\n## Aplicación posible\nContrastar en [[wiki/projects/Nexo]]; no es una tarea ni evento creado.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        }
+      },
+      "after": {
+        "wiki/concepts/Synthesis - Nexo.md": {
+          "hash": "14e14deb921d723a9a3e3ba75ec41fc6e778b6a050a849943c418e0a4cf0aa5d",
+          "text": "---\ndate: 2026-10-10\ntype: concept\ntags: [prueba]\nai-first: true\n---\n# Synthesis - Nexo\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Patrón candidato\nDocumentar la hipótesis antes de probar puede facilitar comparación y transferencia del aprendizaje.\n\n## Evidencia\n- Ensayo de prototipos: [[wiki/concepts/Fuente A]], B2 de [[raw/Fuente A]]; facilitó comparar lo esperado con el resultado.\n- Encuentro de colaboración: [[wiki/concepts/Fuente B]], B2 de [[raw/Fuente B]]; facilitó compartir el aprendizaje.\n\n## Inferencia y límites\nInferencia del agente, confianza media: patrón transversal sustentado por dos contextos distintos. No afirma causalidad universal. Umbral cross-pollination de dos notas satisfecho; concept-evolution no se ejecuta: no hay tres actualizaciones.\n\n## Aplicación posible\nContrastar en [[wiki/projects/Nexo]]; no es una tarea ni evento creado.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n## Áreas\n[[wiki/areas/Exploración]] · [[wiki/areas/Comunidad]]\n"
+        }
+      }
+    },
+    {
+      "id": "distill_authorized_areas",
+      "operation_id": "desktop-distill_authorized_areas",
+      "status": "committed",
+      "before": {
+        "wiki/concepts/Distillation - Fuente.md": {
+          "hash": "bd2e5d2970e82fbcf80d1528b8e6b11b6193bbc72ddd1cf3aeba9bb447942480",
+          "text": "---\ndate: 2026-10-10\ntype: concept\ntags: [prueba]\nai-first: true\n---\n# Distillation - Fuente\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Source\nFuente completa: [[raw/Fuente A]], SHA-256 d4885ac712464dd0d092b3bc0229fd242015411d66562467721985a92101515f.\nB1: título Experimento de prototipos. B2: párrafo del ensayo A.\n\n## Claim\nRegistrar la hipótesis antes de probar facilitó comparar resultado y expectativa en el ensayo A. [source: [[raw/Fuente A]], bloque B2; confianza alta, declaración textual del fixture].\n\n## Inferencia separada\nPodría ayudar al seguimiento de [[wiki/projects/Nexo]]; confianza media, pendiente de contrastar. No se generaliza como hecho.\n\n## Connections\n[[wiki/concepts/Fuente A]] y [[wiki/concepts/Synthesis - Nexo]].\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        }
+      },
+      "after": {
+        "wiki/concepts/Distillation - Fuente.md": {
+          "hash": "a7ecf9a6cedce96b9be6d4a4539e7ffb446818859facffb5f374c7c470955f75",
+          "text": "---\ndate: 2026-10-10\ntype: concept\ntags: [prueba]\nai-first: true\n---\n# Distillation - Fuente\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Source\nFuente completa: [[raw/Fuente A]], SHA-256 d4885ac712464dd0d092b3bc0229fd242015411d66562467721985a92101515f.\nB1: título Experimento de prototipos. B2: párrafo del ensayo A.\n\n## Claim\nRegistrar la hipótesis antes de probar facilitó comparar resultado y expectativa en el ensayo A. [source: [[raw/Fuente A]], bloque B2; confianza alta, declaración textual del fixture].\n\n## Inferencia separada\nPodría ayudar al seguimiento de [[wiki/projects/Nexo]]; confianza media, pendiente de contrastar. No se generaliza como hecho.\n\n## Connections\n[[wiki/concepts/Fuente A]] y [[wiki/concepts/Synthesis - Nexo]].\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n\n## Áreas\n[[wiki/areas/Exploración]] · [[wiki/areas/Comunidad]]\n"
+        }
+      }
+    },
+    {
+      "id": "task_authorized_areas",
+      "operation_id": "desktop-task_authorized_areas",
+      "status": "committed",
+      "before": {
+        "boards/Trabajo.md": {
+          "hash": "bc36c5562b6b9aded8622d5d8e53fe3f99efe6d05b647e544659fb7e2a16668c",
+          "text": "---\nkanban-plugin: basic\nhuman-owner: Equipo sintético\n---\n\n## Backlog\n\n- [ ] Preparar prototipo @{2026-10-10} — [[wiki/projects/Nexo]]\n\n- [ ] [[wiki/projects/Nexo|Nexo]] — Documentar experimentos y compartir aprendizajes.\n\n## In Progress\n\n## Done\n"
+        }
+      },
+      "after": {
+        "boards/Trabajo.md": {
+          "hash": "51de61b0c4ce250f5ca24972dcaf51a504226db13f3c9cdd1a9a5e161d24ba5d",
+          "text": "---\nkanban-plugin: basic\nhuman-owner: Equipo sintético\n---\n\n## Backlog\n\n- [ ] Preparar prototipo @{2026-10-10} — [[wiki/projects/Nexo]] · [[wiki/areas/Exploración]] · [[wiki/areas/Comunidad]]\n\n- [ ] [[wiki/projects/Nexo|Nexo]] — Documentar experimentos y compartir aprendizajes.\n\n## In Progress\n\n## Done\n"
+        }
+      }
+    },
+    {
+      "id": "UnknownOKRValuesPending",
+      "operation_id": "desktop-UnknownOKRValuesPending",
+      "status": "committed",
+      "before": {
+        "wiki/okrs/Aprendizaje.md": null
+      },
+      "after": {
+        "wiki/okrs/Aprendizaje.md": {
+          "hash": "c8a76ce329a3d390cc46e6ee30991734550560b5abd75b1ea725bbc595f00968",
+          "text": "---\ndate: 2026-10-10\ntype: okr\ntags: [prueba]\nai-first: true\nstatus: draft\n---\n# Compartir aprendizaje de los experimentos\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Objective\nCompartir aprendizaje de los experimentos.\n\n## Periodo\nPendiente.\n\n## Owner\nPendiente.\n\n## Key Results\n| KR | Métrica | Baseline | Target | Actual | Fecha |\n| --- | --- | --- | --- | --- | --- |\n| Pendiente de definición | Pendiente | Pendiente | Pendiente | Pendiente | Pendiente |\n\n## Evidence\nNo hay resultados medidos proporcionados. La fecha de captura no es un periodo de OKR.\n\n## History\n- 2026-10-10: borrador creado desde intención explícita sintética; valores desconocidos conservados como pendientes.\n\n## Áreas\n[[wiki/areas/Exploración]] · [[wiki/areas/Comunidad]]\n\n## Related\n[[wiki/projects/Nexo]]\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        }
+      }
+    },
+    {
+      "id": "KanbanKeepsColumns",
+      "status": "passed",
+      "hash": "51de61b0c4ce250f5ca24972dcaf51a504226db13f3c9cdd1a9a5e161d24ba5d",
+      "columns": [
+        "## Backlog",
+        "## In Progress",
+        "## Done"
+      ]
+    },
+    {
+      "id": "ShortTaskKeepsCard",
+      "status": "passed",
+      "path": "boards/Trabajo.md",
+      "hash": "51de61b0c4ce250f5ca24972dcaf51a504226db13f3c9cdd1a9a5e161d24ba5d",
+      "standalone_task_created": false
+    },
+    {
+      "id": "RawBytesUnchanged",
+      "status": "passed",
+      "hashes": {
+        "raw/Fuente A.md": "d4885ac712464dd0d092b3bc0229fd242015411d66562467721985a92101515f",
+        "raw/Fuente B.md": "8c89092c072758e92a6cc5eec2f9a181bec7c5e0d61b27030765d833f3c2ddfd"
+      }
+    },
+    {
+      "id": "HumanMetadataPreserved",
+      "status": "passed",
+      "path": "wiki/projects/Nexo.md",
+      "hash": "34284edb1409ea7f29c1e053f1af22292f6472ab330a0d523c87be458c47c358"
+    },
+    {
+      "id": "RepeatedLinkRequestWithCurrentHash",
+      "status": "passed",
+      "path": "wiki/projects/Nexo.md",
+      "hash": "34284edb1409ea7f29c1e053f1af22292f6472ab330a0d523c87be458c47c358",
+      "write": false,
+      "one_link_per_area": true
+    },
+    {
+      "id": "GeneralIntentDoesNotWrite",
+      "status": "passed",
+      "request": "Quiero ordenar mis áreas.",
+      "decision": "Clarify the requested workflow and explicit scope before changes",
+      "write": false,
+      "core_snapshot_hashes": {
+        "boards/Trabajo.md": "51de61b0c4ce250f5ca24972dcaf51a504226db13f3c9cdd1a9a5e161d24ba5d",
+        "raw/Fuente A.md": "d4885ac712464dd0d092b3bc0229fd242015411d66562467721985a92101515f",
+        "raw/Fuente B.md": "8c89092c072758e92a6cc5eec2f9a181bec7c5e0d61b27030765d833f3c2ddfd",
+        "wiki/projects/Nexo.md": "34284edb1409ea7f29c1e053f1af22292f6472ab330a0d523c87be458c47c358",
+        "wiki/okrs/Aprendizaje.md": "c8a76ce329a3d390cc46e6ee30991734550560b5abd75b1ea725bbc595f00968"
+      }
+    },
+    {
+      "id": "multi-first",
+      "operation_id": "desktop-multi-first",
+      "status": "committed",
+      "before": {
+        "wiki/concepts/Multi.md": null
+      },
+      "after": {
+        "wiki/concepts/Multi.md": {
+          "hash": "aad05919cb82dc73ae9afc04892b53d7fd571caff49ca552d3445cf46fb650e1",
+          "text": "---\ndate: 2026-10-10\ntype: concept\ntags: [prueba]\nai-first: true\nhuman-label: conservar\n---\n# Multi\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Texto humano\nPreservar este contenido.\n\n## Áreas\n[[wiki/areas/Exploración]]\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        }
+      }
+    },
+    {
+      "id": "AddSecondAreaPreservesFirst",
+      "operation_id": "desktop-AddSecondAreaPreservesFirst",
+      "status": "committed",
+      "before": {
+        "wiki/concepts/Multi.md": {
+          "hash": "aad05919cb82dc73ae9afc04892b53d7fd571caff49ca552d3445cf46fb650e1",
+          "text": "---\ndate: 2026-10-10\ntype: concept\ntags: [prueba]\nai-first: true\nhuman-label: conservar\n---\n# Multi\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Texto humano\nPreservar este contenido.\n\n## Áreas\n[[wiki/areas/Exploración]]\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        }
+      },
+      "after": {
+        "wiki/concepts/Multi.md": {
+          "hash": "4b93da6148863bdc138ed8900241bfa631159fb1ef5f304a2f5243b604b3677f",
+          "text": "---\ndate: 2026-10-10\ntype: concept\ntags: [prueba]\nai-first: true\nhuman-label: conservar\n---\n# Multi\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Texto humano\nPreservar este contenido.\n\n## Áreas\n[[wiki/areas/Exploración]] · [[wiki/areas/Comunidad]]\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        }
+      }
+    },
+    {
+      "id": "UnsafeAreaNameDoesNotEscape",
+      "status": "passed",
+      "runtime_error": "vault path traversal is not allowed: \"../Escapada.md\"",
+      "proposed_safe_filename": "Escapada.md",
+      "write": false
+    },
+    {
+      "id": "okr-evidence-update",
+      "operation_id": "desktop-okr-evidence-update",
+      "status": "committed",
+      "before": {
+        "wiki/okrs/Aprendizaje.md": {
+          "hash": "c8a76ce329a3d390cc46e6ee30991734550560b5abd75b1ea725bbc595f00968",
+          "text": "---\ndate: 2026-10-10\ntype: okr\ntags: [prueba]\nai-first: true\nstatus: draft\n---\n# Compartir aprendizaje de los experimentos\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Objective\nCompartir aprendizaje de los experimentos.\n\n## Periodo\nPendiente.\n\n## Owner\nPendiente.\n\n## Key Results\n| KR | Métrica | Baseline | Target | Actual | Fecha |\n| --- | --- | --- | --- | --- | --- |\n| Pendiente de definición | Pendiente | Pendiente | Pendiente | Pendiente | Pendiente |\n\n## Evidence\nNo hay resultados medidos proporcionados. La fecha de captura no es un periodo de OKR.\n\n## History\n- 2026-10-10: borrador creado desde intención explícita sintética; valores desconocidos conservados como pendientes.\n\n## Áreas\n[[wiki/areas/Exploración]] · [[wiki/areas/Comunidad]]\n\n## Related\n[[wiki/projects/Nexo]]\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        }
+      },
+      "after": {
+        "wiki/okrs/Aprendizaje.md": {
+          "hash": "6a1180bffd0df51588c5eef1374593373779e54a92677708cd38a3a0193621da",
+          "text": "---\ndate: 2026-10-10\ntype: okr\ntags: [prueba]\nai-first: true\nstatus: draft\n---\n# Compartir aprendizaje de los experimentos\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Objective\nCompartir aprendizaje de los experimentos.\n\n## Periodo\nPendiente.\n\n## Owner\nPendiente.\n\n## Key Results\n| KR | Métrica | Baseline | Target | Actual | Fecha |\n| --- | --- | --- | --- | --- | --- |\n| Pendiente de definición | Pendiente | Pendiente | Pendiente | Pendiente | Pendiente |\n\n## Evidence\n- 2026-10-10: [[wiki/logs/2026-10-10 - Nexo]] documenta una hipótesis; no demuestra cumplimiento de un KR.\nNo hay resultados medidos proporcionados. La fecha de captura no es un periodo de OKR.\n\n## History\n- 2026-10-10: se añadió referencia documental; no se calculó progreso ni se completaron valores pendientes.\n- 2026-10-10: borrador creado desde intención explícita sintética; valores desconocidos conservados como pendientes.\n\n## Áreas\n[[wiki/areas/Exploración]] · [[wiki/areas/Comunidad]]\n\n## Related\n[[wiki/projects/Nexo]]\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n"
+        }
+      }
+    },
+    {
+      "id": "IncompleteInventoryDoesNotCreate",
+      "status": "passed",
+      "response": {
+        "error": "area inventory is incomplete; inspect diagnostics",
+        "result": {
+          "folder": "wiki/areas",
+          "areas": [],
+          "coverage": {
+            "scanned": 3,
+            "excluded": [
+              ".llm-wiki: protected technical state"
+            ],
+            "errors": [],
+            "truncated": false
+          },
+          "diagnostics": [
+            {
+              "path": "wiki/areas/Rota.md",
+              "code": "invalid_metadata",
+              "message": "frontmatter cannot be parsed"
+            }
+          ],
+          "complete": false
+        }
+      },
+      "write_after_inventory": false
+    },
+    {
+      "id": "AmbiguousAreaDoesNotSelect",
+      "status": "passed",
+      "inventory": {
+        "result": {
+          "folder": "wiki/areas",
+          "areas": [
+            {
+              "path": "wiki/areas/C.md",
+              "name": "C",
+              "hash": "1b73033d136317b8e064de8180a86132912890a4cbe4f6a46d146d3f00867135",
+              "aliases": []
+            },
+            {
+              "path": "wiki/areas/Dos.md",
+              "name": "Homónimo",
+              "hash": "eb111556d26d86130fc305a379625aea2fea4a626281dc7f120754593d1185c7",
+              "aliases": []
+            },
+            {
+              "path": "wiki/areas/Rota.md",
+              "name": "Rota",
+              "hash": "8da3063ac097f60879d08d36cc86fe70d2277ee1dbe08d4717f19f9844800a0d",
+              "aliases": []
+            },
+            {
+              "path": "wiki/areas/Uno.md",
+              "name": "Homónimo",
+              "hash": "eb111556d26d86130fc305a379625aea2fea4a626281dc7f120754593d1185c7",
+              "aliases": []
+            }
+          ],
+          "coverage": {
+            "scanned": 6,
+            "excluded": [
+              ".llm-wiki: protected technical state"
+            ],
+            "errors": [],
+            "truncated": false
+          },
+          "diagnostics": [
+            {
+              "path": "wiki/areas/Dos.md",
+              "code": "ambiguous_name",
+              "message": "name or alias is shared by distinct areas"
+            },
+            {
+              "path": "wiki/areas/Uno.md",
+              "code": "ambiguous_name",
+              "message": "name or alias is shared by distinct areas"
+            }
+          ],
+          "complete": true
+        }
+      },
+      "write_after_inventory": false,
+      "decision": "Expose Uno.md and Dos.md; clarification required before selecting either."
+    },
+    {
+      "id": "ReservedAreaNameSafeTarget",
+      "status": "passed",
+      "inventory": {
+        "result": {
+          "folder": "wiki/areas",
+          "areas": [
+            {
+              "path": "wiki/areas/C.md",
+              "name": "C",
+              "hash": "1b73033d136317b8e064de8180a86132912890a4cbe4f6a46d146d3f00867135",
+              "aliases": []
+            },
+            {
+              "path": "wiki/areas/Dos.md",
+              "name": "Homónimo",
+              "hash": "eb111556d26d86130fc305a379625aea2fea4a626281dc7f120754593d1185c7",
+              "aliases": []
+            },
+            {
+              "path": "wiki/areas/Rota.md",
+              "name": "Rota",
+              "hash": "8da3063ac097f60879d08d36cc86fe70d2277ee1dbe08d4717f19f9844800a0d",
+              "aliases": []
+            },
+            {
+              "path": "wiki/areas/Uno.md",
+              "name": "Homónimo",
+              "hash": "eb111556d26d86130fc305a379625aea2fea4a626281dc7f120754593d1185c7",
+              "aliases": []
+            }
+          ],
+          "coverage": {
+            "scanned": 6,
+            "excluded": [
+              ".llm-wiki: protected technical state"
+            ],
+            "errors": [],
+            "truncated": false
+          },
+          "diagnostics": [
+            {
+              "path": "wiki/areas/Dos.md",
+              "code": "ambiguous_name",
+              "message": "name or alias is shared by distinct areas"
+            },
+            {
+              "path": "wiki/areas/Uno.md",
+              "code": "ambiguous_name",
+              "message": "name or alias is shared by distinct areas"
+            }
+          ],
+          "complete": true
+        }
+      },
+      "proposed_path": "wiki/areas/C-sharp.md",
+      "proposed_title": "C#",
+      "proposed_link": "[[wiki/areas/C-sharp|C#]]",
+      "write": true,
+      "approval_scope": "Synthetic acceptance scoped to explicit safe target; actual user confirmation dialogue not exercised",
+      "path": "wiki/areas/C-sharp.md",
+      "canonical_link": "[[wiki/areas/C-sharp|C#]]",
+      "backlinks": [
+        {
+          "result": {
+            "all_references": [
+              {
+                "source": "wiki/projects/Nexo.md",
+                "target": "wiki/areas/C-sharp.md",
+                "text": "wiki/areas/C-sharp",
+                "alias": "C#",
+                "resolved": true
+              }
+            ],
+            "coverage": {
+              "scanned": 9,
+              "excluded": [
+                ".llm-wiki: protected technical state"
+              ],
+              "errors": [],
+              "truncated": false
+            },
+            "references": [
+              {
+                "source": "wiki/projects/Nexo.md",
+                "target": "wiki/areas/C-sharp.md",
+                "text": "wiki/areas/C-sharp",
+                "alias": "C#",
+                "resolved": true
+              }
+            ]
+          }
+        },
+        {
+          "result": {
+            "all_references": [
+              {
+                "source": "wiki/projects/Nexo.md",
+                "target": "wiki/areas/C-sharp.md",
+                "text": "wiki/areas/C-sharp",
+                "alias": "C#",
+                "resolved": true
+              }
+            ],
+            "coverage": {
+              "scanned": 9,
+              "excluded": [
+                ".llm-wiki: protected technical state"
+              ],
+              "errors": [],
+              "truncated": false
+            },
+            "references": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "LegacyReservedAreaDoesNotMislink",
+      "status": "passed",
+      "inventory": {
+        "result": {
+          "folder": "wiki/areas",
+          "areas": [
+            {
+              "path": "wiki/areas/C#.md",
+              "name": "C#",
+              "hash": "dc26e33e872ca4e4fa0e3e921d777675422801926b5dc6ef617e002ce3582540",
+              "aliases": []
+            },
+            {
+              "path": "wiki/areas/C.md",
+              "name": "C",
+              "hash": "1b73033d136317b8e064de8180a86132912890a4cbe4f6a46d146d3f00867135",
+              "aliases": []
+            },
+            {
+              "path": "wiki/areas/Dos.md",
+              "name": "Homónimo",
+              "hash": "eb111556d26d86130fc305a379625aea2fea4a626281dc7f120754593d1185c7",
+              "aliases": []
+            },
+            {
+              "path": "wiki/areas/Rota.md",
+              "name": "Rota",
+              "hash": "8da3063ac097f60879d08d36cc86fe70d2277ee1dbe08d4717f19f9844800a0d",
+              "aliases": []
+            },
+            {
+              "path": "wiki/areas/Uno.md",
+              "name": "Homónimo",
+              "hash": "eb111556d26d86130fc305a379625aea2fea4a626281dc7f120754593d1185c7",
+              "aliases": []
+            }
+          ],
+          "coverage": {
+            "scanned": 7,
+            "excluded": [
+              ".llm-wiki: protected technical state"
+            ],
+            "errors": [],
+            "truncated": false
+          },
+          "diagnostics": [
+            {
+              "path": "wiki/areas/Dos.md",
+              "code": "ambiguous_name",
+              "message": "name or alias is shared by distinct areas"
+            },
+            {
+              "path": "wiki/areas/Uno.md",
+              "code": "ambiguous_name",
+              "message": "name or alias is shared by distinct areas"
+            }
+          ],
+          "complete": true
+        }
+      },
+      "decision": "Canonical path contains #; no link or automatic migration",
+      "write_after_inventory": false
+    },
+    {
+      "id": "MissingToolDoesNotSimulate",
+      "status": "passed",
+      "source": "Prior two actual Desktop turns, before restart, documented in 2026-10-10-desktop-areas.md",
+      "tools_available_then": 0,
+      "workflow_cases_run_then": 0,
+      "writes_then": false,
+      "scope": "Historical observed unavailability; current MCP not disabled for this test"
+    }
+  ],
+  "retrieval": {
+    "result": {
+      "cases": [
+        {
+          "matches": [
+            {
+              "path": "wiki/concepts/Synthesis - Nexo.md",
+              "snippet": "# Synthesis - Nexo",
+              "line": 7,
+              "hash": "14e14deb921d723a9a3e3ba75ec41fc6e778b6a050a849943c418e0a4cf0aa5d",
+              "score": 3.25
+            },
+            {
+              "path": "wiki/logs/2026-10-10 - Nexo.md",
+              "snippet": "# 2026-10-10 - Nexo",
+              "line": 7,
+              "hash": "77187d60ccd7a1f2ed7de0ac3b6cf741abb8e30598f7f222962d40b92a18b3fc",
+              "score": 3.25
+            },
+            {
+              "path": "wiki/projects/Nexo.md",
+              "snippet": "# Nexo",
+              "line": 9,
+              "hash": "34284edb1409ea7f29c1e053f1af22292f6472ab330a0d523c87be458c47c358",
+              "score": 3.25
+            },
+            {
+              "path": "wiki/daily/2026-10-10.md",
+              "snippet": "- [ ] Preparar prototipo — [[boards/Trabajo]] / [[wiki/projects/Nexo]]; vencimiento explícito: 2026-10-10.",
+              "line": 14,
+              "hash": "3617b41525cdd7004a347c57d678d0c327296d7df6928926235dc72419139085",
+              "score": 2
+            },
+            {
+              "path": "boards/Trabajo.md",
+              "snippet": "- [ ] [[wiki/projects/Nexo|Nexo]] — Documentar experimentos y compartir aprendizajes.",
+              "line": 10,
+              "hash": "51de61b0c4ce250f5ca24972dcaf51a504226db13f3c9cdd1a9a5e161d24ba5d",
+              "score": 1.5
+            },
+            {
+              "path": "index.md",
+              "snippet": "- [[wiki/projects/Nexo]]",
+              "line": 4,
+              "hash": "84ba7a9fd19466001e6bb3dad362c2b74c27b2c156eb47a7e6f692aae33c88e4",
+              "score": 1.25
+            },
+            {
+              "path": "wiki/concepts/Distillation - Fuente.md",
+              "snippet": "Podría ayudar al seguimiento de [[wiki/projects/Nexo]]; confianza media, pendiente de contrastar. No se generaliza como hecho.",
+              "line": 20,
+              "hash": "a7ecf9a6cedce96b9be6d4a4539e7ffb446818859facffb5f374c7c470955f75",
+              "score": 1.25
+            },
+            {
+              "path": "wiki/okrs/Aprendizaje.md",
+              "snippet": "- 2026-10-10: [[wiki/logs/2026-10-10 - Nexo]] documenta una hipótesis; no demuestra cumplimiento de un KR.",
+              "line": 28,
+              "hash": "6a1180bffd0df51588c5eef1374593373779e54a92677708cd38a3a0193621da",
+              "score": 1.25
+            },
+            {
+              "path": "wiki/reviews/2026-10-10.md",
+              "snippet": "Se registró una hipótesis y su próximo paso en [[wiki/projects/Nexo]]. No hay experimento terminado.",
+              "line": 16,
+              "hash": "6a1d4e6c47e5dbc94c07b640e5ff0ccb1b4d5203e980605ad850252697964362",
+              "score": 1.25
+            },
+            {
+              "path": "log.md",
+              "snippet": "Síntesis interactiva de dos fuentes sintéticas: [[wiki/concepts/Synthesis - Nexo]].",
+              "line": 8,
+              "hash": "a443b24b6c47f1744d6060a2d1754a8421b8c5aac96f81c83181d5c23fcb0c2d",
+              "score": 1
+            }
+          ],
+          "misses": [],
+          "query": "Nexo",
+          "relevant": [
+            "wiki/projects/Nexo.md"
+          ]
+        }
+      ],
+      "corpus": [
+        {
+          "hash": "51de61b0c4ce250f5ca24972dcaf51a504226db13f3c9cdd1a9a5e161d24ba5d",
+          "path": "boards/Trabajo.md"
+        },
+        {
+          "hash": "84ba7a9fd19466001e6bb3dad362c2b74c27b2c156eb47a7e6f692aae33c88e4",
+          "path": "index.md"
+        },
+        {
+          "hash": "a443b24b6c47f1744d6060a2d1754a8421b8c5aac96f81c83181d5c23fcb0c2d",
+          "path": "log.md"
+        },
+        {
+          "hash": "d4885ac712464dd0d092b3bc0229fd242015411d66562467721985a92101515f",
+          "path": "raw/Fuente A.md"
+        },
+        {
+          "hash": "8c89092c072758e92a6cc5eec2f9a181bec7c5e0d61b27030765d833f3c2ddfd",
+          "path": "raw/Fuente B.md"
+        },
+        {
+          "hash": "a48d6336bd6e04deb68c0321e1622b6c4b9f4024dfbffb12db63b3035f06280f",
+          "path": "wiki/areas/Comunidad.md"
+        },
+        {
+          "hash": "56e69f35fdb481dec60c6f403e1997fc245e3cc2cebc37a440293ea04db2be3b",
+          "path": "wiki/areas/Exploración.md"
+        },
+        {
+          "hash": "a7ecf9a6cedce96b9be6d4a4539e7ffb446818859facffb5f374c7c470955f75",
+          "path": "wiki/concepts/Distillation - Fuente.md"
+        },
+        {
+          "hash": "54a1a9307768c33bda9aa07e8bf29bd2f574c016239526b94287599ebe68cda7",
+          "path": "wiki/concepts/Fuente A.md"
+        },
+        {
+          "hash": "1cac6be5c4cc355a88a3dfef25fd2ba1a1fba0a55666f31c0b686d13934d126c",
+          "path": "wiki/concepts/Fuente B.md"
+        },
+        {
+          "hash": "d7cc7567e04c3479c23edfa00a4096d6ab9b2193a0b9c6ed2adff4069b66a08f",
+          "path": "wiki/concepts/Idea.md"
+        },
+        {
+          "hash": "4b93da6148863bdc138ed8900241bfa631159fb1ef5f304a2f5243b604b3677f",
+          "path": "wiki/concepts/Multi.md"
+        },
+        {
+          "hash": "14e14deb921d723a9a3e3ba75ec41fc6e778b6a050a849943c418e0a4cf0aa5d",
+          "path": "wiki/concepts/Synthesis - Nexo.md"
+        },
+        {
+          "hash": "3617b41525cdd7004a347c57d678d0c327296d7df6928926235dc72419139085",
+          "path": "wiki/daily/2026-10-10.md"
+        },
+        {
+          "hash": "caf2063b6b55199701a3ab9ca176087313a1a807e9a37239c60f802755cbe28a",
+          "path": "wiki/entities/Ada.md"
+        },
+        {
+          "hash": "77187d60ccd7a1f2ed7de0ac3b6cf741abb8e30598f7f222962d40b92a18b3fc",
+          "path": "wiki/logs/2026-10-10 - Nexo.md"
+        },
+        {
+          "hash": "a44cc59de580ddadb9eaec4542aaa639619e4aa4d479cd680f13771b188ac91a",
+          "path": "wiki/meetings/Reunión.md"
+        },
+        {
+          "hash": "6a1180bffd0df51588c5eef1374593373779e54a92677708cd38a3a0193621da",
+          "path": "wiki/okrs/Aprendizaje.md"
+        },
+        {
+          "hash": "34284edb1409ea7f29c1e053f1af22292f6472ab330a0d523c87be458c47c358",
+          "path": "wiki/projects/Nexo.md"
+        },
+        {
+          "hash": "6a1d4e6c47e5dbc94c07b640e5ff0ccb1b4d5203e980605ad850252697964362",
+          "path": "wiki/reviews/2026-10-10.md"
+        }
+      ],
+      "coverage": {
+        "scanned": 20,
+        "excluded": [
+          ".llm-wiki: protected technical state"
+        ],
+        "errors": [],
+        "truncated": false
+      },
+      "engine": "lexical",
+      "metrics": {
+        "cases": 1,
+        "recall_at_k": 1,
+        "mrr": 0.3333333333333333,
+        "k": 10
+      },
+      "report_written": false,
+      "semantic_equivalence": "unverified",
+      "version": "0.2.0"
+    }
+  },
+  "final_core": {
+    "wiki/okrs/Aprendizaje.md": {
+      "text": "---\ndate: 2026-10-10\ntype: okr\ntags: [prueba]\nai-first: true\nstatus: draft\n---\n# Compartir aprendizaje de los experimentos\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Objective\nCompartir aprendizaje de los experimentos.\n\n## Periodo\nPendiente.\n\n## Owner\nPendiente.\n\n## Key Results\n| KR | Métrica | Baseline | Target | Actual | Fecha |\n| --- | --- | --- | --- | --- | --- |\n| Pendiente de definición | Pendiente | Pendiente | Pendiente | Pendiente | Pendiente |\n\n## Evidence\n- 2026-10-10: [[wiki/logs/2026-10-10 - Nexo]] documenta una hipótesis; no demuestra cumplimiento de un KR.\nNo hay resultados medidos proporcionados. La fecha de captura no es un periodo de OKR.\n\n## History\n- 2026-10-10: se añadió referencia documental; no se calculó progreso ni se completaron valores pendientes.\n- 2026-10-10: borrador creado desde intención explícita sintética; valores desconocidos conservados como pendientes.\n\n## Áreas\n[[wiki/areas/Exploración]] · [[wiki/areas/Comunidad]]\n\n## Related\n[[wiki/projects/Nexo]]\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n",
+      "hash": "6a1180bffd0df51588c5eef1374593373779e54a92677708cd38a3a0193621da",
+      "next_offset": -1,
+      "truncated": false
+    },
+    "wiki/projects/Nexo.md": {
+      "text": "---\ndate: 2026-10-10\ntype: project\ntags: [prueba]\nai-first: true\nowner: Equipo sintético\ncustom: conservar\n---\n# Nexo\n\n## For future agent\nFixture sintético de aceptación Desktop. Su contenido procede del caso de prueba autorizado y no representa hechos personales.\n\n## Objetivo\nDocumentar experimentos y compartir aprendizajes.\n\n## Estado\nActivo (dato del caso sintético).\n\n## Next Actions\nPreparar prototipo (tarea corta en [[boards/Trabajo]], vencimiento proporcionado: 2026-10-10; prioridad pendiente).\n\n## People\n- [[wiki/entities/Ada]]\n\n## Key Decisions\n- 2026-10-10: decisión explícita del fixture: registrar hipótesis antes de probar.\n\n## Recent Activity\n- 2026-10-10: [[wiki/logs/2026-10-10 - Nexo]] — hipótesis inicial registrada.\n\n## Last overview\nÁreas consultadas y autorizadas: [[wiki/areas/Exploración]] · [[wiki/areas/Comunidad]].\n2026-10-10: activo; próximo paso explícito: preparar prototipo. No hay fecha límite proporcionada.\n\n## Texto humano\nConservar este párrafo y los atributos owner/custom.\n\n## Procedencia\nCaso sintético de aceptación de llm-wiki 0.2.0, 2026-10-10.\n",
+      "hash": "34284edb1409ea7f29c1e053f1af22292f6472ab330a0d523c87be458c47c358",
+      "next_offset": -1,
+      "truncated": false
+    },
+    "raw/Fuente A.md": {
+      "text": "# Experimento de prototipos\n\nEn el ensayo A, registrar la hipótesis antes de probar facilitó comparar el resultado con lo esperado.\n",
+      "hash": "d4885ac712464dd0d092b3bc0229fd242015411d66562467721985a92101515f",
+      "next_offset": -1,
+      "truncated": false
+    }
+  },
+  "continuity": {
+    "verified": true,
+    "method": "Two existing real Desktop chats, writer MCP mutations and reader MCP recovery; stable second read pass",
+    "tools_per_chat": [
+      30,
+      30
+    ],
+    "reader_wrote": false,
+    "first_pass_snapshot": false,
+    "stable_pass": {
+      "coverage": {
+        "scanned": 20,
+        "errors": [],
+        "truncated": false
+      },
+      "areas": 2,
+      "backlinks_per_area": 12,
+      "ambiguous": 0,
+      "unresolved": 0,
+      "hashes": {
+        "wiki/projects/Nexo.md": "34284edb1409ea7f29c1e053f1af22292f6472ab330a0d523c87be458c47c358",
+        "wiki/okrs/Aprendizaje.md": "6a1180bffd0df51588c5eef1374593373779e54a92677708cd38a3a0193621da",
+        "boards/Trabajo.md": "51de61b0c4ce250f5ca24972dcaf51a504226db13f3c9cdd1a9a5e161d24ba5d",
+        "raw/Fuente A.md": "d4885ac712464dd0d092b3bc0229fd242015411d66562467721985a92101515f",
+        "wiki/areas/Exploración.md": "56e69f35fdb481dec60c6f403e1997fc245e3cc2cebc37a440293ea04db2be3b",
+        "wiki/areas/Comunidad.md": "a48d6336bd6e04deb68c0321e1622b6c4b9f4024dfbffb12db63b3035f06280f"
+      }
+    }
+  }
+}

@@ -1633,18 +1633,20 @@
       "name": "obsidian-area",
       "skill": "skills/wiki-obsidian-area/SKILL.md",
       "status": "component_verified",
-      "evidence": "internal/vault/areas_test.go; internal/service/service_test.go; internal/mcp/server_test.go; internal/catalog/catalog_test.go",
-      "behavior_verified": false,
-      "host_acceptance": "pending"
+      "evidence": "internal/vault/areas_test.go; internal/service/service_test.go; internal/mcp/server_test.go; internal/catalog/catalog_test.go; docs/superpowers/evidence/2026-10-10-desktop-areas.md; tests/acceptance/desktop-areas-observed.json",
+      "behavior_verified": true,
+      "host_acceptance": "verified_scoped_synthetic_Desktop",
+      "host_scope": "Two real Desktop chats; area body links, optional routing, OKR pending values/evidence history. No Obsidian rendering or remote calendar."
     },
     {
       "id": "EXT-OKR",
       "name": "obsidian-okr",
       "skill": "skills/wiki-obsidian-okr/SKILL.md",
       "status": "component_verified",
-      "evidence": "internal/catalog/catalog_test.go; internal/vault/vault_test.go (OKR routing); workflow host acceptance pending",
-      "behavior_verified": false,
-      "host_acceptance": "pending"
+      "evidence": "internal/catalog/catalog_test.go; internal/vault/vault_test.go (OKR routing); Desktop synthetic acceptance; docs/superpowers/evidence/2026-10-10-desktop-areas.md; tests/acceptance/desktop-areas-observed.json",
+      "behavior_verified": true,
+      "host_acceptance": "verified_scoped_synthetic_Desktop",
+      "host_scope": "Two real Desktop chats; area body links, optional routing, OKR pending values/evidence history. No Obsidian rendering or remote calendar."
     }
   ],
   "extension_evidence": "docs/superpowers/evidence/2026-10-10-areas.md; tests/acceptance/areas-cases.json"

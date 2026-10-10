@@ -31,8 +31,10 @@
           "implicit external calendar or area creation"
         ]
       },
-      "host_result": "pending",
-      "evidence": "not yet run on installed host"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#project_authorized_areas",
+      "observed_status": "no_write_already_satisfied",
+      "scope": "Current complete read and existing links reused; no redundant mutation"
     },
     {
       "id": "project_previous_without_areas",
@@ -59,8 +61,9 @@
           "implicit external calendar or area creation"
         ]
       },
-      "host_result": "pending",
-      "evidence": "not yet run on installed host"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#project_previous_without_areas",
+      "observed_status": "committed"
     },
     {
       "id": "projects_authorized_areas",
@@ -90,8 +93,9 @@
           "implicit external calendar or area creation"
         ]
       },
-      "host_result": "pending",
-      "evidence": "not yet run on installed host"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#projects_authorized_areas",
+      "observed_status": "committed"
     },
     {
       "id": "projects_previous_without_areas",
@@ -118,8 +122,9 @@
           "implicit external calendar or area creation"
         ]
       },
-      "host_result": "pending",
-      "evidence": "not yet run on installed host"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#projects_previous_without_areas",
+      "observed_status": "committed"
     },
     {
       "id": "person_authorized_areas",
@@ -149,8 +154,9 @@
           "implicit external calendar or area creation"
         ]
       },
-      "host_result": "pending",
-      "evidence": "not yet run on installed host"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#person_authorized_areas",
+      "observed_status": "committed"
     },
     {
       "id": "person_previous_without_areas",
@@ -177,8 +183,9 @@
           "implicit external calendar or area creation"
         ]
       },
-      "host_result": "pending",
-      "evidence": "not yet run on installed host"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#person_previous_without_areas",
+      "observed_status": "committed"
     },
     {
       "id": "capture_authorized_areas",
@@ -208,8 +215,9 @@
           "implicit external calendar or area creation"
         ]
       },
-      "host_result": "pending",
-      "evidence": "not yet run on installed host"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#capture_authorized_areas",
+      "observed_status": "committed"
     },
     {
       "id": "capture_previous_without_areas",
@@ -236,8 +244,9 @@
           "implicit external calendar or area creation"
         ]
       },
-      "host_result": "pending",
-      "evidence": "not yet run on installed host"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#capture_previous_without_areas",
+      "observed_status": "committed"
     },
     {
       "id": "save_authorized_areas",
@@ -267,8 +276,10 @@
           "implicit external calendar or area creation"
         ]
       },
-      "host_result": "pending",
-      "evidence": "not yet run on installed host"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#save_authorized_areas",
+      "observed_status": "no_write_already_satisfied",
+      "scope": "Current complete read and existing links reused; no redundant mutation"
     },
     {
       "id": "save_previous_without_areas",
@@ -295,8 +306,9 @@
           "implicit external calendar or area creation"
         ]
       },
-      "host_result": "pending",
-      "evidence": "not yet run on installed host"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#save_previous_without_areas",
+      "observed_status": "committed"
     },
     {
       "id": "task_authorized_areas",
@@ -326,8 +338,9 @@
           "implicit external calendar or area creation"
         ]
       },
-      "host_result": "pending",
-      "evidence": "not yet run on installed host"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#task_authorized_areas",
+      "observed_status": "committed"
     },
     {
       "id": "task_previous_without_areas",
@@ -354,8 +367,9 @@
           "implicit external calendar or area creation"
         ]
       },
-      "host_result": "pending",
-      "evidence": "not yet run on installed host"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#task_previous_without_areas",
+      "observed_status": "committed"
     },
     {
       "id": "calendar_authorized_areas",
@@ -385,8 +399,9 @@
           "implicit external calendar or area creation"
         ]
       },
-      "host_result": "pending",
-      "evidence": "not yet run on installed host"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#calendar_authorized_areas",
+      "observed_status": "committed"
     },
     {
       "id": "calendar_previous_without_areas",
@@ -413,8 +428,9 @@
           "implicit external calendar or area creation"
         ]
       },
-      "host_result": "pending",
-      "evidence": "not yet run on installed host"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#calendar_previous_without_areas",
+      "observed_status": "committed"
     },
     {
       "id": "daily_authorized_areas",
@@ -444,8 +460,9 @@
           "implicit external calendar or area creation"
         ]
       },
-      "host_result": "pending",
-      "evidence": "not yet run on installed host"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#daily_authorized_areas",
+      "observed_status": "committed"
     },
     {
       "id": "daily_previous_without_areas",
@@ -472,8 +489,9 @@
           "implicit external calendar or area creation"
         ]
       },
-      "host_result": "pending",
-      "evidence": "not yet run on installed host"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#daily_previous_without_areas",
+      "observed_status": "committed"
     },
     {
       "id": "log_authorized_areas",
@@ -503,8 +521,9 @@
           "implicit external calendar or area creation"
         ]
       },
-      "host_result": "pending",
-      "evidence": "not yet run on installed host"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#log_authorized_areas",
+      "observed_status": "committed"
     },
     {
       "id": "log_previous_without_areas",
@@ -531,8 +550,9 @@
           "implicit external calendar or area creation"
         ]
       },
-      "host_result": "pending",
-      "evidence": "not yet run on installed host"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#log_previous_without_areas",
+      "observed_status": "committed"
     },
     {
       "id": "review_authorized_areas",
@@ -562,8 +582,9 @@
           "implicit external calendar or area creation"
         ]
       },
-      "host_result": "pending",
-      "evidence": "not yet run on installed host"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#review_authorized_areas",
+      "observed_status": "committed"
     },
     {
       "id": "review_previous_without_areas",
@@ -590,8 +611,9 @@
           "implicit external calendar or area creation"
         ]
       },
-      "host_result": "pending",
-      "evidence": "not yet run on installed host"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#review_previous_without_areas",
+      "observed_status": "committed"
     },
     {
       "id": "synthesize_authorized_areas",
@@ -621,8 +643,9 @@
           "implicit external calendar or area creation"
         ]
       },
-      "host_result": "pending",
-      "evidence": "not yet run on installed host"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#synthesize_authorized_areas",
+      "observed_status": "committed"
     },
     {
       "id": "synthesize_previous_without_areas",
@@ -649,8 +672,9 @@
           "implicit external calendar or area creation"
         ]
       },
-      "host_result": "pending",
-      "evidence": "not yet run on installed host"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#synthesize_previous_without_areas",
+      "observed_status": "committed"
     },
     {
       "id": "distill_authorized_areas",
@@ -680,8 +704,9 @@
           "implicit external calendar or area creation"
         ]
       },
-      "host_result": "pending",
-      "evidence": "not yet run on installed host"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#distill_authorized_areas",
+      "observed_status": "committed"
     },
     {
       "id": "distill_previous_without_areas",
@@ -708,8 +733,9 @@
           "implicit external calendar or area creation"
         ]
       },
-      "host_result": "pending",
-      "evidence": "not yet run on installed host"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#distill_previous_without_areas",
+      "observed_status": "committed"
     },
     {
       "id": "ShortTaskKeepsCard",
@@ -718,8 +744,9 @@
         "request": "scenario ShortTaskKeepsCard"
       },
       "expected": "one existing board card, no standalone task solely for areas",
-      "host_result": "pending",
-      "evidence": "requires installed host workflow execution"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#ShortTaskKeepsCard",
+      "observed_status": "passed"
     },
     {
       "id": "KanbanKeepsColumns",
@@ -728,8 +755,9 @@
         "request": "scenario KanbanKeepsColumns"
       },
       "expected": "unchanged H2 columns and kanban frontmatter; links in card",
-      "host_result": "pending",
-      "evidence": "requires installed host workflow execution"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#KanbanKeepsColumns",
+      "observed_status": "passed"
     },
     {
       "id": "RawBytesUnchanged",
@@ -738,8 +766,9 @@
         "request": "scenario RawBytesUnchanged"
       },
       "expected": "all original raw bytes equal; area links on derived note",
-      "host_result": "pending",
-      "evidence": "requires installed host workflow execution"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#RawBytesUnchanged",
+      "observed_status": "passed"
     },
     {
       "id": "HumanMetadataPreserved",
@@ -748,8 +777,9 @@
         "request": "scenario HumanMetadataPreserved"
       },
       "expected": "existing frontmatter and human text preserved; links in body",
-      "host_result": "pending",
-      "evidence": "requires installed host workflow execution"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#HumanMetadataPreserved",
+      "observed_status": "passed"
     },
     {
       "id": "UnknownOKRValuesPending",
@@ -758,8 +788,9 @@
         "request": "scenario UnknownOKRValuesPending"
       },
       "expected": "unknown metric/baseline/target/date/owner remain pending; no inferred board or calendar",
-      "host_result": "pending",
-      "evidence": "requires installed host workflow execution"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#UnknownOKRValuesPending",
+      "observed_status": "committed"
     },
     {
       "id": "GeneralIntentDoesNotWrite",
@@ -768,8 +799,9 @@
         "request": "scenario GeneralIntentDoesNotWrite"
       },
       "expected": "general intent without explicit workflow/area scope produces no writes",
-      "host_result": "pending",
-      "evidence": "requires installed host workflow execution"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#GeneralIntentDoesNotWrite",
+      "observed_status": "passed"
     },
     {
       "id": "RepeatedLinkRequestWithCurrentHash",
@@ -778,8 +810,9 @@
         "request": "scenario RepeatedLinkRequestWithCurrentHash"
       },
       "expected": "reread full note/hash; one path and link per area, no write if already satisfied; other authorized edits new ID/current hash",
-      "host_result": "pending",
-      "evidence": "requires installed host workflow execution"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#RepeatedLinkRequestWithCurrentHash",
+      "observed_status": "passed"
     },
     {
       "id": "AddSecondAreaPreservesFirst",
@@ -788,8 +821,9 @@
         "request": "scenario AddSecondAreaPreservesFirst"
       },
       "expected": "read current hash and purpose, add only missing second area; retain first and human content",
-      "host_result": "pending",
-      "evidence": "requires installed host workflow execution"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#AddSecondAreaPreservesFirst",
+      "observed_status": "committed"
     },
     {
       "id": "IncompleteInventoryDoesNotCreate",
@@ -798,8 +832,9 @@
         "request": "scenario IncompleteInventoryDoesNotCreate"
       },
       "expected": "partial reader result plus error blocks absence conclusion and dedup creation",
-      "host_result": "pending",
-      "evidence": "requires installed host workflow execution"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#IncompleteInventoryDoesNotCreate",
+      "observed_status": "passed"
     },
     {
       "id": "AmbiguousAreaDoesNotSelect",
@@ -808,8 +843,9 @@
         "request": "scenario AmbiguousAreaDoesNotSelect"
       },
       "expected": "show distinct homonyms and ask before choosing",
-      "host_result": "pending",
-      "evidence": "requires installed host workflow execution"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#AmbiguousAreaDoesNotSelect",
+      "observed_status": "passed"
     },
     {
       "id": "UnsafeAreaNameDoesNotEscape",
@@ -818,8 +854,9 @@
         "request": "scenario UnsafeAreaNameDoesNotEscape"
       },
       "expected": "show safe filename alternative before creation, no overwritten targets",
-      "host_result": "pending",
-      "evidence": "requires installed host workflow execution"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#UnsafeAreaNameDoesNotEscape",
+      "observed_status": "passed"
     },
     {
       "id": "MissingToolDoesNotSimulate",
@@ -828,8 +865,10 @@
         "request": "scenario MissingToolDoesNotSimulate"
       },
       "expected": "report unavailable reader or skill, never replace by fictitious inventory or shell mutation",
-      "host_result": "pending",
-      "evidence": "requires installed host workflow execution"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#MissingToolDoesNotSimulate",
+      "observed_status": "passed",
+      "scope": "Historical real Desktop absence before restart; current tools not disabled"
     },
     {
       "id": "ReservedAreaNameSafeTarget",
@@ -838,8 +877,10 @@
         "inventory": "complete, C.md exists, C# absent"
       },
       "expected": "propose C-sharp.md before creation, preserve title C#, canonical link targets C-sharp; no C.md edge",
-      "host_result": "pending",
-      "evidence": "agent proposed-call pressure and graph characterization only"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#ReservedAreaNameSafeTarget",
+      "observed_status": "passed",
+      "scope": "Proposal followed by explicit safe-path synthetic test; actual user approval dialogue not exercised"
     },
     {
       "id": "LegacyReservedAreaDoesNotMislink",
@@ -851,8 +892,12 @@
         ]
       },
       "expected": "diagnose incompatible canonical path, no automatic migration or C.md link",
-      "host_result": "pending",
-      "evidence": "agent proposed-call pressure only"
+      "host_result": "passed",
+      "evidence": "tests/acceptance/desktop-areas-observed.json#LegacyReservedAreaDoesNotMislink",
+      "observed_status": "passed"
     }
-  ]
+  ],
+  "executed_date": "2026-10-10",
+  "host": "Codex Desktop 26.1007.21159; installed local 0.2.0 correction",
+  "scope": "24 paired workflow cases and 14 guard scenarios. Local calendar meeting mode only. Historical absent-tool case. Safe filename approval interaction not exercised. No Obsidian rendering, remote calendar, exhaustive semantic equivalence or Intel execution."
 }

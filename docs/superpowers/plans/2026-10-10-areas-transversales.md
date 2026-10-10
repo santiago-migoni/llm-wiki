@@ -257,7 +257,7 @@ extender `internal/graph/graph_test.go`, `internal/vault/process_recovery_test.g
 - [x] Ejecutar `go test ./internal/vault ./internal/graph ./internal/service ./tests/acceptance`;
   cerrar casos de formato/coverage de Review Focus. Tests con llamadas prediseñadas
   acreditan runtime, no decisiones semánticas de un agente.
-- [ ] Ejecutar escenario de dos chats Codex sobre fixtures sintéticos; registrar
+- [x] Ejecutar escenario de dos chats Codex sobre fixtures sintéticos; registrar
   host/plugin, entrada, operaciones/diffs y fuentes recuperadas. Ausencia del host
   deja este criterio pendiente sin sustituirlo por dos procesos.
 - [x] Ejecutar `go test -race ./...`, `go vet ./...`, gofmt y `git diff --check`;
@@ -327,3 +327,17 @@ No ejecutado ni aprobado; no cambia el plan anterior del plugin.
 - Spec presentada: `e5121812e74fa53eeaf37e03c9496147cd68ffde:docs/superpowers/specs/2026-10-10-areas-transversales-design.md`.
 - Plan presentado: `bc9f6fa2c7d333c3a1e2d42fd840b5c1c8e7e527:docs/superpowers/plans/2026-10-10-areas-transversales.md`.
 - Alcance: especificación v001, tareas T1–T7 y ejecución directa con verificación; no autoriza publicación, instalación ni push. Conserva AA-001 y AP-001.
+
+## Cierre de aceptación Desktop — 2026-10-10
+
+Los estados pendientes de host anteriores son históricos. Tras corregir los
+manifiestos y reiniciar Desktop, ambos chats existentes reciben 30 herramientas
+MCP. Se ejecutaron 24 casos pareados de los 12 workflows y 14 escenarios de
+guardas con los límites de interacción detallados en la matriz. La segunda pasada
+del chat lector recuperó los mismos hashes, valores pendientes de OKR y 12
+backlinks por área, con cobertura completa de 20 archivos.
+
+Evidencia: [informe Desktop](../evidence/2026-10-10-desktop-areas.md) y
+[observaciones](../../../tests/acceptance/desktop-areas-observed.json).
+El renderizado Obsidian, calendario remoto, ejecución Intel y resultados de
+usuario EXI-002/003 no quedan acreditados por esta aceptación sintética.

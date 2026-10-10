@@ -160,3 +160,66 @@ La recarga por el socket de control del daemon administrado no estaba disponible
 de control de interfaz. Se pidió reiniciar después de instalar la corrección
 para volver a comprobar las sesiones. **La carga está corregida; las 38 pruebas
 de workflows y la continuidad de vault entre chats siguen sin ejecutar.**
+
+## Aceptación real después del último reinicio
+
+Los estados anteriores son históricos. Ambos chats existentes exponen ahora
+30 herramientas MCP. El escritor seleccionó una bóveda sintética temporal;
+todas las mutaciones de contenido se hicieron mediante MCP recuperable.
+
+Se ejecutaron los **24 casos pareados de los 12 workflows**, primero sin áreas
+y después con Exploración/Comunidad. Lecturas completas, hashes, operaciones,
+contenido anterior/posterior y decisiones sin escritura están en
+[observaciones](../../../tests/acceptance/desktop-areas-observed.json).
+La [matriz](../../../tests/acceptance/areas-cases.json) registra cada resultado.
+
+- `projects` sólo escribió Last overview. `project` y `save` reutilizaron los
+  enlaces ya presentes, leyendo el contenido y hash actuales sin otra escritura.
+- Persona, captura, reunión local, daily, log, revisión, síntesis y destilación
+  conservaron destinos canónicos. La tarea corta permaneció como tarjeta de
+  Backlog, sin nota propia ni columnas nuevas.
+- Frontmatter y párrafo humanos preservados; ambas fuentes raw conservaron sus
+  hashes. Los nuevos enlaces quedaron en notas derivadas y cuerpos de notas.
+- La revisión declara seis días ausentes. La síntesis usa dos contextos y no
+  ejecuta concept-evolution sin tres actualizaciones. El claim destilado cita B2.
+- El OKR es draft: periodo, owner, KR, métrica, baseline, target, actual y fecha
+  pendientes. Se añadió evidencia e historial sin calcular progreso ni inferir
+  periodo a partir de la fecha de captura.
+
+También se registraron **14 escenarios de guardas**. Un frontmatter malformado
+provocó inventario incomplete/error y no se dedujo ausencia; los homónimos se
+presentaron sin selección; un escape fue rechazado. Se conservaron la primera
+área al añadir otra y un enlace por área al repetir la petición. El caso de
+herramientas ausentes usa la ausencia real observada antes del reinicio.
+Para C# se propuso C-sharp.md y después se ejecutó el fixture con ese destino
+explícito: el grafo resolvió C-sharp.md y no C.md. No se ejercitó un diálogo nuevo
+de aprobación humana. El C#.md heredado se diagnosticó sin migración automática.
+
+El segundo chat recibió sólo ubicaciones y recuperó propósitos, relaciones,
+pendientes y hashes con MCP. La primera pasada coincidió con escrituras y no
+representa un snapshot único. La segunda pasada, con el vault principal estable,
+coincide con los hashes del escritor: dos áreas completas, cobertura de 20 archivos
+sin errores/truncamiento y **12 backlinks por área**, sin ambigüedades. El lector
+no escribió. Véase [continuidad](../../../tests/acceptance/desktop-continuity-observed.json).
+
+### Defecto adicional del catálogo MCP
+
+Los arrays changes/cases/scope se publicaban sin items. Desktop los presentaba
+como listas de texto, mientras el runtime esperaba objetos para los primeros dos.
+Strings fallaron antes de escribir. Objetos reales sí funcionaron en los lotes
+de esta aceptación y en retrieval-eval: recall@10=1, MRR=1/3, informe no escrito.
+
+La corrección declara objetos para changes/cases y strings para relevant/scope,
+con binario base64 y destino nullable. La regresión de tools/list falló antes de
+corregir y luego aprobó. Las pruebas STDIO cubren creación, actualización, bytes
+binarios, rechazo atómico de hash obsoleto, métricas conocidas y rechazo de strings.
+Pruebas enfocadas, suite con carreras y vet aprobados; revisión independiente sin
+hallazgos concretos. La aceptación del paquete aprobó manifiestos y alternancia
+con 0.1.0. La corrección no cambia la lógica de los workflows.
+
+La aceptación funcional corresponde al binario de lanzamiento documentado arriba.
+La reconstrucción e instalación del esquema adicional se registran por separado
+para conservar su procedencia. Scope: workflows declarativos interpretados por el
+agente, reunión calendar local y fixtures sintéticos. No acredita renderizado
+Obsidian, eventos remotos, ejecución Intel, todas las ramas semánticas ni resultados
+de usuario EXI-002/003. El tag histórico y publicación no cambian.

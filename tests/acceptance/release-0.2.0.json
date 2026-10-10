@@ -21,11 +21,11 @@
     "previous_package_process_reads_preserve_state": "passed",
     "workflow_instruction_pressure": "simulated proposals only",
     "final_review": "initial three Important and PR three P2 corrected; ordered-list regression corrected",
-    "PR_review_fixes": "three P2 fixed; packaged reproductions passed"
+    "PR_review_fixes": "three P2 fixed; packaged reproductions passed",
+    "installed_Desktop_workflows": "24 paired cases passed within recorded scope",
+    "two_real_Desktop_chats": "passed; full hashes match in stable read pass"
   },
   "pending": [
-    "installed Codex Desktop workflows",
-    "two real Codex chats",
     "Intel execution",
     "EXI-002 and EXI-003 user outcomes"
   ],
@@ -35,15 +35,15 @@
   "installation_scope": "Current local 0.2.0 correction installed via Desktop CLI; original release provenance above remains historical",
   "desktop_attempt": {
     "date": "2026-10-10",
-    "status": "loader_fixed_chat_refresh_pending",
+    "status": "host_acceptance_verified_scoped",
     "local_chats_checked": 2,
     "runtime_tools_exposed_per_chat": [
-      0,
-      0
+      30,
+      30
     ],
-    "workflow_cases_executed": 0,
-    "vault_continuity_verified": false,
-    "cause": "Confirmed portable MCP command rejected by Desktop loader; fixed relative command/cwd; existing chat tools still absent",
+    "workflow_cases_executed": 24,
+    "vault_continuity_verified": true,
+    "cause": "Portable launch corrected; after restart both real chats expose MCP. Additional array-schema defect reproduced and fixed.",
     "after_user_reported_restart": {
       "runtime_tools_exposed_per_chat": [
         0,
@@ -84,14 +84,53 @@
         "architectures": "arm64 and amd64 present; Intel not executed"
       },
       "existing_chat_tools": [
-        0,
-        0
+        30,
+        30
       ],
-      "workflow_cases_executed": 0,
-      "continuity_verified": false,
+      "workflow_cases_executed": 24,
+      "continuity_verified": true,
       "git_tag_modified": false,
       "published": false,
-      "pending": "refresh both existing Desktop chats after corrected installation"
+      "pending": "none for scoped functional acceptance; array-schema package tracked separately"
+    },
+    "guard_cases_executed": 14,
+    "verified_after_latest_restart": {
+      "date": "2026-10-10",
+      "workflow_cases": 24,
+      "guard_cases": 14,
+      "continuity": {
+        "verified": true,
+        "method": "Two existing real Desktop chats, writer MCP mutations and reader MCP recovery; stable second read pass",
+        "tools_per_chat": [
+          30,
+          30
+        ],
+        "reader_wrote": false,
+        "first_pass_snapshot": false,
+        "stable_pass": {
+          "coverage": {
+            "scanned": 20,
+            "errors": [],
+            "truncated": false
+          },
+          "areas": 2,
+          "backlinks_per_area": 12,
+          "ambiguous": 0,
+          "unresolved": 0,
+          "hashes": {
+            "wiki/projects/Nexo.md": "34284edb1409ea7f29c1e053f1af22292f6472ab330a0d523c87be458c47c358",
+            "wiki/okrs/Aprendizaje.md": "6a1180bffd0df51588c5eef1374593373779e54a92677708cd38a3a0193621da",
+            "boards/Trabajo.md": "51de61b0c4ce250f5ca24972dcaf51a504226db13f3c9cdd1a9a5e161d24ba5d",
+            "raw/Fuente A.md": "d4885ac712464dd0d092b3bc0229fd242015411d66562467721985a92101515f",
+            "wiki/areas/Exploración.md": "56e69f35fdb481dec60c6f403e1997fc245e3cc2cebc37a440293ea04db2be3b",
+            "wiki/areas/Comunidad.md": "a48d6336bd6e04deb68c0321e1622b6c4b9f4024dfbffb12db63b3035f06280f"
+          }
+        }
+      },
+      "observations": "tests/acceptance/desktop-areas-observed.json",
+      "executed_binary_sha256": "f964722942b97154ba9e12441211e69c93296998226261e6cb47ca6e8f5ddd8c",
+      "executed_source_commit": "d985fa177274aac764f187a623add06e0cc4a0d2",
+      "scope": "24 paired workflow cases and 14 guard scenarios. Local calendar meeting mode only. Historical absent-tool case. Safe filename approval interaction not exercised. No Obsidian rendering, remote calendar, exhaustive semantic equivalence or Intel execution."
     }
   },
   "published": false,
