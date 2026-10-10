@@ -4,7 +4,9 @@ Gestiona tus notas y tu conocimiento desde Codex Desktop.
 
 Busca información, guarda ideas y decisiones y relaciona notas. Tus archivos siguen siendo Markdown, compatibles con Obsidian.
 
-**Estado:** versión `0.2.0`, con áreas opcionales y workflow de OKRs. El núcleo y el paquete se probaron en macOS con Apple Silicon. La instalación por CLI tiene evidencia de versiones de desarrollo anteriores; la validación completa en Desktop sigue pendiente.
+**Estado:** versión `0.2.0` (tag `v0.2.0`), con áreas opcionales y workflow de OKRs. El núcleo y el paquete se probaron en macOS con Apple Silicon. La instalación por CLI tiene evidencia de versiones de desarrollo anteriores; la validación completa en Desktop sigue pendiente.
+
+Cambios de esta entrega: [changelog v0.2.0](CHANGELOG.md).
 
 ## Qué puedes hacer
 
@@ -23,11 +25,11 @@ Necesitas Codex Desktop en macOS. El paquete incluye el ejecutable `plugins/llm-
 
 ### Desde GitHub en Codex Desktop
 
-Esta opción requiere que el repositorio [santiago-migoni/llm-wiki](https://github.com/santiago-migoni/llm-wiki) esté disponible y que su rama `main` contenga el catálogo y el paquete. Configurar el remoto local no publica los archivos: hace falta realizar el push.
+El repositorio [santiago-migoni/llm-wiki](https://github.com/santiago-migoni/llm-wiki) contiene el catálogo y el paquete de esta entrega en la referencia Git `v0.2.0`.
 
 1. Abre **Complementos → Agregar → Agregar marketplace**.
 2. En **Origen**, introduce `santiago-migoni/llm-wiki` o `https://github.com/santiago-migoni/llm-wiki.git`.
-3. En **Referencia de Git**, introduce `main`. Deja **Rutas dispersas** vacío.
+3. En **Referencia de Git**, introduce `v0.2.0`. Deja **Rutas dispersas** vacío.
 4. Pulsa **Agregar marketplace**, selecciona el marketplace **llm-wiki** e instala el plugin **llm-wiki**.
 5. Abre un chat nuevo. Si el plugin no aparece, reinicia la aplicación.
 
@@ -42,10 +44,10 @@ Si el marketplace ya registrado apunta a un clon o worktree antiguo y falla al c
 
 ### Desde la terminal
 
-Para instalar desde GitHub, una vez publicada la rama `main`, con el CLI de Codex disponible:
+Para instalar la entrega `v0.2.0` desde GitHub, con el CLI de Codex disponible:
 
 ```sh
-codex plugin marketplace add https://github.com/santiago-migoni/llm-wiki.git --ref main
+codex plugin marketplace add https://github.com/santiago-migoni/llm-wiki.git --ref v0.2.0
 codex plugin add llm-wiki@llm-wiki
 codex plugin list --marketplace llm-wiki
 ```

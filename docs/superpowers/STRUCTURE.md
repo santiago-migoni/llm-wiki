@@ -1,7 +1,7 @@
 ---
 title: Estructura de llm-wiki
 status: draft
-version: v004
+version: v005
 responsible: Usuario promotor del proyecto
 created_at: "2026-10-08"
 updated_at: "2026-10-10"
@@ -11,7 +11,12 @@ approval_reference: null
 
 # Estructura de llm-wiki
 
-Estructura implementada en `43ee802`, con paquete de ensayo 0.1.0-dev.2. La dirección aplicable está en
+Entrega relacionada: **v0.2.0**; runtime/manifiestos `0.2.0`.
+[Changelog](../../CHANGELOG.md) y [evidencia de áreas](evidence/2026-10-10-areas.md).
+
+Estructura vigente para `v0.2.0`: resolución e inventario de áreas, dos skills nuevas
+y paquete universal verificado. Base histórica `43ee802`, ensayo 0.1.0-dev.2.
+La dirección aplicable está en
 [CONSTITUTION.md](CONSTITUTION.md), v003, y [ARCHITECTURE.md](ARCHITECTURE.md),
 AC-019. Base previa: `f27672f7a63039805784efd8ccd5478b089dda2e`.
 El inventario original se conserva intacto. No se utiliza `.repos` en ejecución.

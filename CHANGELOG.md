@@ -2,6 +2,42 @@
 
 Registro de cambios del plugin llm-wiki. La versión inicial contiene capacidades cuya validación sigue pendiente.
 
+## v0.2.0 — 2026-10-10
+
+### Funcionalidades
+
+- Áreas opcionales elegidas por el usuario; una nota puede vincularse con varias
+  mediante enlaces en el cuerpo, conservando su ubicación y contenido.
+- Lector `wiki_list_areas` compartido por CLI y MCP, con hashes, aliases,
+  cobertura, diagnósticos e inventarios parciales explícitos.
+- Workflows de áreas y OKRs, e integración opcional en doce workflows existentes.
+- Resolución de carpetas de áreas, OKRs y entidades con precedencia de mapas
+  explícitos y errores de destino sin fallback silencioso.
+
+### Correcciones
+
+- Las tablas de convenciones de nombres conservan los mapas de carpetas válidos.
+- Nombres de área mediante H1 ATX/Setext; se descartan comentarios HTML y bloques
+  de código, y no se confunden listas numeradas con encabezados Setext.
+- Fuentes de mapa ilegibles producen `map_errors` e inventarios incompletos.
+- Destinos bloqueados por archivos y enlaces incompatibles se diagnostican antes
+  de crear relaciones; títulos como «C#» conservan su nombre visible.
+
+### Distribución, documentación y validación
+
+- Runtime, manifiestos y paquete macOS universal en `0.2.0`; referencia Git
+  `v0.2.0`. Documentación vigente y evidencia vinculadas a esta entrega.
+- Suite Go con detector de carreras, vet, pruebas de recuperación y continuidad
+  entre procesos aprobadas. Firma, arquitecturas, checksums y procedencia del
+  paquete verificados; prueba MCP con PATH del sistema aprobada.
+- Las tres reproducciones del PR pasaron sobre el binario recompilado.
+- Instalación y workflows en Codex Desktop, dos chats reales, ejecución Intel y
+  resultados de usuario EXI-002/003 continúan pendientes. Las simulaciones de
+  instrucciones no equivalen a aceptación del host.
+
+Evidencia: [registro de áreas](docs/superpowers/evidence/2026-10-10-areas.md) e
+[informe 0.2.0](tests/acceptance/release-0.2.0.json).
+
 ## 0.1.0 — 2026-10-09
 
 Primera versión registrada en el historial público del proyecto.

@@ -11,6 +11,9 @@ approval_reference: AA-002
 
 # Plan de implementación de áreas y organización transversal
 
+Entrega del producto: **v0.2.0** (runtime/manifiestos `0.2.0`);
+[changelog](../../../CHANGELOG.md). La revisión documental v001 y AA-002 conservan su alcance.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development
 > or superpowers:executing-plans to implement this plan task-by-task. Steps use
 > checkbox syntax for tracking. Método aprobado: ejecución directa por el agente

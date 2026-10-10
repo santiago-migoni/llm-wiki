@@ -1,7 +1,7 @@
 ---
 title: Arquitectura de llm-wiki
 status: draft
-version: v008
+version: v009
 responsible: Usuario promotor del proyecto
 created_at: "2026-10-08"
 updated_at: "2026-10-10"
@@ -10,6 +10,9 @@ approval_reference: null
 ---
 
 # Arquitectura de llm-wiki
+
+Entrega relacionada: **v0.2.0**; runtime/manifiestos `0.2.0`.
+[Changelog](../../CHANGELOG.md) y [evidencia de áreas](evidence/2026-10-10-areas.md).
 
 ## Contexto y límites del sistema
 
@@ -31,14 +34,14 @@ las brechas no se declaran resueltas por adoptar Codex.
   `.repos/obsidian-second-brain`, commit `b0089f7666d0c1e3db41c9d587b6f3c997665235`.
   Sus fuentes están identificadas en el inventario. No se modifican ni se proponen
   como dependencia de ejecución del paquete instalado.
-- **Estado actual:** núcleo y paquete propio implementados en `43ee802`; artefacto macOS y evidencia de recuperación en `619fecb`. Instalación CLI de 0.1.0-dev.2 verificada. Desktop y paridad funcional siguen pendientes.
+- **Estado actual:** entrega `v0.2.0`, con áreas/OKRs y correcciones del PR #1. Paquete compilado desde `22194406f7d9d7137b3f8d38fcf4824b98e6897a`; suite con carreras, vet y MCP aislado verificados. Instalación CLI histórica de 0.1.0-dev.2; Desktop y paridad funcional siguen pendientes.
 - **Documentos relacionados:** [STRUCTURE.md](STRUCTURE.md) e [INFRASTRUCTURE.md](INFRASTRUCTURE.md) describen módulos, ejecución y límites observados; [evidencia](evidence/2026-10-08-implementation.md) registra pruebas.
 
 ## Componentes, interfaces y flujos implementados
 
 MCP STDIO y CLI comparten `internal/service`. El registro mantiene identidad canónica por vault y asociaciones de proyectos; `vault` confina lectura y escritura, y coordina planes con journals y snapshots externos. Cada archivo se publica con precondiciones; un lote parcial tiene inspect/resume/rollback condicional. No se promete atomicidad global ni CAS frente a un editor que no respeta locks.
 
-Grafo, salud, bootstrap, init, migración, merge y exportación trabajan sobre las notas canónicas. Búsqueda usa un índice léxico reconstruible en memoria; reindex reporta cambios y retrieval-eval recibe gold cases explícitos. No hay embeddings ni cliente de proveedor. Catálogo combina 48 skills del paquete y workflows personales; leer un workflow no lo ejecuta ni instala.
+Grafo, salud, bootstrap, init, migración, merge y exportación trabajan sobre las notas canónicas. Búsqueda usa un índice léxico reconstruible en memoria; reindex reporta cambios y retrieval-eval recibe gold cases explícitos. No hay embeddings ni cliente de proveedor. Catálogo combina 50 skills del paquete y workflows personales; leer un workflow no lo ejecuta ni instala.
 
 El paquete contiene un binario universal, manifiestos y checksums. Se ejecutó en arm64 sin toolchain de usuario; Intel y llamada desde Desktop no están acreditados. Razonamiento y web ocurren en Codex, no en el núcleo. Las brechas de host y vistas permanecen abiertas conforme la spec.
 
@@ -763,7 +766,7 @@ Estado draft; no registra aprobación ni implementación nuevas.
   aprobado, sin transformar evidencia pendiente en verificación.
 
 Documentos dependientes preparados por este encargo: [spec de áreas v001](specs/2026-10-10-areas-transversales-design.md)
-y [plan de áreas v001](plans/2026-10-10-areas-transversales.md), ambos draft.
+y [plan de áreas v001](plans/2026-10-10-areas-transversales.md), ambos draft en esa presentación; posteriormente aprobados en AA-002 para la entrega `v0.2.0`.
 AA-001 no aprueba sus detalles ni habilita ejecución; sus bases exactas se
 presentan mediante sus propios commits. AP-001 y el incremento anterior permanecen intactos.
 

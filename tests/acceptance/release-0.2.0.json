@@ -32,5 +32,12 @@
   "evidence": "docs/superpowers/evidence/2026-10-10-areas.md",
   "matrix": "tests/acceptance/areas-cases.json",
   "installed": false,
-  "published": false
+  "published": false,
+  "distribution": {
+    "repository": "https://github.com/santiago-migoni/llm-wiki",
+    "git_tag": "v0.2.0",
+    "channel": "git",
+    "github_release_created": false
+  },
+  "publication_scope": "GitHub Release or plugin directory"
 }

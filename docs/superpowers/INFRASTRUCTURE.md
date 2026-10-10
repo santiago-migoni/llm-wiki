@@ -1,17 +1,22 @@
 ---
 title: Ejecución y distribución de llm-wiki
 status: draft
-version: v002
+version: v003
 responsible: Usuario promotor del proyecto
 created_at: "2026-10-08"
-updated_at: "2026-10-08"
+updated_at: "2026-10-10"
 reviewed_at: null
 approval_reference: null
 ---
 
 # Ejecución y distribución de llm-wiki
 
-Estado operativo observado: paquete 0.1.0-dev.2 instalado mediante CLI; ejecución MCP arm64 verificada. Desktop sigue pendiente.
+Entrega relacionada: **v0.2.0**; runtime/manifiestos `0.2.0`.
+[Changelog](../../CHANGELOG.md) y [evidencia de áreas](evidence/2026-10-10-areas.md).
+
+Estado de entrega: paquete `v0.2.0` verificado en macOS arm64, con firma ad hoc,
+checksums y procedencia; MCP con PATH del sistema y persistencia comprobados.
+Instalación CLI histórica: 0.1.0-dev.2. Instalación de 0.2.0/Desktop e Intel pendientes.
 Fuentes: [arquitectura](ARCHITECTURE.md) y
 [estudio de empaquetado](analysis/equivalencias-codex/EMPAQUETADO.md).
 
@@ -20,9 +25,9 @@ Fuentes: [arquitectura](ARCHITECTURE.md) y
 | Entorno | Función | Evidencia actual |
 |---|---|---|
 | Desarrollo macOS | Go, SDK MCP, tests, generación de paquete | Go 1.27.2 aislado, SDK MCP Go 1.8.0; race/vet pasan |
-| Paquete de ensayo | Binario Go universal, skills y manifiestos | dev.1 y dev.2 generados; esquemas, checksums, firma y MCP aislado verificados |
-| Codex Desktop macOS | Carga de skills y proceso MCP local STDIO | Plugin habilitado mediante CLI; 48 skills descubiertas; interacción Desktop pendiente |
-| Distribución Git | Catálogo reproducible y versiones disponibles para volver atrás | No hay remoto/publicación autorizados para esta entrega |
+| Paquete v0.2.0 | Binario Go universal, 50 skills y manifiestos | Fuentes `2219440`; firma, checksums, procedencia y MCP aislado verificados. Ensayos dev.1/dev.2 históricos |
+| Codex Desktop macOS | Carga de skills y proceso MCP local STDIO | Evidencia CLI histórica de 48 skills; 50 empaquetadas en 0.2.0. Instalación/aceptación Desktop de esta versión pendientes |
+| Distribución Git | Catálogo y paquete por referencia versionada | Repositorio GitHub `santiago-migoni/llm-wiki`; tag `v0.2.0` autorizado por el usuario. PR #1 hacia main |
 
 Se compilan arm64 y amd64 y se ensamblan con `lipo` en desarrollo. Esto no prueba
 que ambas arquitecturas funcionen: cada una exige ejecución real antes de figurar
@@ -82,8 +87,8 @@ No se fuerza un bloqueo abandonado sin inspección del journal y proceso dueño.
 6. Probar proceso real por cada arquitectura declarada compatible. Compilar no basta.
 
 El alta de marketplace y la instalación local forman parte de la etapa solicitada
-por el usuario, y se ejecutaron mediante Codex CLI 0.135.0. La interfaz Desktop no pudo verificarse por restricción de la herramienta de control visual. Publicación remota y directorio público
-quedan fuera hasta decisión específica. No se reinicia la app durante un chat activo
+por el usuario, y se ejecutaron mediante Codex CLI 0.135.0. La interfaz Desktop no pudo verificarse por restricción de la herramienta de control visual. La entrega `v0.2.0` tiene autorización explícita para commit, tag y push; una
+GitHub Release, el directorio público y la instalación de esta versión quedan pendientes. No se reinicia la app durante un chat activo
 sin coordinar el momento; si exige reinicio, la comprobación se registra pendiente.
 
 ## Automatizaciones y Obsidian
@@ -95,6 +100,15 @@ registrada como diferencia funcional; no se anuncia persistencia automática pro
 Se generan formatos `.canvas`/`.base` compatibles como datos; operar esos archivos
 no exige abrir Obsidian. La vista en vivo/lint del editor no se declara reemplazada.
 
-## Evidencia y límites de esta revisión
+## Evidencia histórica de la revisión dev.2
 
-Fuente del paquete dev.2: `43ee802`; macOS 27.0.1 arm64. Se probó alternar procesos dev.1/dev.2 sin cambios en hashes del vault/estado y recuperar un lote tras salida del proceso, conservando edición humana posterior. El [registro de implementación](evidence/2026-10-08-implementation.md) detalla comandos, criterios y límites. No prueba downgrade del marketplace, dos chats Desktop, trust/permisos ni ejecución Intel. No hay publicación remota.
+Fuente del paquete dev.2: `43ee802`; macOS 27.0.1 arm64. Se probó alternar procesos dev.1/dev.2 sin cambios en hashes del vault/estado y recuperar un lote tras salida del proceso, conservando edición humana posterior. El [registro de implementación](evidence/2026-10-08-implementation.md) detalla comandos, criterios y límites. No prueba downgrade del marketplace, dos chats Desktop, trust/permisos ni ejecución Intel. En ese ensayo no había publicación remota.
+
+## Evidencia de la entrega v0.2.0
+
+Fuentes del binario: `22194406f7d9d7137b3f8d38fcf4824b98e6897a`;
+procedencia en `plugins/llm-wiki/build.json`, hashes en `checksums.json`.
+La [evidencia de áreas](evidence/2026-10-10-areas.md) y el
+[informe de entrega](../../tests/acceptance/release-0.2.0.json) registran pruebas
+y pendientes. El tag `v0.2.0` incluye documentación/changelog y esas fuentes;
+no sustituye las pruebas pendientes de instalación, dos chats reales o Intel.

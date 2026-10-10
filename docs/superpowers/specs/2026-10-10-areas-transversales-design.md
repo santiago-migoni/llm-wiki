@@ -11,12 +11,15 @@ approval_reference: AA-002
 
 # Especificación de áreas y organización transversal
 
+Entrega del producto: **v0.2.0** (runtime/manifiestos `0.2.0`);
+[changelog](../../../CHANGELOG.md). La revisión documental v001 y AA-002 conservan su alcance.
+
 ## Contexto y resultado
 
 Permitir crear y recuperar áreas elegidas por el usuario y relacionar una misma
 unidad de conocimiento con varias de ellas, conservando su contenido y ubicación.
 Integrar esta organización opcional en los workflows existentes y resolver rutas
-de OKRs y entidades de forma consistente. No hay release numerada asignada; esta
+de OKRs y entidades de forma consistente. La entrega asignada es `v0.2.0`; esta
 es la fuente canónica del incremento, sin sustituir la spec anterior del plugin.
 
 Fuentes exactas:
