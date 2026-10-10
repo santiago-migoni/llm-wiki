@@ -1,7 +1,7 @@
 {
   "version": "0.2.1",
   "date": "2026-10-10",
-  "status": "preparing",
+  "status": "package_verified",
   "installed": false,
   "published": false,
   "git_tag": "v0.2.1",
@@ -19,7 +19,17 @@
     "two_real_chats": true,
     "scope": "Synthetic agent-executed declarative workflows, calendar meeting local mode; no claim that 0.2.1 was installed"
   },
-  "tests": {},
+  "tests": {
+    "focused_mcp_service_packaging_acceptance": "passed",
+    "runtime_race": "passed",
+    "vet": "passed",
+    "packaged_MCP_manifest_launch_system_PATH": "passed",
+    "packaged_server_version": "0.2.1",
+    "previous_package_0_1_0_identity_and_state": "passed",
+    "document_links": "passed",
+    "manifest_version_consistency": "passed",
+    "diff_check": "passed"
+  },
   "pending": [
     "Desktop installation of 0.2.1",
     "existing Desktop model declarations refresh",
@@ -30,5 +40,19 @@
   "distribution": {
     "channel": "local Git commit and annotated tag",
     "remote_pushed": false
-  }
+  },
+  "source_commit": "7b39ff8c5e477a1b42a7a87a631db93e3e127b9c",
+  "source_tree_sha256": "1195b8897eec8923955e128162fb25428d686e85543709452c94af7cdea2fbc0",
+  "binary_sha256": "17afd42bbfff0a9f8511cc0880085820e0674a92ad8e3aa5aaaeef033fbaa268",
+  "runtime_dependencies": [],
+  "architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "signature": "ad-hoc; codesign --verify --strict passed",
+  "checksums": {
+    "files": 70,
+    "fresh_output_and_repository": "matched"
+  },
+  "review_base": "c2908469f6cea431182f5201df09d898bab128be"
 }

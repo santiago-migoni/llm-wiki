@@ -7,9 +7,9 @@
   "intel_runtime_tested": false,
   "runtime_dependencies": [],
   "sdk": "github.com/modelcontextprotocol/go-sdk@v1.8.0",
-  "source_commit": "3955c6c105929bf1a67e0a31cf5873d569a1525d",
+  "source_commit": "7b39ff8c5e477a1b42a7a87a631db93e3e127b9c",
   "source_dirty": false,
   "source_tree_hash_format": "sha256 of sorted path + NUL + file sha256 hex + LF; cmd/**/*.go, internal/**/*.go, go.mod, go.sum",
-  "source_tree_sha256": "13832d760578c1b7e03ae3c469969f80966946d2227e30d62d1212036ef0fe85",
-  "version": "0.2.0"
+  "source_tree_sha256": "1195b8897eec8923955e128162fb25428d686e85543709452c94af7cdea2fbc0",
+  "version": "0.2.1"
 }
