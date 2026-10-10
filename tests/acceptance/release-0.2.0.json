@@ -2,9 +2,9 @@
   "version": "0.2.0",
   "date": "2026-10-10",
   "status": "component_verified",
-  "source_commit": "2eaa7c427492cd3a4bc31a833cb6b9ff5eb8b28f",
-  "source_tree_sha256": "93df0f8583d44ae13348a2b64d93073584d902c15bab53462dc89e3dc9230b03",
-  "binary_sha256": "2ce096a828a3af34476b09677a6e7b8f940736bc87a8d76e047049e97830160d",
+  "source_commit": "dee93c365fc653b20bc03caa7fd990140bcf2a90",
+  "source_tree_sha256": "190c7da3caa91a5295b99a4b1cfd1c0b8d0ce9b0ac2e86c1bb9a613d2779c39b",
+  "binary_sha256": "5598481b347cda1b911e97f8128a45134d7c70b4a4638b48688c6d44c94b95bb",
   "runtime_dependencies": [],
   "architectures": [
     "arm64",
@@ -19,7 +19,8 @@
     "new_skills_catalog": "passed",
     "area_reader_after_process_restart": "passed",
     "previous_package_process_reads_preserve_state": "passed",
-    "workflow_instruction_pressure": "simulated proposals only"
+    "workflow_instruction_pressure": "simulated proposals only",
+    "final_review": "three Important findings corrected; no Critical or deferred Minor"
   },
   "pending": [
     "installed Codex Desktop workflows",

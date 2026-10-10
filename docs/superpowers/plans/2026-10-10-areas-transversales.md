@@ -309,8 +309,10 @@ revisión; no ejecutó sus tests. Los checkboxes se actualizan con la evidencia 
 
 AA-002 aprueba las bases y ejecución directa. Versión elegida: 0.2.0.
 Resultados y decisiones: [evidencia de áreas](../evidence/2026-10-10-areas.md).
-T1–T7 completadas técnicamente; revisión independiente final en curso. La aceptación del
-host instalado/dos chats queda pendiente y conserva su casilla abierta.
+T1–T7 completadas técnicamente. Revisión independiente final: tres Important
+corregidos en una pasada, sin Critical ni Minor diferidos. Suite con carreras,
+vet y paquete 0.2.0 recompilado/verificado pasan. La aceptación del host
+instalado/dos chats queda pendiente y conserva su casilla abierta.
 
 2026-10-10, v001: borrador solicitado sobre AA-001 y spec v001 draft fijada arriba.
 No ejecutado ni aprobado; no cambia el plan anterior del plugin.
