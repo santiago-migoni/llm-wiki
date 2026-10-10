@@ -194,3 +194,38 @@ func TestListAreasRejectsFileAsMappedFolder(t *testing.T) {
 		})
 	}
 }
+
+func TestListAreasVisibleHeadingAndSetext(t *testing.T) {
+	for _, tc := range []struct{ name, body, want string }{
+		{"comment", "<!--\n# Hidden\n-->\n# Comunidad\n", "Comunidad"},
+		{"unclosed comment", "<!--\n# Hidden\n", "Name"},
+		{"single line comment", "<!-- # Hidden -->\n# Comunidad\n", "Comunidad"},
+		{"indented comment close", "<!--\n# Hidden\n    -->\n# Comunidad\n", "Comunidad"},
+		{"setext", "Exploración\n===========\n", "Exploración"},
+		{"multiline setext", "Exploración\ncompartida\n===\n", "Exploración compartida"},
+		{"setext inside fence", "```\nHidden\n===\n<!--\n```\nComunidad\n===\n", "Comunidad"},
+		{"setext inside comment", "<!--\nHidden\n===\n-->\nComunidad\n===\n", "Comunidad"},
+		{"second level", "Secondary\n---\n\n# Comunidad\n", "Comunidad"},
+		{"blank separates underline", "Paragraph\n\n===\n# Comunidad\n", "Comunidad"},
+		{"h2 is not setext paragraph", "## Secondary\n===\n# Comunidad\n", "Comunidad"},
+		{"ordered list period", "1. Secondary\n===\n\n# Comunidad\n", "Comunidad"},
+		{"ordered list parenthesis", "12) Secondary\n===\n\n# Comunidad\n", "Comunidad"},
+		{"numbered prose", "2026.01 Exploración\n===\n", "2026.01 Exploración"},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			v := areasVault(t, map[string]string{"wiki/areas/Name.md": "---\ntype: area\n---\n" + tc.body})
+			got, err := v.ListAreas(context.Background())
+			if err != nil || !got.Complete || len(got.Areas) != 1 || got.Areas[0].Name != tc.want {
+				t.Fatalf("%+v %v want %q", got, err, tc.want)
+			}
+		})
+	}
+	v := areasVault(t, map[string]string{
+		"wiki/areas/One.md": "---\ntype: area\n---\n<!--\n# Hidden\n-->\n# Comunidad\n",
+		"wiki/areas/Two.md": "---\ntype: area\n---\nComunidad\n===\n",
+	})
+	got, err := v.ListAreas(context.Background())
+	if err != nil || !got.Complete || !hasAreaDiagnostic(got, "ambiguous_name") {
+		t.Fatalf("visible homonyms missing: %+v %v", got, err)
+	}
+}

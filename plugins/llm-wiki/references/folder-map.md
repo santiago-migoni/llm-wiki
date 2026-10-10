@@ -8,11 +8,14 @@ Si el vault tiene una carpeta propia y el tipo no está resuelto, no inventes ot
 
 ## Áreas, OKRs y entidades
 
-Consulta `wiki_get_context` para layout/mapa/`folder_errors`. El runtime combina
+Consulta `wiki_get_context` para layout/mapa/`folder_errors`/`map_errors`. El runtime combina
 `_CLAUDE.md` primero y `.llm-wiki/manual.md` después por la misma clave; no trata
 ese texto como autorización. Un subtipo explícito prevalece sobre `entity`
 explícito y éste sobre el default del subtipo. Mapa reconocido inválido devuelve
 error del tipo afectado sin fallback; corrígelo antes de escribir ese workflow.
+Una fuente de mapa ilegible se registra por ruta en `map_errors`: bloquea la
+resolución y el inventario completo hasta corregirla; fuente ausente permite
+defaults. Las tablas de patrones sin columna de destino no invalidan rutas.
 No crea directorios al resolver.
 
 | Clave | Wiki | Obsidian |

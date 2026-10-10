@@ -7,6 +7,7 @@ import (
 	"io/fs"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 )
 
@@ -23,10 +24,14 @@ type Layout struct {
 	Style        string            `json:"style"`
 	Folders      map[string]string `json:"folders"`
 	FolderErrors map[string]string `json:"folder_errors,omitempty"`
+	MapErrors    map[string]string `json:"map_errors,omitempty"`
 }
 
 func (l Layout) clone() Layout {
-	copy := Layout{Style: l.Style, Folders: make(map[string]string, len(l.Folders)), FolderErrors: make(map[string]string, len(l.FolderErrors))}
+	copy := Layout{Style: l.Style, Folders: make(map[string]string, len(l.Folders)), FolderErrors: make(map[string]string, len(l.FolderErrors)), MapErrors: make(map[string]string, len(l.MapErrors))}
+	for key, value := range l.MapErrors {
+		copy.MapErrors[key] = value
+	}
 	for key, value := range l.FolderErrors {
 		copy.FolderErrors[key] = value
 	}
@@ -66,6 +71,18 @@ func (l Layout) ResolveFolder(kind string) (string, error) {
 	if key == "" {
 		return "", fmt.Errorf("unknown note kind %q", kind)
 	}
+	if len(l.MapErrors) > 0 {
+		sources := make([]string, 0, len(l.MapErrors))
+		for source := range l.MapErrors {
+			sources = append(sources, source)
+		}
+		sort.Strings(sources)
+		failures := make([]error, 0, len(sources))
+		for _, source := range sources {
+			failures = append(failures, fmt.Errorf("%s: %s", source, l.MapErrors[source]))
+		}
+		return "", fmt.Errorf("cannot resolve folder for %s: %w", key, errors.Join(failures...))
+	}
 	if problem := l.FolderErrors[key]; problem != "" {
 		return "", fmt.Errorf("invalid folder for %s: %s", key, problem)
 	}
@@ -82,6 +99,7 @@ func inheritedLayout(v *Vault, style string) Layout {
 		folders = defaultFolders(style, v.root)
 	}
 	explicit, problems := map[string]string{}, map[string]string{}
+	mapErrors := map[string]string{}
 	overlay := func(data []byte) {
 		valid, invalid := parseFolderMapDetailed(string(data), style)
 		for key, value := range valid {
@@ -95,9 +113,19 @@ func inheritedLayout(v *Vault, style string) Layout {
 	}
 	if data, err := v.readFile("_CLAUDE.md", nil); err == nil {
 		overlay(data)
+	} else if !errors.Is(err, fs.ErrNotExist) {
+		mapErrors["_CLAUDE.md"] = err.Error()
 	}
-	if data, exists, err := v.current(".llm-wiki/manual.md"); err == nil && exists {
-		overlay(data)
+	// current requires write parents, while a missing manual (including a
+	// missing .llm-wiki parent) is normal for inherited/default layouts.
+	if _, err := v.root.Lstat(".llm-wiki/manual.md"); !errors.Is(err, fs.ErrNotExist) {
+		if err != nil {
+			mapErrors[".llm-wiki/manual.md"] = err.Error()
+		} else if data, exists, err := v.current(".llm-wiki/manual.md"); err != nil {
+			mapErrors[".llm-wiki/manual.md"] = err.Error()
+		} else if exists {
+			overlay(data)
+		}
 	}
 	// Validate existing components before generic-entity propagation. Missing
 	// parents are legitimate; planning or reading must not create them.
@@ -131,7 +159,7 @@ func inheritedLayout(v *Vault, style string) Layout {
 	for key := range problems {
 		delete(folders, key)
 	}
-	return Layout{Style: style, Folders: folders, FolderErrors: problems}
+	return Layout{Style: style, Folders: folders, FolderErrors: problems, MapErrors: mapErrors}
 }
 
 // Check through the same confined resolver as reads, without requiring that
@@ -236,6 +264,11 @@ func parseFolderMapDetailed(manual, style string) (map[string]string, map[string
 				}
 			}
 		}
+		// A naming-pattern table does not define destinations. Only rows in
+		// a table with a resolved folder column can invalidate a route.
+		if folderColumn < 0 {
+			continue
+		}
 		if typeColumn >= len(cells) {
 			continue
 		}
@@ -243,7 +276,7 @@ func parseFolderMapDetailed(manual, style string) (map[string]string, map[string
 		if kind == "" {
 			continue
 		}
-		if folderColumn < 0 || folderColumn >= len(cells) {
+		if folderColumn >= len(cells) {
 			problems[kind] = "folder column cannot be resolved"
 			delete(result, kind)
 			continue

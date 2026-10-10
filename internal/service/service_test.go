@@ -287,3 +287,43 @@ func TestListAreasContractAndPartialError(t *testing.T) {
 		t.Fatal("reader changed note")
 	}
 }
+
+func TestAreaInventoryRejectsUnreadableContextMap(t *testing.T) {
+	root := t.TempDir()
+	if err := os.Mkdir(filepath.Join(root, ".llm-wiki"), 0700); err != nil {
+		t.Fatal(err)
+	}
+	manual := filepath.Join(root, ".llm-wiki/manual.md")
+	if err := os.WriteFile(manual, []byte(strings.Repeat("x", vault.MaxFileBytes+1)), 0600); err != nil {
+		t.Fatal(err)
+	}
+	registry, err := config.Open(t.TempDir())
+	if err != nil {
+		t.Fatal(err)
+	}
+	ref, err := registry.SelectWithTimezone(t.TempDir(), root, "UTC")
+	if err != nil {
+		t.Fatal(err)
+	}
+	r := Runtime{Registry: registry}
+	args, _ := json.Marshal(map[string]string{"vault_id": ref.ID})
+	ctxResult, err := r.Call(context.Background(), "wiki_get_context", args)
+	if err != nil {
+		t.Fatal(err)
+	}
+	layout := ctxResult.(map[string]any)["layout"].(vault.Layout)
+	if layout.MapErrors[".llm-wiki/manual.md"] == "" {
+		t.Fatalf("context lost source failure: %+v", layout)
+	}
+	result, err := r.Call(context.Background(), "wiki_list_areas", args)
+	if err == nil || result.(vault.AreaListResult).Complete {
+		t.Fatalf("unreadable map allowed absence: %+v %v", result, err)
+	}
+	if err := os.Remove(manual); err != nil {
+		t.Fatal(err)
+	}
+	result, err = r.Call(context.Background(), "wiki_list_areas", args)
+	if err != nil || !result.(vault.AreaListResult).Complete {
+		t.Fatalf("legitimate missing map: %+v %v", result, err)
+	}
+}

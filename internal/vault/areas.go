@@ -178,10 +178,28 @@ func (v *Vault) listAreasWithLimits(ctx context.Context, maxBytes, maxEntries in
 func firstAreaHeading(body string) string {
 	var fence byte
 	width := 0
+	comment := false
+	var paragraph []string
 	for _, line := range strings.Split(body, "\n") {
 		line = strings.TrimSuffix(line, "\r")
 		text := strings.TrimLeft(line, " ")
+		if comment {
+			if strings.Contains(line, "-->") {
+				comment = false
+			}
+			continue
+		}
 		if len(line)-len(text) > 3 {
+			paragraph = nil
+			continue
+		}
+		// HTML comment blocks are invisible. Fence contents must not start one.
+		if fence == 0 && strings.HasPrefix(text, "<!--") {
+			comment = true
+			if strings.Contains(text, "-->") {
+				comment = false
+			}
+			paragraph = nil
 			continue
 		}
 		marker, count := byte(0), 0
@@ -201,11 +219,24 @@ func firstAreaHeading(body string) string {
 		if count >= 3 && (marker != '`' || !strings.ContainsRune(text[count:], '`')) {
 			fence = marker
 			width = count
+			paragraph = nil
 			continue
+		}
+		trimmed := strings.TrimSpace(text)
+		if trimmed != "" && strings.Trim(trimmed, "=") == "" && len(paragraph) > 0 {
+			return strings.Join(paragraph, " ")
 		}
 		if len(text) < 2 || text[0] != '#' || (text[1] != ' ' && text[1] != '\t') {
+			// A Setext underline belongs to the immediately preceding paragraph,
+			// never a blank line, another heading or a block delimiter.
+			if trimmed == "" || strings.HasPrefix(text, "#") || strings.HasPrefix(text, ">") || strings.HasPrefix(text, "<") || areaListMarker(text) || strings.Trim(trimmed, "=-") == "" {
+				paragraph = nil
+			} else {
+				paragraph = append(paragraph, trimmed)
+			}
 			continue
 		}
+		paragraph = nil
 		name := strings.TrimSpace(text[2:])
 		// A closing ATX hash sequence requires preceding whitespace; C# is literal.
 		closing := len(name)
@@ -224,6 +255,18 @@ func firstAreaHeading(body string) string {
 	}
 	return ""
 }
+
+func areaListMarker(text string) bool {
+	i := 0
+	for i < len(text) && i < 9 && text[i] >= '0' && text[i] <= '9' {
+		i++
+	}
+	if i > 0 {
+		return i < len(text) && (text[i] == '.' || text[i] == ')') && (i+1 == len(text) || text[i+1] == ' ' || text[i+1] == '\t')
+	}
+	return len(text) > 0 && strings.ContainsRune("-*+", rune(text[0])) && (len(text) == 1 || text[1] == ' ' || text[1] == '\t')
+}
+
 func areaFoldKey(text string) string {
 	var b strings.Builder
 	for _, r := range text {
