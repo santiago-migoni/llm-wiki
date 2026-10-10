@@ -101,3 +101,62 @@ Resultado conservado: **0/38 casos funcionales ejecutados** y continuidad de
 vault sin verificar. El intercambio de mensajes entre chats sí fue comprobado,
 pero no equivale a recuperar conocimiento persistido. El JSON de entrega
 registra ambas comprobaciones de disponibilidad por separado.
+
+## Causa identificada y corrección instalada
+
+La investigación posterior utilizó el CLI incluido en Desktop, versión
+`0.162.0-alpha.17.2`, en la aplicación `26.1007.21159` (build `20052`).
+Es distinto del CLI de desarrollo `0.135.0` consultado inicialmente.
+Se abrió un proceso diagnóstico del app-server oficial; no se enviaron mensajes
+de prueba mediante él ni se lo contó como uno de los dos chats.
+
+Antes de corregir, `plugin/installed` reconocía llm-wiki habilitado, pero
+`mcpServerStatus/list` lo omitía. El stderr del cargador confirmó que rechazaba
+`mcp.json` con el error:
+
+> Agent Plugins stdio command must be a bare executable name or a contained `./` path
+
+El manifiesto portable usaba `${PLUGIN_ROOT}/bin/llm-wiki` en `command`, una
+forma incompatible con ese contrato. La presencia del manifiesto compatible
+no evitaba el rechazo del portable. La fuente primaria del
+[normalizador portable](https://github.com/openai/codex/blob/main/codex-rs/codex-mcp/src/agent_plugin_config.rs)
+confirma el requisito. La prueba anterior arrancaba por ruta absoluta y no
+ejercitaba este contrato; validar sólo `mcp.json` tampoco protegía `.mcp.json`.
+
+Corrección: ambos descriptores usan `command: "./bin/llm-wiki"`,
+`args: ["serve"]` y `cwd: "./"`. El validador revisa ambos. Las nuevas
+regresiones rechazan el placeholder, escapes de cwd, transporte y argumentos
+incompatibles, y aceptan la forma relativa legítima. La aceptación del paquete
+lo copia a una raíz con espacios y consume sus descriptores literalmente.
+
+La revisión independiente detectó que esa adaptación podía ejecutar siempre
+el paquete actual durante downgrade. La comprobación de identidad del servidor
+reprodujo el fallo (0.2.0 donde debía ser 0.1.0). Se corrigió con raíz explícita
+por conexión; cada alternancia verifica nombre y versión reales. El paquete
+legado se lanza por su ejecutable conocido sólo para comprobar compatibilidad
+de runtime/estado; no se acredita su antiguo manifiesto como compatible.
+
+Verificación: pruebas enfocadas, `go test -race ./...`, `go vet ./...` y
+`git diff --check` aprobados. Tras corregir la prueba de alternancia también
+pasaron carreras/vet de aceptación y la prueba empaquetada con ambos paquetes.
+Firma ad hoc verificada y arquitecturas arm64/x86_64 presentes; Intel no se ejecutó.
+
+El paquete final se reconstruyó desde fuentes comprometidas en
+`d985fa177274aac764f187a623add06e0cc4a0d2`. Fingerprint del dominio Go declarado
+en `build.json`: `8b745a1d3ad0dd090d281dbecec24f97824b20da8271a31c940b7d616f0c0811`.
+Binario SHA-256: `f964722942b97154ba9e12441211e69c93296998226261e6cb47ca6e8f5ddd8c`.
+Checksums, manifiestos y procedencia comprobados antes de copiarlo al repositorio
+y al origen registrado. Reinstalado con el CLI oficial; no se editó el cache a
+mano ni se modificaron vaults, permisos u otros plugins.
+
+Después de reinstalar, el mismo cargador anuncia **llm-wiki y 30 herramientas**
+y no emite el error de parseo. Este antes/después verifica la corrección de carga
+del servidor. La instalación conserva versión 0.2.0 como corrección local:
+no se movió el tag histórico v0.2.0 ni se publicó una nueva entrega.
+
+Los dos chats existentes todavía devolvieron cero herramientas en su inventario.
+La recarga por el socket de control del daemon administrado no estaba disponible
+(socket inexistente). No se reinició la aplicación ni se rodeó la restricción
+de control de interfaz. Se pidió reiniciar después de instalar la corrección
+para volver a comprobar las sesiones. **La carga está corregida; las 38 pruebas
+de workflows y la continuidad de vault entre chats siguen sin ejecutar.**

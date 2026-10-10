@@ -32,17 +32,23 @@
   "evidence": "docs/superpowers/evidence/2026-10-10-areas.md",
   "matrix": "tests/acceptance/areas-cases.json",
   "installed": true,
-  "installation_scope": "CLI plugin inventory reports installed and enabled 0.2.0; installed files match packaged binary; Desktop MCP tools unavailable",
+  "installation_scope": "Current local 0.2.0 correction installed via Desktop CLI; original release provenance above remains historical",
   "desktop_attempt": {
     "date": "2026-10-10",
-    "status": "blocked",
+    "status": "loader_fixed_chat_refresh_pending",
     "local_chats_checked": 2,
-    "runtime_tools_exposed_per_chat": [0, 0],
+    "runtime_tools_exposed_per_chat": [
+      0,
+      0
+    ],
     "workflow_cases_executed": 0,
     "vault_continuity_verified": false,
-    "cause": "Undetermined: wiki_* tools absent in both independent chats, including after Desktop restart",
+    "cause": "Confirmed portable MCP command rejected by Desktop loader; fixed relative command/cwd; existing chat tools still absent",
     "after_user_reported_restart": {
-      "runtime_tools_exposed_per_chat": [0, 0],
+      "runtime_tools_exposed_per_chat": [
+        0,
+        0
+      ],
       "installed_binary_direct_MCP": {
         "initialize": "passed",
         "tools_list": "passed",
@@ -54,7 +60,39 @@
       "workflow_cases_executed": 0,
       "host_server_status": "awaiting visible host diagnostic"
     },
-    "evidence": "docs/superpowers/evidence/2026-10-10-desktop-areas.md"
+    "evidence": "docs/superpowers/evidence/2026-10-10-desktop-areas.md",
+    "local_correction": {
+      "source_commit": "d985fa177274aac764f187a623add06e0cc4a0d2",
+      "source_tree_sha256": "8b745a1d3ad0dd090d281dbecec24f97824b20da8271a31c940b7d616f0c0811",
+      "binary_sha256": "f964722942b97154ba9e12441211e69c93296998226261e6cb47ca6e8f5ddd8c",
+      "desktop_version": "26.1007.21159",
+      "desktop_bundled_CLI_version": "0.162.0-alpha.17.2",
+      "loader_before": "plugin installed/enabled; server omitted; Agent Plugins command validation error",
+      "loader_after": {
+        "server": "llm-wiki",
+        "tools": 30,
+        "parse_error": false
+      },
+      "installation": "registered source updated; reinstalled via official Desktop CLI; no manual cache edits",
+      "tests": {
+        "focused_packaging": "passed",
+        "runtime_race": "passed",
+        "vet": "passed",
+        "manifest_launch_with_spaces": "passed",
+        "previous_package_runtime_identity_and_state": "passed",
+        "signature": "passed",
+        "architectures": "arm64 and amd64 present; Intel not executed"
+      },
+      "existing_chat_tools": [
+        0,
+        0
+      ],
+      "workflow_cases_executed": 0,
+      "continuity_verified": false,
+      "git_tag_modified": false,
+      "published": false,
+      "pending": "refresh both existing Desktop chats after corrected installation"
+    }
   },
   "published": false,
   "distribution": {
