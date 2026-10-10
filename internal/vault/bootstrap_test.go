@@ -143,3 +143,35 @@ func TestInitPreservesManualIndexAndLogHumanSections(t *testing.T) {
 		t.Fatalf("init not idempotent: %+v %v", again, e)
 	}
 }
+
+func TestBootstrapNewKindsPreserveExisting(t *testing.T) {
+	v := testWritableVault(t)
+	os.WriteFile(filepath.Join(v.rootPath, "Home.md"), []byte("human"), 0600)
+	changes, err := v.PlanBootstrap(BootstrapSpec{Name: "Owner", Style: LayoutWiki, Preset: "executive", Timezone: "UTC"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if _, err = v.Apply(context.Background(), "bootstrap-areas", changes, false); err != nil {
+		t.Fatal(err)
+	}
+	if got := readFixture(t, v, "Home.md"); got != "human" {
+		t.Fatal("home replaced")
+	}
+	if err = v.SelectLayout(LayoutWiki); err != nil {
+		t.Fatal(err)
+	}
+	for _, kind := range []string{"area", "okr", "entity", "organization", "tool"} {
+		if _, err = v.Layout().ResolveFolder(kind); err != nil {
+			t.Fatal(err)
+		}
+	}
+	scan, err := v.Scan(context.Background())
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, note := range scan.Notes {
+		if strings.Contains(note.Text, "type: area") {
+			t.Fatal("bootstrap generated an area")
+		}
+	}
+}

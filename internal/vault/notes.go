@@ -77,7 +77,10 @@ func (v *Vault) PlanCapture(req CaptureRequest) ([]Change, error) {
 	if ideaChange != nil {
 		changes = append(changes, *ideaChange)
 	}
-	dailyDir := v.layout.Folders["daily"]
+	dailyDir, routeErr := v.layout.ResolveFolder("daily")
+	if routeErr != nil {
+		return nil, routeErr
+	}
 	if dailyDir == "" {
 		return nil, errors.New("vault layout has no daily folder")
 	}
@@ -129,7 +132,10 @@ func (v *Vault) PlanSave(req SaveRequest) ([]Change, error) {
 	target := strings.TrimSuffix(filepath.ToSlash(req.Path), path.Ext(req.Path))
 	dailyPath := req.DailyPath
 	if dailyPath == "" {
-		dailyDir := v.layout.Folders["daily"]
+		dailyDir, routeErr := v.layout.ResolveFolder("daily")
+		if routeErr != nil {
+			return nil, routeErr
+		}
 		if dailyDir == "" {
 			return nil, errors.New("vault layout has no daily folder")
 		}

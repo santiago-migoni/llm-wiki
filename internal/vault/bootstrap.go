@@ -31,7 +31,7 @@ var presets = map[string]preset{
 	"creator":    {[]string{"Daily", "People", "Companies", "Tools", "Content/LinkedIn", "Content/X", "Content/Blog", "Ideas", "Audience", "Publishing", "Boards", "Templates", "_trash"}, "Pipeline", []string{"💡 Ideas", "✏️ Drafts", "📅 Scheduled", "✅ Published"}},
 	"researcher": {[]string{"Daily", "Sources", "Literature", "Hypotheses", "Methodology", "Synthesis", "Reading Queue", "Projects", "People", "Companies", "Tools", "Boards", "Templates", "_trash"}, "Research", []string{"📚 Reading", "🔬 Processing", "🧬 Synthesized", "✅ Done"}},
 }
-var wikiFolders = map[string]string{"Daily": "wiki/daily", "Dev Logs": "wiki/logs", "Tasks": "wiki/tasks", "Projects": "wiki/projects", "People": "wiki/entities", "Companies": "wiki/entities", "Tools": "wiki/entities", "Ideas": "wiki/concepts", "Knowledge": "wiki/concepts", "Synthesis": "wiki/concepts", "Reviews": "wiki/reviews", "Meetings": "wiki/meetings", "Decisions": "wiki/decisions", "Boards": "boards", "Templates": "templates", "_trash": "_trash"}
+var wikiFolders = map[string]string{"Areas": "wiki/areas", "OKRs": "wiki/okrs", "Entities": "wiki/entities", "Daily": "wiki/daily", "Dev Logs": "wiki/logs", "Tasks": "wiki/tasks", "Projects": "wiki/projects", "People": "wiki/entities", "Companies": "wiki/entities", "Tools": "wiki/entities", "Ideas": "wiki/concepts", "Knowledge": "wiki/concepts", "Synthesis": "wiki/concepts", "Reviews": "wiki/reviews", "Meetings": "wiki/meetings", "Decisions": "wiki/decisions", "Boards": "boards", "Templates": "templates", "_trash": "_trash"}
 
 func bootstrapFolder(folder, style string) string {
 	if style == LayoutObsidian {
@@ -78,7 +78,7 @@ func (v *Vault) PlanBootstrap(spec BootstrapSpec) ([]Change, error) {
 		home += "- " + resolved + "\n"
 	}
 	// Canonical kinds match the runtime's note routing while preserving the preset folders.
-	for _, kind := range []struct{ key, folder string }{{"project", "Projects"}, {"person", "People"}, {"daily", "Daily"}, {"task", "Tasks"}, {"idea", "Ideas"}, {"decision", "Decisions"}, {"log", "Dev Logs"}, {"meeting", "Meetings"}, {"review", "Reviews"}, {"board", "Boards"}, {"raw", "raw"}} {
+	for _, kind := range []struct{ key, folder string }{{"area", "Areas"}, {"okr", "OKRs"}, {"entity", "Entities"}, {"organization", "Companies"}, {"tool", "Tools"}, {"project", "Projects"}, {"person", "People"}, {"daily", "Daily"}, {"task", "Tasks"}, {"idea", "Ideas"}, {"decision", "Decisions"}, {"log", "Dev Logs"}, {"meeting", "Meetings"}, {"review", "Reviews"}, {"board", "Boards"}, {"raw", "raw"}} {
 		resolved := bootstrapFolder(kind.folder, spec.Style)
 		if kind.key == "raw" {
 			resolved = "raw"
