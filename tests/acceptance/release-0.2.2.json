@@ -2,9 +2,9 @@
   "version": "0.2.2",
   "display_name": "LLM Wiki",
   "date": "2026-10-12",
-  "status": "package_verified",
-  "installed": false,
-  "published": false,
+  "status": "published_and_installed",
+  "installed": true,
+  "published": true,
   "git_tag": "v0.2.2",
   "changes": [
     "YAML-safe template placeholders including Person.last_interaction",
@@ -38,7 +38,8 @@
     "release_vet": "passed",
     "packaged_MCP_all_presets": "passed",
     "packaged_server_version": "passed",
-    "installed_byte_comparison": "pending"
+    "installed_byte_comparison": "passed; 71 of 71 files identical",
+    "installed_packaged_MCP": "passed; TestPackaged suite against installed 0.2.2"
   },
   "review": {
     "base": "c84a40eef45178f57ccca3ff5a9e194b8bd51070",
@@ -54,14 +55,22 @@
     "scope": "Historical only; release MCP subprocess acceptance does not prove new Desktop chats"
   },
   "distribution": {
-    "remote_pushed": false,
-    "github_release": false,
-    "local_installation": false
+    "remote_pushed": true,
+    "github_release": true,
+    "local_installation": true,
+    "release_commit": "bd05548173014e826f5533981cd1750295a4ebf2",
+    "annotated_tag_object": "353edd8c192b85cd575f2ff6d19d74da4453a5b6",
+    "remote_refs_verified": true,
+    "github_release_url": "https://github.com/santiago-migoni/llm-wiki/releases/tag/v0.2.2",
+    "release_asset": "llm-wiki-0.2.2-macos-universal.tar.gz",
+    "release_asset_sha256": "676fea46ca08bcbeb78bd7cf7931683ca1882d453b9c3e87a27a09c4a890baf6",
+    "installation_method": "native codex plugin marketplace upgrade and plugin add",
+    "installed_version": "0.2.2",
+    "installed_enabled": true
   },
   "source_commit": "54aad93e1f45d917083ccf3831204cbcc6b1c680",
   "source_dirty": false,
   "pending": [
-    "publication and local installation",
     "fresh Desktop chat schema reload",
     "Intel execution",
     "Obsidian/Dataview rendering and external calendar",
