@@ -1,23 +1,25 @@
 ---
-title: Ejecución y distribución de llm-wiki
+title: Ejecución y distribución de LLM Wiki
 status: draft
-version: v004
+version: v005
 responsible: Usuario promotor del proyecto
 created_at: "2026-10-08"
-updated_at: "2026-10-10"
+updated_at: "2026-10-12"
 reviewed_at: null
 approval_reference: null
 ---
 
-# Ejecución y distribución de llm-wiki
+# Ejecución y distribución de LLM Wiki
 
-Entrega relacionada: **v0.2.1**; runtime/manifiestos `0.2.1`.
-[Changelog](../../CHANGELOG.md), [informe 0.2.1](../../tests/acceptance/release-0.2.1.json) y [aceptación Desktop](evidence/2026-10-10-desktop-areas.md).
+Entrega relacionada: **v0.2.2**; runtime/manifiestos `0.2.2`.
+Nombre visible **LLM Wiki**; identificador técnico `llm-wiki` conservado.
+[Changelog](../../CHANGELOG.md), [informe 0.2.2](../../tests/acceptance/release-0.2.2.json) y [aceptación Desktop](evidence/2026-10-10-desktop-areas.md).
 
-Estado de entrega: paquete local `v0.2.1`; identidad, procedencia y checksums
-se registran en el informe de esta entrega. La corrección local 0.2.0 se instaló
-con el CLI incluido en Desktop y se probó con MCP en dos chats reales. Instalación
-Desktop de 0.2.1, recarga de declaraciones e Intel pendientes.
+Estado de entrega: paquete `v0.2.2`; identidad, procedencia, checksums y estado
+de publicación/instalación se registran en el informe de esta entrega. La prueba
+MCP del paquete sin toolchain cubre los ocho cruces de layout/preset. La aceptación
+Desktop de dos chats sobre 0.2.0 se conserva histórica; sesiones nuevas de Desktop,
+recarga de declaraciones, Intel y vistas Obsidian requieren evidencia propia.
 Fuentes: [arquitectura](ARCHITECTURE.md) y
 [estudio de empaquetado](analysis/equivalencias-codex/EMPAQUETADO.md).
 
@@ -26,9 +28,9 @@ Fuentes: [arquitectura](ARCHITECTURE.md) y
 | Entorno | Función | Evidencia actual |
 |---|---|---|
 | Desarrollo macOS | Go, SDK MCP, tests, generación de paquete | Go 1.27.2 aislado, SDK MCP Go 1.8.0; race/vet pasan |
-| Paquete v0.2.1 | Binario Go universal, 50 skills y manifiestos | Procedencia y validación en el informe 0.2.1; aceptación Desktop 0.2.0 separada |
-| Codex Desktop macOS | Carga de skills y proceso MCP local STDIO | 30 herramientas y dos chats reales verificados sobre 0.2.0; 0.2.1 aún no instalado |
-| Distribución Git | Catálogo y paquete por referencia versionada | Repositorio GitHub `santiago-migoni/llm-wiki`; tag local `v0.2.1` autorizado; publicación remota pendiente. PR #1 previo integrado en main |
+| Paquete v0.2.2 | Binario Go universal, 50 skills y manifiestos | Procedencia y aceptación MCP sin toolchain en el informe 0.2.2; aceptación Desktop 0.2.0 separada |
+| Codex Desktop macOS | Carga de skills y proceso MCP local STDIO | 30 herramientas y dos chats reales verificados sobre 0.2.0; instalación actual en informe 0.2.2, aceptación nueva del host pendiente |
+| Distribución Git | Catálogo y paquete por referencia versionada | Repositorio GitHub `santiago-migoni/llm-wiki`; referencia `v0.2.2`; estado remoto en informe 0.2.2. PR #1 previo integrado en main |
 
 Se compilan arm64 y amd64 y se ensamblan con `lipo` en desarrollo. Esto no prueba
 que ambas arquitecturas funcionen: cada una exige ejecución real antes de figurar
@@ -126,3 +128,13 @@ La revisión usa origin/main actualizado por fetch; commit y tag son locales.
 No se reinstala Desktop ni se publica por preparar esta entrega. Un proceso nuevo
 del cargador vio los schemas corregidos en 0.2.0; las sesiones existentes seguían
 mostrando arrays de strings. La prueba pendiente es refrescar su declaración.
+
+## Entrega v0.2.2
+
+El [informe 0.2.2](../../tests/acceptance/release-0.2.2.json) identifica el paquete
+reconstruido y sus comprobaciones. La aceptación MCP usa registros y bóvedas
+sintéticos, PATH sin toolchain y procesos reales del binario empaquetado. Las
+[regresiones de plantillas](evidence/2026-10-12-template-regressions.md) cubren
+60 plantillas, 24 Bases y dos colas en los ocho escenarios; parsear Bases no
+demuestra su ejecución en Obsidian. Actualizar el plugin preserva las plantillas
+humanas y no migra bóvedas existentes.

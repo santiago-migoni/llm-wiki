@@ -2,11 +2,114 @@ package vault
 
 import (
 	"context"
+	"github.com/santiago-migoni/llm-wiki/internal/noteformat"
 	"os"
 	"path/filepath"
 	"strings"
 	"testing"
 )
+
+// A freshly bootstrapped vault must be usable before template placeholders are filled.
+func TestBootstrapAllPresetsHaveParseableMetadataAndCompleteAreas(t *testing.T) {
+	for _, style := range []string{"wiki", "obsidian"} {
+		for _, preset := range []string{"executive", "builder", "creator", "researcher"} {
+			t.Run(style+"/"+preset, func(t *testing.T) {
+				v := testWritableVault(t)
+				spec := BootstrapSpec{Name: "Operator", Style: style, Preset: preset, Timezone: "UTC"}
+				changes, err := v.PlanBootstrap(spec)
+				if err != nil {
+					t.Fatal(err)
+				}
+				if _, err = v.Apply(context.Background(), "bootstrap-templates", changes, false); err != nil {
+					t.Fatal(err)
+				}
+				scan, err := v.Scan(context.Background())
+				if err != nil {
+					t.Fatal(err)
+				}
+				for _, note := range scan.Notes {
+					if _, _, err := noteformat.Parse(note.Text); err != nil {
+						t.Errorf("%s: %v", note.Path, err)
+					}
+				}
+				areas, err := v.ListAreas(context.Background())
+				if err != nil || !areas.Complete || len(areas.Areas) != 0 {
+					t.Errorf("areas: %+v, %v", areas, err)
+				}
+				if again, err := v.PlanBootstrap(spec); err != nil || len(again) != 0 {
+					t.Errorf("repeat: %+v, %v", again, err)
+				}
+			})
+		}
+	}
+}
+
+func TestBootstrapLiteratureUsesIndependentSource(t *testing.T) {
+	for _, style := range []string{"wiki", "obsidian"} {
+		t.Run(style, func(t *testing.T) {
+			v := testWritableVault(t)
+			changes, err := v.PlanBootstrap(BootstrapSpec{Name: "Operator", Style: style, Preset: "researcher", Timezone: "UTC"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			var text string
+			for _, change := range changes {
+				if strings.HasSuffix(change.Path, "/Literature Note.md") {
+					text = change.Content
+				}
+			}
+			text = strings.NewReplacer("{{title}}", "Commentary", "{{source}}", "Sources/Original", "{{date}}", "2026-10-12").Replace(text)
+			fm, body, err := noteformat.Parse(text)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if fm["source"] != "Sources/Original" {
+				t.Errorf("source metadata: %+v", fm)
+			}
+			if !strings.Contains(body, "[[Sources/Original]]") || strings.Contains(body, "[[Commentary]]") {
+				t.Fatalf("source link does not identify the separate work: %s", body)
+			}
+		})
+	}
+}
+
+func TestBootstrapGeneratedPostAndQueueMeetMetadataContract(t *testing.T) {
+	for _, style := range []string{"wiki", "obsidian"} {
+		for _, preset := range []string{"creator", "researcher"} {
+			t.Run(style+"/"+preset, func(t *testing.T) {
+				v := testWritableVault(t)
+				changes, err := v.PlanBootstrap(BootstrapSpec{Name: "Operator", Style: style, Preset: preset, Timezone: "UTC"})
+				if err != nil {
+					t.Fatal(err)
+				}
+				for _, change := range changes {
+					if !strings.HasSuffix(change.Path, "/Post.md") && !strings.HasSuffix(change.Path, "/_Queue.md") {
+						continue
+					}
+					text := strings.ReplaceAll(change.Content, "{{date}}", "2026-10-12")
+					fm, body, err := noteformat.Parse(text)
+					if err != nil {
+						t.Fatal(err)
+					}
+					kind, ok := fm["type"].(string)
+					if !ok || kind == "" || fm["ai-first"] != true || !strings.Contains(body, "## For future agent\n\n") {
+						t.Errorf("%s metadata/context: %+v", change.Path, fm)
+					}
+					tags, _ := fm["tags"].([]any)
+					found := false
+					for _, tag := range tags {
+						if tag == kind {
+							found = true
+						}
+					}
+					if !found {
+						t.Errorf("%s type %q missing in tags: %+v", change.Path, kind, tags)
+					}
+				}
+			})
+		}
+	}
+}
 
 func TestBootstrapLayoutsPresetsPreserveExistingAndRepeat(t *testing.T) {
 	for _, style := range []string{"wiki", "obsidian"} {

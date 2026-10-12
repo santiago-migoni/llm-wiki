@@ -1,12 +1,12 @@
-# llm-wiki
+# LLM Wiki
 
 Gestiona tus notas y tu conocimiento desde Codex Desktop.
 
 Busca información, guarda ideas y decisiones y relaciona notas. Tus archivos siguen siendo Markdown, compatibles con Obsidian.
 
-**Estado:** versión `0.2.1` (tag local `v0.2.1`), con correcciones de arranque y esquemas MCP. En la corrección local 0.2.0 se verificaron 24 casos de los doce workflows, 14 escenarios de guardas y continuidad entre dos chats reales de Codex Desktop en Apple Silicon. La instalación de 0.2.1 en Desktop aún no se repitió.
+**Estado:** versión `0.2.2` (referencia `v0.2.2`), con las siete correcciones de plantillas y el nombre visible **LLM Wiki**. El identificador técnico sigue siendo `llm-wiki`, incluidos CLI, skills y rutas. La validación del paquete y el estado de publicación e instalación se registran en el [informe 0.2.2](tests/acceptance/release-0.2.2.json).
 
-Cambios de esta entrega: [changelog v0.2.1](CHANGELOG.md).
+Cambios de esta entrega: [changelog v0.2.2](CHANGELOG.md).
 
 ## Qué puedes hacer
 
@@ -25,29 +25,29 @@ Necesitas Codex Desktop en macOS. El paquete incluye el ejecutable `plugins/llm-
 
 ### Desde GitHub en Codex Desktop
 
-El catálogo y paquete 0.2.1 están preparados en este clon. La instalación desde GitHub con `v0.2.1` requiere publicar antes el tag; mientras tanto, usa la instalación desde el clon local. Repositorio: [santiago-migoni/llm-wiki](https://github.com/santiago-migoni/llm-wiki).
+La entrega se identifica con `v0.2.2`. Comprueba su publicación en el [informe de entrega](tests/acceptance/release-0.2.2.json) antes de usar la referencia Git. Repositorio: [santiago-migoni/llm-wiki](https://github.com/santiago-migoni/llm-wiki).
 
 1. Abre **Complementos → Agregar → Agregar marketplace**.
 2. En **Origen**, introduce `santiago-migoni/llm-wiki` o `https://github.com/santiago-migoni/llm-wiki.git`.
-3. En **Referencia de Git**, introduce `v0.2.1`. Deja **Rutas dispersas** vacío.
-4. Pulsa **Agregar marketplace**, selecciona el marketplace **llm-wiki** e instala el plugin **llm-wiki**.
+3. En **Referencia de Git**, introduce `v0.2.2`. Deja **Rutas dispersas** vacío.
+4. Pulsa **Agregar marketplace**, selecciona el marketplace **LLM Wiki** e instala el plugin **LLM Wiki**.
 5. Abre un chat nuevo. Si el plugin no aparece, reinicia la aplicación.
 
 ### Desde un clon local en Codex Desktop
 
 1. Abre **Complementos → Agregar → Agregar marketplace**.
 2. En **Origen**, introduce la ruta absoluta a la raíz del clon, por ejemplo `/ruta/al/clon/llm-wiki`. Deja vacíos **Referencia de Git** y **Rutas dispersas**. Usa la raíz que contiene `.agents/plugins/marketplace.json`.
-3. Selecciona el marketplace **llm-wiki** e instala el plugin **llm-wiki**.
+3. Selecciona el marketplace **LLM Wiki** e instala el plugin **LLM Wiki**.
 4. Abre un chat nuevo. Si el plugin no aparece, reinicia la aplicación.
 
 Si el marketplace ya registrado apunta a un clon o worktree antiguo y falla al cargar su manifiesto, elimina ese origen desde la administración de marketplaces y vuelve a agregarlo con la ruta actual. Que el plugin aparezca instalado no confirma que el origen siga disponible.
 
 ### Desde la terminal
 
-Para instalar la entrega `v0.2.1` desde GitHub, con el CLI de Codex disponible:
+Para instalar la entrega `v0.2.2` desde GitHub, con el CLI de Codex disponible:
 
 ```sh
-codex plugin marketplace add https://github.com/santiago-migoni/llm-wiki.git --ref v0.2.1
+codex plugin marketplace add https://github.com/santiago-migoni/llm-wiki.git --ref v0.2.2
 codex plugin add llm-wiki@llm-wiki
 codex plugin list --marketplace llm-wiki
 ```
@@ -86,7 +86,8 @@ Consulta el [plan y su avance](docs/superpowers/plans/2026-10-08-codex-plugin.md
 
 Los informes de aceptación anteriores conservan las versiones de desarrollo que
 probaron. La validación del paquete actual se registra en
-[el informe 0.2.1](tests/acceptance/release-0.2.1.json).
+[el informe 0.2.2](tests/acceptance/release-0.2.2.json).
+La [evidencia de plantillas](docs/superpowers/evidence/2026-10-12-template-regressions.md) registra los ocho cruces de layout/preset, 60 plantillas Markdown, 24 Bases y dos colas, con pruebas MCP del paquete sin toolchain de desarrollo. No acredita vistas ejecutadas en Obsidian ni sesiones nuevas de Desktop.
 La [aceptación Desktop sobre la corrección local 0.2.0](docs/superpowers/evidence/2026-10-10-desktop-areas.md) conserva el binario y alcance realmente probados.
 El [informe 0.1.0](tests/acceptance/release-0.1.0.json) conserva su alcance histórico.
 
@@ -102,8 +103,9 @@ notas, cambia metadata humana ni crea categorías obligatorias.
 permite afirmar que un área no existe. La ejecución sintética de los doce workflows y la recuperación en dos chats
 se verificaron sobre la corrección local 0.2.0. Los chats abiertos aún conservaban
 la declaración antigua de los lotes después de reinstalar: el cargador nuevo
-ya publicaba los esquemas correctos. La recarga de esas sesiones y la instalación
-Desktop de 0.2.1 permanecen pendientes. Consulta la
+ya publicaba los esquemas correctos. La instalación de la entrega actual se registra
+en el informe 0.2.2; la recarga y aceptación en sesiones nuevas de Desktop requieren
+evidencia propia. Consulta la
 [matriz de casos](tests/acceptance/areas-cases.json) y el
 [plan de este incremento](docs/superpowers/plans/2026-10-10-areas-transversales.md).
 

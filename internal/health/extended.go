@@ -12,18 +12,17 @@ import (
 	"unicode"
 
 	"github.com/santiago-migoni/llm-wiki/internal/graph"
+	"github.com/santiago-migoni/llm-wiki/internal/noteformat"
 	"github.com/santiago-migoni/llm-wiki/internal/vault"
 )
 
 var (
 	dueField         = regexp.MustCompile(`(?im)^due:\s*["']?(\d{4}-\d{2}-\d{2})`)
-	templateLeftover = regexp.MustCompile(`<%.*?%>`)
+	templateLeftover = regexp.MustCompile(`<%.*?%>|\{\{(?:date|title|weekday|content|source)\}\}`)
 	fmLine           = regexp.MustCompile(`^([A-Za-z][A-Za-z0-9_-]*):\s*(.*)$`)
 	aliasInline      = regexp.MustCompile(`(?m)^aliases:\s*\[(.*)\]\s*$`)
 	aliasBlock       = regexp.MustCompile(`(?m)^aliases:\s*\n((?:\s+-\s*.+\n?)+)`)
 	aliasItem        = regexp.MustCompile(`(?m)^\s+-\s*(.+)$`)
-	tagInline        = regexp.MustCompile(`(?m)^tags:\s*\[(.*)\]\s*$`)
-	tagBlock         = regexp.MustCompile(`(?m)^tags:\s*\n((?:\s+-\s*.+\n?)+)`)
 )
 
 func checkOrphans(scan vault.ScanResult) []Finding {
@@ -64,7 +63,7 @@ func checkTasksTagsTemplates(scan vault.ScanResult, now time.Time) []Finding {
 		fm, bodyStart := parseFM(strings.Split(strings.TrimPrefix(n.Text, "\ufeff"), "\n"))
 		fmText := frontmatterText(n.Text)
 		task := strings.Contains(strings.ToLower(fm["type"]), "task") || strings.Contains(strings.ToLower(prefixRunes(n.Text, 200)), "kanban")
-		if task {
+		if task && !inTemplates(n.Path) {
 			if m := dueField.FindStringSubmatch(fmText); len(m) > 1 {
 				if due, e := time.Parse("2006-01-02", m[1]); e == nil && due.Before(today) {
 					days := int(today.Sub(due).Hours() / 24)
@@ -77,15 +76,20 @@ func checkTasksTagsTemplates(scan vault.ScanResult, now time.Time) []Finding {
 			}
 		}
 		if hasFrontmatter(n.Text) {
-			for _, tag := range parseTags(fmText) {
+			for _, value := range parseTagValues(fmText) {
+				tag, ok := value.(string)
+				if !ok {
+					out = append(out, Finding{Rule: "INVALID_TAG", Severity: "warning", Path: n.Path, Message: fmt.Sprintf("tag %v must be a string (got %T)", value, value)})
+					continue
+				}
 				if why := tagProblem(tag); why != "" {
 					out = append(out, Finding{Rule: "INVALID_TAG", Severity: "warning", Path: n.Path, Message: fmt.Sprintf("tag %q %s", tag, why)})
 				}
 			}
 		}
 		if !inTemplates(n.Path) {
-			if loc := templateLeftover.FindStringIndex(n.Text); loc != nil {
-				out = append(out, Finding{Rule: "TEMPLATE_LEFTOVER", Severity: "warning", Path: n.Path, Line: strings.Count(n.Text[:loc[0]], "\n") + 1, Message: "unfilled template directive remains"})
+			if line := leftoverLine(n.Text); line > 0 {
+				out = append(out, Finding{Rule: "TEMPLATE_LEFTOVER", Severity: "warning", Path: n.Path, Line: line, Message: "unfilled template directive remains"})
 			}
 		}
 		_ = bodyStart
@@ -96,6 +100,10 @@ func checkTasksTagsTemplates(scan vault.ScanResult, now time.Time) []Finding {
 func checkMetadataContext(scan vault.ScanResult) []Finding {
 	out := []Finding{}
 	for _, n := range scan.Notes {
+		if _, _, err := noteformat.Parse(n.Text); err != nil {
+			out = append(out, Finding{Rule: "METADATA", Severity: "warning", Path: n.Path, Message: err.Error()})
+			continue
+		}
 		if metadataExempt(n.Path, n.Text) {
 			continue
 		}
@@ -103,12 +111,15 @@ func checkMetadataContext(scan vault.ScanResult) []Finding {
 		fields, _ := parseFM(strings.Split("---\n"+fm+"\n---", "\n"))
 		missing := []string{}
 		for _, key := range []string{"date", "type", "tags", "ai-first"} {
+			if key == "tags" {
+				continue
+			}
 			value := strings.TrimSpace(fields[key])
 			if value == "" {
 				missing = append(missing, key)
 				continue
 			}
-			if key == "date" {
+			if key == "date" && !inTemplates(n.Path) {
 				if _, err := time.Parse("2006-01-02", strings.Trim(value, "\"'")); err != nil {
 					missing = append(missing, "valid date")
 				}
@@ -117,13 +128,14 @@ func checkMetadataContext(scan vault.ScanResult) []Finding {
 				missing = append(missing, "ai-first: true")
 			}
 		}
-		if len(parseTags(fm)) == 0 {
+		tags := parseTags(fm)
+		if len(tags) == 0 {
 			missing = append(missing, "non-empty tags")
 		}
 		if strings.TrimSpace(fields["type"]) != "" {
 			typeTag := strings.ToLower(strings.TrimSpace(fields["type"]))
 			found := false
-			for _, tag := range parseTags(fm) {
+			for _, tag := range tags {
 				if strings.ToLower(tag) == typeTag {
 					found = true
 				}
@@ -135,7 +147,7 @@ func checkMetadataContext(scan vault.ScanResult) []Finding {
 		if len(missing) > 0 {
 			out = append(out, Finding{Rule: "METADATA", Severity: "warning", Path: n.Path, Message: "missing or invalid AI-first fields: " + strings.Join(missing, ", ")})
 		}
-		if len([]rune(stripFrontmatter(n.Text))) > 0 && !contextExempt(n.Path, n.Text) {
+		if len([]rune(stripFrontmatter(n.Text))) > 0 && !contextExempt(n.Path, n.Text) && !inTemplates(n.Path) {
 			summary, ok := futureContextSummary(n.Text)
 			if !ok {
 				out = append(out, Finding{Rule: "CONTEXT", Severity: "warning", Path: n.Path, Message: "missing non-empty 'For future agent' preamble"})
@@ -196,20 +208,53 @@ func frontmatterText(s string) string {
 	}
 	return ""
 }
+func parseTagValues(fm string) []any {
+	fields, _, err := noteformat.Parse("---\n" + fm + "\n---\n")
+	if err != nil {
+		return nil
+	}
+	tags, _ := fields["tags"].([]any)
+	return tags
+}
+
 func parseTags(fm string) []string {
-	if m := tagInline.FindStringSubmatch(fm); len(m) > 1 {
-		return splitYAMLList(m[1])
-	}
-	if m := tagBlock.FindStringSubmatch(fm); len(m) > 1 {
-		out := []string{}
-		for _, item := range aliasItem.FindAllStringSubmatch(m[1], -1) {
-			if len(item) > 1 {
-				out = append(out, unquote(item[1]))
-			}
+	out := []string{}
+	for _, value := range parseTagValues(fm) {
+		if tag, ok := value.(string); ok {
+			out = append(out, tag)
 		}
-		return out
 	}
-	return nil
+	return out
+}
+
+// Known bootstrap placeholders and legacy directives are diagnosed in note
+// text, including frontmatter. Code examples (inline or fenced) are exempt;
+// arbitrary mustache expressions are not assumed to belong to this plugin.
+func leftoverLine(text string) int {
+	fence := ""
+	fenceLen := 0
+	for index, line := range strings.Split(text, "\n") {
+		trim := strings.TrimSpace(line)
+		marker := ""
+		if strings.HasPrefix(trim, "```") {
+			marker = "`"
+		} else if strings.HasPrefix(trim, "~~~") {
+			marker = "~"
+		}
+		if marker != "" {
+			count := len(trim) - len(strings.TrimLeft(trim, marker))
+			if fence == "" {
+				fence, fenceLen = marker, count
+			} else if fence == marker && count >= fenceLen && strings.TrimSpace(trim[count:]) == "" {
+				fence = ""
+			}
+			continue
+		}
+		if fence == "" && templateLeftover.MatchString(inlineCodeRE.ReplaceAllString(line, "")) {
+			return index + 1
+		}
+	}
+	return 0
 }
 func splitYAMLList(s string) []string {
 	out := []string{}

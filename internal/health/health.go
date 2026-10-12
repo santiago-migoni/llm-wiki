@@ -65,13 +65,14 @@ func Check(scan vault.ScanResult, now time.Time) []Finding {
 func CheckWithOptions(scan vault.ScanResult, now time.Time, opts Options) []Finding {
 	out := []Finding{}
 	out = append(out, checkMetadataContext(scan)...)
-	out = append(out, duplicateFindings(scan, opts.Context)...)
+	notes := healthKnowledgeScan(scan)
+	out = append(out, duplicateFindings(notes, opts.Context)...)
 	out = append(out, checkLinks(scan)...)
-	out = append(out, checkOrphans(scan)...)
+	out = append(out, checkOrphans(notes)...)
 	out = append(out, checkTasksTagsTemplates(scan, now)...)
-	out = append(out, checkSourcePayload(scan, opts)...)
+	out = append(out, checkSourcePayload(notes, opts)...)
 	out = append(out, checkEmptyDirectories(opts)...)
-	out = append(out, checkFreshness(scan, now, opts)...)
+	out = append(out, checkFreshness(notes, now, opts)...)
 	if len(scan.Coverage.Excluded) > 0 || len(scan.Coverage.Errors) > 0 || scan.Coverage.Truncated {
 		sev := "info"
 		if len(scan.Coverage.Errors) > 0 || scan.Coverage.Truncated {
@@ -156,7 +157,7 @@ func checkLinks(scan vault.ScanResult) []Finding {
 		notes[n.Path] = n.Text
 	}
 	for _, ref := range g.References() {
-		if ref.Resolved {
+		if inTemplates(ref.Source) || ref.Resolved {
 			continue
 		}
 		sev := "warning"
@@ -175,4 +176,19 @@ func checkLinks(scan vault.ScanResult) []Finding {
 		out = append(out, Finding{Rule: rule, Severity: sev, Path: ref.Source, Line: line, Message: msg})
 	}
 	return out
+}
+
+// Templates are reusable instructions for creating notes, not knowledge nodes.
+// Keep the original scan and coverage for metadata checks and diagnostics; only
+// health's knowledge analyses use this view. Link resolution retains the full
+// scan so human notes may link to templates. Global graph/area APIs are unchanged.
+func healthKnowledgeScan(scan vault.ScanResult) vault.ScanResult {
+	notes := make([]vault.Note, 0, len(scan.Notes))
+	for _, note := range scan.Notes {
+		if !inTemplates(note.Path) {
+			notes = append(notes, note)
+		}
+	}
+	scan.Notes = notes
+	return scan
 }

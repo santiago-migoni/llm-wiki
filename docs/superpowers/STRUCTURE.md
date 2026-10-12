@@ -1,23 +1,24 @@
 ---
-title: Estructura de llm-wiki
+title: Estructura de LLM Wiki
 status: draft
-version: v006
+version: v007
 responsible: Usuario promotor del proyecto
 created_at: "2026-10-08"
-updated_at: "2026-10-10"
+updated_at: "2026-10-12"
 reviewed_at: null
 approval_reference: null
 ---
 
-# Estructura de llm-wiki
+# Estructura de LLM Wiki
 
-Entrega relacionada: **v0.2.1**; runtime/manifiestos `0.2.1`.
-[Changelog](../../CHANGELOG.md), [informe 0.2.1](../../tests/acceptance/release-0.2.1.json) y [aceptación Desktop](evidence/2026-10-10-desktop-areas.md).
+Entrega relacionada: **v0.2.2**; runtime/manifiestos `0.2.2`.
+Nombre visible **LLM Wiki**; identificador técnico `llm-wiki` conservado.
+[Changelog](../../CHANGELOG.md), [informe 0.2.2](../../tests/acceptance/release-0.2.2.json) y [aceptación Desktop](evidence/2026-10-10-desktop-areas.md).
 
-Estructura vigente para `v0.2.1`: resolución e inventario de áreas, dos skills nuevas
-y paquete universal verificado. Base histórica `43ee802`, ensayo 0.1.0-dev.2.
+Estructura vigente para `v0.2.2`: siete correcciones de generación y salud de
+plantillas, nombre visible LLM Wiki y paquete universal. Identidad técnica sin cambios. Base histórica `43ee802`, ensayo 0.1.0-dev.2.
 La dirección aplicable está en
-[CONSTITUTION.md](CONSTITUTION.md), v004, y [ARCHITECTURE.md](ARCHITECTURE.md),
+[CONSTITUTION.md](CONSTITUTION.md), v005, y [ARCHITECTURE.md](ARCHITECTURE.md),
 AC-019. Base previa: `f27672f7a63039805784efd8ccd5478b089dda2e`.
 El inventario original se conserva intacto. No se utiliza `.repos` en ejecución.
 
@@ -91,7 +92,7 @@ Evidencia de pruebas y límites: [registro de implementación](evidence/2026-10-
 La decisión canónica es [ARCHITECTURE.md](ARCHITECTURE.md), v008, ADR-009
 (approved, AA-001). Esta sección localiza los cambios futuros; no los describe como
 implementados ni autoriza ejecutarlos. La dirección aplicable permanece en
-[CONSTITUTION.md](CONSTITUTION.md), v004, PRI-003–005 y OBJ-002–003.
+[CONSTITUTION.md](CONSTITUTION.md), v005, PRI-003–005 y OBJ-002–003.
 Base exacta de archivos inspeccionados y constitución:
 `e703e1f9d898ccc797cb2d7eeed1ee4e68a3ee04`.
 
@@ -199,3 +200,14 @@ STDIO en `internal/mcp/server_test.go`. Validación de ambos manifiestos en
 `internal/packaging/`; lanzamiento y alternancia con identidad en
 `tests/acceptance/package_test.go`. La evidencia Desktop 0.2.0 permanece histórica
 y separada del [informe de paquete 0.2.1](../../tests/acceptance/release-0.2.1.json).
+
+## Correcciones descriptivas v0.2.2
+
+Assets y bootstrap en `internal/vault/bootstrap_templates.json` y `bootstrap.go`;
+salud y placeholders en `internal/health/health.go` y `extended.go`. Regresiones
+en `internal/vault/bootstrap_test.go`, `internal/health/templates_test.go`,
+`internal/service/bootstrap_templates_test.go` y
+`tests/acceptance/bootstrap_templates_test.go`. Cubren ocho cruces de layout/preset,
+60 plantillas Markdown, 24 Bases y dos colas. La aceptación ejecuta MCP del paquete
+sin toolchain; no equivale a renderizado de vistas o aceptación nueva de Desktop.
+[Informe 0.2.2](../../tests/acceptance/release-0.2.2.json).

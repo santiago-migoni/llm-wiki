@@ -1,0 +1,71 @@
+{
+  "version": "0.2.2",
+  "display_name": "LLM Wiki",
+  "date": "2026-10-12",
+  "status": "source_prepared",
+  "installed": false,
+  "published": false,
+  "git_tag": "v0.2.2",
+  "changes": [
+    "YAML-safe template placeholders including Person.last_interaction",
+    "YAML block/inline tags and non-string diagnostics",
+    "template-specific health policy retaining malformed YAML and coverage",
+    "independent Literature Note source placeholder",
+    "current and legacy placeholder detector with literal code controls",
+    "Post type tag retained alongside content",
+    "AI-first reading queue dashboard",
+    "LLM Wiki display name in portable/native manifests and marketplace"
+  ],
+  "coverage": {
+    "styles": [
+      "wiki",
+      "obsidian"
+    ],
+    "presets": [
+      "executive",
+      "builder",
+      "creator",
+      "researcher"
+    ],
+    "combinations": 8,
+    "markdown_templates": 60,
+    "bases": 24,
+    "reading_queues": 2
+  },
+  "tests": {
+    "focused_runtime": "passed",
+    "release_runtime_race": "pending",
+    "release_vet": "pending",
+    "packaged_MCP_all_presets": "pending",
+    "packaged_server_version": "pending",
+    "installed_byte_comparison": "pending"
+  },
+  "review": {
+    "base": "c84a40eef45178f57ccca3ff5a9e194b8bd51070",
+    "fresh_origin_main": true,
+    "independent_code_and_package_review": "completed for corrections",
+    "local_diff_review": "completed against freshly fetched origin/main",
+    "external_codex_review": "not run; automatic permission review rejected potential transmission to unidentified external service"
+  },
+  "historical_Desktop_acceptance": {
+    "version": "0.2.0 local correction",
+    "report": "tests/acceptance/release-0.2.0.json",
+    "two_real_chats": true,
+    "scope": "Historical only; release MCP subprocess acceptance does not prove new Desktop chats"
+  },
+  "distribution": {
+    "remote_pushed": false,
+    "github_release": false,
+    "local_installation": false
+  },
+  "source_commit": null,
+  "source_dirty": null,
+  "pending": [
+    "release package verification",
+    "publication and local installation",
+    "fresh Desktop chat schema reload",
+    "Intel execution",
+    "Obsidian/Dataview rendering and external calendar",
+    "EXI-002 and EXI-003 user outcomes"
+  ]
+}

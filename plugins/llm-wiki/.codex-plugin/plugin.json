@@ -1,15 +1,15 @@
 {
   "name": "llm-wiki",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Knowledge workflows in Codex with local Markdown, recoverable writes and explicit capability gaps.",
   "author": {
     "name": "llm-wiki contributors"
   },
   "license": "MIT",
   "interface": {
-    "displayName": "llm-wiki",
+    "displayName": "LLM Wiki",
     "shortDescription": "Conocimiento desde Codex",
-    "longDescription": "Gestiona notas Markdown desde Codex: búsqueda local, contexto, workflows, operaciones recuperables, bootstrap y exportación. Versión 0.2.1; consulta capabilities.json para pruebas pendientes y funciones dependientes del host.",
+    "longDescription": "Gestiona notas Markdown desde Codex: búsqueda local, contexto, workflows, operaciones recuperables, bootstrap y exportación. Versión 0.2.2; consulta capabilities.json para pruebas pendientes y funciones dependientes del host.",
     "developerName": "llm-wiki contributors",
     "category": "Productivity",
     "capabilities": [

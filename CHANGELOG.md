@@ -1,6 +1,40 @@
 # Changelog
 
-Registro de cambios del plugin llm-wiki. La versión inicial contiene capacidades cuya validación sigue pendiente.
+Registro de cambios del plugin LLM Wiki. La versión inicial contiene capacidades cuya validación sigue pendiente.
+
+## v0.2.2 — 2026-10-12
+
+### Correcciones
+
+- Placeholders YAML entrecomillados en las plantillas, incluido `last_interaction`
+  de Person: bootstrap deja el inventario de áreas completo.
+- Salud acepta tags en listas YAML inline y de bloque; conserva diagnósticos
+  para elementos no textuales.
+- Salud distingue plantillas de notas finales: mantiene errores estructurales y
+  YAML, sin exigir fechas resueltas ni analizar enlaces placeholder como notas.
+- Literature Note usa `{{source}}` para enlazar la obra, separado de `{{title}}`.
+- El detector de contenido pendiente reconoce los placeholders actuales y la
+  sintaxis anterior; respeta código y Mustache desconocido legítimo.
+- Post incluye `post` en tags y conserva `content`.
+- Las colas de lectura incluyen `type`, tags, `ai-first` y contexto futuro.
+- Nombre visible **LLM Wiki** en plugin y marketplace; identidad técnica
+  `llm-wiki` conservada.
+
+### Validación y distribución
+
+- Regresiones del fallo y de casos legítimos; generación y salud de los ocho
+  cruces `wiki`/`obsidian` con `executive`, `builder`, `creator` y `researcher`:
+  60 plantillas Markdown, 24 Bases y dos colas. Plantillas humanas existentes
+  preservadas; sin migración automática de bóvedas.
+- Suite con carreras, vet y aceptación MCP real del paquete sin toolchain de
+  desarrollo. La procedencia, checksums, firma y arquitecturas del paquete
+  reconstruido se registran en el informe de entrega.
+- La aceptación anterior de dos chats Desktop sigue asociada a 0.2.0. Esta
+  validación del paquete no acredita sesiones nuevas de Desktop, ejecución Intel,
+  renderizado Obsidian/Dataview ni calendarios externos.
+
+Evidencia: [informe 0.2.2](tests/acceptance/release-0.2.2.json) y
+[regresiones de plantillas](docs/superpowers/evidence/2026-10-12-template-regressions.md).
 
 ## v0.2.1 — 2026-10-10
 

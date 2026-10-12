@@ -111,8 +111,8 @@ func (v *Vault) PlanBootstrap(spec BootstrapSpec) ([]Change, error) {
 	for name, body := range assets.Presets[spec.Style+"/"+spec.Preset] {
 		body = strings.ReplaceAll(body, "{{bootstrap_date}}", today.Format("2006-01-02"))
 		body = strings.ReplaceAll(body, "{{bootstrap_year}}", today.Format("2006"))
-		// Quote placeholder dates so frontmatter remains parseable before filling.
-		body = strings.ReplaceAll(body, "date: {{date}}", `date: "{{date}}"`)
+		// Asset frontmatter already quotes placeholders so it is parseable
+		// before a note is instantiated, regardless of the metadata field name.
 		files[name] = body
 	}
 	// Preserve upstream empty-folder intent without enabling an Obsidian runtime.

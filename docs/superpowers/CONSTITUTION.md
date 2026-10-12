@@ -1,18 +1,19 @@
 ---
-title: Constitución de llm-wiki
+title: Constitución de LLM Wiki
 status: approved
-version: v004
+version: v005
 responsible: Usuario promotor del proyecto
 created_at: "2026-10-08"
-updated_at: "2026-10-10"
+updated_at: "2026-10-12"
 reviewed_at: "2026-10-08"
 approval_reference: "D-005 (dirección sin cambios); D-006 (nombre y referencia); D-007 (Codex sin proveedores externos) — Historial de decisiones"
 ---
 
-# Constitución de llm-wiki
+# Constitución de LLM Wiki
 
-Entrega relacionada: **v0.2.1**; runtime/manifiestos `0.2.1`.
-[Changelog](../../CHANGELOG.md), [informe 0.2.1](../../tests/acceptance/release-0.2.1.json) y [aceptación Desktop](evidence/2026-10-10-desktop-areas.md).
+Entrega relacionada: **v0.2.2**; runtime/manifiestos `0.2.2`.
+Nombre visible **LLM Wiki**; identificador técnico `llm-wiki` conservado.
+[Changelog](../../CHANGELOG.md), [informe 0.2.2](../../tests/acceptance/release-0.2.2.json) y [aceptación Desktop](evidence/2026-10-10-desktop-areas.md).
 
 ## Misión
 
@@ -210,3 +211,11 @@ Referencia vigente v0.2.1; propósito y decisiones aprobadas sin cambios.
 La dirección anterior queda preservada en
 `5c2829f92b08d6756745361e49572e7530122300:docs/superpowers/CONSTITUTION.md`; esta actualización no amplía
 la aprobación de D-005/D-006/D-007 a resultados de usuario todavía pendientes.
+
+## Actualización editorial de entrega — 2026-10-12
+
+Referencia vigente v0.2.2. El usuario solicitó el nombre visible **LLM Wiki**;
+el identificador técnico sigue siendo `llm-wiki`. El registro D-006 conserva el
+nombre aprobado originalmente como antecedente histórico. Propósito, principios
+y dirección aprobada sin cambios; la corrección de siete problemas de plantillas
+y la actualización del nombre no acreditan resultados de usuario pendientes.

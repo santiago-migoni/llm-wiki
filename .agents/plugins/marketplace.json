@@ -1,7 +1,7 @@
 {
   "name": "llm-wiki",
   "interface": {
-    "displayName": "llm-wiki"
+    "displayName": "LLM Wiki"
   },
   "plugins": [
     {
