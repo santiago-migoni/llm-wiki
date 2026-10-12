@@ -1,7 +1,7 @@
 ---
 title: Arquitectura de LLM Wiki
 status: draft
-version: v011
+version: v012
 responsible: Usuario promotor del proyecto
 created_at: "2026-10-08"
 updated_at: "2026-10-12"
@@ -13,7 +13,7 @@ approval_reference: null
 
 Entrega relacionada: **v0.2.2**; runtime/manifiestos `0.2.2`.
 Nombre visible **LLM Wiki**; identificador técnico `llm-wiki` conservado.
-[Changelog](../../CHANGELOG.md), [informe 0.2.2](../../tests/acceptance/release-0.2.2.json) y [aceptación Desktop](evidence/2026-10-10-desktop-areas.md).
+[Changelog](../../CHANGELOG.md), [informe 0.2.2](../../tests/acceptance/release-0.2.2.json) y [verificación Desktop 0.2.2](evidence/2026-10-12-desktop-0.2.2.md).
 
 ## Contexto y límites del sistema
 
@@ -24,7 +24,7 @@ desde GitHub/Git. Obsidian es opcional para operar los archivos del vault, y se
 conservan sus formatos. Las integraciones se reevalúan por resultado bajo AC-019;
 las brechas no se declaran resueltas por adoptar Codex.
 
-- **Dirección de producto:** [Constitución vigente v005](CONSTITUTION.md); dirección aprobada en v001, base
+- **Dirección de producto:** [Constitución vigente v006](CONSTITUTION.md); dirección aprobada en v001, base
   `eaa8e3075c482dc3fd9cb9864b50b34e668d97a0:docs/superpowers/CONSTITUTION.md`.
   Aplican PRI-001–PRI-005, OBJ-001–OBJ-003 y EXI-001–EXI-003.
 - **Diagnóstico:** [inventario v001](analysis/inventario-codex/README.md), base
@@ -35,7 +35,7 @@ las brechas no se declaran resueltas por adoptar Codex.
   `.repos/obsidian-second-brain`, commit `b0089f7666d0c1e3db41c9d587b6f3c997665235`.
   Sus fuentes están identificadas en el inventario. No se modifican ni se proponen
   como dependencia de ejecución del paquete instalado.
-- **Estado actual:** entrega `v0.2.2`, con siete correcciones de generación y salud de plantillas. Los ocho cruces de layout/preset se verifican por runtime y MCP del paquete. La corrección local 0.2.0 conserva su aceptación de 24 casos de workflows, 14 guardas y continuidad entre dos chats Desktop; no acredita la aceptación del host de esta entrega. Publicación e instalación actuales se registran en el informe 0.2.2.
+- **Estado actual:** entrega `v0.2.2`, con siete correcciones de generación y salud de plantillas. Los ocho cruces de layout/preset se verifican por runtime y MCP del paquete. La corrección local 0.2.0 conserva su aceptación de 24 casos de workflows, 14 guardas y continuidad entre dos chats Desktop; se conserva separada de la verificación de un chat nuevo de 0.2.2, con 30 herramientas expuestas y 28 llamadas a 12 herramientas. Publicación e instalación actuales se registran en el informe 0.2.2.
 - **Documentos relacionados:** [STRUCTURE.md](STRUCTURE.md) e [INFRASTRUCTURE.md](INFRASTRUCTURE.md) describen módulos, ejecución y límites observados; [evidencia](evidence/2026-10-08-implementation.md) registra pruebas.
 
 ## Componentes, interfaces y flujos implementados
@@ -44,14 +44,14 @@ MCP STDIO y CLI comparten `internal/service`. El registro mantiene identidad can
 
 Grafo, salud, bootstrap, init, migración, merge y exportación trabajan sobre las notas canónicas. Búsqueda usa un índice léxico reconstruible en memoria; reindex reporta cambios y retrieval-eval recibe gold cases explícitos. No hay embeddings ni cliente de proveedor. Catálogo combina 50 skills del paquete y workflows personales; leer un workflow no lo ejecuta ni instala.
 
-El paquete contiene un binario universal, manifiestos y checksums. Se ejecutó en arm64 sin toolchain de usuario; Intel no se ejecutó. Las llamadas Desktop tienen evidencia sintética sobre 0.2.0, no sobre la instalación actual 0.2.2. La aceptación MCP del paquete 0.2.2 sin toolchain se registra separadamente del host. Razonamiento y web ocurren en Codex, no en el núcleo. Las brechas de host y vistas permanecen abiertas conforme la spec.
+El paquete contiene un binario universal, manifiestos y checksums. Se ejecutó en arm64 sin toolchain de usuario; Intel no se ejecutó. Las llamadas Desktop de 0.2.2 tienen evidencia de un chat nuevo sobre un vault sintético, con bootstrap `obsidian`/`researcher`, escritura recuperable, lectura/búsqueda, áreas y salud. Manifiestos, build y checksum corroboran 0.2.2; las herramientas probadas no exponen la versión del proceso y no se observó su ruta. La aceptación MCP del paquete 0.2.2 sin toolchain se registra separadamente del host. Razonamiento y web ocurren en Codex, no en el núcleo. El refresco de sesiones existentes, la matriz completa de dos chats en esta versión, otras modalidades y vistas permanecen pendientes conforme la spec.
 
 ## Restricciones técnicas y atributos de calidad
 
 | Restricción | Fuente de autoridad | Evidencia actual y límite |
 |---|---|---|
 | Conservar todas las capacidades, incluyendo calendario, captura remota y mantenimiento | PRI-001, OBJ-001 | Catálogo de 47 comandos y funciones adicionales; sin paridad demostrada |
-| Experiencia centrada en Codex Desktop e instalación desde marketplace Git | AC-001 y AC-002 | Instalación CLI dev.2 verificada; aceptación Desktop pendiente |
+| Experiencia centrada en Codex Desktop e instalación desde marketplace Git | AC-001 y AC-002 | Instalación 0.2.2 registrada y flujo MCP en un chat nuevo verificado; sesiones existentes y aceptación completa pendientes |
 | Operar sin Obsidian abierto y mantener sus formatos e integraciones | AC-003 | Operaciones sobre fixtures sin Obsidian; render/vistas pendientes |
 | Reutilizar lógica útil con skills nativas y núcleo compartido | AC-004 | Assets y núcleo Go compartido implementados; interacción por modalidad pendiente |
 | Conservar procedencia, historial y control sobre las escrituras | PRI-003, PRI-004, OBJ-003 | Hashes, bloqueo por vault y recuperación durable probados; límite ante editor externo documentado |
@@ -69,7 +69,7 @@ El paquete contiene un binario universal, manifiestos y checksums. Se ejecutó e
 - **Decision status:** approved
 - **Fuente:** AC-001; no define sistemas operativos ni versiones mínimas.
 - **Implementation state:** partially_implemented
-- **Evidencia de implementación/verificación:** Instalación CLI y descubrimiento; Desktop pendiente. Ver registro de implementación.
+- **Evidencia de implementación/verificación:** Instalación y descubrimiento documentados; carga de esquemas y flujo MCP en un chat nuevo de 0.2.2 verificados en [evidencia Desktop](evidence/2026-10-12-desktop-0.2.2.md). Otras modalidades y sesiones existentes pendientes.
 
 ### ADR-002 — Distribución desde marketplace Git
 

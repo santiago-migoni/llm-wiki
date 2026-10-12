@@ -29,12 +29,20 @@ Registro de cambios del plugin LLM Wiki. La versión inicial contiene capacidade
 - Suite con carreras, vet y aceptación MCP real del paquete sin toolchain de
   desarrollo. La procedencia, checksums, firma y arquitecturas del paquete
   reconstruido se registran en el informe de entrega.
-- La aceptación anterior de dos chats Desktop sigue asociada a 0.2.0. Esta
-  validación del paquete no acredita sesiones nuevas de Desktop, ejecución Intel,
-  renderizado Obsidian/Dataview ni calendarios externos.
+- Verificación real en un chat nuevo de Desktop: 30 herramientas expuestas y
+  28 llamadas a 12 herramientas; bootstrap `obsidian`/`researcher` aplicado e
+  idempotente, escritura recuperable y lectura/búsqueda correctas, áreas completas,
+  ocho plantillas con YAML válido y salud de 15 notas sin errores ni advertencias.
+  Manifiestos/build/checksum corroboran 0.2.2; las herramientas probadas no devuelven
+  la versión del proceso y su ruta no se observó.
+- Se cierra la carga de esquemas en un chat nuevo y el flujo probado. La aceptación
+  anterior de dos chats sigue asociada a 0.2.0; no se verifica refresco de sesiones
+  existentes, ejecución Intel, renderizado Obsidian/Dataview ni calendarios externos.
 
 Evidencia: [informe 0.2.2](tests/acceptance/release-0.2.2.json) y
-[regresiones de plantillas](docs/superpowers/evidence/2026-10-12-template-regressions.md).
+[regresiones de plantillas](docs/superpowers/evidence/2026-10-12-template-regressions.md),
+[verificación Desktop](docs/superpowers/evidence/2026-10-12-desktop-0.2.2.md) y
+[registro de llamadas Desktop](tests/acceptance/desktop-0.2.2.json).
 
 ## v0.2.1 — 2026-10-10
 

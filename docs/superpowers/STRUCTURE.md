@@ -1,7 +1,7 @@
 ---
 title: Estructura de LLM Wiki
 status: draft
-version: v007
+version: v008
 responsible: Usuario promotor del proyecto
 created_at: "2026-10-08"
 updated_at: "2026-10-12"
@@ -13,12 +13,12 @@ approval_reference: null
 
 Entrega relacionada: **v0.2.2**; runtime/manifiestos `0.2.2`.
 Nombre visible **LLM Wiki**; identificador técnico `llm-wiki` conservado.
-[Changelog](../../CHANGELOG.md), [informe 0.2.2](../../tests/acceptance/release-0.2.2.json) y [aceptación Desktop](evidence/2026-10-10-desktop-areas.md).
+[Changelog](../../CHANGELOG.md), [informe 0.2.2](../../tests/acceptance/release-0.2.2.json) y [verificación Desktop 0.2.2](evidence/2026-10-12-desktop-0.2.2.md).
 
 Estructura vigente para `v0.2.2`: siete correcciones de generación y salud de
 plantillas, nombre visible LLM Wiki y paquete universal. Identidad técnica sin cambios. Base histórica `43ee802`, ensayo 0.1.0-dev.2.
 La dirección aplicable está en
-[CONSTITUTION.md](CONSTITUTION.md), v005, y [ARCHITECTURE.md](ARCHITECTURE.md),
+[CONSTITUTION.md](CONSTITUTION.md), v006, y [ARCHITECTURE.md](ARCHITECTURE.md),
 AC-019. Base previa: `f27672f7a63039805784efd8ccd5478b089dda2e`.
 El inventario original se conserva intacto. No se utiliza `.repos` en ejecución.
 
@@ -85,7 +85,7 @@ instrucción superior ni renombrarlo automáticamente.
 - No se cambia `.gitignore` preexistente hasta que una tarea lo requiera y preserve
   su contenido; no se versionan caches, configuración personal ni fixtures reales.
 
-Evidencia de pruebas y límites: [registro de implementación](evidence/2026-10-08-implementation.md). Desktop, modalidades y soporte Intel siguen pendientes.
+Evidencia de pruebas y límites: [registro de implementación](evidence/2026-10-08-implementation.md). La [verificación Desktop 0.2.2](evidence/2026-10-12-desktop-0.2.2.md) cubre carga y flujo MCP en un chat nuevo; modalidades, sesiones existentes y soporte Intel siguen pendientes.
 
 ## Cambios propuestos para áreas definidas por el usuario
 
@@ -211,3 +211,11 @@ en `internal/vault/bootstrap_test.go`, `internal/health/templates_test.go`,
 60 plantillas Markdown, 24 Bases y dos colas. La aceptación ejecuta MCP del paquete
 sin toolchain; no equivale a renderizado de vistas o aceptación nueva de Desktop.
 [Informe 0.2.2](../../tests/acceptance/release-0.2.2.json).
+
+La evidencia del host se conserva en
+[desktop-0.2.2.json](../../tests/acceptance/desktop-0.2.2.json), separada de las
+pruebas de subprocess y del registro histórico de dos chats. Expone 30 herramientas
+y registra 28 llamadas a 12 herramientas sobre `obsidian`/`researcher`, ocho
+plantillas válidas y 15 notas revisadas por salud sin errores ni advertencias.
+Cierra carga y flujo probado en un chat nuevo; no prueba sesiones existentes,
+la matriz Desktop completa ni renderizado Obsidian.

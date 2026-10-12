@@ -88,6 +88,7 @@ Los informes de aceptación anteriores conservan las versiones de desarrollo que
 probaron. La validación del paquete actual se registra en
 [el informe 0.2.2](tests/acceptance/release-0.2.2.json).
 La [evidencia de plantillas](docs/superpowers/evidence/2026-10-12-template-regressions.md) registra los ocho cruces de layout/preset, 60 plantillas Markdown, 24 Bases y dos colas, con pruebas MCP del paquete sin toolchain de desarrollo. No acredita vistas ejecutadas en Obsidian ni sesiones nuevas de Desktop.
+La [verificación en un chat nuevo de Desktop 0.2.2](docs/superpowers/evidence/2026-10-12-desktop-0.2.2.md) acredita 30 herramientas MCP expuestas y 28 llamadas a 12 herramientas: bootstrap `obsidian`/`researcher`, escritura recuperable, lectura, búsqueda, inventario de áreas completo y salud sin errores ni advertencias. Manifiestos, build y checksum corroboran 0.2.2; las respuestas de las herramientas probadas no exponen la versión del proceso ni se observó su ruta. Cierra el pendiente de carga de esquemas en un chat nuevo y del flujo probado; no verifica refrescar sesiones existentes.
 La [aceptación Desktop sobre la corrección local 0.2.0](docs/superpowers/evidence/2026-10-10-desktop-areas.md) conserva el binario y alcance realmente probados.
 El [informe 0.1.0](tests/acceptance/release-0.1.0.json) conserva su alcance histórico.
 
@@ -104,8 +105,9 @@ permite afirmar que un área no existe. La ejecución sintética de los doce wor
 se verificaron sobre la corrección local 0.2.0. Los chats abiertos aún conservaban
 la declaración antigua de los lotes después de reinstalar: el cargador nuevo
 ya publicaba los esquemas correctos. La instalación de la entrega actual se registra
-en el informe 0.2.2; la recarga y aceptación en sesiones nuevas de Desktop requieren
-evidencia propia. Consulta la
+en el informe 0.2.2. La carga en un chat nuevo y el inventario completo se verificaron
+para 0.2.2 en la evidencia Desktop citada arriba; no se repitió la matriz completa
+de dos chats ni el refresco de sesiones existentes. Consulta la
 [matriz de casos](tests/acceptance/areas-cases.json) y el
 [plan de este incremento](docs/superpowers/plans/2026-10-10-areas-transversales.md).
 

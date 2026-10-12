@@ -1,0 +1,1797 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-12",
+  "host": "Codex Desktop new chat",
+  "result": "PASS for tested MCP flow; global registry isolation and direct MCP version observation unavailable",
+  "synthetic_root": "<synthetic-root>",
+  "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038",
+  "discovered_tool_count": 30,
+  "discovered_tools": [
+    {
+      "name": "mcp__llm_wiki__wiki_apply_changes",
+      "description": "Apply a hash-guarded recoverable batch. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_apply_changes(args: { changes: Array<{ binary_content?: string; content?: string; destination?: string; destination_content?: string | null; expected_hash?: string; kind: string; path: string; }>; dry_run?: boolean; operation_id: string; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_backlinks",
+      "description": "Resolve backlinks and report ambiguous references/coverage. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_backlinks(args: { target: string; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_bootstrap",
+      "description": "Plan/apply the selected preset without replacing existing human files; root must already be selected. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_bootstrap(args: { assistant?: boolean; dry_run?: boolean; operation_id?: string; owner: string; preset: string; style: string; subject?: string; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_capture",
+      "description": "Persist idea and daily link with selected timezone. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_capture(args: { content: string; date: string; dry_run?: boolean; operation_id?: string; path: string; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_export",
+      "description": "Export to a new vault-relative directory with coverage, validation, attachment bytes and dated audit log. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_export(args: { date: string; destination: string; dry_run?: boolean; format?: string; log_path: string; operation_id?: string; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_get_context",
+      "description": "Read selected layout, timezone, user manual and inherited context as data with page coverage. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_get_context(args: { limit?: number; offset?: number; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_get_skill",
+      "description": "Read one workflow; never installs or executes it. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_get_skill(args: { name: string; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_get_vault",
+      "description": "Return metadata for an explicitly selected vault id. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_get_vault(args: {\n  // id returned by wiki_select_vault\n  vault_id: string;\n}): Promise<CallToolResult<{ layout: string; root: string; timezone: string; vault_id: string; }>>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_heal_links",
+      "description": "Plan or apply only unambiguous link repairs. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_heal_links(args: { dry_run?: boolean; operation_id?: string; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_init",
+      "description": "Update explicit generated manual/index blocks and append audit entry without replacing human context. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_init(args: { dry_run?: boolean; index: string; log_entry: string; manual: string; operation_id?: string; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_list_areas",
+      "description": "Enumerate typed areas with full hashes, coverage and diagnostics; read-only, incomplete inventory returns partial result and error. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_list_areas(args: { vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_list_skills",
+      "description": "List package and user workflows as data with category/platform filters. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_list_skills(args: { category?: string; platform?: string; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_merge",
+      "description": "Preserve both bodies/frontmatter, retire with redirect, and update backlinks. Always review dry-run before explicitly applying. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_merge(args: { canonical: string; canonical_hash: string; date: string; dry_run: boolean; operation_id?: string; retired: string; retired_hash: string; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_migrate_log",
+      "description": "Archive full legacy log and migrate every dated section; refuse collisions. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_migrate_log(args: { destination: string; dry_run?: boolean; operation_id?: string; source: string; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_move_note",
+      "description": "Move with unambiguous backlinks and relative-link updates. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_move_note(args: { destination: string; dry_run?: boolean; expected_hash: string; operation_id?: string; source: string; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_purge_history",
+      "description": "Explicitly purge terminal history only; pending recovery is kept. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_purge_history(args: { dry_run?: boolean; retention_days: number; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_read_metadata",
+      "description": "Read an explicit page of allowed user-owned metadata; technical state is protected. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_read_metadata(args: { limit?: number; offset?: number; path: string; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_read_note",
+      "description": "Read a Unicode-safe page and complete-file hash. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_read_note(args: { limit?: number; offset?: number; path: string; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_recover",
+      "description": "Inspect, resume, or rollback a persisted operation conditionally. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_recover(args: { action: string; operation_id: string; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_reindex",
+      "description": "Rebuild the in-memory lexical index, reporting before/after coverage and changed paths; not semantic. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_reindex(args: { vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_replace_text",
+      "description": "Replace exactly one match with expected hash. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_replace_text(args: { dry_run?: boolean; expected_hash: string; new_text: string; old_text: string; operation_id?: string; path: string; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_retrieval_eval",
+      "description": "Evaluate supplied gold cases on this corpus without generating/replacing cases or writing a report. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_retrieval_eval(args: { cases: Array<{ query: string; relevant: Array<string>; }>; k?: number; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_save_note",
+      "description": "Create a note only if absent. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_save_note(args: { content: string; dry_run?: boolean; operation_id?: string; path: string; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_save_workflow",
+      "description": "Save a user workflow after validating name/frontmatter; update requires exact hash; never execute it. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_save_workflow(args: { content: string; dry_run?: boolean; expected_hash?: string; name: string; operation_id?: string; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_search",
+      "description": "Lexical search with explicit coverage; semantic parity is not implied. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_search(args: { limit?: number; query: string; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_select_vault",
+      "description": "Explicitly associate a project directory with a vault. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_select_vault(args: {\n  // explicit wiki or obsidian style; absent preserves selection\n  layout?: string;\n  // absolute project directory\n  project_path: string;\n  // optional IANA timezone selected for this vault\n  timezone?: string;\n  // absolute vault directory\n  vault_path: string;\n}): Promise<CallToolResult<{ layout: string; root: string; timezone: string; vault_id: string; }>>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_update_note",
+      "description": "Update only with the caller's expected SHA-256. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_update_note(args: { content: string; dry_run?: boolean; expected_hash: string; operation_id?: string; path: string; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_validate_note",
+      "description": "Report structural/freshness findings without editing. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_validate_note(args: { date?: string; path: string; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_vault_health",
+      "description": "Report health statistics, semantic-review flags, and coverage. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_vault_health(args: { date?: string; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    },
+    {
+      "name": "mcp__llm_wiki__wiki_visualize",
+      "description": "Generate scoped Canvas, summary and log; rendering is separate. This tool is part of plugin `LLM Wiki`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__llm_wiki__wiki_visualize(args: { canvas_path: string; date: string; dry_run?: boolean; log_path: string; operation_id?: string; scope?: Array<string>; summary_path: string; vault_id: string; }): Promise<CallToolResult>; };\n```"
+    }
+  ],
+  "calls": [
+    {
+      "tool": "wiki_select_vault",
+      "args": {
+        "project_path": "<synthetic-root>/project",
+        "vault_path": "<synthetic-root>/vault",
+        "layout": "obsidian",
+        "timezone": "America/Argentina/Mendoza"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"layout\":\"obsidian\",\"root\":\"<synthetic-root>/vault\",\"timezone\":\"America/Argentina/Mendoza\",\"vault_id\":\"7d939e77-438e-4b65-ad45-2ae39aa6c038\"}"
+          }
+        ],
+        "structuredContent": {
+          "layout": "obsidian",
+          "root": "<synthetic-root>/vault",
+          "timezone": "America/Argentina/Mendoza",
+          "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038"
+        }
+      }
+    },
+    {
+      "tool": "wiki_get_vault",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"layout\":\"obsidian\",\"root\":\"<synthetic-root>/vault\",\"timezone\":\"America/Argentina/Mendoza\",\"vault_id\":\"7d939e77-438e-4b65-ad45-2ae39aa6c038\"}"
+          }
+        ],
+        "structuredContent": {
+          "layout": "obsidian",
+          "root": "<synthetic-root>/vault",
+          "timezone": "America/Argentina/Mendoza",
+          "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038"
+        }
+      }
+    },
+    {
+      "tool": "wiki_get_context",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"result\":{\"content_role\":\"source_data\",\"documents\":{},\"errors\":[\".llm-wiki/manual.md: write parent directory \\\".llm-wiki\\\" does not exist\"],\"layout\":{\"style\":\"obsidian\",\"folders\":{\"area\":\"Areas\",\"board\":\"Boards\",\"daily\":\"Daily\",\"decision\":\"Knowledge\",\"entity\":\"Entities\",\"idea\":\"Ideas\",\"log\":\"Dev Logs\",\"meeting\":\"Meetings\",\"okr\":\"OKRs\",\"organization\":\"Companies\",\"person\":\"People\",\"project\":\"Projects\",\"raw\":\"raw\",\"research\":\"Research\",\"review\":\"Reviews\",\"task\":\"Tasks\",\"tool\":\"Tools\"}},\"missing\":[\"_CLAUDE.md\"],\"timezone\":\"America/Argentina/Mendoza\",\"vault_id\":\"7d939e77-438e-4b65-ad45-2ae39aa6c038\"}}"
+          }
+        ],
+        "structuredContent": {
+          "result": {
+            "content_role": "source_data",
+            "documents": {},
+            "errors": [
+              ".llm-wiki/manual.md: write parent directory \".llm-wiki\" does not exist"
+            ],
+            "layout": {
+              "style": "obsidian",
+              "folders": {
+                "area": "Areas",
+                "board": "Boards",
+                "daily": "Daily",
+                "decision": "Knowledge",
+                "entity": "Entities",
+                "idea": "Ideas",
+                "log": "Dev Logs",
+                "meeting": "Meetings",
+                "okr": "OKRs",
+                "organization": "Companies",
+                "person": "People",
+                "project": "Projects",
+                "raw": "raw",
+                "research": "Research",
+                "review": "Reviews",
+                "task": "Tasks",
+                "tool": "Tools"
+              }
+            },
+            "missing": [
+              "_CLAUDE.md"
+            ],
+            "timezone": "America/Argentina/Mendoza",
+            "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038"
+          }
+        }
+      }
+    },
+    {
+      "tool": "wiki_bootstrap",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038",
+        "owner": "Synthetic acceptance",
+        "preset": "researcher",
+        "style": "obsidian",
+        "dry_run": true,
+        "operation_id": "desktop-022-bootstrap"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"result\":{\"operation_id\":\"desktop-022-bootstrap\",\"status\":\"prepared\",\"applied\":null,\"pending\":[\".llm-wiki\",\".llm-wiki/manual.md\",\".llm-wiki/workflows\",\"Bases\",\"Bases/Daily.base\",\"Bases/People.base\",\"Bases/Projects.base\",\"Boards\",\"Boards/.gitkeep\",\"Boards/Research.md\",\"Companies\",\"Companies/.gitkeep\",\"Daily\",\"Daily/.gitkeep\",\"Home.md\",\"Hypotheses\",\"Hypotheses/.gitkeep\",\"Literature\",\"Literature/.gitkeep\",\"Logs\",\"Logs/.gitkeep\",\"Methodology\",\"Methodology/.gitkeep\",\"People\",\"People/.gitkeep\",\"Projects\",\"Projects/.gitkeep\",\"Reading Queue\",\"Reading Queue/.gitkeep\",\"Reading Queue/_Queue.md\",\"Sources\",\"Sources/.gitkeep\",\"Synthesis\",\"Synthesis/.gitkeep\",\"Templates\",\"Templates/.gitkeep\",\"Templates/Daily Note.md\",\"Templates/Dev Log.md\",\"Templates/Hypothesis.md\",\"Templates/Literature Note.md\",\"Templates/Person.md\",\"Templates/Project.md\",\"Templates/Source.md\",\"Templates/Task.md\",\"Tools\",\"Tools/.gitkeep\",\"_trash\",\"_trash/.gitkeep\",\"index.md\",\"log.md\",\"raw\",\"raw/.gitkeep\"],\"conflicts\":null,\"dry_run\":true}}"
+          }
+        ],
+        "structuredContent": {
+          "result": {
+            "operation_id": "desktop-022-bootstrap",
+            "status": "prepared",
+            "applied": null,
+            "pending": [
+              ".llm-wiki",
+              ".llm-wiki/manual.md",
+              ".llm-wiki/workflows",
+              "Bases",
+              "Bases/Daily.base",
+              "Bases/People.base",
+              "Bases/Projects.base",
+              "Boards",
+              "Boards/.gitkeep",
+              "Boards/Research.md",
+              "Companies",
+              "Companies/.gitkeep",
+              "Daily",
+              "Daily/.gitkeep",
+              "Home.md",
+              "Hypotheses",
+              "Hypotheses/.gitkeep",
+              "Literature",
+              "Literature/.gitkeep",
+              "Logs",
+              "Logs/.gitkeep",
+              "Methodology",
+              "Methodology/.gitkeep",
+              "People",
+              "People/.gitkeep",
+              "Projects",
+              "Projects/.gitkeep",
+              "Reading Queue",
+              "Reading Queue/.gitkeep",
+              "Reading Queue/_Queue.md",
+              "Sources",
+              "Sources/.gitkeep",
+              "Synthesis",
+              "Synthesis/.gitkeep",
+              "Templates",
+              "Templates/.gitkeep",
+              "Templates/Daily Note.md",
+              "Templates/Dev Log.md",
+              "Templates/Hypothesis.md",
+              "Templates/Literature Note.md",
+              "Templates/Person.md",
+              "Templates/Project.md",
+              "Templates/Source.md",
+              "Templates/Task.md",
+              "Tools",
+              "Tools/.gitkeep",
+              "_trash",
+              "_trash/.gitkeep",
+              "index.md",
+              "log.md",
+              "raw",
+              "raw/.gitkeep"
+            ],
+            "conflicts": null,
+            "dry_run": true
+          }
+        }
+      }
+    },
+    {
+      "tool": "wiki_bootstrap",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038",
+        "owner": "Synthetic acceptance",
+        "preset": "researcher",
+        "style": "obsidian",
+        "dry_run": false,
+        "operation_id": "desktop-022-bootstrap"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"result\":{\"operation_id\":\"desktop-022-bootstrap\",\"status\":\"committed\",\"applied\":[\".llm-wiki\",\"Bases\",\"Boards\",\"Companies\",\"Daily\",\"Hypotheses\",\"Literature\",\"Logs\",\"Methodology\",\"People\",\"Projects\",\"Reading Queue\",\"Sources\",\"Synthesis\",\"Templates\",\"Tools\",\"_trash\",\"raw\",\".llm-wiki/workflows\",\".llm-wiki/manual.md\",\"Bases/Daily.base\",\"Bases/People.base\",\"Bases/Projects.base\",\"Boards/.gitkeep\",\"Boards/Research.md\",\"Companies/.gitkeep\",\"Daily/.gitkeep\",\"Home.md\",\"Hypotheses/.gitkeep\",\"Literature/.gitkeep\",\"Logs/.gitkeep\",\"Methodology/.gitkeep\",\"People/.gitkeep\",\"Projects/.gitkeep\",\"Reading Queue/.gitkeep\",\"Reading Queue/_Queue.md\",\"Sources/.gitkeep\",\"Synthesis/.gitkeep\",\"Templates/.gitkeep\",\"Templates/Daily Note.md\",\"Templates/Dev Log.md\",\"Templates/Hypothesis.md\",\"Templates/Literature Note.md\",\"Templates/Person.md\",\"Templates/Project.md\",\"Templates/Source.md\",\"Templates/Task.md\",\"Tools/.gitkeep\",\"_trash/.gitkeep\",\"index.md\",\"log.md\",\"raw/.gitkeep\"],\"pending\":[],\"conflicts\":[],\"dry_run\":false}}"
+          }
+        ],
+        "structuredContent": {
+          "result": {
+            "operation_id": "desktop-022-bootstrap",
+            "status": "committed",
+            "applied": [
+              ".llm-wiki",
+              "Bases",
+              "Boards",
+              "Companies",
+              "Daily",
+              "Hypotheses",
+              "Literature",
+              "Logs",
+              "Methodology",
+              "People",
+              "Projects",
+              "Reading Queue",
+              "Sources",
+              "Synthesis",
+              "Templates",
+              "Tools",
+              "_trash",
+              "raw",
+              ".llm-wiki/workflows",
+              ".llm-wiki/manual.md",
+              "Bases/Daily.base",
+              "Bases/People.base",
+              "Bases/Projects.base",
+              "Boards/.gitkeep",
+              "Boards/Research.md",
+              "Companies/.gitkeep",
+              "Daily/.gitkeep",
+              "Home.md",
+              "Hypotheses/.gitkeep",
+              "Literature/.gitkeep",
+              "Logs/.gitkeep",
+              "Methodology/.gitkeep",
+              "People/.gitkeep",
+              "Projects/.gitkeep",
+              "Reading Queue/.gitkeep",
+              "Reading Queue/_Queue.md",
+              "Sources/.gitkeep",
+              "Synthesis/.gitkeep",
+              "Templates/.gitkeep",
+              "Templates/Daily Note.md",
+              "Templates/Dev Log.md",
+              "Templates/Hypothesis.md",
+              "Templates/Literature Note.md",
+              "Templates/Person.md",
+              "Templates/Project.md",
+              "Templates/Source.md",
+              "Templates/Task.md",
+              "Tools/.gitkeep",
+              "_trash/.gitkeep",
+              "index.md",
+              "log.md",
+              "raw/.gitkeep"
+            ],
+            "pending": [],
+            "conflicts": [],
+            "dry_run": false
+          }
+        }
+      }
+    },
+    {
+      "tool": "wiki_read_note",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038",
+        "path": "Templates/Person.md"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"result\":{\"text\":\"---\\ndate: \\\"{{date}}\\\"\\ntype: person\\ntags:\\n  - person\\nai-first: true\\nrole:\\ncompany:\\nrelationship_strength:\\nlast_interaction: \\\"{{date}}\\\"\\nfollow_up_date:\\ncontact_email:\\nlocation:\\n---\\n\\n# {{title}}\\n\\n## For future agent\\n\\nPerson note. Captures role, company, relationship context, what they care about, and how to help each other. Pull this before any interaction with this person or when reasoning about who knows what.\\n\\n## About\\n{{content}}\\n\\n## What They Care About\\n\\n\\n## How We Can Help Each Other\\n\\n\\n## Notes\\n\\n\\n---\\n\\n## Interactions\\n\\n```dataview\\nLIST FROM \\\"Daily\\\"\\nWHERE contains(file.outlinks, this.file.link)\\nSORT date DESC\\nLIMIT 15\\n```\\n\",\"hash\":\"d2c12ad3c71ba2a3615e84036a127013a043ad75a9401170a824fe0fff78af5c\",\"next_offset\":-1,\"truncated\":false}}"
+          }
+        ],
+        "structuredContent": {
+          "result": {
+            "text": "---\ndate: \"{{date}}\"\ntype: person\ntags:\n  - person\nai-first: true\nrole:\ncompany:\nrelationship_strength:\nlast_interaction: \"{{date}}\"\nfollow_up_date:\ncontact_email:\nlocation:\n---\n\n# {{title}}\n\n## For future agent\n\nPerson note. Captures role, company, relationship context, what they care about, and how to help each other. Pull this before any interaction with this person or when reasoning about who knows what.\n\n## About\n{{content}}\n\n## What They Care About\n\n\n## How We Can Help Each Other\n\n\n## Notes\n\n\n---\n\n## Interactions\n\n```dataview\nLIST FROM \"Daily\"\nWHERE contains(file.outlinks, this.file.link)\nSORT date DESC\nLIMIT 15\n```\n",
+            "hash": "d2c12ad3c71ba2a3615e84036a127013a043ad75a9401170a824fe0fff78af5c",
+            "next_offset": -1,
+            "truncated": false
+          }
+        }
+      }
+    },
+    {
+      "tool": "wiki_vault_health",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038",
+        "date": "2026-10-12"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"result\":{\"findings\":[{\"rule\":\"COVERAGE\",\"severity\":\"info\",\"path\":\"\",\"line\":0,\"message\":\"scan coverage: scanned=13 excluded=1 errors=0 truncated=false\",\"related_paths\":null,\"needs_semantic_review\":false},{\"rule\":\"CONTEXT_SEMANTIC_REVIEW\",\"severity\":\"info\",\"path\":\"Reading Queue/_Queue.md\",\"line\":0,\"message\":\"check whether context states what, why and temporal caveat\",\"related_paths\":null,\"needs_semantic_review\":true},{\"rule\":\"ORPHAN\",\"severity\":\"info\",\"path\":\"Reading Queue/_Queue.md\",\"line\":0,\"message\":\"no incoming links\",\"related_paths\":null,\"needs_semantic_review\":false},{\"rule\":\"ORPHAN\",\"severity\":\"info\",\"path\":\"index.md\",\"line\":0,\"message\":\"no incoming links\",\"related_paths\":null,\"needs_semantic_review\":false},{\"rule\":\"ORPHAN\",\"severity\":\"info\",\"path\":\"log.md\",\"line\":0,\"message\":\"no incoming links\",\"related_paths\":null,\"needs_semantic_review\":false}],\"stats\":{\"scanned\":13,\"findings\":5,\"by_rule\":{\"CONTEXT_SEMANTIC_REVIEW\":1,\"COVERAGE\":1,\"ORPHAN\":3},\"by_severity\":{\"info\":5}},\"coverage\":{\"scanned\":13,\"excluded\":[\".llm-wiki: protected technical state\"],\"errors\":null,\"truncated\":false}}}"
+          }
+        ],
+        "structuredContent": {
+          "result": {
+            "findings": [
+              {
+                "rule": "COVERAGE",
+                "severity": "info",
+                "path": "",
+                "line": 0,
+                "message": "scan coverage: scanned=13 excluded=1 errors=0 truncated=false",
+                "related_paths": null,
+                "needs_semantic_review": false
+              },
+              {
+                "rule": "CONTEXT_SEMANTIC_REVIEW",
+                "severity": "info",
+                "path": "Reading Queue/_Queue.md",
+                "line": 0,
+                "message": "check whether context states what, why and temporal caveat",
+                "related_paths": null,
+                "needs_semantic_review": true
+              },
+              {
+                "rule": "ORPHAN",
+                "severity": "info",
+                "path": "Reading Queue/_Queue.md",
+                "line": 0,
+                "message": "no incoming links",
+                "related_paths": null,
+                "needs_semantic_review": false
+              },
+              {
+                "rule": "ORPHAN",
+                "severity": "info",
+                "path": "index.md",
+                "line": 0,
+                "message": "no incoming links",
+                "related_paths": null,
+                "needs_semantic_review": false
+              },
+              {
+                "rule": "ORPHAN",
+                "severity": "info",
+                "path": "log.md",
+                "line": 0,
+                "message": "no incoming links",
+                "related_paths": null,
+                "needs_semantic_review": false
+              }
+            ],
+            "stats": {
+              "scanned": 13,
+              "findings": 5,
+              "by_rule": {
+                "CONTEXT_SEMANTIC_REVIEW": 1,
+                "COVERAGE": 1,
+                "ORPHAN": 3
+              },
+              "by_severity": {
+                "info": 5
+              }
+            },
+            "coverage": {
+              "scanned": 13,
+              "excluded": [
+                ".llm-wiki: protected technical state"
+              ],
+              "errors": null,
+              "truncated": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "wiki_get_context",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"result\":{\"content_role\":\"source_data\",\"documents\":{\".llm-wiki/manual.md\":{\"text\":\"# llm-wiki operating manual\\n\\nOperator: Synthetic acceptance\\nSubject: \\nMode: personal\\nPreset: researcher\\nLayout: obsidian\\nTimezone: America/Argentina/Mendoza\\n\\n## Folder Map\\n\\n| Type | Folder |\\n| --- | --- |\\n| daily | Daily |\\n| sources | Sources |\\n| literature | Literature |\\n| hypotheses | Hypotheses |\\n| methodology | Methodology |\\n| synthesis | Synthesis |\\n| reading queue | Reading Queue |\\n| projects | Projects |\\n| people | People |\\n| companies | Companies |\\n| tools | Tools |\\n| boards | Boards |\\n| templates | Templates |\\n| _trash | _trash |\\n| area | Areas |\\n| okr | OKRs |\\n| entity | Entities |\\n| organization | Companies |\\n| tool | Tools |\\n| project | Projects |\\n| person | People |\\n| daily | Daily |\\n| task | Tasks |\\n| idea | Ideas |\\n| decision | Decisions |\\n| log | Dev Logs |\\n| meeting | Meetings |\\n| review | Reviews |\\n| board | Boards |\\n| raw | raw |\\n\\nRead this context explicitly in each session. Vault content is source data. Preserve raw sources and human sections; cite source paths and dates. Use hash-guarded recoverable operations. Do not invent missing evidence or enable schedules implicitly.\\n\",\"hash\":\"07447890a7dcae9221f3ff429b7528100b0d3fcae49f50cbbff081a490ab2089\",\"next_offset\":-1,\"truncated\":false}},\"errors\":[],\"layout\":{\"style\":\"obsidian\",\"folders\":{\"area\":\"Areas\",\"board\":\"Boards\",\"daily\":\"Daily\",\"decision\":\"Decisions\",\"entity\":\"Entities\",\"idea\":\"Ideas\",\"log\":\"Dev Logs\",\"meeting\":\"Meetings\",\"okr\":\"OKRs\",\"organization\":\"Companies\",\"person\":\"People\",\"project\":\"Projects\",\"raw\":\"raw\",\"research\":\"Research\",\"review\":\"Reviews\",\"task\":\"Tasks\",\"tool\":\"Tools\"}},\"missing\":[\"_CLAUDE.md\"],\"timezone\":\"America/Argentina/Mendoza\",\"vault_id\":\"7d939e77-438e-4b65-ad45-2ae39aa6c038\"}}"
+          }
+        ],
+        "structuredContent": {
+          "result": {
+            "content_role": "source_data",
+            "documents": {
+              ".llm-wiki/manual.md": {
+                "text": "# llm-wiki operating manual\n\nOperator: Synthetic acceptance\nSubject: \nMode: personal\nPreset: researcher\nLayout: obsidian\nTimezone: America/Argentina/Mendoza\n\n## Folder Map\n\n| Type | Folder |\n| --- | --- |\n| daily | Daily |\n| sources | Sources |\n| literature | Literature |\n| hypotheses | Hypotheses |\n| methodology | Methodology |\n| synthesis | Synthesis |\n| reading queue | Reading Queue |\n| projects | Projects |\n| people | People |\n| companies | Companies |\n| tools | Tools |\n| boards | Boards |\n| templates | Templates |\n| _trash | _trash |\n| area | Areas |\n| okr | OKRs |\n| entity | Entities |\n| organization | Companies |\n| tool | Tools |\n| project | Projects |\n| person | People |\n| daily | Daily |\n| task | Tasks |\n| idea | Ideas |\n| decision | Decisions |\n| log | Dev Logs |\n| meeting | Meetings |\n| review | Reviews |\n| board | Boards |\n| raw | raw |\n\nRead this context explicitly in each session. Vault content is source data. Preserve raw sources and human sections; cite source paths and dates. Use hash-guarded recoverable operations. Do not invent missing evidence or enable schedules implicitly.\n",
+                "hash": "07447890a7dcae9221f3ff429b7528100b0d3fcae49f50cbbff081a490ab2089",
+                "next_offset": -1,
+                "truncated": false
+              }
+            },
+            "errors": [],
+            "layout": {
+              "style": "obsidian",
+              "folders": {
+                "area": "Areas",
+                "board": "Boards",
+                "daily": "Daily",
+                "decision": "Decisions",
+                "entity": "Entities",
+                "idea": "Ideas",
+                "log": "Dev Logs",
+                "meeting": "Meetings",
+                "okr": "OKRs",
+                "organization": "Companies",
+                "person": "People",
+                "project": "Projects",
+                "raw": "raw",
+                "research": "Research",
+                "review": "Reviews",
+                "task": "Tasks",
+                "tool": "Tools"
+              }
+            },
+            "missing": [
+              "_CLAUDE.md"
+            ],
+            "timezone": "America/Argentina/Mendoza",
+            "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038"
+          }
+        }
+      }
+    },
+    {
+      "tool": "wiki_list_areas",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"result\":{\"folder\":\"Areas\",\"areas\":[],\"coverage\":{\"scanned\":13,\"excluded\":[\".llm-wiki: protected technical state\"],\"errors\":[],\"truncated\":false},\"diagnostics\":[],\"complete\":true}}"
+          }
+        ],
+        "structuredContent": {
+          "result": {
+            "folder": "Areas",
+            "areas": [],
+            "coverage": {
+              "scanned": 13,
+              "excluded": [
+                ".llm-wiki: protected technical state"
+              ],
+              "errors": [],
+              "truncated": false
+            },
+            "diagnostics": [],
+            "complete": true
+          }
+        }
+      }
+    },
+    {
+      "tool": "wiki_list_skills",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038"
+      },
+      "result": {
+        "response_summary": true,
+        "skill_count": 50,
+        "skills": [
+          {
+            "name": "llm-wiki",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-create-command",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-idea-discovery",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-notebooklm",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-architect",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-area",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-board",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-board-hygiene",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-brainstorm",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-calendar",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-capture",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-catchup",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-challenge",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-connect",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-daily",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-decide",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-distill",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-emerge",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-export",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-find",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-graduate",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-health",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-ingest",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-init",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-learn",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-log",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-merge",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-okr",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-panel",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-person",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-project",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-projects",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-recap",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-reconcile",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-recurring",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-reindex",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-retrieval-eval",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-review",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-save",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-synthesize",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-task",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-visualize",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-obsidian-world",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-podcast",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-research",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-research-deep",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-vault-deep-synthesis",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-x-pulse",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-x-read",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          },
+          {
+            "name": "wiki-youtube",
+            "source": "package",
+            "category": "Productivity",
+            "platforms": [
+              "macos"
+            ]
+          }
+        ]
+      },
+      "evidence_note": "Response inspected; bodies omitted from evidence to keep it bounded."
+    },
+    {
+      "tool": "wiki_search",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038",
+        "query": "aurora022",
+        "limit": 10
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"result\":{\"matches\":[],\"coverage\":{\"scanned\":13,\"excluded\":[\".llm-wiki: protected technical state\"],\"errors\":null,\"truncated\":false}}}"
+          }
+        ],
+        "structuredContent": {
+          "result": {
+            "matches": [],
+            "coverage": {
+              "scanned": 13,
+              "excluded": [
+                ".llm-wiki: protected technical state"
+              ],
+              "errors": null,
+              "truncated": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "wiki_save_note",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038",
+        "path": "Areas/Synthetic Research.md",
+        "content": "---\ndate: 2026-10-12\ntype: area\ntags:\n  - area\nai-first: true\n---\n# Synthetic Research\n\n## For future agent\nSynthetic area used only for Desktop MCP acceptance on 2026-10-12. Its purpose is to test complete area inventory with a Person template.\n\n## Purpose\nVerify synthetic research knowledge. Source: authorized acceptance test.\n\n## Related\n[[People/Synthetic Person]]\n",
+        "operation_id": "desktop-022-area"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"result\":{\"operation_id\":\"desktop-022-area\",\"status\":\"committed\",\"applied\":[\"Areas\",\"Areas/Synthetic Research.md\"],\"pending\":[],\"conflicts\":[],\"dry_run\":false}}"
+          }
+        ],
+        "structuredContent": {
+          "result": {
+            "operation_id": "desktop-022-area",
+            "status": "committed",
+            "applied": [
+              "Areas",
+              "Areas/Synthetic Research.md"
+            ],
+            "pending": [],
+            "conflicts": [],
+            "dry_run": false
+          }
+        }
+      }
+    },
+    {
+      "tool": "wiki_save_note",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038",
+        "path": "People/Synthetic Person.md",
+        "content": "---\ndate: \"2026-10-12\"\ntype: person\ntags:\n  - person\nai-first: true\nrole:\ncompany:\nrelationship_strength:\nlast_interaction: \"2026-10-12\"\nfollow_up_date:\ncontact_email:\nlocation:\n---\n\n# Synthetic Person\n\n## For future agent\n\nPerson note. Captures role, company, relationship context, what they care about, and how to help each other. Pull this before any interaction with this person or when reasoning about who knows what.\n\n## About\nSynthetic desktop acceptance marker: aurora022. Linked to [[Areas/Synthetic Research]].\n\n## What They Care About\n\n\n## How We Can Help Each Other\n\n\n## Notes\n\n\n---\n\n## Interactions\n\n```dataview\nLIST FROM \"Daily\"\nWHERE contains(file.outlinks, this.file.link)\nSORT date DESC\nLIMIT 15\n```\n",
+        "operation_id": "desktop-022-person"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"result\":{\"operation_id\":\"desktop-022-person\",\"status\":\"committed\",\"applied\":[\"People/Synthetic Person.md\"],\"pending\":[],\"conflicts\":[],\"dry_run\":false}}"
+          }
+        ],
+        "structuredContent": {
+          "result": {
+            "operation_id": "desktop-022-person",
+            "status": "committed",
+            "applied": [
+              "People/Synthetic Person.md"
+            ],
+            "pending": [],
+            "conflicts": [],
+            "dry_run": false
+          }
+        }
+      }
+    },
+    {
+      "tool": "wiki_vault_health",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038",
+        "date": "2026-10-12"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"result\":{\"findings\":[{\"rule\":\"COVERAGE\",\"severity\":\"info\",\"path\":\"\",\"line\":0,\"message\":\"scan coverage: scanned=15 excluded=1 errors=0 truncated=false\",\"related_paths\":null,\"needs_semantic_review\":false},{\"rule\":\"CONTEXT_SEMANTIC_REVIEW\",\"severity\":\"info\",\"path\":\"Areas/Synthetic Research.md\",\"line\":0,\"message\":\"check whether context states what, why and temporal caveat\",\"related_paths\":null,\"needs_semantic_review\":true},{\"rule\":\"CONTEXT_SEMANTIC_REVIEW\",\"severity\":\"info\",\"path\":\"People/Synthetic Person.md\",\"line\":0,\"message\":\"check whether context states what, why and temporal caveat\",\"related_paths\":null,\"needs_semantic_review\":true},{\"rule\":\"CONTEXT_SEMANTIC_REVIEW\",\"severity\":\"info\",\"path\":\"Reading Queue/_Queue.md\",\"line\":0,\"message\":\"check whether context states what, why and temporal caveat\",\"related_paths\":null,\"needs_semantic_review\":true},{\"rule\":\"ORPHAN\",\"severity\":\"info\",\"path\":\"Reading Queue/_Queue.md\",\"line\":0,\"message\":\"no incoming links\",\"related_paths\":null,\"needs_semantic_review\":false},{\"rule\":\"ORPHAN\",\"severity\":\"info\",\"path\":\"index.md\",\"line\":0,\"message\":\"no incoming links\",\"related_paths\":null,\"needs_semantic_review\":false},{\"rule\":\"ORPHAN\",\"severity\":\"info\",\"path\":\"log.md\",\"line\":0,\"message\":\"no incoming links\",\"related_paths\":null,\"needs_semantic_review\":false}],\"stats\":{\"scanned\":15,\"findings\":7,\"by_rule\":{\"CONTEXT_SEMANTIC_REVIEW\":3,\"COVERAGE\":1,\"ORPHAN\":3},\"by_severity\":{\"info\":7}},\"coverage\":{\"scanned\":15,\"excluded\":[\".llm-wiki: protected technical state\"],\"errors\":null,\"truncated\":false}}}"
+          }
+        ],
+        "structuredContent": {
+          "result": {
+            "findings": [
+              {
+                "rule": "COVERAGE",
+                "severity": "info",
+                "path": "",
+                "line": 0,
+                "message": "scan coverage: scanned=15 excluded=1 errors=0 truncated=false",
+                "related_paths": null,
+                "needs_semantic_review": false
+              },
+              {
+                "rule": "CONTEXT_SEMANTIC_REVIEW",
+                "severity": "info",
+                "path": "Areas/Synthetic Research.md",
+                "line": 0,
+                "message": "check whether context states what, why and temporal caveat",
+                "related_paths": null,
+                "needs_semantic_review": true
+              },
+              {
+                "rule": "CONTEXT_SEMANTIC_REVIEW",
+                "severity": "info",
+                "path": "People/Synthetic Person.md",
+                "line": 0,
+                "message": "check whether context states what, why and temporal caveat",
+                "related_paths": null,
+                "needs_semantic_review": true
+              },
+              {
+                "rule": "CONTEXT_SEMANTIC_REVIEW",
+                "severity": "info",
+                "path": "Reading Queue/_Queue.md",
+                "line": 0,
+                "message": "check whether context states what, why and temporal caveat",
+                "related_paths": null,
+                "needs_semantic_review": true
+              },
+              {
+                "rule": "ORPHAN",
+                "severity": "info",
+                "path": "Reading Queue/_Queue.md",
+                "line": 0,
+                "message": "no incoming links",
+                "related_paths": null,
+                "needs_semantic_review": false
+              },
+              {
+                "rule": "ORPHAN",
+                "severity": "info",
+                "path": "index.md",
+                "line": 0,
+                "message": "no incoming links",
+                "related_paths": null,
+                "needs_semantic_review": false
+              },
+              {
+                "rule": "ORPHAN",
+                "severity": "info",
+                "path": "log.md",
+                "line": 0,
+                "message": "no incoming links",
+                "related_paths": null,
+                "needs_semantic_review": false
+              }
+            ],
+            "stats": {
+              "scanned": 15,
+              "findings": 7,
+              "by_rule": {
+                "CONTEXT_SEMANTIC_REVIEW": 3,
+                "COVERAGE": 1,
+                "ORPHAN": 3
+              },
+              "by_severity": {
+                "info": 7
+              }
+            },
+            "coverage": {
+              "scanned": 15,
+              "excluded": [
+                ".llm-wiki: protected technical state"
+              ],
+              "errors": null,
+              "truncated": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "wiki_recover",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038",
+        "operation_id": "desktop-022-person",
+        "action": "inspect"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"result\":{\"operation_id\":\"desktop-022-person\",\"status\":\"committed\",\"applied\":[\"People/Synthetic Person.md\"],\"pending\":[],\"conflicts\":[],\"dry_run\":false}}"
+          }
+        ],
+        "structuredContent": {
+          "result": {
+            "operation_id": "desktop-022-person",
+            "status": "committed",
+            "applied": [
+              "People/Synthetic Person.md"
+            ],
+            "pending": [],
+            "conflicts": [],
+            "dry_run": false
+          }
+        }
+      }
+    },
+    {
+      "tool": "wiki_read_note",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038",
+        "path": "People/Synthetic Person.md"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"result\":{\"text\":\"---\\ndate: \\\"2026-10-12\\\"\\ntype: person\\ntags:\\n  - person\\nai-first: true\\nrole:\\ncompany:\\nrelationship_strength:\\nlast_interaction: \\\"2026-10-12\\\"\\nfollow_up_date:\\ncontact_email:\\nlocation:\\n---\\n\\n# Synthetic Person\\n\\n## For future agent\\n\\nPerson note. Captures role, company, relationship context, what they care about, and how to help each other. Pull this before any interaction with this person or when reasoning about who knows what.\\n\\n## About\\nSynthetic desktop acceptance marker: aurora022. Linked to [[Areas/Synthetic Research]].\\n\\n## What They Care About\\n\\n\\n## How We Can Help Each Other\\n\\n\\n## Notes\\n\\n\\n---\\n\\n## Interactions\\n\\n```dataview\\nLIST FROM \\\"Daily\\\"\\nWHERE contains(file.outlinks, this.file.link)\\nSORT date DESC\\nLIMIT 15\\n```\\n\",\"hash\":\"280874981b0e8b0195a6c996037ef9c9ad09b2cb461251d29a5fd53bf115fd47\",\"next_offset\":-1,\"truncated\":false}}"
+          }
+        ],
+        "structuredContent": {
+          "result": {
+            "text": "---\ndate: \"2026-10-12\"\ntype: person\ntags:\n  - person\nai-first: true\nrole:\ncompany:\nrelationship_strength:\nlast_interaction: \"2026-10-12\"\nfollow_up_date:\ncontact_email:\nlocation:\n---\n\n# Synthetic Person\n\n## For future agent\n\nPerson note. Captures role, company, relationship context, what they care about, and how to help each other. Pull this before any interaction with this person or when reasoning about who knows what.\n\n## About\nSynthetic desktop acceptance marker: aurora022. Linked to [[Areas/Synthetic Research]].\n\n## What They Care About\n\n\n## How We Can Help Each Other\n\n\n## Notes\n\n\n---\n\n## Interactions\n\n```dataview\nLIST FROM \"Daily\"\nWHERE contains(file.outlinks, this.file.link)\nSORT date DESC\nLIMIT 15\n```\n",
+            "hash": "280874981b0e8b0195a6c996037ef9c9ad09b2cb461251d29a5fd53bf115fd47",
+            "next_offset": -1,
+            "truncated": false
+          }
+        }
+      }
+    },
+    {
+      "tool": "wiki_list_areas",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"result\":{\"folder\":\"Areas\",\"areas\":[{\"path\":\"Areas/Synthetic Research.md\",\"name\":\"Synthetic Research\",\"hash\":\"764168906472f565061098424ad0f5ffb778a8ba43fcbf6a32b374fc17f276f8\",\"aliases\":[]}],\"coverage\":{\"scanned\":15,\"excluded\":[\".llm-wiki: protected technical state\"],\"errors\":[],\"truncated\":false},\"diagnostics\":[],\"complete\":true}}"
+          }
+        ],
+        "structuredContent": {
+          "result": {
+            "folder": "Areas",
+            "areas": [
+              {
+                "path": "Areas/Synthetic Research.md",
+                "name": "Synthetic Research",
+                "hash": "764168906472f565061098424ad0f5ffb778a8ba43fcbf6a32b374fc17f276f8",
+                "aliases": []
+              }
+            ],
+            "coverage": {
+              "scanned": 15,
+              "excluded": [
+                ".llm-wiki: protected technical state"
+              ],
+              "errors": [],
+              "truncated": false
+            },
+            "diagnostics": [],
+            "complete": true
+          }
+        }
+      }
+    },
+    {
+      "tool": "wiki_validate_note",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038",
+        "path": "People/Synthetic Person.md",
+        "date": "2026-10-12"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"result\":{\"findings\":[{\"rule\":\"COVERAGE\",\"severity\":\"info\",\"path\":\"\",\"line\":0,\"message\":\"scan coverage: scanned=15 excluded=1 errors=0 truncated=false\",\"related_paths\":null,\"needs_semantic_review\":false},{\"rule\":\"CONTEXT_SEMANTIC_REVIEW\",\"severity\":\"info\",\"path\":\"People/Synthetic Person.md\",\"line\":0,\"message\":\"check whether context states what, why and temporal caveat\",\"related_paths\":null,\"needs_semantic_review\":true}],\"stats\":{\"scanned\":15,\"findings\":2,\"by_rule\":{\"CONTEXT_SEMANTIC_REVIEW\":1,\"COVERAGE\":1},\"by_severity\":{\"info\":2}},\"coverage\":{\"scanned\":15,\"excluded\":[\".llm-wiki: protected technical state\"],\"errors\":null,\"truncated\":false}}}"
+          }
+        ],
+        "structuredContent": {
+          "result": {
+            "findings": [
+              {
+                "rule": "COVERAGE",
+                "severity": "info",
+                "path": "",
+                "line": 0,
+                "message": "scan coverage: scanned=15 excluded=1 errors=0 truncated=false",
+                "related_paths": null,
+                "needs_semantic_review": false
+              },
+              {
+                "rule": "CONTEXT_SEMANTIC_REVIEW",
+                "severity": "info",
+                "path": "People/Synthetic Person.md",
+                "line": 0,
+                "message": "check whether context states what, why and temporal caveat",
+                "related_paths": null,
+                "needs_semantic_review": true
+              }
+            ],
+            "stats": {
+              "scanned": 15,
+              "findings": 2,
+              "by_rule": {
+                "CONTEXT_SEMANTIC_REVIEW": 1,
+                "COVERAGE": 1
+              },
+              "by_severity": {
+                "info": 2
+              }
+            },
+            "coverage": {
+              "scanned": 15,
+              "excluded": [
+                ".llm-wiki: protected technical state"
+              ],
+              "errors": null,
+              "truncated": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "wiki_search",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038",
+        "query": "aurora022",
+        "limit": 10
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"result\":{\"matches\":[{\"path\":\"People/Synthetic Person.md\",\"snippet\":\"Synthetic desktop acceptance marker: aurora022. Linked to [[Areas/Synthetic Research]].\",\"line\":23,\"hash\":\"280874981b0e8b0195a6c996037ef9c9ad09b2cb461251d29a5fd53bf115fd47\",\"score\":1}],\"coverage\":{\"scanned\":15,\"excluded\":[\".llm-wiki: protected technical state\"],\"errors\":null,\"truncated\":false}}}"
+          }
+        ],
+        "structuredContent": {
+          "result": {
+            "matches": [
+              {
+                "path": "People/Synthetic Person.md",
+                "snippet": "Synthetic desktop acceptance marker: aurora022. Linked to [[Areas/Synthetic Research]].",
+                "line": 23,
+                "hash": "280874981b0e8b0195a6c996037ef9c9ad09b2cb461251d29a5fd53bf115fd47",
+                "score": 1
+              }
+            ],
+            "coverage": {
+              "scanned": 15,
+              "excluded": [
+                ".llm-wiki: protected technical state"
+              ],
+              "errors": null,
+              "truncated": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "tool": "wiki_read_note",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038",
+        "path": "Templates/Dev Log.md"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"result\":{\"text\":\"---\\ndate: \\\"{{date}}\\\"\\ntype: devlog\\ntags:\\n  - devlog\\nai-first: true\\nproject:\\njob:\\n---\\n\\n# Dev Log - {{date}}\\n\\n## For future agent\\n\\nEngineering log for this date. Captures what was worked on, problems solved, decisions made, and next steps. Pull this when reconstructing the chain of technical decisions on a project.\\n\\n## What I Worked On\\n{{content}}\\n\\n## Problems Solved\\n\\n\\n## Decisions Made\\n\\n\\n## Next Steps\\n- [ ]\\n\",\"hash\":\"40425231e3b0af323569f47d7283fe3761f981c3455de2feaab4ed8f42d6a8df\",\"next_offset\":-1,\"truncated\":false}}"
+          }
+        ],
+        "structuredContent": {
+          "result": {
+            "text": "---\ndate: \"{{date}}\"\ntype: devlog\ntags:\n  - devlog\nai-first: true\nproject:\njob:\n---\n\n# Dev Log - {{date}}\n\n## For future agent\n\nEngineering log for this date. Captures what was worked on, problems solved, decisions made, and next steps. Pull this when reconstructing the chain of technical decisions on a project.\n\n## What I Worked On\n{{content}}\n\n## Problems Solved\n\n\n## Decisions Made\n\n\n## Next Steps\n- [ ]\n",
+            "hash": "40425231e3b0af323569f47d7283fe3761f981c3455de2feaab4ed8f42d6a8df",
+            "next_offset": -1,
+            "truncated": false
+          }
+        }
+      }
+    },
+    {
+      "tool": "wiki_read_note",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038",
+        "path": "Templates/Daily Note.md"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"result\":{\"text\":\"---\\ndate: \\\"{{date}}\\\"\\ntype: daily\\ntags:\\n  - daily\\nai-first: true\\nmood:\\nenergy:\\n---\\n\\n# {{date}} - {{weekday}}\\n\\n## For future agent\\n\\nDaily note for this date. Captures what was worked on, who was met, decisions made, energy, and the day's intention. Pull this when reconstructing what happened on a given day.\\n\\n---\\n\\n## 🌅 Morning\\n\\n**Intention:** {{content}}\\n\\n**Grateful for:**\\n1.\\n2.\\n3.\\n\\n---\\n\\n## 🎯 Today's Focus\\n\\n### 🔴 #1 -\\n\\n### 🟡 #2 -\\n\\n### 🟢 #3 -\\n\\n---\\n\\n## 💼 Work Log\\n\\n\\n\\n---\\n\\n## 🏠 Personal\\n\\n\\n\\n---\\n\\n## ✅ Habits\\n\\n- [ ] Exercised\\n- [ ] Read/learned something\\n- [ ] Reached out to someone\\n\\n---\\n\\n## 🌙 Evening Review\\n\\n**What went well:**\\n\\n**What didn't:**\\n\\n**Tomorrow's #1 priority:**\\n\",\"hash\":\"67e93adb1ff7452b532bc730e01199f413b472494e7f731a51fa101bc21fb8fe\",\"next_offset\":-1,\"truncated\":false}}"
+          }
+        ],
+        "structuredContent": {
+          "result": {
+            "text": "---\ndate: \"{{date}}\"\ntype: daily\ntags:\n  - daily\nai-first: true\nmood:\nenergy:\n---\n\n# {{date}} - {{weekday}}\n\n## For future agent\n\nDaily note for this date. Captures what was worked on, who was met, decisions made, energy, and the day's intention. Pull this when reconstructing what happened on a given day.\n\n---\n\n## 🌅 Morning\n\n**Intention:** {{content}}\n\n**Grateful for:**\n1.\n2.\n3.\n\n---\n\n## 🎯 Today's Focus\n\n### 🔴 #1 -\n\n### 🟡 #2 -\n\n### 🟢 #3 -\n\n---\n\n## 💼 Work Log\n\n\n\n---\n\n## 🏠 Personal\n\n\n\n---\n\n## ✅ Habits\n\n- [ ] Exercised\n- [ ] Read/learned something\n- [ ] Reached out to someone\n\n---\n\n## 🌙 Evening Review\n\n**What went well:**\n\n**What didn't:**\n\n**Tomorrow's #1 priority:**\n",
+            "hash": "67e93adb1ff7452b532bc730e01199f413b472494e7f731a51fa101bc21fb8fe",
+            "next_offset": -1,
+            "truncated": false
+          }
+        }
+      }
+    },
+    {
+      "tool": "wiki_read_note",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038",
+        "path": "Templates/Hypothesis.md"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"result\":{\"text\":\"---\\ndate: \\\"{{date}}\\\"\\ntype: hypothesis\\ntags:\\n  - hypothesis\\nai-first: true\\nstatus: open\\nconfidence: medium\\n---\\n\\n# {{title}}\\n\\n## For future agent\\n\\nHypothesis note. Captures a testable statement, predictions, evidence for and against, and a verdict. Pull this when reasoning about open questions or when new evidence arrives that could update an open hypothesis.\\n\\n## Statement\\n\\n## Predictions\\n\\n## Evidence For\\n\\n## Evidence Against\\n\\n## Verdict\\n\",\"hash\":\"c63645f911fa32c72b29617c5f5ad69233f92fd7b247063110f4b500035f326f\",\"next_offset\":-1,\"truncated\":false}}"
+          }
+        ],
+        "structuredContent": {
+          "result": {
+            "text": "---\ndate: \"{{date}}\"\ntype: hypothesis\ntags:\n  - hypothesis\nai-first: true\nstatus: open\nconfidence: medium\n---\n\n# {{title}}\n\n## For future agent\n\nHypothesis note. Captures a testable statement, predictions, evidence for and against, and a verdict. Pull this when reasoning about open questions or when new evidence arrives that could update an open hypothesis.\n\n## Statement\n\n## Predictions\n\n## Evidence For\n\n## Evidence Against\n\n## Verdict\n",
+            "hash": "c63645f911fa32c72b29617c5f5ad69233f92fd7b247063110f4b500035f326f",
+            "next_offset": -1,
+            "truncated": false
+          }
+        }
+      }
+    },
+    {
+      "tool": "wiki_read_note",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038",
+        "path": "Templates/Literature Note.md"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"result\":{\"text\":\"---\\ndate: \\\"{{date}}\\\"\\ntype: literature\\ntags:\\n  - literature\\nai-first: true\\nsource: \\\"{{source}}\\\"\\n---\\n\\n# {{title}}\\n\\n## For future agent\\n\\nLiterature note. Distillation of one source's key claims, methodology, critique, and connections to other ideas. Pull this when reasoning about what one specific source argues, separate from the broader landscape.\\n\\n## Source\\n[[{{source}}]]\\n\\n## Key Claims\\n\\n## Methodology\\n\\n## Critique\\n\\n## Connections\\n\",\"hash\":\"fb9daad8088c947492946fbbc16020ac0d6903eee481d93c5f68a16e85b75eb6\",\"next_offset\":-1,\"truncated\":false}}"
+          }
+        ],
+        "structuredContent": {
+          "result": {
+            "text": "---\ndate: \"{{date}}\"\ntype: literature\ntags:\n  - literature\nai-first: true\nsource: \"{{source}}\"\n---\n\n# {{title}}\n\n## For future agent\n\nLiterature note. Distillation of one source's key claims, methodology, critique, and connections to other ideas. Pull this when reasoning about what one specific source argues, separate from the broader landscape.\n\n## Source\n[[{{source}}]]\n\n## Key Claims\n\n## Methodology\n\n## Critique\n\n## Connections\n",
+            "hash": "fb9daad8088c947492946fbbc16020ac0d6903eee481d93c5f68a16e85b75eb6",
+            "next_offset": -1,
+            "truncated": false
+          }
+        }
+      }
+    },
+    {
+      "tool": "wiki_read_note",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038",
+        "path": "Templates/Project.md"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"result\":{\"text\":\"---\\ndate: \\\"{{date}}\\\"\\ntype: project\\ntags:\\n  - project\\nai-first: true\\nstatus: active\\njob:\\n---\\n\\n# {{title}}\\n\\n## For future agent\\n\\nProject note. Captures overview, architecture, key decisions, and related tasks. Pull this when reasoning about the project's direction, prior decisions, or current scope.\\n\\n## Overview\\n{{content}}\\n\\n## Architecture\\n\\n\\n## Key Decisions\\n\\n\\n## Links\\n\\n\\n## Related Tasks\\n\\n```dataview\\nTABLE WITHOUT ID file.link AS \\\"Task\\\", status AS \\\"Status\\\"\\nFROM \\\"Tasks\\\"\\nWHERE contains(file.outlinks, this.file.link)\\nSORT date DESC\\n```\\n\\n## Recent Activity\\n\\n```dataview\\nLIST FROM \\\"Daily\\\"\\nWHERE contains(file.outlinks, this.file.link)\\nSORT date DESC\\nLIMIT 5\\n```\\n\",\"hash\":\"c5fbb8a6aa6e6e25ca515de04ae0ef456237e6175d1bffbf8d4ccaf2b457673c\",\"next_offset\":-1,\"truncated\":false}}"
+          }
+        ],
+        "structuredContent": {
+          "result": {
+            "text": "---\ndate: \"{{date}}\"\ntype: project\ntags:\n  - project\nai-first: true\nstatus: active\njob:\n---\n\n# {{title}}\n\n## For future agent\n\nProject note. Captures overview, architecture, key decisions, and related tasks. Pull this when reasoning about the project's direction, prior decisions, or current scope.\n\n## Overview\n{{content}}\n\n## Architecture\n\n\n## Key Decisions\n\n\n## Links\n\n\n## Related Tasks\n\n```dataview\nTABLE WITHOUT ID file.link AS \"Task\", status AS \"Status\"\nFROM \"Tasks\"\nWHERE contains(file.outlinks, this.file.link)\nSORT date DESC\n```\n\n## Recent Activity\n\n```dataview\nLIST FROM \"Daily\"\nWHERE contains(file.outlinks, this.file.link)\nSORT date DESC\nLIMIT 5\n```\n",
+            "hash": "c5fbb8a6aa6e6e25ca515de04ae0ef456237e6175d1bffbf8d4ccaf2b457673c",
+            "next_offset": -1,
+            "truncated": false
+          }
+        }
+      }
+    },
+    {
+      "tool": "wiki_read_note",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038",
+        "path": "Templates/Person.md"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"result\":{\"text\":\"---\\ndate: \\\"{{date}}\\\"\\ntype: person\\ntags:\\n  - person\\nai-first: true\\nrole:\\ncompany:\\nrelationship_strength:\\nlast_interaction: \\\"{{date}}\\\"\\nfollow_up_date:\\ncontact_email:\\nlocation:\\n---\\n\\n# {{title}}\\n\\n## For future agent\\n\\nPerson note. Captures role, company, relationship context, what they care about, and how to help each other. Pull this before any interaction with this person or when reasoning about who knows what.\\n\\n## About\\n{{content}}\\n\\n## What They Care About\\n\\n\\n## How We Can Help Each Other\\n\\n\\n## Notes\\n\\n\\n---\\n\\n## Interactions\\n\\n```dataview\\nLIST FROM \\\"Daily\\\"\\nWHERE contains(file.outlinks, this.file.link)\\nSORT date DESC\\nLIMIT 15\\n```\\n\",\"hash\":\"d2c12ad3c71ba2a3615e84036a127013a043ad75a9401170a824fe0fff78af5c\",\"next_offset\":-1,\"truncated\":false}}"
+          }
+        ],
+        "structuredContent": {
+          "result": {
+            "text": "---\ndate: \"{{date}}\"\ntype: person\ntags:\n  - person\nai-first: true\nrole:\ncompany:\nrelationship_strength:\nlast_interaction: \"{{date}}\"\nfollow_up_date:\ncontact_email:\nlocation:\n---\n\n# {{title}}\n\n## For future agent\n\nPerson note. Captures role, company, relationship context, what they care about, and how to help each other. Pull this before any interaction with this person or when reasoning about who knows what.\n\n## About\n{{content}}\n\n## What They Care About\n\n\n## How We Can Help Each Other\n\n\n## Notes\n\n\n---\n\n## Interactions\n\n```dataview\nLIST FROM \"Daily\"\nWHERE contains(file.outlinks, this.file.link)\nSORT date DESC\nLIMIT 15\n```\n",
+            "hash": "d2c12ad3c71ba2a3615e84036a127013a043ad75a9401170a824fe0fff78af5c",
+            "next_offset": -1,
+            "truncated": false
+          }
+        }
+      }
+    },
+    {
+      "tool": "wiki_read_note",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038",
+        "path": "Templates/Source.md"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"result\":{\"text\":\"---\\ndate: \\\"{{date}}\\\"\\ntype: source\\ntags:\\n  - source\\nai-first: true\\nsource_kind:\\nauthors:\\nyear:\\nurl:\\n---\\n\\n# {{title}}\\n\\n## For future agent\\n\\nSource note (book, paper, podcast, video, article). Captures citation, abstract or summary, and raw notes. `source_kind` distinguishes the form (book/paper/podcast/etc.). Pull this when reasoning about what's been read on a topic.\\n\\n## Citation\\n\\n## Abstract / Summary\\n\\n## Raw Notes\\n\",\"hash\":\"c624dd1d505162f2e6f5dd699a18ad624f28cbf07ac2623b07cee5e45da61f03\",\"next_offset\":-1,\"truncated\":false}}"
+          }
+        ],
+        "structuredContent": {
+          "result": {
+            "text": "---\ndate: \"{{date}}\"\ntype: source\ntags:\n  - source\nai-first: true\nsource_kind:\nauthors:\nyear:\nurl:\n---\n\n# {{title}}\n\n## For future agent\n\nSource note (book, paper, podcast, video, article). Captures citation, abstract or summary, and raw notes. `source_kind` distinguishes the form (book/paper/podcast/etc.). Pull this when reasoning about what's been read on a topic.\n\n## Citation\n\n## Abstract / Summary\n\n## Raw Notes\n",
+            "hash": "c624dd1d505162f2e6f5dd699a18ad624f28cbf07ac2623b07cee5e45da61f03",
+            "next_offset": -1,
+            "truncated": false
+          }
+        }
+      }
+    },
+    {
+      "tool": "wiki_read_note",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038",
+        "path": "Templates/Task.md"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"result\":{\"text\":\"---\\ndate: \\\"{{date}}\\\"\\ntype: task\\ntags:\\n  - task\\nai-first: true\\nstatus: in-progress\\nproject:\\njob:\\nrequested_by:\\ndue:\\n---\\n\\n# {{title}}\\n\\n## For future agent\\n\\nTask note. Captures requirements, implementation notes, and what was delivered. Pull this when reconstructing why a piece of work was done or what was actually shipped vs requested.\\n\\n## Requirements\\n{{content}}\\n\\n## Implementation Notes\\n\\n\\n## Delivered\\n\\n## Related\\n\",\"hash\":\"e1d337e26ba4a3df430494817c0ee741816f44b34ef3008677757837b12a60f1\",\"next_offset\":-1,\"truncated\":false}}"
+          }
+        ],
+        "structuredContent": {
+          "result": {
+            "text": "---\ndate: \"{{date}}\"\ntype: task\ntags:\n  - task\nai-first: true\nstatus: in-progress\nproject:\njob:\nrequested_by:\ndue:\n---\n\n# {{title}}\n\n## For future agent\n\nTask note. Captures requirements, implementation notes, and what was delivered. Pull this when reconstructing why a piece of work was done or what was actually shipped vs requested.\n\n## Requirements\n{{content}}\n\n## Implementation Notes\n\n\n## Delivered\n\n## Related\n",
+            "hash": "e1d337e26ba4a3df430494817c0ee741816f44b34ef3008677757837b12a60f1",
+            "next_offset": -1,
+            "truncated": false
+          }
+        }
+      }
+    },
+    {
+      "tool": "wiki_bootstrap",
+      "args": {
+        "vault_id": "7d939e77-438e-4b65-ad45-2ae39aa6c038",
+        "owner": "Synthetic acceptance",
+        "preset": "researcher",
+        "style": "obsidian",
+        "dry_run": true,
+        "operation_id": "desktop-022-repeat"
+      },
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"result\":{\"applied\":[],\"pending\":[],\"status\":\"unchanged\"}}"
+          }
+        ],
+        "structuredContent": {
+          "result": {
+            "applied": [],
+            "pending": [],
+            "status": "unchanged"
+          }
+        }
+      }
+    }
+  ],
+  "corroboration": {
+    "installed_manifest_version": "0.2.2",
+    "displayName": "LLM Wiki",
+    "launch": {
+      "command": "./bin/llm-wiki",
+      "args": [
+        "serve"
+      ],
+      "cwd": "./",
+      "manifests": [
+        ".mcp.json",
+        "mcp.json"
+      ]
+    },
+    "build_version": "0.2.2",
+    "source_commit": "54aad93e1f45d917083ccf3831204cbcc6b1c680",
+    "source_dirty": false,
+    "binary_sha256": "df3d64df0813c780487b6d4b760bb132705efae8773d8c08d0b0fe9f12d452d2",
+    "binary_checksum_matches": true,
+    "binary_architectures": [
+      "arm64",
+      "x86_64"
+    ],
+    "direct_running_process_path_observed": false,
+    "mcp_version_returned_by_tested_tools": false,
+    "verified_hashes": {
+      ".codex-plugin/plugin.json": true,
+      ".mcp.json": true,
+      "mcp.json": true,
+      "build.json": true,
+      "bin/llm-wiki": true
+    }
+  },
+  "checks": {
+    "tool_calls_real": true,
+    "unique_called_tools": 12,
+    "call_count": 28,
+    "bootstrap": {
+      "preset": "researcher",
+      "layout": "obsidian",
+      "committed": true,
+      "repeat": "unchanged"
+    },
+    "catalog_skill_count": 50,
+    "person_readback_exact": true,
+    "search_marker": "aurora022",
+    "area_inventory_complete": true,
+    "area_count": 1,
+    "health": {
+      "scanned": 15,
+      "errors": 0,
+      "truncated": false,
+      "info": 7,
+      "warnings": 0
+    },
+    "template_yaml": {
+      "count": 8,
+      "valid": 8,
+      "parser": "Ruby Psych.safe_load",
+      "supplement": "template-yaml.json",
+      "results": [
+        {
+          "path": "Templates/Daily Note.md",
+          "valid_yaml": true,
+          "frontmatter": {
+            "date": "{{date}}",
+            "type": "daily",
+            "tags": [
+              "daily"
+            ],
+            "ai-first": true,
+            "mood": null,
+            "energy": null
+          }
+        },
+        {
+          "path": "Templates/Dev Log.md",
+          "valid_yaml": true,
+          "frontmatter": {
+            "date": "{{date}}",
+            "type": "devlog",
+            "tags": [
+              "devlog"
+            ],
+            "ai-first": true,
+            "project": null,
+            "job": null
+          }
+        },
+        {
+          "path": "Templates/Hypothesis.md",
+          "valid_yaml": true,
+          "frontmatter": {
+            "date": "{{date}}",
+            "type": "hypothesis",
+            "tags": [
+              "hypothesis"
+            ],
+            "ai-first": true,
+            "status": "open",
+            "confidence": "medium"
+          }
+        },
+        {
+          "path": "Templates/Literature Note.md",
+          "valid_yaml": true,
+          "frontmatter": {
+            "date": "{{date}}",
+            "type": "literature",
+            "tags": [
+              "literature"
+            ],
+            "ai-first": true,
+            "source": "{{source}}"
+          }
+        },
+        {
+          "path": "Templates/Person.md",
+          "valid_yaml": true,
+          "frontmatter": {
+            "date": "{{date}}",
+            "type": "person",
+            "tags": [
+              "person"
+            ],
+            "ai-first": true,
+            "role": null,
+            "company": null,
+            "relationship_strength": null,
+            "last_interaction": "{{date}}",
+            "follow_up_date": null,
+            "contact_email": null,
+            "location": null
+          }
+        },
+        {
+          "path": "Templates/Project.md",
+          "valid_yaml": true,
+          "frontmatter": {
+            "date": "{{date}}",
+            "type": "project",
+            "tags": [
+              "project"
+            ],
+            "ai-first": true,
+            "status": "active",
+            "job": null
+          }
+        },
+        {
+          "path": "Templates/Source.md",
+          "valid_yaml": true,
+          "frontmatter": {
+            "date": "{{date}}",
+            "type": "source",
+            "tags": [
+              "source"
+            ],
+            "ai-first": true,
+            "source_kind": null,
+            "authors": null,
+            "year": null,
+            "url": null
+          }
+        },
+        {
+          "path": "Templates/Task.md",
+          "valid_yaml": true,
+          "frontmatter": {
+            "date": "{{date}}",
+            "type": "task",
+            "tags": [
+              "task"
+            ],
+            "ai-first": true,
+            "status": "in-progress",
+            "project": null,
+            "job": null,
+            "requested_by": null,
+            "due": null
+          }
+        }
+      ]
+    },
+    "human_vault_selected": false,
+    "repository_modified": false
+  },
+  "limitations": [
+    "Installed launch target, build metadata and checksum corroborate 0.2.2; tested wiki tool replies do not expose runtime/serverInfo version.",
+    "Process inspection via ps was denied; exact running executable path was not independently observed.",
+    "MCP does not expose state-dir selection. Only project association, vault and per-vault journals are synthetic and isolated; server registry uses configured shared default.",
+    "Bootstrap covered researcher/obsidian only; no Obsidian UI, Dataview or Bases rendering tested.",
+    "Recovery inspect on committed operation tested; forced crash, resume and rollback not exercised.",
+    "Initial empty-vault context reported missing .llm-wiki parent; after bootstrap errors=[] and _CLAUDE.md is optional missing.",
+    "CLI --version was not supported/verified: attempted invocation hit sandbox-denied default registry lock; no CLI result used as MCP evidence.",
+    "Python yaml unavailable; independent template YAML validation succeeded with Ruby Psych."
+  ],
+  "skills_read": [
+    "llm-wiki",
+    "wiki-obsidian-init",
+    "wiki-obsidian-save",
+    "wiki-obsidian-area",
+    "wiki-obsidian-health"
+  ],
+  "supplemental_readonly_checks": [
+    "Installed .codex-plugin/plugin.json, .mcp.json, mcp.json, build.json, checksums.json; binary SHA-256 and file architecture.",
+    "Template YAML independently parsed after all 8 templates were read via MCP."
+  ],
+  "provenance": {
+    "source_evidence_sha256": "0b3e426108ed1a47110c0ddbb33873435394a8ec5929fe9c0fc3b5098e6dc15a",
+    "chat_id": "01a1324e-f5ba-7502-b9b1-18c405235c0d",
+    "normalization": "Synthetic temporary root replaced by <synthetic-root> in arguments, structured results and embedded JSON text. No other call/result content changed.",
+    "scope": "Recorded real Desktop calls; supplemental file/checksum/YAML checks are not MCP calls."
+  }
+}

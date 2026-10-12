@@ -39,7 +39,8 @@
     "packaged_MCP_all_presets": "passed",
     "packaged_server_version": "passed",
     "installed_byte_comparison": "passed; 71 of 71 files identical",
-    "installed_packaged_MCP": "passed; TestPackaged suite against installed 0.2.2"
+    "installed_packaged_MCP": "passed; TestPackaged suite against installed 0.2.2",
+    "new_Desktop_chat_MCP": "passed; 30 tools discovered, 28 real calls to 12 tools"
   },
   "review": {
     "base": "c84a40eef45178f57ccca3ff5a9e194b8bd51070",
@@ -71,7 +72,6 @@
   "source_commit": "54aad93e1f45d917083ccf3831204cbcc6b1c680",
   "source_dirty": false,
   "pending": [
-    "fresh Desktop chat schema reload",
     "Intel execution",
     "Obsidian/Dataview rendering and external calendar",
     "EXI-002 and EXI-003 user outcomes"
@@ -87,5 +87,35 @@
     ],
     "signature": "ad-hoc; codesign strict all-architectures passed",
     "intel_runtime_tested": false
+  },
+  "Desktop_acceptance": {
+    "version": "0.2.2 installed package corroborated by manifests, build and checksums",
+    "date": "2026-10-12",
+    "report": "tests/acceptance/desktop-0.2.2.json",
+    "chat_id": "01a1324e-f5ba-7502-b9b1-18c405235c0d",
+    "new_chat_loading": "passed",
+    "tool_schema_discovery": "passed; 30 tools",
+    "calls": 28,
+    "unique_called_tools": 12,
+    "style": "obsidian",
+    "preset": "researcher",
+    "bootstrap_idempotent": true,
+    "recoverable_write_read_search": "passed",
+    "area_inventory_complete": true,
+    "template_yaml_valid": 8,
+    "health": {
+      "scanned": 15,
+      "errors": 0,
+      "truncated": false,
+      "info": 7,
+      "warnings": 0
+    },
+    "version_returned_by_MCP_tools": false,
+    "direct_running_process_path_observed": false,
+    "shared_global_registry": true,
+    "existing_chat_refresh_tested": false,
+    "two_chat_continuity_tested": false,
+    "forced_crash_recovery_tested": false,
+    "scope": "Closes fresh Desktop chat schema reload and tested MCP flow only; historical two-chat matrix remains separate."
   }
 }

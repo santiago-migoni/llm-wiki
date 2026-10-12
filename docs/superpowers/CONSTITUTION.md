@@ -1,7 +1,7 @@
 ---
 title: Constitución de LLM Wiki
 status: approved
-version: v005
+version: v006
 responsible: Usuario promotor del proyecto
 created_at: "2026-10-08"
 updated_at: "2026-10-12"
@@ -13,7 +13,7 @@ approval_reference: "D-005 (dirección sin cambios); D-006 (nombre y referencia)
 
 Entrega relacionada: **v0.2.2**; runtime/manifiestos `0.2.2`.
 Nombre visible **LLM Wiki**; identificador técnico `llm-wiki` conservado.
-[Changelog](../../CHANGELOG.md), [informe 0.2.2](../../tests/acceptance/release-0.2.2.json) y [aceptación Desktop](evidence/2026-10-10-desktop-areas.md).
+[Changelog](../../CHANGELOG.md), [informe 0.2.2](../../tests/acceptance/release-0.2.2.json) y [verificación Desktop 0.2.2](evidence/2026-10-12-desktop-0.2.2.md).
 
 ## Misión
 
@@ -219,3 +219,8 @@ el identificador técnico sigue siendo `llm-wiki`. El registro D-006 conserva el
 nombre aprobado originalmente como antecedente histórico. Propósito, principios
 y dirección aprobada sin cambios; la corrección de siete problemas de plantillas
 y la actualización del nombre no acreditan resultados de usuario pendientes.
+
+La [verificación Desktop 0.2.2](evidence/2026-10-12-desktop-0.2.2.md) registra
+carga de esquemas y flujo MCP en un chat nuevo. Cierra ese pendiente operativo
+con alcance sintético; no modifica principios, decisiones aprobadas ni acredita
+paridad funcional, otras modalidades o resultados de usuario todavía pendientes.
