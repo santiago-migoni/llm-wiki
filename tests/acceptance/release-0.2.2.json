@@ -2,7 +2,7 @@
   "version": "0.2.2",
   "display_name": "LLM Wiki",
   "date": "2026-10-12",
-  "status": "source_prepared",
+  "status": "package_verified",
   "installed": false,
   "published": false,
   "git_tag": "v0.2.2",
@@ -34,16 +34,16 @@
   },
   "tests": {
     "focused_runtime": "passed",
-    "release_runtime_race": "pending",
-    "release_vet": "pending",
-    "packaged_MCP_all_presets": "pending",
-    "packaged_server_version": "pending",
+    "release_runtime_race": "passed",
+    "release_vet": "passed",
+    "packaged_MCP_all_presets": "passed",
+    "packaged_server_version": "passed",
     "installed_byte_comparison": "pending"
   },
   "review": {
     "base": "c84a40eef45178f57ccca3ff5a9e194b8bd51070",
     "fresh_origin_main": true,
-    "independent_code_and_package_review": "completed for corrections",
+    "independent_code_and_package_review": "completed; 0.2.2 package integrity approved",
     "local_diff_review": "completed against freshly fetched origin/main",
     "external_codex_review": "not run; automatic permission review rejected potential transmission to unidentified external service"
   },
@@ -58,14 +58,25 @@
     "github_release": false,
     "local_installation": false
   },
-  "source_commit": null,
-  "source_dirty": null,
+  "source_commit": "54aad93e1f45d917083ccf3831204cbcc6b1c680",
+  "source_dirty": false,
   "pending": [
-    "release package verification",
     "publication and local installation",
     "fresh Desktop chat schema reload",
     "Intel execution",
     "Obsidian/Dataview rendering and external calendar",
     "EXI-002 and EXI-003 user outcomes"
-  ]
+  ],
+  "package": {
+    "binary_sha256": "df3d64df0813c780487b6d4b760bb132705efae8773d8c08d0b0fe9f12d452d2",
+    "source_tree_sha256": "64f3f5fc1168889b2de13f461a4d0eae0019c2fa47dd3726fdfbf18322423f39",
+    "checksums_verified": 70,
+    "source_files_verified": 61,
+    "architectures": [
+      "arm64",
+      "amd64"
+    ],
+    "signature": "ad-hoc; codesign strict all-architectures passed",
+    "intel_runtime_tested": false
+  }
 }

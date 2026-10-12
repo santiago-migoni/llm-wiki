@@ -98,3 +98,7 @@ autorizado; no debe reutilizar esta huella después de modificar fuentes.
 
 Pendientes deliberados: instalación, publicación, ejecución Intel y renderizado
 Obsidian/Dataview. Apple Silicon y protocolo MCP del paquete sí se ejecutaron.
+
+## Paquete de release 0.2.2
+
+La reconstrucción posterior usa el commit limpio `54aad93e1f45d917083ccf3831204cbcc6b1c680`, incorpora el nombre visible LLM Wiki y supera la suite con carreras, vet y los ocho escenarios MCP del paquete. La procedencia, integridad y resultados de publicación e instalación se registran en [release-0.2.2.json](../../../tests/acceptance/release-0.2.2.json). Las cifras anteriores corresponden al artefacto intermedio y se conservan como evidencia histórica.
