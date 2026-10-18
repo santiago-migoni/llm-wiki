@@ -70,7 +70,7 @@ func (v *Vault) PlanBootstrap(spec BootstrapSpec) ([]Change, error) {
 	}
 	dirs := []string{".llm-wiki/workflows", "raw", "Logs"}
 	table := "## Folder Map\n\n| Type | Folder |\n| --- | --- |\n"
-	home := "# " + spec.Name + " — " + spec.Preset + "\n\n> For future agent: navigation dashboard for the selected preset; query notes through Codex.\n\n"
+	home := "# " + spec.Name + " — " + spec.Preset + "\n\n> For future agent: navigation dashboard for the selected preset; query notes through Claude.\n\n"
 	for _, folder := range p.folders {
 		resolved := bootstrapFolder(folder, spec.Style)
 		dirs = append(dirs, resolved)

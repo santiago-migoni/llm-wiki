@@ -189,7 +189,7 @@ func TestLogMigrationCollisionAndIdempotency(t *testing.T) {
 	}
 }
 
-func TestBootstrapUsesPinnedPresetTemplatesAndCodexPlaceholders(t *testing.T) {
+func TestBootstrapUsesPinnedPresetTemplatesAndClaudePlaceholders(t *testing.T) {
 	v, e := OpenWithState(t.TempDir(), t.TempDir())
 	if e != nil {
 		t.Fatal(e)
@@ -210,6 +210,19 @@ func TestBootstrapUsesPinnedPresetTemplatesAndCodexPlaceholders(t *testing.T) {
 	}
 	if strings.Contains(content, "<%") {
 		t.Fatal("requires Templater runtime")
+	}
+	dashboards := 0
+	for _, change := range changes {
+		if !strings.Contains(change.Content, "navigation dashboard") {
+			continue
+		}
+		dashboards++
+		if !strings.Contains(change.Content, "query notes through Claude.") || strings.Contains(change.Content, "Codex") {
+			t.Fatalf("generated dashboard names the wrong host: %s", change.Path)
+		}
+	}
+	if dashboards == 0 {
+		t.Fatal("no generated dashboard checked")
 	}
 }
 func TestInitPreservesManualIndexAndLogHumanSections(t *testing.T) {
