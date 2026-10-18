@@ -7,6 +7,6 @@
   "intel_runtime_tested": false,
   "runtime_dependencies": [],
   "sdk": "github.com/modelcontextprotocol/go-sdk@v1.8.0",
-  "source_commit": "ec7d4a2ddbbb87750fc181c7e11e7b0c7b16c105",
+  "source_commit": "ac88eaadd4721b84f8c18a6d9db11c94e6a180ee",
   "source_dirty": false
 }
