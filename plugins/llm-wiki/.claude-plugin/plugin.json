@@ -1,0 +1,24 @@
+{
+  "name": "llm-wiki",
+  "version": "0.2.2",
+  "description": "Knowledge workflows in Claude with local Markdown, recoverable writes and explicit capability gaps.",
+  "author": {
+    "name": "llm-wiki contributors"
+  },
+  "license": "MIT",
+  "keywords": [
+    "markdown",
+    "obsidian",
+    "knowledge-base",
+    "mcp"
+  ],
+  "mcpServers": {
+    "llm-wiki": {
+      "type": "stdio",
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/llm-wiki",
+      "args": [
+        "serve"
+      ]
+    }
+  }
+}

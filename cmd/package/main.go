@@ -42,14 +42,14 @@ func run() error {
 	if e = packaging.CopyAssets(filepath.Join(root, "plugins/llm-wiki"), plugin); e != nil {
 		return e
 	}
-	if e = os.MkdirAll(filepath.Join(dest, ".agents/plugins"), 0755); e != nil {
+	if e = os.MkdirAll(filepath.Join(dest, ".claude-plugin"), 0755); e != nil {
 		return e
 	}
-	market, e := os.ReadFile(filepath.Join(root, ".agents/plugins/marketplace.json"))
+	market, e := os.ReadFile(filepath.Join(root, ".claude-plugin/marketplace.json"))
 	if e != nil {
 		return e
 	}
-	if e = os.WriteFile(filepath.Join(dest, ".agents/plugins/marketplace.json"), market, 0644); e != nil {
+	if e = os.WriteFile(filepath.Join(dest, ".claude-plugin/marketplace.json"), market, 0644); e != nil {
 		return e
 	}
 	stage, e := os.MkdirTemp("", "llm-wiki-build-")
@@ -88,11 +88,19 @@ func run() error {
 	if e != nil {
 		return e
 	}
-	metadata := map[string]any{"go": runtime.Version(), "source_commit": strings.TrimSpace(string(revision)), "architectures": []string{"arm64", "amd64"}, "intel_runtime_tested": false, "sdk": "github.com/modelcontextprotocol/go-sdk@v1.8.0", "runtime_dependencies": []string{}}
+	status, e := exec.Command("git", "-C", root, "status", "--porcelain").Output()
+	if e != nil {
+		return e
+	}
+	// A dirty tree means the binary may come from sources absent at source_commit.
+	metadata := map[string]any{"go": runtime.Version(), "source_commit": strings.TrimSpace(string(revision)), "source_dirty": len(strings.TrimSpace(string(status))) > 0, "architectures": []string{"arm64", "amd64"}, "intel_runtime_tested": false, "sdk": "github.com/modelcontextprotocol/go-sdk@v1.8.0", "runtime_dependencies": []string{}}
 	if e = writeJSON(filepath.Join(plugin, "build.json"), metadata); e != nil {
 		return e
 	}
 	if e = packaging.Validate(plugin); e != nil {
+		return e
+	}
+	if e = packaging.ValidateMarketplace(dest); e != nil {
 		return e
 	}
 	sums, e := packaging.Checksums(plugin)

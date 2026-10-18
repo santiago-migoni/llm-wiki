@@ -2,6 +2,24 @@
 
 Registro de cambios del plugin LLM Wiki. La versión inicial contiene capacidades cuya validación sigue pendiente.
 
+## Sin publicar — migración a Claude
+
+### Cambios
+
+- El plugin se distribuye para Claude Desktop: `.claude-plugin/plugin.json` y
+  `.claude-plugin/marketplace.json`. El servidor MCP usa
+  `${CLAUDE_PLUGIN_ROOT}/bin/llm-wiki serve`.
+- Se retiran los manifiestos, el marketplace y la configuración de Codex
+  (`.codex-plugin/`, `.mcp.json`, `mcp.json`, `plugin.json` raíz, `.agents/` y `.codex/`).
+- El empaquetador valida la nueva ruta de lanzamiento y la coherencia entre
+  el catálogo y el manifiesto del plugin.
+- Las skills y referencias nombran a Claude como host.
+
+### Sin cambios de runtime
+
+- Las plantillas y el texto generado en vaults nuevos conservan su contrato
+  actual; la lectura de notas antiguas que mencionan Codex sigue funcionando.
+
 ## v0.2.2 — 2026-10-12
 
 ### Correcciones

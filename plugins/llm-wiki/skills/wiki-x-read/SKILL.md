@@ -9,7 +9,7 @@ Run this workflow only when the user explicitly invokes it or clearly asks for t
 
 ## Flujo
 
-1. Lee URL/texto de un post/hilo solo si Codex puede acceder; separa contenido original de comentarios y análisis. Indica thread/replies leídos, privados o inaccesibles.
+1. Lee URL/texto de un post/hilo solo si Claude puede acceder; separa contenido original de comentarios y análisis. Indica thread/replies leídos, privados o inaccesibles.
 2. Extrae claims, evidencias, contrapuntos y voces, sin decir que replies están completos si no lo están.
 3. Default chat-only. Guarda una nota solo si el usuario pide guardar, con post URL/author si conocidos, claims, tags y fuente; registra entidades solo cuando puedan resolverse.
 

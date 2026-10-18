@@ -1,6 +1,6 @@
 # LLM Wiki
 
-Gestiona tus notas y tu conocimiento desde Codex Desktop.
+Gestiona tus notas y tu conocimiento desde Claude Desktop.
 
 Busca información, guarda ideas y decisiones y relaciona notas. Tus archivos siguen siendo Markdown, compatibles con Obsidian.
 
@@ -21,50 +21,33 @@ Un **vault** es tu carpeta de notas. No necesitas mantener Obsidian abierto ni c
 
 ## Instalación
 
-Necesitas Codex Desktop en macOS. El paquete incluye el ejecutable `plugins/llm-wiki/bin/llm-wiki`: no necesitas Go, Python ni Node para usarlo.
+Necesitas Claude Desktop en macOS con la pestaña Code. El paquete incluye el ejecutable `plugins/llm-wiki/bin/llm-wiki`: no necesitas Go, Python ni Node para usarlo.
 
-### Desde GitHub en Codex Desktop
+### Desde GitHub
 
-La entrega se identifica con `v0.2.2`. Comprueba su publicación en el [informe de entrega](tests/acceptance/release-0.2.2.json) antes de usar la referencia Git. Repositorio: [santiago-migoni/llm-wiki](https://github.com/santiago-migoni/llm-wiki).
+En una sesión de la pestaña Code, registra el marketplace y luego instala el plugin:
 
-1. Abre **Complementos → Agregar → Agregar marketplace**.
-2. En **Origen**, introduce `santiago-migoni/llm-wiki` o `https://github.com/santiago-migoni/llm-wiki.git`.
-3. En **Referencia de Git**, introduce `v0.2.2`. Deja **Rutas dispersas** vacío.
-4. Pulsa **Agregar marketplace**, selecciona el marketplace **LLM Wiki** e instala el plugin **LLM Wiki**.
-5. Abre un chat nuevo. Si el plugin no aparece, reinicia la aplicación.
-
-### Desde un clon local en Codex Desktop
-
-1. Abre **Complementos → Agregar → Agregar marketplace**.
-2. En **Origen**, introduce la ruta absoluta a la raíz del clon, por ejemplo `/ruta/al/clon/llm-wiki`. Deja vacíos **Referencia de Git** y **Rutas dispersas**. Usa la raíz que contiene `.agents/plugins/marketplace.json`.
-3. Selecciona el marketplace **LLM Wiki** e instala el plugin **LLM Wiki**.
-4. Abre un chat nuevo. Si el plugin no aparece, reinicia la aplicación.
-
-Si el marketplace ya registrado apunta a un clon o worktree antiguo y falla al cargar su manifiesto, elimina ese origen desde la administración de marketplaces y vuelve a agregarlo con la ruta actual. Que el plugin aparezca instalado no confirma que el origen siga disponible.
-
-### Desde la terminal
-
-Para instalar la entrega `v0.2.2` desde GitHub, con el CLI de Codex disponible:
-
-```sh
-codex plugin marketplace add https://github.com/santiago-migoni/llm-wiki.git --ref v0.2.2
-codex plugin add llm-wiki@llm-wiki
-codex plugin list --marketplace llm-wiki
+```text
+/plugin marketplace add santiago-migoni/llm-wiki
+/plugin install llm-wiki@llm-wiki
 ```
 
-Como alternativa, desde la raíz del clon local:
+La referencia `v0.2.2` identifica la entrega; comprueba su publicación en el [informe de entrega](tests/acceptance/release-0.2.2.json). Fijar la versión con una referencia Git en este flujo aún no está verificado en Claude Desktop.
 
-```sh
-codex plugin marketplace add "$PWD"
-codex plugin add llm-wiki@llm-wiki
-codex plugin list --marketplace llm-wiki
+### Desde un clon local
+
+Desde la raíz del clon, que contiene `.claude-plugin/marketplace.json`:
+
+```text
+/plugin marketplace add /ruta/absoluta/al/clon/llm-wiki
+/plugin install llm-wiki@llm-wiki
 ```
 
-El último comando permite comprobar la versión y si el plugin está habilitado. Después abre un chat nuevo en Desktop.
+Si el marketplace registrado apunta a un clon antiguo y falla al cargar, elimínalo desde la gestión de plugins y vuelve a añadirlo con la ruta actual. Que el plugin aparezca instalado no confirma que el origen siga disponible.
 
 ## Primera prueba
 
-Escribe `$llm-wiki` en un chat nuevo y selecciona su skill. Usa una carpeta de notas de prueba y envía este mensaje, reemplazando la ruta y `<zona-horaria-IANA>` por la zona horaria que quieras usar:
+Abre un chat nuevo en Claude Desktop y envía este mensaje, usando una carpeta de notas de prueba, reemplazando la ruta y `<zona-horaria-IANA>` por la zona horaria que quieras usar:
 
 > Usa llm-wiki con el vault `/ruta/a/mis-notas`. Selecciónalo para este proyecto, configura la zona horaria `<zona-horaria-IANA>` y carga su contexto. Lista las notas y lee una, sin modificar archivos.
 
@@ -122,8 +105,7 @@ Reporta problemas en el chat de prueba con versión del plugin, macOS, acción y
 
 ## Desarrollo
 
-El trabajo con Codex se guía por [AGENTS.md](AGENTS.md) y la
-[configuración de desarrollo](.codex/README.md), que define roles para
+El trabajo de desarrollo se guía por [CLAUDE.md](CLAUDE.md), que define roles para
 implementación, revisión de código, seguridad y distribución.
 
 ### Límites de recursos del runtime

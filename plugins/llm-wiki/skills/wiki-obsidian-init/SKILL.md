@@ -10,7 +10,7 @@ Run this workflow only when the user explicitly invokes it or clearly asks for t
 ## Flujo
 
 1. Inspecciona raíz/layout y notas existentes; reconoce wiki, Obsidian o mapa explícito. Si es ambiguo, pregunta. Selecciona preset executive/builder/creator/researcher y estilo si falta.
-2. En vault nuevo, propone las carpetas, manual Codex, index y log según el preset; crea solo estructura elegida. En vault existente, no pisa manual ni renombra `_CLAUDE.md`; añade secciones generadas entre sentinels.
+2. En vault nuevo, propone las carpetas, manual `_CLAUDE.md`, index y log según el preset; crea solo estructura elegida. En vault existente, no pisa manual ni renombra `_CLAUDE.md`; añade secciones generadas entre sentinels.
 3. Si migra log, presenta dry-run por secciones y destinos. Si hay colisión o pérdida potencial, no reemplaza log fuente. Verifica idempotencia y lista lo que cambió.
 
 ## Salida

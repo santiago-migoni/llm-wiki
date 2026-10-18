@@ -1,6 +1,6 @@
 # Áreas opcionales y relaciones múltiples
 
-Las áreas son notas elegidas por el usuario, sin categorías obligatorias. Codex
+Las áreas son notas elegidas por el usuario, sin categorías obligatorias. Claude
 interpreta pertinencia; Go enumera candidatos y aplica operaciones recuperables.
 
 ## Activación y lectura
