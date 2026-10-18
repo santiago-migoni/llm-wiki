@@ -200,6 +200,8 @@ func TestListAreasVisibleHeadingAndSetext(t *testing.T) {
 		{"comment", "<!--\n# Hidden\n-->\n# Comunidad\n", "Comunidad"},
 		{"unclosed comment", "<!--\n# Hidden\n", "Name"},
 		{"single line comment", "<!-- # Hidden -->\n# Comunidad\n", "Comunidad"},
+		{"heading after single line comment", "<!-- nota --> # Comunidad\n", "Comunidad"},
+		{"heading after multiline comment close", "<!--\nnota\n--> # Comunidad\n", "Comunidad"},
 		{"indented comment close", "<!--\n# Hidden\n    -->\n# Comunidad\n", "Comunidad"},
 		{"setext", "Exploración\n===========\n", "Exploración"},
 		{"multiline setext", "Exploración\ncompartida\n===\n", "Exploración compartida"},
@@ -227,5 +229,16 @@ func TestListAreasVisibleHeadingAndSetext(t *testing.T) {
 	got, err := v.ListAreas(context.Background())
 	if err != nil || !got.Complete || !hasAreaDiagnostic(got, "ambiguous_name") {
 		t.Fatalf("visible homonyms missing: %+v %v", got, err)
+	}
+}
+
+func TestListAreasUnresolvedFolderDoesNotMisplaceAreas(t *testing.T) {
+	v := areasVault(t, map[string]string{
+		"wiki/areas/Name.md": "---\ntype: area\n---\n# Name\n",
+		"_CLAUDE.md":         "## Folder Map\n| Type | Folder |\n| --- | --- |\n| area | ../outside |",
+	})
+	got, err := v.ListAreas(context.Background())
+	if err == nil || got.Complete || !hasAreaDiagnostic(got, "invalid_folder") || hasAreaDiagnostic(got, "misplaced_area") {
+		t.Fatalf("unresolved folder misreported: %+v %v", got, err)
 	}
 }
