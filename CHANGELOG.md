@@ -2,6 +2,19 @@
 
 Registro de cambios del plugin LLM Wiki. La versión inicial contiene capacidades cuya validación sigue pendiente.
 
+## v0.3.0 — 2026-10-18
+
+### Cambios
+
+- Los manifiestos declaran como autor y propietario a Santiago Migoni en lugar de
+  «llm-wiki contributors».
+- `plugin.json` añade el campo `repository`.
+
+### Notas
+
+- Sin cambios de comportamiento del runtime. La evidencia de Desktop sigue
+  correspondiendo a 0.2.2; no se repitió para 0.3.0.
+
 ## v0.2.3 — 2026-10-18
 
 ### Correcciones

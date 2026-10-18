@@ -125,7 +125,7 @@ func TestMarketplaceMatchesPackagedPlugin(t *testing.T) {
 	if err := ValidateMarketplace(root); err != nil {
 		t.Fatalf("current catalog rejected: %v", err)
 	}
-	stale := strings.Replace(string(market), `"version": "0.2.3"`, `"version": "0.2.1"`, 1)
+	stale := strings.Replace(string(market), `"version": "0.3.0"`, `"version": "0.2.1"`, 1)
 	if err := os.WriteFile(marketPath, []byte(stale), 0644); err != nil {
 		t.Fatal(err)
 	}

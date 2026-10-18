@@ -1,7 +1,8 @@
 {
   "name": "llm-wiki",
   "owner": {
-    "name": "llm-wiki contributors"
+    "name": "Santiago Migoni",
+    "email": "santiagomigoni@gmail.com"
   },
   "metadata": {
     "description": "Marketplace de LLM Wiki para Claude"
@@ -11,7 +12,7 @@
       "name": "llm-wiki",
       "source": "./plugins/llm-wiki",
       "description": "Conocimiento desde Claude: notas Markdown locales, workflows y escrituras recuperables.",
-      "version": "0.2.3",
+      "version": "0.3.0",
       "category": "productivity"
     }
   ]
