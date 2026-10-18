@@ -10,9 +10,7 @@ usa fixtures sintéticos, ejemplos portables y responsabilidades por rol.
 Lee solo el contexto necesario para la tarea:
 
 - `README.md`: instalación, desarrollo y límites vigentes del runtime.
-- `docs/superpowers/CONSTITUTION.md`: propósito y principios del producto.
-- `docs/superpowers/ARCHITECTURE.md`: fronteras entre componentes.
-- `docs/superpowers/INFRASTRUCTURE.md`: estado, journals y recuperación.
+- Los documentos de diseño (constitución, arquitectura, infraestructura) se retiraron del árbol; consulta su historial en git (`a1849a6`).
 - `plugins/llm-wiki/capabilities.json`: capacidades y evidencia declarada.
 
 Algunas evidencias documentales describen revisiones anteriores. Confirma las

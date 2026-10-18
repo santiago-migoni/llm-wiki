@@ -65,14 +65,14 @@ La búsqueda actual es léxica: busca coincidencias de palabras, sin acreditar e
 
 Calendarios, Telegram, X, transcripción de medios, automatizaciones y vistas de Obsidian tienen pruebas o capacidades pendientes. No se activan hooks ni horarios al instalar. El binario incluye Intel, pero su ejecución en esa arquitectura aún no se verificó.
 
-Consulta el [plan y su avance](docs/superpowers/plans/2026-10-08-codex-plugin.md) y los [resultados de aceptación](tests/acceptance/results.json) para distinguir implementación de comportamiento verificado.
+Consulta el plan y su avance (en el historial de git) y los [resultados de aceptación](tests/acceptance/results.json) para distinguir implementación de comportamiento verificado.
 
 Los informes de aceptación anteriores conservan las versiones de desarrollo que
 probaron. La validación del paquete actual se registra en
 [el informe 0.2.2](tests/acceptance/release-0.2.2.json).
-La [evidencia de plantillas](docs/superpowers/evidence/2026-10-12-template-regressions.md) registra los ocho cruces de layout/preset, 60 plantillas Markdown, 24 Bases y dos colas, con pruebas MCP del paquete sin toolchain de desarrollo. No acredita vistas ejecutadas en Obsidian ni sesiones nuevas de Desktop.
-La [verificación en un chat nuevo de Desktop 0.2.2](docs/superpowers/evidence/2026-10-12-desktop-0.2.2.md) acredita 30 herramientas MCP expuestas y 28 llamadas a 12 herramientas: bootstrap `obsidian`/`researcher`, escritura recuperable, lectura, búsqueda, inventario de áreas completo y salud sin errores ni advertencias. Manifiestos, build y checksum corroboran 0.2.2; las respuestas de las herramientas probadas no exponen la versión del proceso ni se observó su ruta. Cierra el pendiente de carga de esquemas en un chat nuevo y del flujo probado; no verifica refrescar sesiones existentes.
-La [aceptación Desktop sobre la corrección local 0.2.0](docs/superpowers/evidence/2026-10-10-desktop-areas.md) conserva el binario y alcance realmente probados.
+La evidencia de plantillas (en el historial de git) registra los ocho cruces de layout/preset, 60 plantillas Markdown, 24 Bases y dos colas, con pruebas MCP del paquete sin toolchain de desarrollo. No acredita vistas ejecutadas en Obsidian ni sesiones nuevas de Desktop.
+La verificación en un chat nuevo de Desktop 0.2.2 (en el historial de git) acredita 30 herramientas MCP expuestas y 28 llamadas a 12 herramientas: bootstrap `obsidian`/`researcher`, escritura recuperable, lectura, búsqueda, inventario de áreas completo y salud sin errores ni advertencias. Manifiestos, build y checksum corroboran 0.2.2; las respuestas de las herramientas probadas no exponen la versión del proceso ni se observó su ruta. Cierra el pendiente de carga de esquemas en un chat nuevo y del flujo probado; no verifica refrescar sesiones existentes.
+La aceptación Desktop sobre la corrección local 0.2.0 (en el historial de git) conserva el binario y alcance realmente probados.
 El [informe 0.1.0](tests/acceptance/release-0.1.0.json) conserva su alcance histórico.
 
 ### Áreas y OKRs
@@ -92,16 +92,16 @@ en el informe 0.2.2. La carga en un chat nuevo y el inventario completo se verif
 para 0.2.2 en la evidencia Desktop citada arriba; no se repitió la matriz completa
 de dos chats ni el refresco de sesiones existentes. Consulta la
 [matriz de casos](tests/acceptance/areas-cases.json) y el
-[plan de este incremento](docs/superpowers/plans/2026-10-10-areas-transversales.md).
+plan de este incremento (en el historial de git).
 
 ## Ayuda y documentación
 
 Reporta problemas en el chat de prueba con versión del plugin, macOS, acción y error, sin notas privadas.
 
-- [Workflows disponibles](docs/superpowers/evidence/2026-10-08-workflows.md)
+- Workflows disponibles (en el historial de git)
 - [Validación de Desktop](tests/acceptance/desktop.md)
-- [Arquitectura](docs/superpowers/ARCHITECTURE.md) y [estructura del código](docs/superpowers/STRUCTURE.md)
-- [Configuración, persistencia y recuperación](docs/superpowers/INFRASTRUCTURE.md)
+- Arquitectura (en el historial de git) y estructura del código (en el historial de git)
+- Configuración, persistencia y recuperación (en el historial de git)
 
 ## Desarrollo
 
@@ -124,7 +124,7 @@ go vet ./...
 go run ./cmd/package --output /tmp/llm-wiki-marketplace
 ```
 
-La carpeta de salida debe ser nueva. El empaquetador genera un marketplace con el binario universal, skills, referencias y checksums. Los cambios y sus pruebas deben respetar la [especificación del proyecto](docs/superpowers/specs/2026-10-08-codex-plugin-spec.md).
+La carpeta de salida debe ser nueva. El empaquetador genera un marketplace con el binario universal, skills, referencias y checksums. Los cambios y sus pruebas deben respetar la especificación del proyecto (en el historial de git).
 
 ## Procedencia
 
