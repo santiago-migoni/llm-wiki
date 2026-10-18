@@ -9,7 +9,7 @@ Run this workflow only when the user explicitly invokes it or clearly asks for t
 
 ## Flujo
 
-1. Resuelve URL o ID y el modo: transcripción, metadata/comentarios, o visual por escenas. Usa solo transcript/frame/contenido que Codex realmente pueda leer o el usuario aporte.
+1. Resuelve URL o ID y el modo: transcripción, metadata/comentarios, o visual por escenas. Usa solo transcript/frame/contenido que Claude realmente pueda leer o el usuario aporte.
 2. Para transcript, resume TL;DR, points, quotes con timestamps reales, themes y follow-ups. Para frames, describe timestamp, texto/UI/diagramas/escenas y qué agregan respecto del transcript. No infieras comments, frames ni palabras del audio no leído.
 3. Guarda nota YouTube con ID/URL/canal/fecha y marca modos realmente procesados. Si no hay transcript, metadata o frames accesibles, indica exactamente qué no pudo hacerse; no sustituyas una modalidad con otra en silencio.
 

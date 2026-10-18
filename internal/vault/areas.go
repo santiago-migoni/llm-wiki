@@ -74,10 +74,8 @@ func (v *Vault) listAreasWithLimits(ctx context.Context, maxBytes, maxEntries in
 	seen := map[string]string{}
 	ambiguous := map[string]bool{}
 	for _, note := range scan.Notes {
-		if err := ctx.Err(); err != nil {
-			diagnose("", "incomplete_scan", "area analysis canceled")
-			failures = append(failures, err)
-			break
+		if ctx.Err() != nil {
+			break // reported once after the loop
 		}
 		fm, body, parseErr := noteformat.Parse(note.Text)
 		inside := folder != "" && strings.HasPrefix(note.Path, folder+"/")
@@ -93,7 +91,10 @@ func (v *Vault) listAreasWithLimits(ctx context.Context, maxBytes, maxEntries in
 			continue
 		}
 		if !inside {
-			diagnose(note.Path, "misplaced_area", "typed area is outside its mapped folder")
+			// Without a resolved folder, invalid_folder already explains the failure.
+			if folder != "" {
+				diagnose(note.Path, "misplaced_area", "typed area is outside its mapped folder")
+			}
 			continue
 		}
 		title := ""
@@ -184,10 +185,14 @@ func firstAreaHeading(body string) string {
 		line = strings.TrimSuffix(line, "\r")
 		text := strings.TrimLeft(line, " ")
 		if comment {
-			if strings.Contains(line, "-->") {
-				comment = false
+			end := strings.Index(line, "-->")
+			if end < 0 {
+				continue
 			}
-			continue
+			// Content after the closing marker is visible.
+			comment = false
+			line = line[end+3:]
+			text = strings.TrimLeft(line, " ")
 		}
 		if len(line)-len(text) > 3 {
 			paragraph = nil
@@ -195,12 +200,14 @@ func firstAreaHeading(body string) string {
 		}
 		// HTML comment blocks are invisible. Fence contents must not start one.
 		if fence == 0 && strings.HasPrefix(text, "<!--") {
-			comment = true
-			if strings.Contains(text, "-->") {
-				comment = false
-			}
 			paragraph = nil
-			continue
+			end := strings.Index(text[4:], "-->")
+			if end < 0 {
+				comment = true
+				continue
+			}
+			line = text[4+end+3:]
+			text = strings.TrimLeft(line, " ")
 		}
 		marker, count := byte(0), 0
 		if len(text) > 0 && (text[0] == '`' || text[0] == '~') {

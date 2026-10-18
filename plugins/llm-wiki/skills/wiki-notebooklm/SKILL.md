@@ -15,7 +15,7 @@ Run this workflow only when the user explicitly invokes it or clearly asks for t
 
 ## Salida
 
-Salida: síntesis citada, fuentes realmente leídas (máx. 12), cobertura y propagación: notas creadas/actualizadas/omitidas. No declares resultado del modo File Search original; es una síntesis local de Codex.
+Salida: síntesis citada, fuentes realmente leídas (máx. 12), cobertura y propagación: notas creadas/actualizadas/omitidas. No declares resultado del modo File Search original; es una síntesis local de Claude.
 
 ## Operaciones
 

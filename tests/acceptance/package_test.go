@@ -51,32 +51,32 @@ func TestPackagedBinaryWithoutDevelopmentToolchain(t *testing.T) {
 	state, vault, project := t.TempDir(), t.TempDir(), t.TempDir()
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
-	launchIndex := 0
 	connect := func(launchRoot string) *mcp.ClientSession {
-		descriptor := []string{"mcp.json", ".mcp.json"}[launchIndex%2]
-		launchIndex++
-		data, err := os.ReadFile(filepath.Join(launchRoot, descriptor))
-		if err != nil {
-			t.Fatal(err)
-		}
-		var launch struct {
-			Servers map[string]struct {
-				Command, Cwd string
-				Args         []string
-			} `json:"mcpServers"`
-		}
-		if err := json.Unmarshal(data, &launch); err != nil {
-			t.Fatal(err)
-		}
-		server := launch.Servers["llm-wiki"]
-		// The state override isolates test data; executable, cwd and serve come
-		// directly from the descriptor as the host consumes them.
-		cmd := exec.Command(server.Command, append(server.Args, "--state-dir", state)...)
-		cmd.Dir = filepath.Join(launchRoot, server.Cwd)
-		if launchRoot != root {
+		var cmd *exec.Cmd
+		if launchRoot == root {
+			// The host expands ${CLAUDE_PLUGIN_ROOT} to the installed plugin directory;
+			// the launch descriptor is then consumed exactly as written.
+			data, err := os.ReadFile(filepath.Join(launchRoot, ".claude-plugin/plugin.json"))
+			if err != nil {
+				t.Fatal(err)
+			}
+			var launch struct {
+				MCPServers map[string]struct {
+					Command string   `json:"command"`
+					Args    []string `json:"args"`
+				} `json:"mcpServers"`
+			}
+			if err := json.Unmarshal(data, &launch); err != nil {
+				t.Fatal(err)
+			}
+			server := launch.MCPServers["llm-wiki"]
+			command := strings.Replace(server.Command, "${CLAUDE_PLUGIN_ROOT}", launchRoot, 1)
+			cmd = exec.Command(command, append(server.Args, "--state-dir", state)...)
+			cmd.Dir = launchRoot
+		} else {
 			// Legacy 0.1.0 is exercised only for runtime/state compatibility using
-			// its known absolute executable. This does not validate its host launch
-			// descriptor, which predates the portable command/cwd correction.
+			// its known absolute executable. Its host descriptor predates the Claude
+			// plugin and is not validated here.
 			cmd = exec.Command(filepath.Join(launchRoot, "bin/llm-wiki"), "serve", "--state-dir", state)
 			cmd.Dir = launchRoot
 		}
@@ -89,7 +89,7 @@ func TestPackagedBinaryWithoutDevelopmentToolchain(t *testing.T) {
 		return session
 	}
 	session := connect(root)
-	manifestBytes, err := os.ReadFile(filepath.Join(root, "plugin.json"))
+	manifestBytes, err := os.ReadFile(filepath.Join(root, ".claude-plugin/plugin.json"))
 	if err != nil {
 		t.Fatal(err)
 	}

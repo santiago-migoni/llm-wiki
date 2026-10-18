@@ -9,7 +9,7 @@ Run this workflow only when the user explicitly invokes it or clearly asks for t
 
 ## Flujo
 
-1. Resuelve URL Apple/Spotify/RSS o episodio seleccionado; obtiene metadata/show notes solo desde la URL si la sesión puede leerlos. Para transcript usa solo transcript ya accesible/proporcionado por Codex; no descargues ni transcribas audio.
+1. Resuelve URL Apple/Spotify/RSS o episodio seleccionado; obtiene metadata/show notes solo desde la URL si la sesión puede leerlos. Para transcript usa solo transcript ya accesible/proporcionado por Claude; no descargues ni transcribas audio.
 2. Distingue metadata, show notes y transcript: resume únicamente el material leído; si transcript no existe y show notes son breves, explica el vacío sin inventar citas.
 3. Guarda nota de episodio con fuente, fecha, TL;DR, puntos clave, quotes exactos, temas, invitados y follow-ups. Cita timestamps solo si la transcripción los incluye.
 

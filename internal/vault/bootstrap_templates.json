@@ -1,6 +1,6 @@
 {
   "source_commit": "b0089f7666d0c1e3db41c9d587b6f3c997665235",
-  "adaptation": "Templater expressions become Codex placeholders; Bases/Dataview retained as compatibility data, not installed/executed.",
+  "adaptation": "Templater expressions become Claude placeholders; Bases/Dataview retained as compatibility data, not installed/executed.",
   "presets": {
     "wiki/executive": {
       "templates/Daily Note.md": "---\ndate: \"{{date}}\"\ntype: daily\ntags:\n  - daily\nai-first: true\nmood:\nenergy:\n---\n\n# {{date}} - {{weekday}}\n\n## For future agent\n\nDaily note for this date. Captures what was worked on, who was met, decisions made, energy, and the day's intention. Pull this when reconstructing what happened on a given day.\n\n---\n\n## 🌅 Morning\n\n**Intention:** {{content}}\n\n**Grateful for:**\n1.\n2.\n3.\n\n---\n\n## 🎯 Today's Focus\n\n### 🔴 #1 -\n\n### 🟡 #2 -\n\n### 🟢 #3 -\n\n---\n\n## 💼 Work Log\n\n\n\n---\n\n## 🏠 Personal\n\n\n\n---\n\n## ✅ Habits\n\n- [ ] Exercised\n- [ ] Read/learned something\n- [ ] Reached out to someone\n\n---\n\n## 🌙 Evening Review\n\n**What went well:**\n\n**What didn't:**\n\n**Tomorrow's #1 priority:**\n",

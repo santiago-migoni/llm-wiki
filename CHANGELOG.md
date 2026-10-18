@@ -2,6 +2,39 @@
 
 Registro de cambios del plugin LLM Wiki. La versión inicial contiene capacidades cuya validación sigue pendiente.
 
+## v0.2.3 — 2026-10-18
+
+### Correcciones
+
+- El nombre de un área se toma del H1 que sigue a un comentario HTML cerrado en la
+  misma línea, en lugar de caer al nombre del archivo.
+- Si la carpeta de áreas no resuelve, `wiki_list_areas` informa solo `invalid_folder`
+  y ya no marca como `misplaced_area` las áreas que sí están en su carpeta.
+- Una cancelación durante el análisis de áreas genera un único diagnóstico.
+
+### Notas
+
+- Incluye la migración a Claude descrita en la sección siguiente. La evidencia de
+  Desktop sigue correspondiendo a 0.2.2; no se repitió para 0.2.3.
+
+## Migración a Claude (incluida en 0.2.3)
+
+### Cambios
+
+- El plugin se distribuye para Claude Desktop: `.claude-plugin/plugin.json` y
+  `.claude-plugin/marketplace.json`. El servidor MCP usa
+  `${CLAUDE_PLUGIN_ROOT}/bin/llm-wiki serve`.
+- Se retiran los manifiestos, el marketplace y la configuración de Codex
+  (`.codex-plugin/`, `.mcp.json`, `mcp.json`, `plugin.json` raíz, `.agents/` y `.codex/`).
+- El empaquetador valida la nueva ruta de lanzamiento y la coherencia entre
+  el catálogo y el manifiesto del plugin.
+- Las skills y referencias nombran a Claude como host.
+
+### Sin cambios de runtime
+
+- Las plantillas y el texto generado en vaults nuevos conservan su contrato
+  actual; la lectura de notas antiguas que mencionan Codex sigue funcionando.
+
 ## v0.2.2 — 2026-10-12
 
 ### Correcciones

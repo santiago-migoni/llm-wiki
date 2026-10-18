@@ -67,12 +67,16 @@ func Validate(root string) error {
 	if e != nil {
 		return e
 	}
-	var portable struct {
-		Name       string         `json:"name"`
-		Version    string         `json:"version"`
-		Extensions map[string]any `json:"extensions"`
+	var manifest struct {
+		Name       string `json:"name"`
+		Version    string `json:"version"`
+		MCPServers map[string]struct {
+			Type    string   `json:"type"`
+			Command string   `json:"command"`
+			Args    []string `json:"args"`
+		} `json:"mcpServers"`
 	}
-	for _, name := range []string{"plugin.json", "mcp.json", ".codex-plugin/plugin.json", ".mcp.json", "capabilities.json", "NOTICE"} {
+	for _, name := range []string{"capabilities.json", "NOTICE"} {
 		data, e := r.ReadFile(name)
 		if e != nil {
 			return e
@@ -81,40 +85,24 @@ func Validate(root string) error {
 			return fmt.Errorf("invalid JSON %s", name)
 		}
 	}
-	data, _ := r.ReadFile("plugin.json")
-	if e = json.Unmarshal(data, &portable); e != nil {
+	data, e := r.ReadFile(".claude-plugin/plugin.json")
+	if e != nil {
 		return e
 	}
-	if portable.Name != "llm-wiki" || portable.Version == "" {
+	if !json.Valid(data) {
+		return errors.New("invalid JSON .claude-plugin/plugin.json")
+	}
+	if e = json.Unmarshal(data, &manifest); e != nil {
+		return e
+	}
+	if manifest.Name != "llm-wiki" || manifest.Version == "" {
 		return errors.New("incorrect package identity")
 	}
-	var compat struct{ Name, Version string }
-	data, _ = r.ReadFile(".codex-plugin/plugin.json")
-	json.Unmarshal(data, &compat)
-	if compat.Name != portable.Name || compat.Version != portable.Version {
-		return errors.New("compatibility identity mismatch")
-	}
-	// Both descriptors must launch the packaged executable without host-specific
-	// variable expansion. The native descriptor may omit the stdio type.
-	for _, name := range []string{"mcp.json", ".mcp.json"} {
-		var descriptor struct {
-			Servers map[string]struct {
-				Type, Command, Cwd string
-				Args               []string
-			} `json:"mcpServers"`
-		}
-		data, err := r.ReadFile(name)
-		if err != nil {
-			return err
-		}
-		if err := json.Unmarshal(data, &descriptor); err != nil {
-			return err
-		}
-		server, ok := descriptor.Servers["llm-wiki"]
-		validType := server.Type == "stdio" || (name == ".mcp.json" && server.Type == "")
-		if !ok || len(descriptor.Servers) != 1 || !validType || server.Command != "./bin/llm-wiki" || server.Cwd != "./" || len(server.Args) != 1 || server.Args[0] != "serve" {
-			return fmt.Errorf("invalid local MCP launch in %s", name)
-		}
+	// The host expands ${CLAUDE_PLUGIN_ROOT} to the installed plugin directory.
+	// The launch must name exactly the packaged executable and the serve command.
+	server, ok := manifest.MCPServers["llm-wiki"]
+	if !ok || len(manifest.MCPServers) != 1 || server.Type != "stdio" || server.Command != "${CLAUDE_PLUGIN_ROOT}/bin/llm-wiki" || len(server.Args) != 1 || server.Args[0] != "serve" {
+		return errors.New("invalid local MCP launch in .claude-plugin/plugin.json")
 	}
 	info, e := r.Stat("bin/llm-wiki")
 	if e != nil {
@@ -204,6 +192,47 @@ func VerifyChecksums(root string) error {
 		if observed[path] != sum {
 			return fmt.Errorf("checksum mismatch: %s", path)
 		}
+	}
+	return nil
+}
+
+// ValidateMarketplace checks that the catalog at the package root lists the
+// packaged plugin, at its source path and with the same version as its manifest.
+func ValidateMarketplace(root string) error {
+	r, e := os.OpenRoot(root)
+	if e != nil {
+		return e
+	}
+	defer r.Close()
+	var catalog struct {
+		Name    string `json:"name"`
+		Plugins []struct {
+			Name    string `json:"name"`
+			Source  string `json:"source"`
+			Version string `json:"version"`
+		} `json:"plugins"`
+	}
+	data, e := r.ReadFile(".claude-plugin/marketplace.json")
+	if e != nil {
+		return e
+	}
+	if e = json.Unmarshal(data, &catalog); e != nil {
+		return e
+	}
+	data, e = r.ReadFile("plugins/llm-wiki/.claude-plugin/plugin.json")
+	if e != nil {
+		return e
+	}
+	var manifest struct{ Name, Version string }
+	if e = json.Unmarshal(data, &manifest); e != nil {
+		return e
+	}
+	if len(catalog.Plugins) != 1 {
+		return errors.New("marketplace must list exactly one plugin")
+	}
+	entry := catalog.Plugins[0]
+	if entry.Name != manifest.Name || entry.Source != "./plugins/llm-wiki" || entry.Version != manifest.Version {
+		return errors.New("marketplace entry does not match packaged plugin")
 	}
 	return nil
 }

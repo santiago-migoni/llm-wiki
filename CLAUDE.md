@@ -2,7 +2,7 @@
 
 ## Propósito y contexto
 
-Plugin local para gestionar conocimiento Markdown desde Codex, con runtime Go,
+Plugin local para gestionar conocimiento Markdown desde Claude, con runtime Go,
 MCP STDIO y workflows declarativos. Conserva las capacidades de referencia y
 distingue implementación, evidencia y brechas. El repositorio debe ser genérico:
 usa fixtures sintéticos, ejemplos portables y responsabilidades por rol.
@@ -10,9 +10,7 @@ usa fixtures sintéticos, ejemplos portables y responsabilidades por rol.
 Lee solo el contexto necesario para la tarea:
 
 - `README.md`: instalación, desarrollo y límites vigentes del runtime.
-- `docs/superpowers/CONSTITUTION.md`: propósito y principios del producto.
-- `docs/superpowers/ARCHITECTURE.md`: fronteras entre componentes.
-- `docs/superpowers/INFRASTRUCTURE.md`: estado, journals y recuperación.
+- Los documentos de diseño (constitución, arquitectura, infraestructura) se retiraron del árbol; consulta su historial en git (`a1849a6`).
 - `plugins/llm-wiki/capabilities.json`: capacidades y evidencia declarada.
 
 Algunas evidencias documentales describen revisiones anteriores. Confirma las
@@ -35,7 +33,7 @@ descripciones con el código actual; conserva los registros históricos como tal
 
 El agente principal mantiene alcance, decisiones, integración y resultado final.
 Para tareas independientes de suficiente tamaño, delega mediante los roles de
-`.codex/agents/`. Para una edición pequeña, trabaja directamente.
+`.claude/agents/`. Para una edición pequeña, trabaja directamente.
 
 - `implementer`: implementa y prueba una tarea con archivos asignados.
 - `code_reviewer`: revisa corrección, compatibilidad y pruebas, sin editar.
@@ -106,10 +104,10 @@ artefactos al paquete versionado. Registra fielmente fuentes con cambios locales
 no atribuyas un binario modificado a un commit que no contiene esas fuentes.
 Compilar Intel no equivale a ejecutarlo. Conserva licencias y atribuciones.
 
-`.codex/` y este archivo guían el desarrollo del repositorio; no son configuración
+`.claude/` y este archivo guían el desarrollo del repositorio; no son configuración
 del vault ni archivos del plugin instalado. No añadas cuentas, rutas personales,
 tokens, journals reales, capturas privadas o caches a archivos versionados.
-Usa ramas `codex/` para trabajo nuevo, preserva cambios ajenos y revisa el diff.
+Usa ramas `claude/` para trabajo nuevo, preserva cambios ajenos y revisa el diff.
 Commit, push, instalación, publicación y reescritura de historial requieren estar
 dentro del alcance solicitado; una revisión de un subagente no los autoriza.
 

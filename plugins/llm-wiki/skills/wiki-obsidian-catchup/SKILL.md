@@ -10,7 +10,7 @@ Run this workflow only when the user explicitly invokes it or clearly asks for t
 ## Flujo
 
 1. Procesa solo una cola `catchup.md` local accesible; modos `today`, `week`, `all` controlan rango. Sin cola Telegram conectada no afirmes haber recibido mensajes nuevos.
-2. Revisa cada entrada y su tipo. Texto, imagen y PDF se procesan solo si Codex puede leerlos; transcripción de voz, video u otros adjuntos requieren contenido accesible. Para URL reporta si solo se leyó título/snippet.
+2. Revisa cada entrada y su tipo. Texto, imagen y PDF se procesan solo si Claude puede leerlos; transcripción de voz, video u otros adjuntos requieren contenido accesible. Para URL reporta si solo se leyó título/snippet.
 3. Por entrada extrae intención, entidad, idea, fecha, tarea o fuente y ofrece decisión integrar/mover/dejar. Espera respuesta antes de escribir. No elimines historial; marca procesada con fecha y destino solo después de terminar.
 
 ## Salida
