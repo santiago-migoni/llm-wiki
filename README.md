@@ -4,9 +4,9 @@ Gestiona tus notas y tu conocimiento desde Claude Desktop.
 
 Busca información, guarda ideas y decisiones y relaciona notas. Tus archivos siguen siendo Markdown, compatibles con Obsidian.
 
-**Estado:** versión `0.2.2` (referencia `v0.2.2`), con las siete correcciones de plantillas y el nombre visible **LLM Wiki**. El identificador técnico sigue siendo `llm-wiki`, incluidos CLI, skills y rutas. La validación del paquete y el estado de publicación e instalación se registran en el [informe 0.2.2](tests/acceptance/release-0.2.2.json).
+**Estado:** versión `0.2.3` (referencia `v0.2.3`), con las siete correcciones de plantillas y el nombre visible **LLM Wiki**. El identificador técnico sigue siendo `llm-wiki`, incluidos CLI, skills y rutas. La validación del paquete y la instalación registradas corresponden al [informe 0.2.2](tests/acceptance/release-0.2.2.json); no se repitieron para 0.2.3.
 
-Cambios de esta entrega: [changelog v0.2.2](CHANGELOG.md).
+Cambios de esta entrega: [changelog v0.2.3](CHANGELOG.md).
 
 ## Qué puedes hacer
 

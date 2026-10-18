@@ -11,7 +11,7 @@
       "name": "llm-wiki",
       "source": "./plugins/llm-wiki",
       "description": "Conocimiento desde Claude: notas Markdown locales, workflows y escrituras recuperables.",
-      "version": "0.2.2",
+      "version": "0.2.3",
       "category": "productivity"
     }
   ]

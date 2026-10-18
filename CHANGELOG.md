@@ -2,7 +2,22 @@
 
 Registro de cambios del plugin LLM Wiki. La versión inicial contiene capacidades cuya validación sigue pendiente.
 
-## Sin publicar — migración a Claude
+## v0.2.3 — 2026-10-18
+
+### Correcciones
+
+- El nombre de un área se toma del H1 que sigue a un comentario HTML cerrado en la
+  misma línea, en lugar de caer al nombre del archivo.
+- Si la carpeta de áreas no resuelve, `wiki_list_areas` informa solo `invalid_folder`
+  y ya no marca como `misplaced_area` las áreas que sí están en su carpeta.
+- Una cancelación durante el análisis de áreas genera un único diagnóstico.
+
+### Notas
+
+- Incluye la migración a Claude descrita en la sección siguiente. La evidencia de
+  Desktop sigue correspondiendo a 0.2.2; no se repitió para 0.2.3.
+
+## Migración a Claude (incluida en 0.2.3)
 
 ### Cambios
 

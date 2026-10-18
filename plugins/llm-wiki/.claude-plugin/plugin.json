@@ -1,6 +1,6 @@
 {
   "name": "llm-wiki",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Knowledge workflows in Claude with local Markdown, recoverable writes and explicit capability gaps.",
   "author": {
     "name": "llm-wiki contributors"
