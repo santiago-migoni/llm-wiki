@@ -1,9 +1,9 @@
 {
-  ".claude-plugin/plugin.json": "01d874ebdde51ce0a3de3651509e44c74ceff8652e590978e96f5e6db3f64286",
+  ".claude-plugin/plugin.json": "5ccb7f2dbbd692308abd570460c202e0cbb62bd37bb53bcfa324192a5783a504",
   "NOTICE": "c722570383b284ca35fe82e07b8306b7265628aa575b144594e0bcff52e6d83b",
   "assets/icon.svg": "b0c310a49370403aa275982ec4b70eacb5ba1b06b610b18e2a8de8217c7ed472",
-  "bin/llm-wiki": "bf3182e801a46fcf1ad06fd8bea87601f8a3860c8e8e6cf98a51067f050a5eda",
-  "build.json": "32053d8aeab193fcf439cfb52d24dd49019d5bebc7e44d95141d51331cea7f35",
+  "bin/llm-wiki": "7488040f1e1949bd7727c06fc50df11dcdf1aa4eccaad65a8cae8bc0da72c1d2",
+  "build.json": "bf8b96f044c9ea4a6316f295450e37fb65d2a454f73cac66ebb34f6c96a58ab6",
   "capabilities.json": "12356e5177b5c51a4a740b5f14876c16a5efe7bbe8631959c39f41d9a55b7e2e",
   "references/ai-first-rules.md": "b9b726ed42f610f845dc158f12ef38c33c381b226fc2538f6d497d398458081a",
   "references/areas.md": "cab22332f1b1295d179d6b9962fff81d78ae3eedcc76d5459dda458b25d8dcdb",
