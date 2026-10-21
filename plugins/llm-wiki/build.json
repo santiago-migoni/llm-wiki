@@ -5,8 +5,15 @@
   ],
   "go": "go1.27.2",
   "intel_runtime_tested": false,
+  "linux_runtime_tested": false,
+  "platforms": [
+    "darwin/arm64",
+    "darwin/amd64",
+    "linux/arm64",
+    "linux/amd64"
+  ],
   "runtime_dependencies": [],
   "sdk": "github.com/modelcontextprotocol/go-sdk@v1.8.0",
-  "source_commit": "4e9126ae02fd5fffbe5ece4e3fe3a06f7828ace3",
+  "source_commit": "3f6c13538e675fbc3128db8dcc08f838c5517ee8",
   "source_dirty": false
 }
