@@ -2,7 +2,9 @@
 package packaging
 
 import (
+	"bytes"
 	"crypto/sha256"
+	_ "embed"
 	"encoding/hex"
 	"encoding/json"
 	"errors"
@@ -13,6 +15,15 @@ import (
 	"path/filepath"
 	"strings"
 )
+
+// Launcher is the script installed as bin/llm-wiki. It dispatches to the
+// runtime built for the host, so one package serves macOS and the Linux VM.
+//
+//go:embed launcher.sh
+var Launcher []byte
+
+// Runtimes lists the executables the launcher can dispatch to.
+var Runtimes = []string{"llm-wiki-darwin", "llm-wiki-linux-amd64", "llm-wiki-linux-arm64"}
 
 func CopyAssets(source, dest string) error {
 	return filepath.WalkDir(source, func(p string, d fs.DirEntry, e error) error {
@@ -104,12 +115,21 @@ func Validate(root string) error {
 	if !ok || len(manifest.MCPServers) != 1 || server.Type != "stdio" || server.Command != "${CLAUDE_PLUGIN_ROOT}/bin/llm-wiki" || len(server.Args) != 1 || server.Args[0] != "serve" {
 		return errors.New("invalid local MCP launch in .claude-plugin/plugin.json")
 	}
-	info, e := r.Stat("bin/llm-wiki")
+	for _, name := range append([]string{"llm-wiki"}, Runtimes...) {
+		info, e := r.Stat("bin/" + name)
+		if e != nil {
+			return e
+		}
+		if !info.Mode().IsRegular() || info.Mode()&0111 == 0 {
+			return fmt.Errorf("bin/%s must be executable", name)
+		}
+	}
+	launcher, e := r.ReadFile("bin/llm-wiki")
 	if e != nil {
 		return e
 	}
-	if !info.Mode().IsRegular() || info.Mode()&0111 == 0 {
-		return errors.New("MCP binary must be executable")
+	if !bytes.Equal(launcher, Launcher) {
+		return errors.New("bin/llm-wiki is not the packaged launcher")
 	}
 	skills, e := catalog.List("", root)
 	if e != nil {

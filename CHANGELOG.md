@@ -2,6 +2,23 @@
 
 Registro de cambios del plugin LLM Wiki. La versión inicial contiene capacidades cuya validación sigue pendiente.
 
+## Sin publicar
+
+### Cambios
+
+- `bin/llm-wiki` pasa a ser un lanzador POSIX que elige entre `llm-wiki-darwin`
+  (universal), `llm-wiki-linux-arm64` y `llm-wiki-linux-amd64`. El descriptor MCP de
+  `plugin.json` no cambia. El empaquetador compila los ejecutables de Linux y
+  `packaging.Validate` exige el lanzador y los tres ejecutables.
+- `build.json` añade `platforms` y `linux_runtime_tested`.
+
+### Notas
+
+- La versión sigue en 0.3.0: no se incrementó. Quien ya la tenga instalada puede no
+  recibir el cambio sin reinstalar.
+- Los ejecutables de Linux se compilaron pero no se ejecutaron en Linux; solo se
+  probó el lanzador con `uname` simulado.
+
 ## v0.3.0 — 2026-10-18
 
 ### Cambios

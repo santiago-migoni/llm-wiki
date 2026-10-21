@@ -21,7 +21,7 @@ Un **vault** es tu carpeta de notas. No necesitas mantener Obsidian abierto ni c
 
 ## Instalación
 
-Necesitas Claude Desktop en macOS con la pestaña Code. El paquete incluye el ejecutable `plugins/llm-wiki/bin/llm-wiki`: no necesitas Go, Python ni Node para usarlo.
+Necesitas Claude Desktop en macOS con la pestaña Code. El paquete incluye `plugins/llm-wiki/bin/llm-wiki`, un lanzador que elige el ejecutable según el sistema (`llm-wiki-darwin`, `llm-wiki-linux-arm64` o `llm-wiki-linux-amd64`): no necesitas Go, Python ni Node para usarlo. Los ejecutables de Linux están pensados para la VM de Cowork; su ejecución allí aún no está verificada.
 
 ### Desde GitHub
 

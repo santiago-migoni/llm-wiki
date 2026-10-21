@@ -1,4 +1,4 @@
-// package builds a self-contained macOS marketplace; it is a development tool.
+// package builds a self-contained marketplace for macOS and Linux; it is a development tool.
 package main
 
 import (
@@ -57,32 +57,46 @@ func run() error {
 		return e
 	}
 	defer os.RemoveAll(stage)
-	for _, arch := range []string{"arm64", "amd64"} {
-		cmd := exec.Command(*compiler, "build", "-trimpath", "-ldflags=-s -w", "-o", filepath.Join(stage, arch), "./cmd/llm-wiki")
+	build := func(goos, arch, out string) error {
+		cmd := exec.Command(*compiler, "build", "-trimpath", "-ldflags=-s -w", "-o", out, "./cmd/llm-wiki")
 		cmd.Dir = root
-		cmd.Env = append(os.Environ(), "CGO_ENABLED=0", "GOOS=darwin", "GOARCH="+arch)
+		cmd.Env = append(os.Environ(), "CGO_ENABLED=0", "GOOS="+goos, "GOARCH="+arch)
 		cmd.Stdout = os.Stderr
 		cmd.Stderr = os.Stderr
-		if e = cmd.Run(); e != nil {
+		return cmd.Run()
+	}
+	for _, arch := range []string{"arm64", "amd64"} {
+		if e = build("darwin", arch, filepath.Join(stage, "darwin-"+arch)); e != nil {
 			return e
 		}
 	}
 	if e = os.MkdirAll(filepath.Join(plugin, "bin"), 0755); e != nil {
 		return e
 	}
-	binary := filepath.Join(plugin, "bin/llm-wiki")
-	cmd := exec.Command("/usr/bin/lipo", "-create", filepath.Join(stage, "arm64"), filepath.Join(stage, "amd64"), "-output", binary)
+	// Linux runtimes serve the Claude VM; the launcher picks by OS and CPU.
+	for _, arch := range []string{"arm64", "amd64"} {
+		if e = build("linux", arch, filepath.Join(plugin, "bin/llm-wiki-linux-"+arch)); e != nil {
+			return e
+		}
+	}
+	darwin := filepath.Join(plugin, "bin/llm-wiki-darwin")
+	cmd := exec.Command("/usr/bin/lipo", "-create", filepath.Join(stage, "darwin-arm64"), filepath.Join(stage, "darwin-amd64"), "-output", darwin)
 	cmd.Stderr = os.Stderr
 	if e = cmd.Run(); e != nil {
 		return e
 	}
-	if e = os.Chmod(binary, 0755); e != nil {
-		return e
-	}
-	cmd = exec.Command("/usr/bin/codesign", "--force", "--sign", "-", binary)
+	cmd = exec.Command("/usr/bin/codesign", "--force", "--sign", "-", darwin)
 	cmd.Stderr = os.Stderr
 	if e = cmd.Run(); e != nil {
 		return e
+	}
+	if e = os.WriteFile(filepath.Join(plugin, "bin/llm-wiki"), packaging.Launcher, 0755); e != nil {
+		return e
+	}
+	for _, name := range packaging.Runtimes {
+		if e = os.Chmod(filepath.Join(plugin, "bin", name), 0755); e != nil {
+			return e
+		}
 	}
 	revision, e := exec.Command("git", "-C", root, "rev-parse", "HEAD").Output()
 	if e != nil {
@@ -93,7 +107,7 @@ func run() error {
 		return e
 	}
 	// A dirty tree means the binary may come from sources absent at source_commit.
-	metadata := map[string]any{"go": runtime.Version(), "source_commit": strings.TrimSpace(string(revision)), "source_dirty": len(strings.TrimSpace(string(status))) > 0, "architectures": []string{"arm64", "amd64"}, "intel_runtime_tested": false, "sdk": "github.com/modelcontextprotocol/go-sdk@v1.8.0", "runtime_dependencies": []string{}}
+	metadata := map[string]any{"go": runtime.Version(), "source_commit": strings.TrimSpace(string(revision)), "source_dirty": len(strings.TrimSpace(string(status))) > 0, "architectures": []string{"arm64", "amd64"}, "platforms": []string{"darwin/arm64", "darwin/amd64", "linux/arm64", "linux/amd64"}, "intel_runtime_tested": false, "linux_runtime_tested": false, "sdk": "github.com/modelcontextprotocol/go-sdk@v1.8.0", "runtime_dependencies": []string{}}
 	if e = writeJSON(filepath.Join(plugin, "build.json"), metadata); e != nil {
 		return e
 	}

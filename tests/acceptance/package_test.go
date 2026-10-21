@@ -35,7 +35,7 @@ func TestPackagedBinaryWithoutDevelopmentToolchain(t *testing.T) {
 	if e := packaging.VerifyChecksums(root); e != nil {
 		t.Fatal(e)
 	}
-	binary := filepath.Join(root, "bin/llm-wiki")
+	binary := filepath.Join(root, "bin/llm-wiki-darwin")
 	fat, e := macho.OpenFat(binary)
 	if e != nil {
 		t.Fatal(e)
