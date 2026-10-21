@@ -2,7 +2,7 @@
 
 Registro de cambios del plugin LLM Wiki. La versión inicial contiene capacidades cuya validación sigue pendiente.
 
-## Sin publicar
+## v0.4.0 — 2026-10-21
 
 ### Cambios
 
@@ -14,8 +14,8 @@ Registro de cambios del plugin LLM Wiki. La versión inicial contiene capacidade
 
 ### Notas
 
-- La versión sigue en 0.3.0: no se incrementó. Quien ya la tenga instalada puede no
-  recibir el cambio sin reinstalar.
+- Sin cambios de comportamiento del runtime. La evidencia de Desktop sigue
+  correspondiendo a 0.2.2; no se repitió para 0.4.0.
 - Los ejecutables de Linux se compilaron pero no se ejecutaron en Linux; solo se
   probó el lanzador con `uname` simulado.
 

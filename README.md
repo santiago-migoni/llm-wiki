@@ -4,9 +4,9 @@ Gestiona tus notas y tu conocimiento desde Claude Desktop.
 
 Busca información, guarda ideas y decisiones y relaciona notas. Tus archivos siguen siendo Markdown, compatibles con Obsidian.
 
-**Estado:** versión `0.3.0` (referencia `v0.3.0`), con la autoría y el repositorio declarados en los manifiestos. El identificador técnico sigue siendo `llm-wiki`, incluidos CLI, skills y rutas. La validación del paquete y la instalación registradas corresponden al [informe 0.2.2](tests/acceptance/release-0.2.2.json); no se repitieron para 0.3.0.
+**Estado:** versión `0.4.0` (referencia `v0.4.0`), con ejecutables para macOS y Linux detrás de un lanzador. El identificador técnico sigue siendo `llm-wiki`, incluidos CLI, skills y rutas. La validación del paquete y la instalación registradas corresponden al [informe 0.2.2](tests/acceptance/release-0.2.2.json); no se repitieron para 0.4.0.
 
-Cambios de esta entrega: [changelog v0.3.0](CHANGELOG.md).
+Cambios de esta entrega: [changelog v0.4.0](CHANGELOG.md).
 
 ## Qué puedes hacer
 
@@ -32,7 +32,7 @@ En una sesión de la pestaña Code, registra el marketplace y luego instala el p
 /plugin install llm-wiki@llm-wiki
 ```
 
-La referencia `v0.2.2` identifica la entrega; comprueba su publicación en el [informe de entrega](tests/acceptance/release-0.2.2.json). Fijar la versión con una referencia Git en este flujo aún no está verificado en Claude Desktop.
+La referencia `v0.4.0` identifica la entrega. Su informe de entrega más reciente es el de [0.2.2](tests/acceptance/release-0.2.2.json). Fijar la versión con una referencia Git en este flujo aún no está verificado en Claude Desktop.
 
 ### Desde un clon local
 
